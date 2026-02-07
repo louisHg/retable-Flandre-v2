@@ -1,0 +1,143 @@
+/* =========================
+   SIDEBAR
+========================= */
+
+.rf-sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 280px;
+    height: 100vh;
+    background: var(--theme-site);
+    border-right: 1px solid rgba(0, 0, 0, .08);
+    z-index: 1000;
+    display: flex;
+    flex-direction: column;
+    padding: 20px 14px;
+    transition: transform .25s ease;
+}
+
+.rf-brand {
+    display: flex;
+    align-items: center;
+    margin-bottom: 30px;
+    margin-top: 8vh;
+    color: var(--dark-color);
+    text-decoration: none;
+}
+
+.rf-brand-image {
+    width: 48px;
+    height: 48px;
+    border-radius: 12px;
+}
+
+.rf-brand-text {
+    margin-left: 10px;
+    font-weight: 700;
+}
+
+.rf-brand-text small {
+    display: block;
+    font-size: 10px;
+    text-transform: uppercase;
+}
+
+/* NAV */
+
+.rf-sidebar-nav {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.rf-sidebar-nav .nav-link {
+    padding: 10px 12px;
+    border-radius: 999px;
+    color: var(--dark-color);
+    font-weight: 500;
+}
+
+.rf-sidebar-nav .nav-link:hover {
+    background: rgba(242, 204, 143, .25);
+    color: var(--link-hover-color);
+}
+
+/* FOOTER */
+
+.rf-sidebar-footer {
+    margin-top: auto;
+}
+
+.rf-social-link {
+    width: 44px;
+    height: 44px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--secondary-color);
+    color: #fff;
+    border-radius: 999px;
+}
+
+/* CONTENU */
+
+.rf-content {
+    margin-left: 280px;
+    transition: margin-left .25s ease;
+}
+
+.rf-sidebar.is-collapsed {
+    transform: translateX(-100%);
+}
+
+.rf-content.is-expanded {
+    margin-left: 0;
+}
+
+/* =========================
+   TOGGLE FLOTTANT
+========================= */
+
+.rf-sidebar-fab {
+    position: fixed;
+    top: 16px;
+    left: 16px;
+    z-index: 2000;
+    width: 48px;
+    height: 48px;
+    border-radius: 14px;
+    border: none;
+    background: rgba(255, 255, 255, .9);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, .15);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 6px;
+    padding: 12px;
+    cursor: pointer;
+}
+
+.rf-sidebar-fab span {
+    height: 2px;
+    width: 100%;
+    background: var(--secondary-color);
+}
+
+/* MOBILE */
+
+@media (max-width: 991px) {
+    .rf-sidebar {
+        transform: translateX(-100%);
+    }
+
+    .rf-sidebar:not(.is-collapsed) {
+        transform: translateX(0);
+        box-shadow: 0 20px 60px rgba(0, 0, 0, .25);
+    }
+
+    .rf-content {
+        margin-left: 0;
+        padding-top: 20px;
+    }
+}
