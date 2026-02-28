@@ -1,0 +1,86 @@
+/* ===== COMPOSANTS BADGES RÉUTILISABLES ===== */
+
+/* Badge de base */
+.rf-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 0.875rem;
+  border-radius: 999px;
+  font-weight: 700;
+  font-size: 0.875rem;
+  letter-spacing: 0.03em;
+}
+
+/* Badge primaire */
+.rf-badge-primary {
+  background: var(--primary-color);
+  color: #fff;
+}
+
+/* Badge avec fond transparent (glassmorphism) */
+.rf-badge-glass {
+  background: rgba(255, 255, 255, 0.14);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  backdrop-filter: blur(8px);
+  color: #fff;
+}
+
+/* Badge outline */
+.rf-badge-outline {
+  background: transparent;
+  border: 1px solid var(--primary-color);
+  color: var(--primary-color);
+}
+
+/* Badge avec icône */
+.rf-badge-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 50%;
+  background: var(--primary-color);
+  color: #fff;
+  font-size: 1.25rem;
+}
+
+.rf-badge-icon-lg {
+  width: 3.5rem;
+  height: 3.5rem;
+  font-size: 1.75rem;
+}
+
+/* Badge status */
+.rf-badge-success {
+  background: #28a745;
+  color: #fff;
+}
+
+.rf-badge-warning {
+  background: #ffc107;
+  color: #000;
+}
+
+.rf-badge-info {
+  background: #17a2b8;
+  color: #fff;
+}
+
+.rf-badge-danger {
+  background: #dc3545;
+  color: #fff;
+}
+
+/* Badge avec effet hover */
+.rf-badge-hover {
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.rf-badge-hover:hover {
+  transform: scale(1.05);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+

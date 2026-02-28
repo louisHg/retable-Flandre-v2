@@ -1,0 +1,148 @@
+/* ===== COMPOSANTS NOTIFICATIONS RÉUTILISABLES ===== */
+
+/* Notification de base */
+.rf-notification {
+  display: flex;
+  align-items: flex-start;
+  padding: 1rem 1.25rem;
+  border-radius: 0.5rem;
+  margin-bottom: 1rem;
+  background: #f8f9fa;
+  border-left: 4px solid var(--primary-color);
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.rf-notification:hover {
+  background: #fff;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  transform: translateX(4px);
+}
+
+/* Contenu notification */
+.rf-notification-icon {
+  flex-shrink: 0;
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 50%;
+  background: var(--primary-color);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 1rem;
+  font-size: 1.25rem;
+}
+
+.rf-notification-content {
+  flex: 1;
+}
+
+.rf-notification-title {
+  font-weight: 700;
+  font-size: 0.95rem;
+  margin-bottom: 0.25rem;
+  color: #333;
+}
+
+.rf-notification-text {
+  font-size: 0.875rem;
+  color: #666;
+  margin-bottom: 0.25rem;
+  line-height: 1.5;
+}
+
+.rf-notification-meta {
+  font-size: 0.8rem;
+  color: #999;
+  margin-bottom: 0;
+}
+
+.rf-notification-date {
+  font-size: 0.75rem;
+  color: #aaa;
+}
+
+/* Variantes de couleur */
+.rf-notification-success {
+  border-left-color: #28a745;
+  background: #f1f9f3;
+}
+
+.rf-notification-success .rf-notification-icon {
+  background: #28a745;
+}
+
+.rf-notification-warning {
+  border-left-color: #ffc107;
+  background: #fffbf0;
+}
+
+.rf-notification-warning .rf-notification-icon {
+  background: #ffc107;
+  color: #000;
+}
+
+.rf-notification-danger {
+  border-left-color: #dc3545;
+  background: #fef5f5;
+}
+
+.rf-notification-danger .rf-notification-icon {
+  background: #dc3545;
+}
+
+.rf-notification-info {
+  border-left-color: #17a2b8;
+  background: #f0f9fa;
+}
+
+.rf-notification-info .rf-notification-icon {
+  background: #17a2b8;
+}
+
+/* Notification compacte */
+.rf-notification-compact {
+  padding: 0.75rem 1rem;
+}
+
+.rf-notification-compact .rf-notification-icon {
+  width: 2rem;
+  height: 2rem;
+  font-size: 1rem;
+  margin-right: 0.75rem;
+}
+
+.rf-notification-compact .rf-notification-title {
+  font-size: 0.875rem;
+}
+
+.rf-notification-compact .rf-notification-text {
+  font-size: 0.8rem;
+}
+
+/* Liste de notifications */
+.rf-notification-list {
+  max-height: 400px;
+  overflow-y: auto;
+  padding-right: 0.5rem;
+}
+
+.rf-notification-list::-webkit-scrollbar {
+  width: 6px;
+}
+
+.rf-notification-list::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 10px;
+}
+
+.rf-notification-list::-webkit-scrollbar-thumb {
+  background: var(--primary-color);
+  border-radius: 10px;
+}
+
+.rf-notification-list::-webkit-scrollbar-thumb:hover {
+  background: #5a9d84;
+}
+

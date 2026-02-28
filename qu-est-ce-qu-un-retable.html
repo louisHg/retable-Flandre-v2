@@ -1,0 +1,232 @@
+<!doctype html>
+<html lang="fr">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Qu'est-ce qu'un retable ? - RETABLES de FLANDRE</title>
+    <link rel="icon" type="image/jpg" href="images/previous-image/logo.jpg">
+
+    <!-- CSS -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,700;1,400&display=swap"
+          rel="stylesheet">
+
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/bootstrap-icons.css" rel="stylesheet">
+    <link href="css/main.css" rel="stylesheet">
+    <link href="css/sidebar.css" rel="stylesheet">
+    <link href="css/components/cards.css" rel="stylesheet">
+    <link href="css/components/badges.css" rel="stylesheet">
+    <link href="css/components/notifications.css" rel="stylesheet">
+</head>
+
+<body>
+
+<main>
+
+    <!-- SIDEBAR -->
+    <aside id="rfSidebar" class="rf-sidebar">
+
+        <a class="rf-brand d-flex align-items-center" href="index.html">
+            <img src="images/previous-image/logo.jpg" class="rf-brand-image img-fluid" alt="Retables de Flandre">
+            <span class="rf-brand-text">
+                Retables
+                <small>de Flandre</small>
+            </span>
+        </a>
+
+        <nav class="rf-sidebar-nav">
+            <a class="nav-link" href="index.html">Accueil</a>
+            <a class="nav-link" href="components-demo.html">TEST</a>
+
+            <a class="nav-link" href="generic.html">Association</a>
+            <a class="nav-link" href="activites.html">Activités</a>
+            <a class="nav-link active" href="qu-est-ce-qu-un-retable.html">Qu'est-ce qu'un retable ?</a>
+            <a class="nav-link" href="visiteDesEglises.html">Visites des églises</a>
+            <a class="nav-link" href="depliants-eglises.html">Dépliants des églises à retables</a>
+            <a class="nav-link" href="actualites.html">Actualités</a>
+            <a class="nav-link" href="boutique.html">Boutique</a>
+            <a class="nav-link click-scroll" href="#section_contact">Contact</a>
+        </nav>
+
+        <div class="rf-sidebar-footer">
+            <a class="rf-social-link" target="_blank" href="https://www.facebook.com/lesretablesdeflandres">
+                <i class="bi bi-facebook"></i>
+            </a>
+        </div>
+    </aside>
+
+    <!-- BOUTON TOGGLE -->
+    <button id="rfSidebarToggle" class="rf-sidebar-fab" type="button" aria-label="Toggle sidebar">
+        <span></span><span></span><span></span>
+    </button>
+
+    <!-- WRAPPER CONTENU -->
+    <div id="rfContent" class="rf-content">
+
+        <!-- 📦 SECTION 1 : HERO (chargée dynamiquement) -->
+        <div data-load-component="sections/hero-retable"></div>
+
+        <!-- 📦 SECTION 2 : TEXTE COLLECTIF (chargée dynamiquement) -->
+        <div data-load-component="sections/texte-collectif"></div>
+
+        <!-- 📦 SECTION 3 : ARTICLES SCIENTIFIQUES (chargés dynamiquement) -->
+        <section class="section-padding" style="padding-top: 80px; padding-bottom: 80px;">
+            <div class="container">
+                <div class="row align-items-end mb-5">
+                    <div class="col-lg-8">
+                        <h2 class="videos-title mb-2">Publications scientifiques</h2>
+                        <p class="videos-subtitle mb-0">Articles de recherche sur les retables de Flandre</p>
+                    </div>
+                </div>
+
+                <!-- 📦 Conteneur pour les composants articles -->
+                <div class="row g-4" id="articlesContainer">
+                    <!-- Les composants articles seront chargés ici via JavaScript -->
+                </div>
+
+            </div>
+        </section>
+
+        <!-- 📦 SECTION 4 : CTA NEWSLETTER (chargée dynamiquement) -->
+        <div data-load-component="sections/newsletter-cta"></div>
+
+        <!-- 📦 SECTION 5 : CONTACT (chargée dynamiquement) -->
+        <div data-load-component="sections/contact"></div>
+
+        <!-- 📦 FOOTER (chargé dynamiquement) -->
+        <div id="footerContainer"></div>
+
+    </div><!-- /#rfContent -->
+
+</main>
+
+<!-- MODALE IMAGE SCHÉMA -->
+<div class="image-modal" id="schemaModal" aria-hidden="true">
+    <button class="image-modal-close" type="button" aria-label="Fermer">✕</button>
+
+    <div class="image-modal-content" role="dialog" aria-modal="true">
+        <div class="image-modal-header">
+            <h3 class="image-modal-title">Schéma d'un retable</h3>
+        </div>
+
+        <div class="image-modal-body">
+            <img id="schemaModalImg" class="image-modal-img" src="images/previous-image/schemadunretable.jpg"
+                 alt="Schéma d'un retable">
+        </div>
+    </div>
+</div>
+
+<!-- JAVASCRIPT FILES -->
+<script src="js/jquery.min.js"></script>
+<script src="js/bootstrap.bundle.min.js"></script>
+<script src="js/jquery.sticky.js"></script>
+<script src="js/click-scroll.js"></script>
+<script src="js/custom.js"></script>
+<script src="js/components-bundle.js"></script>
+<script src="js/component-loader.js"></script>
+
+<script>
+    // Gestion de la sidebar
+    document.addEventListener("DOMContentLoaded", function () {
+        const sidebar = document.getElementById("rfSidebar");
+        const toggle = document.getElementById("rfSidebarToggle");
+        const content = document.getElementById("rfContent");
+
+        if (toggle && sidebar && content) {
+            const isMobile = window.matchMedia("(max-width: 991px)").matches;
+
+            toggle.addEventListener("click", function () {
+                sidebar.classList.toggle("is-open");
+                toggle.classList.toggle("is-active");
+                content.classList.toggle("sidebar-open");
+            });
+
+            // Fermer la sidebar en cliquant en dehors sur mobile
+            if (isMobile) {
+                content.addEventListener("click", function () {
+                    if (sidebar.classList.contains("is-open")) {
+                        sidebar.classList.remove("is-open");
+                        toggle.classList.remove("is-active");
+                        content.classList.remove("sidebar-open");
+                    }
+                });
+            }
+
+            // Gérer le redimensionnement
+            window.addEventListener("resize", function () {
+                const mobileNow = window.matchMedia("(max-width: 991px)").matches;
+                if (!mobileNow && sidebar.classList.contains("is-open")) {
+                    sidebar.classList.remove("is-open");
+                    toggle.classList.remove("is-active");
+                    content.classList.remove("sidebar-open");
+                }
+            });
+        }
+
+        // 📦 CHARGEMENT DES COMPOSANTS
+        console.log('🔄 Chargement des composants dynamiques...');
+
+        // Charger les articles scientifiques en grille
+        loadComponentsGrid('#articlesContainer', [
+            { path: 'articles/article-hertel', colClass: 'col-lg-6 col-12' },
+            { path: 'articles/article-oger', colClass: 'col-lg-6 col-12' }
+        ]).then(() => {
+            console.log('✅ Articles scientifiques chargés');
+        });
+
+        // Charger le footer
+        loadComponent('#footerContainer', 'sections/footer').then(() => {
+            console.log('✅ Footer chargé');
+        });
+
+        // Attendre que les composants avec data-load-component soient chargés
+        // puis initialiser la modale du schéma
+        setTimeout(function() {
+            const schemaImg = document.getElementById("schemaImg");
+            const modal = document.getElementById("schemaModal");
+            const closeBtn = modal ? modal.querySelector(".image-modal-close") : null;
+
+            if (schemaImg && modal && closeBtn) {
+                schemaImg.addEventListener("click", function() {
+                    modal.classList.add("is-open");
+                    modal.setAttribute("aria-hidden", "false");
+                    document.body.style.overflow = "hidden";
+                });
+
+                closeBtn.addEventListener("click", function() {
+                    modal.classList.remove("is-open");
+                    modal.setAttribute("aria-hidden", "true");
+                    document.body.style.overflow = "";
+                });
+
+                // Fermer en cliquant sur le fond
+                modal.addEventListener("click", function(e) {
+                    if (e.target === modal) {
+                        modal.classList.remove("is-open");
+                        modal.setAttribute("aria-hidden", "true");
+                        document.body.style.overflow = "";
+                    }
+                });
+
+                // Fermer avec Échap
+                document.addEventListener("keydown", function(e) {
+                    if (e.key === "Escape" && modal.classList.contains("is-open")) {
+                        modal.classList.remove("is-open");
+                        modal.setAttribute("aria-hidden", "true");
+                        document.body.style.overflow = "";
+                    }
+                });
+
+                console.log('✅ Modale schéma initialisée');
+            }
+        }, 500);
+    });
+</script>
+
+</body>
+</html>
+
