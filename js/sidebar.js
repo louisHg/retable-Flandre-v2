@@ -65,14 +65,7 @@
         console.log('✅ Sidebar initialisée');
     }
 
-    // Auto-initialisation au chargement du DOM
-    if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', initSidebar);
-    } else {
-        initSidebar();
-    }
-
-    // Export pour usage manuel si besoin
+    // Export pour usage manuel
     window.initSidebar = initSidebar;
 })();
 
