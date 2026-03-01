@@ -6,7 +6,7 @@
   border-radius: 1rem;
   box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
   background: #fff;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  transition: all 0.3s ease;
 }
 
 .rf-card:hover {
@@ -15,7 +15,7 @@
 }
 
 .rf-card-body {
-  padding: 1.5rem;
+  padding: 1.75rem;
 }
 
 .rf-card-body-lg {
@@ -37,6 +37,18 @@
 
 .rf-card-article .btn {
   margin-top: auto;
+}
+
+.rf-card-article h4 {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--dark-color);
+  line-height: 1.4;
+}
+
+.rf-card-article h6 {
+  font-weight: 500;
+  font-size: 1rem;
 }
 
 /* Carte avec image à gauche/droite */

@@ -87,6 +87,60 @@
     transition: margin-left .25s ease;
 }
 
+/* =========================
+   TOGGLE HAMBURGER (toujours visible)
+========================= */
+
+.rf-sidebar-fab {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    z-index: 1100; /* Au-dessus de la sidebar */
+    width: 52px;
+    height: 52px;
+    border-radius: 14px;
+    border: none;
+    background: rgba(255, 255, 255, .95);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, .15);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    padding: 14px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.rf-sidebar-fab:hover {
+    transform: scale(1.05);
+    box-shadow: 0 12px 35px rgba(0, 0, 0, .2);
+    background: rgba(255, 255, 255, 1);
+}
+
+.rf-sidebar-fab span {
+    height: 3px;
+    width: 24px;
+    background: var(--secondary-color);
+    border-radius: 2px;
+    transition: all 0.3s ease;
+}
+
+/* Animation hamburger -> X quand sidebar ouverte */
+.rf-sidebar:not(.is-collapsed) ~ .rf-sidebar-fab span:nth-child(1) {
+    transform: translateY(8px) rotate(45deg);
+}
+
+.rf-sidebar:not(.is-collapsed) ~ .rf-sidebar-fab span:nth-child(2) {
+    opacity: 0;
+}
+
+.rf-sidebar:not(.is-collapsed) ~ .rf-sidebar-fab span:nth-child(3) {
+    transform: translateY(-8px) rotate(-45deg);
+}
+
+/* ÉTATS DE LA SIDEBAR */
+
 .rf-sidebar.is-collapsed {
     transform: translateX(-100%);
 }
@@ -95,38 +149,10 @@
     margin-left: 0;
 }
 
-/* =========================
-   TOGGLE FLOTTANT
-========================= */
-
-.rf-sidebar-fab {
-    position: fixed;
-    top: 16px;
-    left: 16px;
-    z-index: 2000;
-    width: 48px;
-    height: 48px;
-    border-radius: 14px;
-    border: none;
-    background: rgba(255, 255, 255, .9);
-    box-shadow: 0 10px 30px rgba(0, 0, 0, .15);
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    gap: 6px;
-    padding: 12px;
-    cursor: pointer;
-}
-
-.rf-sidebar-fab span {
-    height: 2px;
-    width: 100%;
-    background: var(--secondary-color);
-}
-
 /* MOBILE */
 
 @media (max-width: 991px) {
+
     .rf-sidebar {
         transform: translateX(-100%);
     }
@@ -138,6 +164,6 @@
 
     .rf-content {
         margin-left: 0;
-        padding-top: 20px;
+        padding-top: 70px;
     }
 }

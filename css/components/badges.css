@@ -7,9 +7,10 @@
   gap: 0.5rem;
   padding: 0.5rem 0.875rem;
   border-radius: 999px;
-  font-weight: 700;
+  font-weight: 600;
   font-size: 0.875rem;
-  letter-spacing: 0.03em;
+  letter-spacing: 0.02em;
+  transition: all 0.3s ease;
 }
 
 /* Badge primaire */
@@ -20,10 +21,11 @@
 
 /* Badge avec fond transparent (glassmorphism) */
 .rf-badge-glass {
-  background: rgba(255, 255, 255, 0.14);
-  border: 1px solid rgba(255, 255, 255, 0.25);
-  backdrop-filter: blur(8px);
+  background: rgba(255, 255, 255, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  backdrop-filter: blur(10px);
   color: #fff;
+  font-weight: 500;
 }
 
 /* Badge outline */
@@ -31,6 +33,7 @@
   background: transparent;
   border: 1px solid var(--primary-color);
   color: var(--primary-color);
+  font-weight: 500;
 }
 
 /* Badge avec icône */

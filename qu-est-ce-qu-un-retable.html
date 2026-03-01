@@ -40,8 +40,6 @@
 
         <nav class="rf-sidebar-nav">
             <a class="nav-link" href="index.html">Accueil</a>
-            <a class="nav-link" href="components-demo.html">TEST</a>
-
             <a class="nav-link" href="generic.html">Association</a>
             <a class="nav-link" href="activites.html">Activités</a>
             <a class="nav-link active" href="qu-est-ce-qu-un-retable.html">Qu'est-ce qu'un retable ?</a>
@@ -59,8 +57,8 @@
         </div>
     </aside>
 
-    <!-- BOUTON TOGGLE -->
-    <button id="rfSidebarToggle" class="rf-sidebar-fab" type="button" aria-label="Toggle sidebar">
+    <!-- BOUTON TOGGLE (hamburger 3 barres) -->
+    <button id="rfSidebarToggle" class="rf-sidebar-fab" type="button" aria-label="Toggle menu">
         <span></span><span></span><span></span>
     </button>
 
@@ -76,10 +74,10 @@
         <!-- 📦 SECTION 3 : ARTICLES SCIENTIFIQUES (chargés dynamiquement) -->
         <section class="section-padding" style="padding-top: 80px; padding-bottom: 80px;">
             <div class="container">
-                <div class="row align-items-end mb-5">
+                <div class="row align-items-end mb-4">
                     <div class="col-lg-8">
-                        <h2 class="videos-title mb-2">Publications scientifiques</h2>
-                        <p class="videos-subtitle mb-0">Articles de recherche sur les retables de Flandre</p>
+                        <h2 class="mb-2">Publications scientifiques</h2>
+                        <p class="mb-0" style="color: #717275;">Articles de recherche sur les retables de Flandre</p>
                     </div>
                 </div>
 
@@ -126,105 +124,121 @@
 <script src="js/jquery.sticky.js"></script>
 <script src="js/click-scroll.js"></script>
 <script src="js/custom.js"></script>
+<script src="js/sidebar.js"></script> <!-- ✅ Sidebar réutilisable -->
 <script src="js/components-bundle.js"></script>
 <script src="js/component-loader.js"></script>
 
 <script>
-    // Gestion de la sidebar
+    // ==========================================
+    // 🎯 CONFIGURATION ET INITIALISATION
+    // ==========================================
+
+    console.log('🚀 Initialisation de la page...');
+
     document.addEventListener("DOMContentLoaded", function () {
-        const sidebar = document.getElementById("rfSidebar");
-        const toggle = document.getElementById("rfSidebarToggle");
-        const content = document.getElementById("rfContent");
+        console.log('✅ DOM Chargé');
 
-        if (toggle && sidebar && content) {
-            const isMobile = window.matchMedia("(max-width: 991px)").matches;
+        // ==========================================
+        // 📦 CHARGEMENT DES COMPOSANTS
+        // ==========================================
+        setTimeout(function() {
+            loadAllComponents();
+        }, 100);
 
-            toggle.addEventListener("click", function () {
-                sidebar.classList.toggle("is-open");
-                toggle.classList.toggle("is-active");
-                content.classList.toggle("sidebar-open");
-            });
+        // ==========================================
+        // 🖼️ MODALE SCHÉMA (après chargement)
+        // ==========================================
+        setTimeout(function() {
+            initSchemaModal();
+        }, 800);
+    });
 
-            // Fermer la sidebar en cliquant en dehors sur mobile
-            if (isMobile) {
-                content.addEventListener("click", function () {
-                    if (sidebar.classList.contains("is-open")) {
-                        sidebar.classList.remove("is-open");
-                        toggle.classList.remove("is-active");
-                        content.classList.remove("sidebar-open");
-                    }
-                });
+
+    // ==========================================
+    // FONCTION : Chargement de tous les composants
+    // ==========================================
+    async function loadAllComponents() {
+        console.log('📦 Chargement des composants...');
+
+        try {
+            // Vérifier si le bundle existe
+            if (!window.COMPONENTS_BUNDLE) {
+                console.error('❌ Bundle de composants non trouvé');
+                return;
             }
 
-            // Gérer le redimensionnement
-            window.addEventListener("resize", function () {
-                const mobileNow = window.matchMedia("(max-width: 991px)").matches;
-                if (!mobileNow && sidebar.classList.contains("is-open")) {
-                    sidebar.classList.remove("is-open");
-                    toggle.classList.remove("is-active");
-                    content.classList.remove("sidebar-open");
-                }
-            });
+            console.log('✅ Bundle trouvé avec', Object.keys(window.COMPONENTS_BUNDLE).length, 'composants');
+
+            // Charger les articles scientifiques en grille
+            if (window.loadComponentsGrid) {
+                await loadComponentsGrid('#articlesContainer', [
+                    { path: 'articles/article-hertel', colClass: 'col-lg-6 col-12 mb-4' },
+                    { path: 'articles/article-oger', colClass: 'col-lg-6 col-12 mb-4' }
+                ]);
+                console.log('✅ Articles scientifiques chargés');
+            }
+
+            // Charger le footer
+            if (window.loadComponent) {
+                await loadComponent('#footerContainer', 'sections/footer');
+                console.log('✅ Footer chargé');
+            }
+
+        } catch (error) {
+            console.error('❌ Erreur lors du chargement des composants:', error);
+        }
+    }
+
+    // ==========================================
+    // FONCTION : Initialisation de la modale schéma
+    // ==========================================
+    function initSchemaModal() {
+        const schemaImg = document.getElementById("schemaImg");
+        const modal = document.getElementById("schemaModal");
+        const closeBtn = modal ? modal.querySelector(".image-modal-close") : null;
+
+        if (!schemaImg || !modal || !closeBtn) {
+            console.warn('⚠️ Modale schéma : éléments non trouvés');
+            return;
         }
 
-        // 📦 CHARGEMENT DES COMPOSANTS
-        console.log('🔄 Chargement des composants dynamiques...');
+        console.log('🖼️ Initialisation de la modale schéma...');
 
-        // Charger les articles scientifiques en grille
-        loadComponentsGrid('#articlesContainer', [
-            { path: 'articles/article-hertel', colClass: 'col-lg-6 col-12' },
-            { path: 'articles/article-oger', colClass: 'col-lg-6 col-12' }
-        ]).then(() => {
-            console.log('✅ Articles scientifiques chargés');
+        // Ouvrir la modale
+        schemaImg.addEventListener("click", function() {
+            modal.classList.add("is-open");
+            modal.setAttribute("aria-hidden", "false");
+            document.body.style.overflow = "hidden";
+            console.log('🖼️ Modale ouverte');
         });
 
-        // Charger le footer
-        loadComponent('#footerContainer', 'sections/footer').then(() => {
-            console.log('✅ Footer chargé');
+        // Fermer avec le bouton
+        closeBtn.addEventListener("click", function() {
+            modal.classList.remove("is-open");
+            modal.setAttribute("aria-hidden", "true");
+            document.body.style.overflow = "";
         });
 
-        // Attendre que les composants avec data-load-component soient chargés
-        // puis initialiser la modale du schéma
-        setTimeout(function() {
-            const schemaImg = document.getElementById("schemaImg");
-            const modal = document.getElementById("schemaModal");
-            const closeBtn = modal ? modal.querySelector(".image-modal-close") : null;
-
-            if (schemaImg && modal && closeBtn) {
-                schemaImg.addEventListener("click", function() {
-                    modal.classList.add("is-open");
-                    modal.setAttribute("aria-hidden", "false");
-                    document.body.style.overflow = "hidden";
-                });
-
-                closeBtn.addEventListener("click", function() {
-                    modal.classList.remove("is-open");
-                    modal.setAttribute("aria-hidden", "true");
-                    document.body.style.overflow = "";
-                });
-
-                // Fermer en cliquant sur le fond
-                modal.addEventListener("click", function(e) {
-                    if (e.target === modal) {
-                        modal.classList.remove("is-open");
-                        modal.setAttribute("aria-hidden", "true");
-                        document.body.style.overflow = "";
-                    }
-                });
-
-                // Fermer avec Échap
-                document.addEventListener("keydown", function(e) {
-                    if (e.key === "Escape" && modal.classList.contains("is-open")) {
-                        modal.classList.remove("is-open");
-                        modal.setAttribute("aria-hidden", "true");
-                        document.body.style.overflow = "";
-                    }
-                });
-
-                console.log('✅ Modale schéma initialisée');
+        // Fermer en cliquant sur le fond
+        modal.addEventListener("click", function(e) {
+            if (e.target === modal) {
+                modal.classList.remove("is-open");
+                modal.setAttribute("aria-hidden", "true");
+                document.body.style.overflow = "";
             }
-        }, 500);
-    });
+        });
+
+        // Fermer avec Échap
+        document.addEventListener("keydown", function(e) {
+            if (e.key === "Escape" && modal.classList.contains("is-open")) {
+                modal.classList.remove("is-open");
+                modal.setAttribute("aria-hidden", "true");
+                document.body.style.overflow = "";
+            }
+        });
+
+        console.log('✅ Modale schéma initialisée');
+    }
 </script>
 
 </body>

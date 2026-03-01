@@ -155,24 +155,24 @@ loadComponent('#sidebar', 'activites/activite-wormhout', 'notification');
 <html lang="fr">
 <head>
     <!-- CSS -->
-    <link href="css/bootstrap.min.css" rel="stylesheet">
-    <link href="css/main.css" rel="stylesheet">
-    <link href="css/components/cards.css" rel="stylesheet">
-    <link href="css/components/badges.css" rel="stylesheet">
-    <link href="css/components/notifications.css" rel="stylesheet">
+    <link href="../css/bootstrap.min.css" rel="stylesheet">
+    <link href="../css/main.css" rel="stylesheet">
+    <link href="../css/components/cards.css" rel="stylesheet">
+    <link href="../css/components/badges.css" rel="stylesheet">
+    <link href="../css/components/notifications.css" rel="stylesheet">
 </head>
 <body>
-    <!-- Auto-chargement des sections -->
-    <div data-load-component="sections/hero-retable"></div>
-    <div data-load-component="sections/contact"></div>
-    <div id="footerContainer"></div>
+<!-- Auto-chargement des sections -->
+<div data-load-component="sections/hero-retable"></div>
+<div data-load-component="sections/contact"></div>
+<div id="footerContainer"></div>
 
-    <!-- JavaScript -->
-    <script src="js/component-loader.js"></script>
-    <script>
-        // Charger le footer manuellement
-        loadComponent('#footerContainer', 'sections/footer');
-    </script>
+<!-- JavaScript -->
+<script src="../js/component-loader.js"></script>
+<script>
+    // Charger le footer manuellement
+    loadComponent('#footerContainer', 'sections/footer');
+</script>
 </body>
 </html>
 ```

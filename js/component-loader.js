@@ -142,24 +142,33 @@ window.loadComponentsGrid = (selector, components) => {
 };
 
 // Auto-chargement des composants avec data-attributes
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', async function () {
+    console.log('🔄 Auto-chargement des composants avec data-load-component...');
+
     // Chercher tous les éléments avec data-load-component
     const autoLoadElements = document.querySelectorAll('[data-load-component]');
+    console.log(`📌 ${autoLoadElements.length} composants à charger automatiquement`);
 
-    autoLoadElements.forEach(async (element) => {
+    // Charger tous les composants en parallèle
+    const loadPromises = Array.from(autoLoadElements).map(async (element) => {
         const path = element.getAttribute('data-load-component');
         const variant = element.getAttribute('data-component-variant') || null;
 
         if (path) {
+            console.log(`📦 Chargement: ${path}${variant ? '-' + variant : ''}`);
             const html = await componentLoader.loadComponent(path, variant);
             element.innerHTML = html;
+            console.log(`✅ Chargé: ${path}`);
         }
     });
+
+    await Promise.all(loadPromises);
+    console.log('✅ Tous les composants auto-chargés');
 
     // Chercher tous les conteneurs avec data-load-components (multiple)
     const multiLoadElements = document.querySelectorAll('[data-load-components]');
 
-    multiLoadElements.forEach(async (element) => {
+    const multiLoadPromises = Array.from(multiLoadElements).map(async (element) => {
         const componentsJson = element.getAttribute('data-load-components');
         const variant = element.getAttribute('data-component-variant') || null;
 
@@ -175,6 +184,8 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         }
     });
+
+    await Promise.all(multiLoadPromises);
 });
 
 console.log('✅ Component Loader initialisé');

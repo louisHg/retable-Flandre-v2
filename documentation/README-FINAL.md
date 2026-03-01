@@ -123,10 +123,11 @@ open qu-est-ce-qu-un-retable.html
 ### Étape 1 : Importer les CSS
 
 ```html
+
 <head>
-    <link href="css/components/cards.css" rel="stylesheet">
-    <link href="css/components/badges.css" rel="stylesheet">
-    <link href="css/components/notifications.css" rel="stylesheet">
+    <link href="../css/components/cards.css" rel="stylesheet">
+    <link href="../css/components/badges.css" rel="stylesheet">
+    <link href="../css/components/notifications.css" rel="stylesheet">
 </head>
 ```
 
