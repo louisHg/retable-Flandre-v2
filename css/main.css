@@ -1754,6 +1754,7 @@ strong {
 
 
 
+/* contact-split : géré dans responsive.css (mobile-first) */
 .contact-split {
   display: flex;
   justify-content: space-between;

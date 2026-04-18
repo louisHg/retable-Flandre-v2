@@ -164,6 +164,11 @@
 
     .rf-content {
         margin-left: 0;
-        padding-top: 70px;
+        padding-top: 72px;
     }
+}
+
+/* Scroll-lock quand sidebar ouverte sur mobile */
+body.rf-sidebar-open {
+    overflow: hidden;
 }

@@ -21,6 +21,7 @@
     <link href="css/components/cards.css" rel="stylesheet">
     <link href="css/components/badges.css" rel="stylesheet">
     <link href="css/components/notifications.css" rel="stylesheet">
+    <link href="css/responsive.css" rel="stylesheet">
 </head>
 
 <body>
@@ -34,6 +35,9 @@
             current-page="index"
             @close="sidebarOpen = false">
         </rf-sidebar>
+
+        <!-- Overlay backdrop mobile -->
+        <div class="rf-sidebar-overlay" :class="{ 'is-active': sidebarOpen }" @click="sidebarOpen = false"></div>
 
         <!-- Bouton hamburger -->
         <button class="rf-sidebar-fab" type="button" aria-label="Toggle menu"

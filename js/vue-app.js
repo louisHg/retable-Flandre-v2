@@ -10,6 +10,13 @@ document.addEventListener('DOMContentLoaded', function () {
         data() {
             return { sidebarOpen: !isMobile };
         },
+        watch: {
+            sidebarOpen(val) {
+                if (window.matchMedia('(max-width: 991px)').matches) {
+                    document.body.classList.toggle('rf-sidebar-open', val);
+                }
+            }
+        },
         mounted() {
             // Initialiser les carousels Bootstrap présents dans la page
             this.$nextTick(function () {

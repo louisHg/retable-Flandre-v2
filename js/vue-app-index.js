@@ -7,6 +7,13 @@ document.addEventListener('DOMContentLoaded', function () {
     const app = createApp({
         data() {
             return { sidebarOpen: !isMobile };
+        },
+        watch: {
+            sidebarOpen(val) {
+                if (window.matchMedia('(max-width: 991px)').matches) {
+                    document.body.classList.toggle('rf-sidebar-open', val);
+                }
+            }
         }
     });
     if (window.RFComponents) {

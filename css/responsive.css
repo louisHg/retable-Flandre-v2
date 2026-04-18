@@ -1,0 +1,296 @@
+/* =====================================================
+   RESPONSIVE.CSS — Couche mobile-first
+   Retables de Flandre v2
+   ===================================================== */
+
+/* ─────────────────────────────────────────────────────
+   0. HTML — Smooth scroll global
+───────────────────────────────────────────────────── */
+html {
+    scroll-behavior: smooth;
+}
+
+/* ─────────────────────────────────────────────────────
+   1. TYPOGRAPHIE FLUIDE (mobile → desktop)
+   Surcharge les variables de main.css
+───────────────────────────────────────────────────── */
+:root {
+    --h1-font-size: clamp(1.65rem, 4vw + 0.5rem, 2.6rem);
+    --h2-font-size: clamp(1.4rem, 3.5vw + 0.3rem, 2.25rem);
+    --h3-font-size: clamp(1.15rem, 2.5vw + 0.2rem, 1.75rem);
+    --h4-font-size: clamp(1.05rem, 2vw + 0.1rem, 1.5rem);
+    --h5-font-size: clamp(.95rem, 1.8vw, 1.375rem);
+    --h6-font-size: clamp(.9rem, 1.5vw, 1.25rem);
+    --p-font-size:  clamp(.95rem, 1.2vw + 0.4rem, 1.125rem);
+}
+
+/* ─────────────────────────────────────────────────────
+   2. SECTION PADDING — mobile-first
+───────────────────────────────────────────────────── */
+.section-padding {
+    padding-top:    48px;
+    padding-bottom: 48px;
+}
+
+@media (min-width: 576px) {
+    .section-padding {
+        padding-top:    72px;
+        padding-bottom: 72px;
+    }
+}
+
+@media (min-width: 992px) {
+    .section-padding {
+        padding-top:    100px;
+        padding-bottom: 100px;
+    }
+}
+
+/* Override inline padding-top / padding-bottom sur mobile */
+@media (max-width: 767px) {
+    [style*="padding-top: 80px"]    { padding-top:    40px !important; }
+    [style*="padding-bottom: 80px"] { padding-bottom: 40px !important; }
+    [style*="padding-top: 60px"]    { padding-top:    32px !important; }
+    [style*="padding-bottom: 60px"] { padding-bottom: 32px !important; }
+    [style*="padding-top: 40px"]    { padding-top:    24px !important; }
+}
+
+/* ─────────────────────────────────────────────────────
+   3. SIDEBAR OVERLAY (backdrop mobile)
+───────────────────────────────────────────────────── */
+.rf-sidebar-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, .45);
+    z-index: 999;
+    /* Juste en dessous de la sidebar (z-index: 1000) */
+    cursor: pointer;
+    animation: fadeIn .2s ease;
+}
+
+.rf-sidebar-overlay.is-active {
+    display: block;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+
+/* L'overlay n'est utile que sur mobile */
+@media (min-width: 992px) {
+    .rf-sidebar-overlay { display: none !important; }
+}
+
+/* ─────────────────────────────────────────────────────
+   4. CAROUSEL GALERIE — hauteur fluide
+───────────────────────────────────────────────────── */
+.photo-carousel .carousel-item img {
+    height: clamp(220px, 40vw, 800px);
+}
+
+/* Carousels inline sur actualites.html */
+@media (max-width: 767px) {
+    [id^="carousel"] {
+        max-width: 100% !important;
+    }
+    [id^="carousel"] .carousel-item img {
+        height: clamp(200px, 55vw, 320px) !important;
+        object-fit: cover;
+    }
+}
+
+/* ─────────────────────────────────────────────────────
+   5. CONTACT FORM — layout responsive
+───────────────────────────────────────────────────── */
+.contact-split {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+@media (min-width: 992px) {
+    .contact-split {
+        flex-direction: row;
+        gap: 4rem;
+        justify-content: space-between;
+        align-items: flex-start;
+    }
+}
+
+/* ─────────────────────────────────────────────────────
+   6. HERO IMAGES — cap height sur mobile
+───────────────────────────────────────────────────── */
+@media (max-width: 575px) {
+    .about-section .col-lg-5 img,
+    .about-section .col-lg-4 img {
+        height: 200px !important;
+    }
+}
+
+@media (min-width: 576px) and (max-width: 991px) {
+    .about-section .col-lg-5 img,
+    .about-section .col-lg-4 img {
+        height: 280px !important;
+    }
+}
+
+/* ─────────────────────────────────────────────────────
+   7. TOUCH TARGETS — minimum 44px
+───────────────────────────────────────────────────── */
+.btn,
+.custom-btn,
+.rf-sidebar-nav .nav-link,
+.rf-sidebar-fab {
+    min-height: 44px;
+}
+
+.rf-sidebar-nav .nav-link {
+    display: flex;
+    align-items: center;
+}
+
+/* ─────────────────────────────────────────────────────
+   8. BOUTONS — empilés sur très petit écran
+───────────────────────────────────────────────────── */
+@media (max-width: 480px) {
+    .about-section .btn,
+    .about-section .d-flex.flex-wrap .btn {
+        width: 100%;
+        text-align: center;
+        justify-content: center;
+    }
+
+    /* Boutons inline dans actualites / association */
+    .d-flex.flex-wrap.gap-3 {
+        flex-direction: column;
+        gap: .75rem !important;
+    }
+}
+
+/* ─────────────────────────────────────────────────────
+   9. CARDS BOUTIQUE — portrait → portrait empilé
+───────────────────────────────────────────────────── */
+@media (max-width: 575px) {
+    .rf-card .row.align-items-start.g-3 > .col-4 {
+        flex: 0 0 100%;
+        max-width: 100%;
+        text-align: center;
+        margin-bottom: .75rem;
+    }
+    .rf-card .row.align-items-start.g-3 > .col-8 {
+        flex: 0 0 100%;
+        max-width: 100%;
+    }
+    .rf-card .row.align-items-start.g-3 > .col-4 img {
+        max-height: 140px;
+        object-fit: contain;
+        width: auto;
+    }
+}
+
+/* ─────────────────────────────────────────────────────
+   10. IFRAMES PDF — responsive
+───────────────────────────────────────────────────── */
+iframe {
+    max-width: 100%;
+    display: block;
+}
+
+@media (max-width: 767px) {
+    iframe[src*=".pdf"] {
+        height: 320px !important;
+    }
+}
+
+/* ─────────────────────────────────────────────────────
+   11. DÉPLIANTS — 1 colonne sur mobile
+───────────────────────────────────────────────────── */
+@media (max-width: 400px) {
+    #depliantList [class*="col-6"] {
+        flex: 0 0 100%;
+        max-width: 100%;
+    }
+}
+
+/* ─────────────────────────────────────────────────────
+   12. NEWSLETTER CTA — icône plus petite sur mobile
+───────────────────────────────────────────────────── */
+@media (max-width: 575px) {
+    .bi-newspaper {
+        font-size: 2.5rem !important;
+    }
+    .section-padding .btn-lg {
+        width: 100%;
+    }
+}
+
+/* ─────────────────────────────────────────────────────
+   13. FOOTER SVG — hauteur réduite sur mobile
+───────────────────────────────────────────────────── */
+.site-footer {
+    padding-bottom: 120px;
+}
+
+@media (min-width: 992px) {
+    .site-footer {
+        padding-bottom: 200px;
+    }
+}
+
+/* ─────────────────────────────────────────────────────
+   14. VISITES — images photo grid responsive
+───────────────────────────────────────────────────── */
+@media (max-width: 575px) {
+    /* Photo grids dans visiteDesEglises */
+    .row.g-3 img.img-fluid.rounded-4 {
+        height: 150px !important;
+    }
+}
+
+/* ─────────────────────────────────────────────────────
+   15. SIDEBAR FAB — position ajustée petits écrans
+───────────────────────────────────────────────────── */
+@media (max-width: 360px) {
+    .rf-sidebar-fab {
+        top: 10px;
+        left: 10px;
+        width: 44px;
+        height: 44px;
+    }
+}
+
+/* ─────────────────────────────────────────────────────
+   16. TABLES & OVERFLOW — protection
+───────────────────────────────────────────────────── */
+@media (max-width: 767px) {
+    .container {
+        padding-left: 1rem;
+        padding-right: 1rem;
+    }
+
+    /* Empêche le débordement horizontal global */
+    main {
+        overflow-x: hidden;
+    }
+}
+
+/* ─────────────────────────────────────────────────────
+   17. ACTIVITES — cards stretch height équitable
+───────────────────────────────────────────────────── */
+@media (max-width: 767px) {
+    .rf-card.h-100 {
+        height: auto !important;
+    }
+}
+
+/* ─────────────────────────────────────────────────────
+   18. FONT SIZE body + li sur mobile
+───────────────────────────────────────────────────── */
+@media (max-width: 575px) {
+    p, ul li {
+        font-size: .97rem;
+    }
+}
+

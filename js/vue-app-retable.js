@@ -1,6 +1,6 @@
 // APP VUE 3 - PAGE RETABLE
 document.addEventListener('DOMContentLoaded', function () {
-    const { createApp } = Vue;
+    const {createApp} = Vue;
     const isMobile = window.matchMedia('(max-width: 991px)').matches;
 
     const app = createApp({
@@ -9,6 +9,13 @@ document.addEventListener('DOMContentLoaded', function () {
                 sidebarOpen: !isMobile,
                 schemaModalOpen: false
             };
+        },
+        watch: {
+            sidebarOpen(val) {
+                if (window.matchMedia('(max-width: 991px)').matches) {
+                    document.body.classList.toggle('rf-sidebar-open', val);
+                }
+            }
         },
         mounted() {
             document.addEventListener('keydown', (e) => {
