@@ -26,144 +26,45 @@
 <body>
 
 <main>
+    <div id="app">
 
-    <!-- 📦 SIDEBAR & TOGGLE chargés dynamiquement par sidebar-loader.js -->
+        <!-- Sidebar -->
+        <rf-sidebar
+            :is-open="sidebarOpen"
+            current-page="index"
+            @close="sidebarOpen = false">
+        </rf-sidebar>
 
-    <!-- WRAPPER CONTENU -->
-    <div id="rfContent" class="rf-content">
+        <!-- Bouton hamburger -->
+        <button class="rf-sidebar-fab" type="button" aria-label="Toggle menu"
+                @click="sidebarOpen = !sidebarOpen">
+            <span></span><span></span><span></span>
+        </button>
 
-        <!-- 📦 SECTION 1 : HERO HOME (chargée dynamiquement) -->
-        <div data-load-component="sections/hero-home"></div>
+        <!-- Contenu principal -->
+        <div :class="['rf-content', { 'is-expanded': !sidebarOpen }]">
+            <rf-hero-home></rf-hero-home>
+            <rf-gallery-carousel></rf-gallery-carousel>
+            <rf-newsletter-cta></rf-newsletter-cta>
+            <rf-contact></rf-contact>
+            <rf-footer></rf-footer>
+        </div>
 
-        <!-- 📦 SECTION 2 : GALERIE CARROUSEL (chargée dynamiquement) -->
-        <div data-load-component="sections/gallery-carousel"></div>
-
-        <!-- 📦 SECTION 3 : CTA NEWSLETTER (chargée dynamiquement) -->
-        <div data-load-component="sections/newsletter-cta"></div>
-
-        <!-- 📦 SECTION 4 : CONTACT (chargée dynamiquement) -->
-        <div data-load-component="sections/contact"></div>
-
-        <!-- 📦 FOOTER (chargé dynamiquement) -->
-        <div id="footerContainer"></div>
-
-    </div><!-- /#rfContent -->
-
+    </div>
 </main>
 
-<!-- JAVASCRIPT FILES -->
-<script src="js/jquery.min.js"></script>
-<script src="js/bootstrap.bundle.min.js"></script>
-<script src="js/jquery.sticky.js"></script>
-<script src="js/click-scroll.js"></script>
-<script src="js/custom.js"></script>
-<script src="js/components-bundle.js"></script>
-<script src="js/sidebar-loader.js"></script> <!-- ✅ Charge sidebar + toggle -->
-<script src="js/sidebar.js"></script> <!-- ✅ Initialise la logique sidebar -->
-<script src="js/component-loader.js"></script>
-<script src="js/carousel.js"></script>
-<script src="js/image-modal.js"></script>
+<!-- Vue 3 CDN -->
+<script src="js/vue.global.prod.js"></script>
 
-<!-- EmailJS (pour le formulaire de contact) -->
+<!-- Bootstrap + EmailJS -->
+<script src="js/bootstrap.bundle.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
 
-<script>
-    // ==========================================
-    // 🎯 INITIALISATION DE LA PAGE
-    // ==========================================
+<!-- Composants Vue partagés -->
+<script src="js/vue-components.js"></script>
 
-    console.log('🚀 Initialisation de la page d\'accueil...');
-
-    document.addEventListener("DOMContentLoaded", function () {
-        console.log('✅ DOM Chargé');
-
-        // ==========================================
-        // 📦 CHARGEMENT DES COMPOSANTS
-        // ==========================================
-        setTimeout(function() {
-            loadAllComponents();
-        }, 100);
-
-        // ==========================================
-        // 📧 INITIALISATION EMAILJS
-        // ==========================================
-        setTimeout(function() {
-            initEmailJS();
-        }, 1000);
-    });
-
-    // ==========================================
-    // FONCTION : Chargement de tous les composants
-    // ==========================================
-    async function loadAllComponents() {
-        console.log('📦 Chargement des composants...');
-
-        try {
-            if (!window.COMPONENTS_BUNDLE) {
-                console.error('❌ Bundle de composants non trouvé');
-                return;
-            }
-
-            console.log('✅ Bundle trouvé avec', Object.keys(window.COMPONENTS_BUNDLE).length, 'composants');
-
-            // Charger le footer
-            if (window.loadComponent) {
-                await loadComponent('#footerContainer', 'sections/footer');
-                console.log('✅ Footer chargé');
-            }
-
-        } catch (error) {
-            console.error('❌ Erreur lors du chargement des composants:', error);
-        }
-    }
-
-    // ==========================================
-    // FONCTION : Initialisation EmailJS
-    // ==========================================
-    function initEmailJS() {
-        const form = document.getElementById("contact-form");
-
-        if (!form) {
-            console.warn('⚠️ Formulaire de contact non trouvé');
-            return;
-        }
-
-        console.log('📧 Initialisation EmailJS...');
-
-        emailjs.init("aDQZj6KUMz6fZ2Qs3");
-
-        form.addEventListener("submit", function (event) {
-            event.preventDefault();
-
-            const submitBtn = document.getElementById("submit-btn");
-            submitBtn.disabled = true;
-            submitBtn.innerText = "Envoi en cours...";
-
-            const formData = {
-                fullName: document.getElementById("full-name").value,
-                phone: document.getElementById("phone").value,
-                email: document.getElementById("email").value,
-                message: document.getElementById("message").value
-            };
-
-            emailjs.send("service_outp9kh", "template_dkbwnu2", formData)
-                .then(function () {
-                    alert("Message envoyé avec succès !");
-                    form.reset();
-                })
-                .catch(function (error) {
-                    alert("Erreur lors de l'envoi. Veuillez réessayer.");
-                    console.error("Erreur EmailJS :", error);
-                })
-                .finally(() => {
-                    submitBtn.disabled = false;
-                    submitBtn.innerText = "Envoyer";
-                });
-        });
-
-        console.log('✅ EmailJS initialisé');
-    }
-</script>
+<!-- App Vue page accueil -->
+<script src="js/vue-app-index.js"></script>
 
 </body>
 

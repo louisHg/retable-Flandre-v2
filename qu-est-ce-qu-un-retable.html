@@ -26,188 +26,85 @@
 <body>
 
 <main>
+    <div id="app">
 
-    <!-- 📦 SIDEBAR & TOGGLE chargés dynamiquement par sidebar-loader.js -->
+        <!-- Sidebar -->
+        <rf-sidebar
+            :is-open="sidebarOpen"
+            current-page="retable"
+            @close="sidebarOpen = false">
+        </rf-sidebar>
 
-    <!-- WRAPPER CONTENU -->
-    <div id="rfContent" class="rf-content">
+        <!-- Bouton hamburger -->
+        <button class="rf-sidebar-fab" type="button" aria-label="Toggle menu"
+                @click="sidebarOpen = !sidebarOpen">
+            <span></span><span></span><span></span>
+        </button>
 
-        <!-- 📦 SECTION 1 : HERO (chargée dynamiquement) -->
-        <div data-load-component="sections/hero-retable"></div>
+        <!-- Contenu principal -->
+        <div :class="['rf-content', { 'is-expanded': !sidebarOpen }]">
 
-        <!-- 📦 SECTION 2 : TEXTE COLLECTIF (chargée dynamiquement) -->
-        <div data-load-component="sections/texte-collectif"></div>
+            <!-- Hero avec image cliquable (schéma) -->
+            <rf-hero-retable @open-schema="openSchema"></rf-hero-retable>
 
-        <!-- 📦 SECTION 3 : ARTICLES SCIENTIFIQUES (chargés dynamiquement) -->
-        <section class="section-padding" style="padding-top: 80px; padding-bottom: 80px;">
-            <div class="container">
-                <div class="row align-items-end mb-4">
-                    <div class="col-lg-8">
-                        <h2 class="mb-2">Publications scientifiques</h2>
-                        <p class="mb-0" style="color: #717275;">Articles de recherche sur les retables de Flandre</p>
+            <!-- Texte collectif -->
+            <rf-texte-collectif></rf-texte-collectif>
+
+            <!-- Articles scientifiques -->
+            <section class="section-padding" style="padding-top: 80px; padding-bottom: 80px;">
+                <div class="container">
+                    <div class="row align-items-end mb-4">
+                        <div class="col-lg-8">
+                            <h2 class="mb-2">Publications scientifiques</h2>
+                            <p class="mb-0" style="color: #717275;">Articles de recherche sur les retables de Flandre</p>
+                        </div>
+                    </div>
+                    <div class="row g-4">
+                        <div class="col-lg-6 col-12">
+                            <rf-article-hertel></rf-article-hertel>
+                        </div>
+                        <div class="col-lg-6 col-12">
+                            <rf-article-oger></rf-article-oger>
+                        </div>
                     </div>
                 </div>
+            </section>
 
-                <!-- 📦 Conteneur pour les composants articles -->
-                <div class="row g-4" id="articlesContainer">
-                    <!-- Les composants articles seront chargés ici via JavaScript -->
+            <rf-newsletter-cta></rf-newsletter-cta>
+            <rf-contact></rf-contact>
+            <rf-footer></rf-footer>
+        </div>
+
+        <!-- Modale schéma du retable -->
+        <div class="image-modal" :class="{ 'is-open': schemaModalOpen }"
+             :aria-hidden="String(!schemaModalOpen)" @click.self="closeSchema">
+            <button class="image-modal-close" type="button" @click="closeSchema" aria-label="Fermer">✕</button>
+            <div class="image-modal-content" role="dialog" aria-modal="true">
+                <div class="image-modal-header">
+                    <h3 class="image-modal-title">Schéma d'un retable</h3>
                 </div>
-
+                <div class="image-modal-body">
+                    <img class="image-modal-img" src="images/previous-image/schemadunretable.jpg"
+                         alt="Schéma d'un retable">
+                </div>
             </div>
-        </section>
+        </div>
 
-        <!-- 📦 SECTION 4 : CTA NEWSLETTER (chargée dynamiquement) -->
-        <div data-load-component="sections/newsletter-cta"></div>
-
-        <!-- 📦 SECTION 5 : CONTACT (chargée dynamiquement) -->
-        <div data-load-component="sections/contact"></div>
-
-        <!-- 📦 FOOTER (chargé dynamiquement) -->
-        <div id="footerContainer"></div>
-
-    </div><!-- /#rfContent -->
-
+    </div>
 </main>
 
-<!-- MODALE IMAGE SCHÉMA -->
-<div class="image-modal" id="schemaModal" aria-hidden="true">
-    <button class="image-modal-close" type="button" aria-label="Fermer">✕</button>
+<!-- Vue 3 CDN -->
+<script src="js/vue.js"></script>
 
-    <div class="image-modal-content" role="dialog" aria-modal="true">
-        <div class="image-modal-header">
-            <h3 class="image-modal-title">Schéma d'un retable</h3>
-        </div>
-
-        <div class="image-modal-body">
-            <img id="schemaModalImg" class="image-modal-img" src="images/previous-image/schemadunretable.jpg"
-                 alt="Schéma d'un retable">
-        </div>
-    </div>
-</div>
-
-<!-- JAVASCRIPT FILES -->
-<script src="js/jquery.min.js"></script>
+<!-- Bootstrap + EmailJS -->
 <script src="js/bootstrap.bundle.min.js"></script>
-<script src="js/jquery.sticky.js"></script>
-<script src="js/click-scroll.js"></script>
-<script src="js/custom.js"></script>
-<script src="js/components-bundle.js"></script>
-<script src="js/sidebar-loader.js"></script> <!-- ✅ Charge sidebar + toggle -->
-<script src="js/sidebar.js"></script> <!-- ✅ Initialise la logique sidebar -->
-<script src="js/component-loader.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
 
-<script>
-    // ==========================================
-    // 🎯 CONFIGURATION ET INITIALISATION
-    // ==========================================
+<!-- Composants Vue partagés -->
+<script src="js/vue-components.js"></script>
 
-    console.log('🚀 Initialisation de la page...');
-
-    document.addEventListener("DOMContentLoaded", function () {
-        console.log('✅ DOM Chargé');
-
-        // ==========================================
-        // 📦 CHARGEMENT DES COMPOSANTS
-        // ==========================================
-        setTimeout(function() {
-            loadAllComponents();
-        }, 100);
-
-        // ==========================================
-        // 🖼️ MODALE SCHÉMA (après chargement)
-        // ==========================================
-        setTimeout(function() {
-            initSchemaModal();
-        }, 800);
-    });
-
-
-    // ==========================================
-    // FONCTION : Chargement de tous les composants
-    // ==========================================
-    async function loadAllComponents() {
-        console.log('📦 Chargement des composants...');
-
-        try {
-            // Vérifier si le bundle existe
-            if (!window.COMPONENTS_BUNDLE) {
-                console.error('❌ Bundle de composants non trouvé');
-                return;
-            }
-
-            console.log('✅ Bundle trouvé avec', Object.keys(window.COMPONENTS_BUNDLE).length, 'composants');
-
-            // Charger les articles scientifiques en grille
-            if (window.loadComponentsGrid) {
-                await loadComponentsGrid('#articlesContainer', [
-                    { path: 'articles/article-hertel', colClass: 'col-lg-6 col-12 mb-4' },
-                    { path: 'articles/article-oger', colClass: 'col-lg-6 col-12 mb-4' }
-                ]);
-                console.log('✅ Articles scientifiques chargés');
-            }
-
-            // Charger le footer
-            if (window.loadComponent) {
-                await loadComponent('#footerContainer', 'sections/footer');
-                console.log('✅ Footer chargé');
-            }
-
-        } catch (error) {
-            console.error('❌ Erreur lors du chargement des composants:', error);
-        }
-    }
-
-    // ==========================================
-    // FONCTION : Initialisation de la modale schéma
-    // ==========================================
-    function initSchemaModal() {
-        const schemaImg = document.getElementById("schemaImg");
-        const modal = document.getElementById("schemaModal");
-        const closeBtn = modal ? modal.querySelector(".image-modal-close") : null;
-
-        if (!schemaImg || !modal || !closeBtn) {
-            console.warn('⚠️ Modale schéma : éléments non trouvés');
-            return;
-        }
-
-        console.log('🖼️ Initialisation de la modale schéma...');
-
-        // Ouvrir la modale
-        schemaImg.addEventListener("click", function() {
-            modal.classList.add("is-open");
-            modal.setAttribute("aria-hidden", "false");
-            document.body.style.overflow = "hidden";
-            console.log('🖼️ Modale ouverte');
-        });
-
-        // Fermer avec le bouton
-        closeBtn.addEventListener("click", function() {
-            modal.classList.remove("is-open");
-            modal.setAttribute("aria-hidden", "true");
-            document.body.style.overflow = "";
-        });
-
-        // Fermer en cliquant sur le fond
-        modal.addEventListener("click", function(e) {
-            if (e.target === modal) {
-                modal.classList.remove("is-open");
-                modal.setAttribute("aria-hidden", "true");
-                document.body.style.overflow = "";
-            }
-        });
-
-        // Fermer avec Échap
-        document.addEventListener("keydown", function(e) {
-            if (e.key === "Escape" && modal.classList.contains("is-open")) {
-                modal.classList.remove("is-open");
-                modal.setAttribute("aria-hidden", "true");
-                document.body.style.overflow = "";
-            }
-        });
-
-        console.log('✅ Modale schéma initialisée');
-    }
-</script>
+<!-- App Vue page retable -->
+<script src="js/vue-app-retable.js"></script>
 
 </body>
 </html>
