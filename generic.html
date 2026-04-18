@@ -1,0 +1,191 @@
+<!doctype html>
+<html lang="fr">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Association - RETABLES de FLANDRE</title>
+    <link rel="icon" type="image/jpg" href="images/previous-image/logo.jpg">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,700;1,400&display=swap" rel="stylesheet">
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/bootstrap-icons.css" rel="stylesheet">
+    <link href="css/main.css" rel="stylesheet">
+    <link href="css/sidebar.css" rel="stylesheet">
+    <link href="css/components/cards.css" rel="stylesheet">
+    <link href="css/components/badges.css" rel="stylesheet">
+    <link href="css/components/notifications.css" rel="stylesheet">
+</head>
+<body>
+<main>
+<div id="app">
+
+    <rf-sidebar :is-open="sidebarOpen" current-page="generic" @close="sidebarOpen = false"></rf-sidebar>
+
+    <button class="rf-sidebar-fab" type="button" aria-label="Toggle menu" @click="sidebarOpen = !sidebarOpen">
+        <span></span><span></span><span></span>
+    </button>
+
+    <div :class="['rf-content', { 'is-expanded': !sidebarOpen }]">
+
+        <!-- Hero -->
+        <section class="about-section section-padding" id="section_1">
+            <div class="container">
+                <div class="row align-items-start g-4">
+                    <div class="col-lg-7 col-12">
+                        <div class="d-flex align-items-center mb-3">
+                            <img src="images/previous-image/logo.jpg" alt="Logo"
+                                 style="width:70px;height:70px;object-fit:cover;border-radius:12px;margin-right:15px;">
+                            <div>
+                                <h2 class="mb-0">Association</h2>
+                                <p class="mb-0" style="color:#717275;">RETABLES de FLANDRE</p>
+                            </div>
+                        </div>
+                        <p class="mt-3" style="line-height:1.8;">
+                            Dans l'arrondissement de Dunkerque sont situées 115 communes dont
+                            62 possèdent un ou plusieurs retables classés ou inscrits à
+                            l'Inventaire des Monuments historiques.
+                        </p>
+                        <a href="images/previous-image/Composition-du-CA-et-du.pdf" target="_blank"
+                           class="btn custom-btn me-2 mb-2">
+                            <i class="bi bi-file-pdf me-2"></i>Conseil d'Administration
+                        </a>
+                        <a href="images/previous-image/Bulletin_adhesion_2022.pdf" target="_blank"
+                           class="btn custom-btn mb-2">
+                            <i class="bi bi-file-pdf me-2"></i>Bulletin d'adhésion 2022
+                        </a>
+                    </div>
+                    <div class="col-lg-5 col-12">
+                        <img src="images/previous-image/WEMAERS-Cappel.jpg" class="img-fluid w-100 rounded-4 shadow-sm"
+                             style="height:300px;object-fit:cover;" alt="Retable du maître-autel - Wemaers-Cappel">
+                        <p class="text-center mt-2" style="font-size:.9rem;color:#717275;">
+                            Retable du maître-autel - Wemaers-Cappel
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contexte & Histoire -->
+        <section class="section-padding" style="padding-top:60px;padding-bottom:60px;">
+            <div class="container">
+
+                <h2 class="mb-4">Le contexte</h2>
+                <p style="line-height:1.8;color:#555;">
+                    <u>Situation juridique</u><br>
+                    Les églises et leur mobilier sont propriété des communes depuis 1905. Le clergé affectataire
+                    en a l'usage mais ne peut en disposer. Les inspecteurs et contrôleurs des Monuments historiques
+                    et les Conservateurs départementaux des Antiquités Objets d'Art (C.A.O.A) ont des missions
+                    importantes en matière de protection et de surveillance, de conseil en conservation, de conduite
+                    des travaux de restauration, d'instruction des dossiers de subvention. Ces subventions peuvent
+                    aller jusqu'à 80&nbsp;% des travaux de restauration.
+                </p>
+
+                <p style="line-height:1.8;color:#555;" class="mt-3">
+                    <u>Cri d'alarme</u><br>
+                    « Credo ou Requiem pour les retables de Flandre ». C'est le titre de l'article du Paul Ravera
+                    paru dans un numéro 1990 de la revue Archeologia. Ce journaliste s'était bien documenté et
+                    savait déjà que les responsables locaux et nationaux des Monuments historiques et les C.A.O.A.
+                    avaient demandé, encore en vain, une aide d'urgence de l'État pour « un état des lieux ».
+                </p>
+
+                <p style="line-height:1.8;color:#555;" class="mt-3">
+                    <u>Opération Mon Patrimoine</u><br>
+                    Jack Lang, alors ministre de la culture, répond à ce cri d'alarme et décide que pour sa
+                    4ème édition, l'Opération Mon Patrimoine sera consacrée aux retables des églises rurales
+                    flamandes. Les journées de sensibilisation sont fixées aux 24, 25 et 26 mai 1991 et sont
+                    organisées avec le concours de la sous-préfecture de Dunkerque et de la ville de Dunkerque.
+                </p>
+
+                <hr class="my-5" style="border-color:#e5e5e5;">
+
+                <h2 class="mb-4">La création de l'association</h2>
+                <p style="line-height:1.8;color:#555;">
+                    Une structure juridique s'avérait indispensable pour faire connaître ce patrimoine et recueillir
+                    des fonds aux fins d'aider financièrement les communes qui engageaient des programmes de
+                    restauration. Le Sous-Préfet, Bernard PREVOST, et Francis THULIE, son proche collaborateur,
+                    furent co-fondateurs de l'association dont les statuts ont été déposés le <strong>19 avril 1991</strong>.
+                </p>
+                <p style="line-height:1.8;color:#555;" class="mt-3">
+                    L'association est dirigée par un Conseil d'administration de 24 membres répartis en 4 collèges :
+                </p>
+                <ul style="color:#555;line-height:1.8;">
+                    <li>Représentants de l'État (sous-préfet, DRAC, Conservateur régional des Monuments historiques…)</li>
+                    <li>Représentants des collectivités locales</li>
+                    <li>Représentants des curés desservants</li>
+                    <li>Représentants des adhérents</li>
+                </ul>
+                <p style="line-height:1.8;color:#555;">
+                    <strong>En 1993</strong>, M. José de BROUCKER est élu Président après André VIAU. Il présidera
+                    pendant 15 années de mandat.<br>
+                    <strong>En 2003</strong>, l'Assemblée Générale crée un 5e collège de guides certifiés.
+                    Le Conseil comprend désormais 31 membres.<br>
+                    <strong>En 2007</strong>, une modification statutaire recompose le Conseil à 26 membres.
+                </p>
+
+                <hr class="my-5" style="border-color:#e5e5e5;">
+
+                <h2 class="mb-4">Les buts de l'association</h2>
+                <div class="row g-3">
+                    <div class="col-lg-6 col-12">
+                        <div class="d-flex align-items-start gap-3">
+                            <i class="bi bi-search" style="font-size:1.4rem;color:var(--primary-color);margin-top:3px;"></i>
+                            <p style="color:#555;margin:0;">Poursuivre la recherche sur l'histoire et l'environnement des retables.</p>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-12">
+                        <div class="d-flex align-items-start gap-3">
+                            <i class="bi bi-megaphone" style="font-size:1.4rem;color:var(--primary-color);margin-top:3px;"></i>
+                            <p style="color:#555;margin:0;">Diffuser l'information concernant ce patrimoine (documents, conférences, visites…)</p>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-12">
+                        <div class="d-flex align-items-start gap-3">
+                            <i class="bi bi-cash-coin" style="font-size:1.4rem;color:var(--primary-color);margin-top:3px;"></i>
+                            <p style="color:#555;margin:0;">Rechercher et mobiliser les moyens financiers publics et privés pour la sauvegarde.</p>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-12">
+                        <div class="d-flex align-items-start gap-3">
+                            <i class="bi bi-map" style="font-size:1.4rem;color:var(--primary-color);margin-top:3px;"></i>
+                            <p style="color:#555;margin:0;">Participer au développement de circuits touristiques intégrant les retables de Flandre.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <hr class="my-5" style="border-color:#e5e5e5;">
+
+                <h2 class="mb-4">Ressources</h2>
+                <p style="line-height:1.8;color:#555;">
+                    <u>Les cotisations des adhérents et les subventions des collectivités territoriales</u>
+                    assurent pour l'essentiel le fonctionnement de l'association.
+                </p>
+                <p style="line-height:1.8;color:#555;" class="mt-2">
+                    <u>Les dons reçus</u>, notamment à l'occasion des visites guidées, ainsi que les produits de
+                    vente des livres sont portés au compte d'un Fonds de ressources affecté aux aides sollicitées
+                    par les communes qui réalisent des programmes de restauration de retables.
+                </p>
+                <p style="line-height:1.8;color:#555;" class="mt-2">
+                    De 1989 à 2021, <strong>quarante et un retables</strong> ont été restaurés.
+                    Notre Fonds de ressources y a contribué pour 39 d'entre eux.
+                </p>
+
+            </div>
+        </section>
+
+        <rf-newsletter-cta></rf-newsletter-cta>
+        <rf-contact></rf-contact>
+        <rf-footer></rf-footer>
+
+    </div>
+</div>
+</main>
+
+<script src="js/vue.global.prod.js"></script>
+<script src="js/bootstrap.bundle.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+<script src="js/vue-components.js"></script>
+<script src="js/vue-app.js"></script>
+</body>
+</html>
+
