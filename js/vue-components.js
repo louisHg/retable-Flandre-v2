@@ -12,8 +12,8 @@
     // ==========================================
     const RFSidebar = {
         props: {
-            isOpen: { type: Boolean, default: true },
-            currentPage: { type: String, default: '' }
+            isOpen: {type: Boolean, default: true},
+            currentPage: {type: String, default: ''}
         },
         emits: ['close'],
         methods: {
@@ -25,7 +25,7 @@
             scrollToContact() {
                 const target = document.getElementById('section_contact');
                 if (target) {
-                    target.scrollIntoView({ behavior: 'smooth' });
+                    target.scrollIntoView({behavior: 'smooth'});
                 } else {
                     window.location.href = 'index.html#section_contact';
                 }
@@ -46,7 +46,6 @@
                     <a class="nav-link" :class="{ active: currentPage === 'generic' }" href="generic.html" @click="handleNavClick">Association</a>
                     <a class="nav-link" :class="{ active: currentPage === 'activites' }" href="activites.html" @click="handleNavClick">Activités</a>
                     <a class="nav-link" :class="{ active: currentPage === 'retable' }" href="qu-est-ce-qu-un-retable.html" @click="handleNavClick">Qu'est-ce qu'un retable ?</a>
-                    <a class="nav-link" :class="{ active: currentPage === 'visites' }" href="visiteDesEglises.html" @click="handleNavClick">Visites des églises</a>
                     <a class="nav-link" :class="{ active: currentPage === 'depliants' }" href="depliants-eglises.html" @click="handleNavClick">Dépliants des églises à retables</a>
                     <a class="nav-link" :class="{ active: currentPage === 'actualites' }" href="actualites.html" @click="handleNavClick">Actualités</a>
                     <a class="nav-link" :class="{ active: currentPage === 'boutique' }" href="boutique.html" @click="handleNavClick">Boutique</a>
@@ -213,7 +212,7 @@
     const RFContact = {
         data() {
             return {
-                form: { fullName: '', phone: '', email: '', message: '' },
+                form: {fullName: '', phone: '', email: '', message: ''},
                 sending: false,
                 sent: false,
                 error: null
@@ -237,7 +236,7 @@
                         message: this.form.message
                     });
                     this.sent = true;
-                    this.form = { fullName: '', phone: '', email: '', message: '' };
+                    this.form = {fullName: '', phone: '', email: '', message: ''};
                 } catch (err) {
                     this.error = "Erreur lors de l'envoi. Veuillez réessayer.";
                     console.error('Erreur EmailJS :', err);
@@ -414,38 +413,193 @@
                 modalSrc: '',
                 modalTitle: '',
                 images: [
-                    { src: BASE + 'crbst_Bollezeele_20retable_20de_20la_20Sainte_20Famille.jpg', alt: 'Retable de la Sainte Famille - Église Saint-Omer de Bollezeele', badge: 'Église Saint-Omer de Bollezeele', heading: 'Retable de la Sainte Famille' },
-                    { src: BASE + 'crbst_Bollezeele_20retable_20Re_CC_81surrection.jpg', alt: 'Retable de la Résurrection - Église Saint-Omer de Bollezeele', badge: 'Église Saint-Omer de Bollezeele', heading: 'Retable de la Résurrection' },
-                    { src: BASE + 'crbst_Bollezeele_20Retable_20Vierge.jpg', alt: 'Retable de la Vierge - Église Saint-Omer de Bollezeele', badge: 'Église Saint-Omer de Bollezeele', heading: 'Retable de la Vierge' },
-                    { src: BASE + 'crbst_Borre_20retable_20du_20ma_C3_AEtre-autel.jpg', alt: 'Retable du maître-autel - Église Saint-Martin de Borre', badge: 'Église Saint-Martin de Borre', heading: 'Retable du maître-autel' },
-                    { src: BASE + 'crbst_Craywick_20retable_20du_20ma_C3_AEtre-autel.jpg', alt: 'Retable du maître-autel - Église Saint-Gilles de Craywick', badge: 'Église Saint-Gilles de Craywick', heading: 'Retable du maître-autel' },
-                    { src: BASE + 'crbst_Craywick_20retable_20nord.jpg', alt: 'Retable de Saint Gilles - Église Saint-Gilles de Craywick', badge: 'Église Saint-Gilles de Craywick', heading: 'Retable de Saint Gilles' },
-                    { src: BASE + 'crbst_Craywick_20retable_20sud.jpg', alt: "Retable de l'Assomption - Église Saint-Gilles de Craywick", badge: 'Église Saint-Gilles de Craywick', heading: "Retable de l'Assomption" },
-                    { src: BASE + 'crbst_Hazebrouck_20nord.jpg', alt: "Retable de la Vierge Marie - Église Saint-Eloi d'Hazebrouck", badge: "Église Saint-Eloi d'Hazebrouck", heading: 'Retable de la Vierge Marie' },
-                    { src: BASE + 'crbst_Hazebrouck_20sud.jpg', alt: "Retable de la Trinité - Église Saint-Eloi d'Hazebrouck", badge: "Église Saint-Eloi d'Hazebrouck", heading: 'Retable de la Trinité' },
-                    { src: BASE + 'crbst_IMG_2246_20retable_20nord_20sRVB_208_20bits_20jpg_20leger_20bavinchove.jpg', alt: 'Retable nord - Église Saint-Omer de Bavinchove', badge: 'Église Saint-Omer de Bavinchove', heading: 'Retable nord' },
-                    { src: BASE + 'crbst_IMG_6716_20rec_20herzeele_20sud.jpg', alt: "Retable de Saint Antoine - Église Saint-Martin d'Herzeele", badge: "Église Saint-Martin d'Herzeele", heading: 'Retable de Saint Antoine' },
-                    { src: BASE + 'crbst_IMG_7777_20Zegers_20nord.jpg', alt: 'Retable du Rosaire - Église Saint-Folquin de Zegerscappel', badge: 'Église Saint-Folquin de Zegerscappel', heading: 'Retable du Rosaire' },
-                    { src: BASE + 'crbst_IMG_7805_20rubrouck_20centre.jpg', alt: 'Retable du maître-autel - Église Notre-Dame de Rubrouck', badge: 'Église Notre-Dame de Rubrouck', heading: 'Retable du maître-autel' },
-                    { src: BASE + 'crbst_IMG_7836_20herzeele_20centre_20rec_20rot_203_C2_B0.jpg', alt: "Retable de l'Assomption - Église Saint-Martin d'Herzeele", badge: "Église Saint-Martin d'Herzeele", heading: "Retable de l'Assomption" },
-                    { src: BASE + 'crbst_IMG_7863_20killem_20nord_20rec.jpg', alt: 'Retable du Rosaire - Église Saint-Pierre de Killem', badge: 'Église Saint-Pierre de Killem', heading: 'Retable du Rosaire' },
-                    { src: BASE + 'crbst_IMG_7877_20hondschodt_20sud.jpg', alt: "Retable du Saint Esprit - Église Saint-Vaast d'Hondschoote", badge: "Église Saint-Vaast d'Hondschoote", heading: 'Retable du Saint Esprit' },
-                    { src: BASE + 'crbst_IMG_7884_20hondchodt_20St_20Sebastien_20transf_20rec.jpg', alt: "Retable de Saint-Sébastien - Église Saint-Vaast d'Hondschoote", badge: "Église Saint-Vaast d'Hondschoote", heading: 'Retable de Saint-Sébastien' },
-                    { src: BASE + 'crbst_IMG_8150_20rot_202_C2_B0_20rec_20wemaers_20centre.jpg', alt: 'Retable du maître-autel - Église Saint-Sylvestre de Wemaers-Cappel', badge: 'Église Saint-Sylvestre de Wemaers-Cappel', heading: 'Retable du maître-autel' },
-                    { src: BASE + 'crbst_IMG_8402_20steenbecque_20centre_20transf.jpg', alt: 'Retable du maître-autel - Église Saint-Léger de Steenbecque', badge: 'Église Saint-Léger de Steenbecque', heading: 'Retable du maître-autel' },
-                    { src: BASE + 'crbst_IMG_9694_20ret_20Herzeele_20nord.jpg', alt: "Retable du Sacré-Cœur - Église Saint-Martin d'Herzeele", badge: "Église Saint-Martin d'Herzeele", heading: 'Retable du Sacré-Cœur' },
-                    { src: BASE + 'crbst_import28.png', alt: 'Retable de Flandre', badge: null, heading: null },
-                    { src: BASE + "crbst_Oudezeele_20retable_20nord.jpg", alt: "Retable du Couronnement de la Vierge - Église Saint-Omer d'Oudezeele", badge: "Église Saint-Omer d'Oudezeele", heading: 'Retable du Couronnement de la Vierge' },
-                    { src: BASE + 'crbst_Oudezeele_20retable_20sud.jpg', alt: "Retable de Sainte Anne Trinitaire - Église Saint-Omer d'Oudezeele", badge: "Église Saint-Omer d'Oudezeele", heading: 'Retable de Sainte Anne Trinitaire' },
-                    { src: BASE + 'crbst_Pitgam_20retable_20nord.jpg', alt: 'Retable du Rosaire - Église Saint-Folquin de Pitgam', badge: 'Église Saint-Folquin de Pitgam', heading: 'Retable du Rosaire' },
-                    { src: BASE + 'crbst_Saint-Pierre_20_C3_A0_20Lo.jpg', alt: 'Retable de Saint-Pierre', badge: null, heading: null },
-                    { src: BASE + 'crbst_Sainte_20Mildr_C3_A8de_20_C3_A0_20Izenberge.jpg', alt: "Retable de Saint-Pierre - Église Sainte-Mildrède d'Izenberge", badge: "Église Sainte-Mildrède d'Izenberge", heading: 'Retable de Saint-Pierre' },
-                    { src: BASE + 'crbst_Socx_20retable_20du_20ma_C3_AEtre-autel.jpg', alt: 'Retable du maître-autel - Église Saint-Maxime de Socx', badge: 'Église Saint-Maxime de Socx', heading: 'Retable du maître-autel' },
-                    { src: BASE + 'crbst_Socx_20retable_20nord.jpg', alt: 'Retable de la Vierge - Église Saint-Maxime de Socx', badge: 'Église Saint-Maxime de Socx', heading: 'Retable de la Vierge' },
-                    { src: BASE + 'crbst_Socx_20retable_20sud.jpg', alt: 'Retable de Saint-Léger - Église Saint-Maxime de Socx', badge: 'Église Saint-Maxime de Socx', heading: 'Retable de Saint-Léger' },
-                    { src: BASE + 'crbst_ST_20Jacques_20Hazebrouck_20A4.jpg', alt: "Retable de Saint-Antoine de Padoue - Chapelle Saint-Jacques d'Hazebrouck", badge: "Chapelle Saint-Jacques d'Hazebrouck", heading: 'Retable de Saint-Antoine de Padoue' },
-                    { src: BASE + 'crbst_Wahrem_20nouvelle_20version_20Jpg.jpg', alt: 'Retable du Rosaire - Église Saint-Martin de Warhem', badge: 'Église Saint-Martin de Warhem', heading: 'Retable du Rosaire' },
-                    { src: BASE + 'crbst_Wormhout_20sud_20_20site_20web_20-_20Copie.jpg', alt: 'Retable sud - Église Saint-Martin de Wormhout', badge: 'Église Saint-Martin de Wormhout', heading: 'Retable sud' }
+                    {
+                        src: BASE + 'crbst_Bollezeele_20retable_20de_20la_20Sainte_20Famille.jpg',
+                        alt: 'Retable de la Sainte Famille - Église Saint-Omer de Bollezeele',
+                        badge: 'Église Saint-Omer de Bollezeele',
+                        heading: 'Retable de la Sainte Famille'
+                    },
+                    {
+                        src: BASE + 'crbst_Bollezeele_20retable_20Re_CC_81surrection.jpg',
+                        alt: 'Retable de la Résurrection - Église Saint-Omer de Bollezeele',
+                        badge: 'Église Saint-Omer de Bollezeele',
+                        heading: 'Retable de la Résurrection'
+                    },
+                    {
+                        src: BASE + 'crbst_Bollezeele_20Retable_20Vierge.jpg',
+                        alt: 'Retable de la Vierge - Église Saint-Omer de Bollezeele',
+                        badge: 'Église Saint-Omer de Bollezeele',
+                        heading: 'Retable de la Vierge'
+                    },
+                    {
+                        src: BASE + 'crbst_Borre_20retable_20du_20ma_C3_AEtre-autel.jpg',
+                        alt: 'Retable du maître-autel - Église Saint-Martin de Borre',
+                        badge: 'Église Saint-Martin de Borre',
+                        heading: 'Retable du maître-autel'
+                    },
+                    {
+                        src: BASE + 'crbst_Craywick_20retable_20du_20ma_C3_AEtre-autel.jpg',
+                        alt: 'Retable du maître-autel - Église Saint-Gilles de Craywick',
+                        badge: 'Église Saint-Gilles de Craywick',
+                        heading: 'Retable du maître-autel'
+                    },
+                    {
+                        src: BASE + 'crbst_Craywick_20retable_20nord.jpg',
+                        alt: 'Retable de Saint Gilles - Église Saint-Gilles de Craywick',
+                        badge: 'Église Saint-Gilles de Craywick',
+                        heading: 'Retable de Saint Gilles'
+                    },
+                    {
+                        src: BASE + 'crbst_Craywick_20retable_20sud.jpg',
+                        alt: "Retable de l'Assomption - Église Saint-Gilles de Craywick",
+                        badge: 'Église Saint-Gilles de Craywick',
+                        heading: "Retable de l'Assomption"
+                    },
+                    {
+                        src: BASE + 'crbst_Hazebrouck_20nord.jpg',
+                        alt: "Retable de la Vierge Marie - Église Saint-Eloi d'Hazebrouck",
+                        badge: "Église Saint-Eloi d'Hazebrouck",
+                        heading: 'Retable de la Vierge Marie'
+                    },
+                    {
+                        src: BASE + 'crbst_Hazebrouck_20sud.jpg',
+                        alt: "Retable de la Trinité - Église Saint-Eloi d'Hazebrouck",
+                        badge: "Église Saint-Eloi d'Hazebrouck",
+                        heading: 'Retable de la Trinité'
+                    },
+                    {
+                        src: BASE + 'crbst_IMG_2246_20retable_20nord_20sRVB_208_20bits_20jpg_20leger_20bavinchove.jpg',
+                        alt: 'Retable nord - Église Saint-Omer de Bavinchove',
+                        badge: 'Église Saint-Omer de Bavinchove',
+                        heading: 'Retable nord'
+                    },
+                    {
+                        src: BASE + 'crbst_IMG_6716_20rec_20herzeele_20sud.jpg',
+                        alt: "Retable de Saint Antoine - Église Saint-Martin d'Herzeele",
+                        badge: "Église Saint-Martin d'Herzeele",
+                        heading: 'Retable de Saint Antoine'
+                    },
+                    {
+                        src: BASE + 'crbst_IMG_7777_20Zegers_20nord.jpg',
+                        alt: 'Retable du Rosaire - Église Saint-Folquin de Zegerscappel',
+                        badge: 'Église Saint-Folquin de Zegerscappel',
+                        heading: 'Retable du Rosaire'
+                    },
+                    {
+                        src: BASE + 'crbst_IMG_7805_20rubrouck_20centre.jpg',
+                        alt: 'Retable du maître-autel - Église Notre-Dame de Rubrouck',
+                        badge: 'Église Notre-Dame de Rubrouck',
+                        heading: 'Retable du maître-autel'
+                    },
+                    {
+                        src: BASE + 'crbst_IMG_7836_20herzeele_20centre_20rec_20rot_203_C2_B0.jpg',
+                        alt: "Retable de l'Assomption - Église Saint-Martin d'Herzeele",
+                        badge: "Église Saint-Martin d'Herzeele",
+                        heading: "Retable de l'Assomption"
+                    },
+                    {
+                        src: BASE + 'crbst_IMG_7863_20killem_20nord_20rec.jpg',
+                        alt: 'Retable du Rosaire - Église Saint-Pierre de Killem',
+                        badge: 'Église Saint-Pierre de Killem',
+                        heading: 'Retable du Rosaire'
+                    },
+                    {
+                        src: BASE + 'crbst_IMG_7877_20hondschodt_20sud.jpg',
+                        alt: "Retable du Saint Esprit - Église Saint-Vaast d'Hondschoote",
+                        badge: "Église Saint-Vaast d'Hondschoote",
+                        heading: 'Retable du Saint Esprit'
+                    },
+                    {
+                        src: BASE + 'crbst_IMG_7884_20hondchodt_20St_20Sebastien_20transf_20rec.jpg',
+                        alt: "Retable de Saint-Sébastien - Église Saint-Vaast d'Hondschoote",
+                        badge: "Église Saint-Vaast d'Hondschoote",
+                        heading: 'Retable de Saint-Sébastien'
+                    },
+                    {
+                        src: BASE + 'crbst_IMG_8150_20rot_202_C2_B0_20rec_20wemaers_20centre.jpg',
+                        alt: 'Retable du maître-autel - Église Saint-Sylvestre de Wemaers-Cappel',
+                        badge: 'Église Saint-Sylvestre de Wemaers-Cappel',
+                        heading: 'Retable du maître-autel'
+                    },
+                    {
+                        src: BASE + 'crbst_IMG_8402_20steenbecque_20centre_20transf.jpg',
+                        alt: 'Retable du maître-autel - Église Saint-Léger de Steenbecque',
+                        badge: 'Église Saint-Léger de Steenbecque',
+                        heading: 'Retable du maître-autel'
+                    },
+                    {
+                        src: BASE + 'crbst_IMG_9694_20ret_20Herzeele_20nord.jpg',
+                        alt: "Retable du Sacré-Cœur - Église Saint-Martin d'Herzeele",
+                        badge: "Église Saint-Martin d'Herzeele",
+                        heading: 'Retable du Sacré-Cœur'
+                    },
+                    {src: BASE + 'crbst_import28.png', alt: 'Retable de Flandre', badge: null, heading: null},
+                    {
+                        src: BASE + "crbst_Oudezeele_20retable_20nord.jpg",
+                        alt: "Retable du Couronnement de la Vierge - Église Saint-Omer d'Oudezeele",
+                        badge: "Église Saint-Omer d'Oudezeele",
+                        heading: 'Retable du Couronnement de la Vierge'
+                    },
+                    {
+                        src: BASE + 'crbst_Oudezeele_20retable_20sud.jpg',
+                        alt: "Retable de Sainte Anne Trinitaire - Église Saint-Omer d'Oudezeele",
+                        badge: "Église Saint-Omer d'Oudezeele",
+                        heading: 'Retable de Sainte Anne Trinitaire'
+                    },
+                    {
+                        src: BASE + 'crbst_Pitgam_20retable_20nord.jpg',
+                        alt: 'Retable du Rosaire - Église Saint-Folquin de Pitgam',
+                        badge: 'Église Saint-Folquin de Pitgam',
+                        heading: 'Retable du Rosaire'
+                    },
+                    {
+                        src: BASE + 'crbst_Saint-Pierre_20_C3_A0_20Lo.jpg',
+                        alt: 'Retable de Saint-Pierre',
+                        badge: null,
+                        heading: null
+                    },
+                    {
+                        src: BASE + 'crbst_Sainte_20Mildr_C3_A8de_20_C3_A0_20Izenberge.jpg',
+                        alt: "Retable de Saint-Pierre - Église Sainte-Mildrède d'Izenberge",
+                        badge: "Église Sainte-Mildrède d'Izenberge",
+                        heading: 'Retable de Saint-Pierre'
+                    },
+                    {
+                        src: BASE + 'crbst_Socx_20retable_20du_20ma_C3_AEtre-autel.jpg',
+                        alt: 'Retable du maître-autel - Église Saint-Maxime de Socx',
+                        badge: 'Église Saint-Maxime de Socx',
+                        heading: 'Retable du maître-autel'
+                    },
+                    {
+                        src: BASE + 'crbst_Socx_20retable_20nord.jpg',
+                        alt: 'Retable de la Vierge - Église Saint-Maxime de Socx',
+                        badge: 'Église Saint-Maxime de Socx',
+                        heading: 'Retable de la Vierge'
+                    },
+                    {
+                        src: BASE + 'crbst_Socx_20retable_20sud.jpg',
+                        alt: 'Retable de Saint-Léger - Église Saint-Maxime de Socx',
+                        badge: 'Église Saint-Maxime de Socx',
+                        heading: 'Retable de Saint-Léger'
+                    },
+                    {
+                        src: BASE + 'crbst_ST_20Jacques_20Hazebrouck_20A4.jpg',
+                        alt: "Retable de Saint-Antoine de Padoue - Chapelle Saint-Jacques d'Hazebrouck",
+                        badge: "Chapelle Saint-Jacques d'Hazebrouck",
+                        heading: 'Retable de Saint-Antoine de Padoue'
+                    },
+                    {
+                        src: BASE + 'crbst_Wahrem_20nouvelle_20version_20Jpg.jpg',
+                        alt: 'Retable du Rosaire - Église Saint-Martin de Warhem',
+                        badge: 'Église Saint-Martin de Warhem',
+                        heading: 'Retable du Rosaire'
+                    },
+                    {
+                        src: BASE + 'crbst_Wormhout_20sud_20_20site_20web_20-_20Copie.jpg',
+                        alt: 'Retable sud - Église Saint-Martin de Wormhout',
+                        badge: 'Église Saint-Martin de Wormhout',
+                        heading: 'Retable sud'
+                    }
                 ]
             };
         },
@@ -576,19 +730,128 @@
     };
 
     // ==========================================
+    // 🔍 rf-lightbox — Rend TOUTES les images cliquables
+    // ==========================================
+    const RFLightbox = {
+        data() {
+            return {
+                open: false,
+                src: '',
+                title: ''
+            };
+        },
+        mounted() {
+            this._onKeydown = (e) => {
+                if (e.key === 'Escape' && this.open) this.close();
+            };
+            document.addEventListener('keydown', this._onKeydown);
+
+            // Scanner les images après le rendu complet
+            this.$nextTick(() => {
+                this.scanImages();
+            });
+            // Re-scanner quand le DOM change (composants chargés dynamiquement)
+            this._observer = new MutationObserver(() => {
+                this.scanImages();
+            });
+            const target = document.querySelector('.rf-content');
+            if (target) {
+                this._observer.observe(target, {childList: true, subtree: true});
+            }
+        },
+        beforeUnmount() {
+            document.removeEventListener('keydown', this._onKeydown);
+            if (this._observer) this._observer.disconnect();
+        },
+        methods: {
+            scanImages() {
+                const content = document.querySelector('.rf-content');
+                if (!content) return;
+                const imgs = content.querySelectorAll('img:not([data-lightbox-bound])');
+                imgs.forEach((img) => {
+                    // Ignorer les petites images (logos, icônes)
+                    if (img.closest('.rf-brand') || img.closest('.rf-sidebar')) return;
+                    if (img.naturalWidth > 0 && img.naturalWidth < 60) return;
+                    if (img.width > 0 && img.width < 60) return;
+
+                    img.setAttribute('data-lightbox-bound', '1');
+                    img.style.cursor = 'pointer';
+
+                    img.addEventListener('click', (e) => {
+                        // Ne pas intercepter si l'image est dans un lien <a> vers un PDF ou autre page
+                        const parentLink = img.closest('a');
+                        if (parentLink) {
+                            const href = parentLink.getAttribute('href') || '';
+                            if (href && !href.startsWith('#') && !href.endsWith('.jpg') && !href.endsWith('.jpeg') && !href.endsWith('.png') && !href.endsWith('.JPG') && !href.endsWith('.JPEG') && !href.endsWith('.PNG')) {
+                                return; // laisser le lien fonctionner normalement
+                            }
+                            e.preventDefault();
+                        }
+                        this.openModal(img.src, img.alt || 'Image');
+                    });
+                });
+            },
+            openModal(src, title) {
+                this.src = src;
+                this.title = title;
+                this.open = true;
+                document.body.style.overflow = 'hidden';
+            },
+            close() {
+                this.open = false;
+                document.body.style.overflow = '';
+            },
+            download() {
+                fetch(this.src)
+                    .then(r => r.blob())
+                    .then(blob => {
+                        const url = URL.createObjectURL(blob);
+                        const a = document.createElement('a');
+                        a.href = url;
+                        a.download = (this.title || 'image').replace(/[^a-z0-9àâäéèêëïîôùûüçœæ ]/gi, '_').substring(0, 80) + '.jpg';
+                        document.body.appendChild(a);
+                        a.click();
+                        URL.revokeObjectURL(url);
+                        document.body.removeChild(a);
+                    })
+                    .catch(() => window.open(this.src, '_blank'));
+            }
+        },
+        template: `
+            <div class="image-modal" :class="{ 'is-open': open }"
+                 :aria-hidden="String(!open)" @click.self="close">
+                <button class="image-modal-close" type="button" @click="close" aria-label="Fermer">✕</button>
+                <button class="image-modal-download" type="button" @click="download"
+                        aria-label="Télécharger" title="Télécharger l'image">
+                    <i class="bi bi-download"></i>
+                </button>
+                <div class="image-modal-content" role="dialog" aria-modal="true">
+                    <div class="image-modal-header">
+                        <h3 class="image-modal-title">{{ title }}</h3>
+                    </div>
+                    <div class="image-modal-body">
+                        <img :src="src" class="image-modal-img" :alt="title">
+                    </div>
+                </div>
+            </div>
+        `
+    };
+
+    // ==========================================
     // 📦 Export global
     // ==========================================
     window.RFComponents = {
-        'rf-sidebar':           RFSidebar,
-        'rf-hero-home':         RFHeroHome,
-        'rf-hero-retable':      RFHeroRetable,
-        'rf-texte-collectif':   RFTexteCollectif,
-        'rf-newsletter-cta':    RFNewsletterCta,
-        'rf-contact':           RFContact,
-        'rf-footer':            RFFooter,
-        'rf-article-hertel':    RFArticleHertel,
-        'rf-article-oger':      RFArticleOger,
-        'rf-gallery-carousel':  RFGalleryCarousel
+        'rf-sidebar': RFSidebar,
+        'rf-hero-home': RFHeroHome,
+        'rf-hero-retable': RFHeroRetable,
+        'rf-texte-collectif': RFTexteCollectif,
+        'rf-newsletter-cta': RFNewsletterCta,
+        'rf-contact': RFContact,
+        'rf-footer': RFFooter,
+        'rf-article-hertel': RFArticleHertel,
+        'rf-article-oger': RFArticleOger,
+        'rf-gallery-carousel': RFGalleryCarousel,
+        'rf-lightbox': RFLightbox
     };
 
     console.log('✅ RFComponents chargés :', Object.keys(window.RFComponents).length, 'composants');

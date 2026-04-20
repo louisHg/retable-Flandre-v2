@@ -7,7 +7,8 @@
     <link rel="icon" type="image/jpg" href="images/previous-image/logo.jpg">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,700;1,400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,700;1,400&display=swap"
+          rel="stylesheet">
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="css/bootstrap-icons.css" rel="stylesheet">
     <link href="css/main.css" rel="stylesheet">
@@ -19,377 +20,546 @@
 </head>
 <body>
 <main>
-<div id="app">
+    <div id="app">
 
-    <rf-sidebar :is-open="sidebarOpen" current-page="actualites" @close="sidebarOpen = false"></rf-sidebar>
+        <rf-sidebar :is-open="sidebarOpen" current-page="actualites" @close="sidebarOpen = false"></rf-sidebar>
 
         <!-- Overlay backdrop mobile -->
         <div class="rf-sidebar-overlay" :class="{ 'is-active': sidebarOpen }" @click="sidebarOpen = false"></div>
 
-    <button class="rf-sidebar-fab" type="button" aria-label="Toggle menu" @click="sidebarOpen = !sidebarOpen">
-        <span></span><span></span><span></span>
-    </button>
+        <button class="rf-sidebar-fab" type="button" aria-label="Toggle menu" @click="sidebarOpen = !sidebarOpen">
+            <span></span><span></span><span></span>
+        </button>
 
-    <div :class="['rf-content', { 'is-expanded': !sidebarOpen }]">
+        <div :class="['rf-content', { 'is-expanded': !sidebarOpen }]">
 
-        <!-- Hero -->
-        <section class="about-section section-padding" id="section_1">
-            <div class="container">
-                <div class="d-flex align-items-center mb-3">
-                    <img src="images/previous-image/logo.jpg" alt="Logo"
-                         style="width:70px;height:70px;object-fit:cover;border-radius:12px;margin-right:15px;">
-                    <div>
-                        <h2 class="mb-0">Actualités</h2>
-                        <p class="mb-0" style="color:#717275;">Association RETABLES de FLANDRE</p>
+            <!-- Hero -->
+            <section class="about-section section-padding" id="section_1">
+                <div class="container">
+                    <div class="d-flex align-items-center mb-3">
+                        <img src="images/previous-image/logo.jpg" alt="Logo"
+                             style="width:70px;height:70px;object-fit:cover;border-radius:12px;margin-right:15px;">
+                        <div>
+                            <h2 class="mb-0">Actualités</h2>
+                            <p class="mb-0" style="color:#717275;">Association RETABLES de FLANDRE</p>
+                        </div>
                     </div>
                 </div>
-            </div>
-        </section>
+            </section>
 
-        <!-- Actualités -->
-        <section class="section-padding" style="padding-top:40px;padding-bottom:80px;">
-            <div class="container">
+            <!-- Actualités -->
+            <section class="section-padding" style="padding-top:40px;padding-bottom:80px;">
+                <div class="container">
 
-                <!-- AG Looberghe 2026 -->
-                <div class="mb-5">
-                    <h2 class="mb-1">Assemblée Générale 2026 à Looberghe</h2>
-                    <h5 class="mb-3" style="color:var(--primary-color);">Samedi 7 mars 2026</h5>
-                    <p style="color:#555;line-height:1.8;font-weight:bold;">
-                        L'Assemblée Générale de l'Association des Retables de Flandre s'est tenue le
-                        <b>samedi 7 mars 2026</b> à <b>Looberghe</b>.
-                    </p>
-                    <p style="color:#555;line-height:1.8;">
-                        Après une visite de l'église et la tenue de l'assemblée générale ordinaire, un nouveau
-                        <b>Conseil d'Administration</b> a été élu le <b>17 mars 2026</b>.
-                    </p>
-                    <div class="d-flex flex-wrap gap-3 mb-3">
-                        <a href="images/2026/Looberghe/CR-AG2026Loob.pdf" target="_blank" class="btn custom-btn btn-sm">
-                            <i class="bi bi-file-pdf me-2"></i>Compte-rendu AG 2026
-                        </a>
-                        <a href="images/2026/AG-2025.pdf" target="_blank" class="btn custom-btn btn-sm">
-                            <i class="bi bi-file-pdf me-2"></i>Rapport moral et d'activités 2025
-                        </a>
-                        <a href="images/2026/Conseil-17-mars.pdf" target="_blank" class="btn custom-btn btn-sm">
-                            <i class="bi bi-file-pdf me-2"></i>Nouveau Conseil d'Administration
+                    <!-- Calendrier des visites été 2026 -->
+                    <div class="mb-5">
+                        <h2 class="mb-1">Calendrier des visites — été 2026</h2>
+                        <p style="color:#555;line-height:1.8;">
+                            Le programme des visites d'églises à retables pour l'été 2026 est disponible.
+                        </p>
+                        <a href="images/2026/2026_visite_eglise.pdf" target="_blank" class="btn custom-btn btn-sm">
+                            <i class="bi bi-calendar3 me-2"></i>Télécharger le calendrier 2026
                         </a>
                     </div>
-                    <!-- Carousel Looberghe -->
-                    <div id="carouselLooberghe" class="carousel slide rounded-4 shadow-sm" data-bs-ride="carousel"
-                         style="max-width:500px;">
-                        <div class="carousel-inner rounded-4">
-                            <div class="carousel-item active">
-                                <img src="images/2026/Looberghe/loob1.JPG" class="d-block w-100 rounded-4"
-                                     style="height:320px;object-fit:cover;" alt="AG Looberghe 2026 - 1/4">
-                            </div>
-                            <div class="carousel-item">
-                                <img src="images/2026/Looberghe/loob2.JPG" class="d-block w-100 rounded-4"
-                                     style="height:320px;object-fit:cover;" alt="AG Looberghe 2026 - 2/4">
-                            </div>
-                            <div class="carousel-item">
-                                <img src="images/2026/Looberghe/loob3.JPG" class="d-block w-100 rounded-4"
-                                     style="height:320px;object-fit:cover;" alt="AG Looberghe 2026 - 3/4">
-                            </div>
-                            <div class="carousel-item">
-                                <img src="images/2026/Looberghe/loob4.JPG" class="d-block w-100 rounded-4"
-                                     style="height:320px;object-fit:cover;" alt="AG Looberghe 2026 - 4/4">
-                            </div>
+
+                    <hr style="border-color:#e5e5e5;" class="my-5">
+
+                    <!-- AG Looberghe 2026 -->
+                    <div class="mb-5">
+                        <h2 class="mb-1">Assemblée Générale 2026 à Looberghe</h2>
+                        <h5 class="mb-3" style="color:var(--primary-color);">Samedi 7 mars 2026</h5>
+                        <p style="color:#555;line-height:1.8;font-weight:bold;">
+                            L'Assemblée Générale de l'Association des Retables de Flandre s'est tenue le
+                            <b>samedi 7 mars 2026</b> à <b>Looberghe</b>.
+                        </p>
+                        <p style="color:#555;line-height:1.8;">
+                            Après une visite de l'église et la tenue de l'assemblée générale ordinaire, un nouveau
+                            <b>Conseil d'Administration</b> a été élu le <b>17 mars 2026</b>.
+                        </p>
+                        <div class="d-flex flex-wrap gap-3 mb-3">
+                            <a href="images/2026/Looberghe/CR-AG2026Loob.pdf" target="_blank"
+                               class="btn custom-btn btn-sm">
+                                <i class="bi bi-file-pdf me-2"></i>Compte-rendu AG 2026
+                            </a>
+                            <a href="images/2026/AG-2025.pdf" target="_blank" class="btn custom-btn btn-sm">
+                                <i class="bi bi-file-pdf me-2"></i>Rapport moral et d'activités 2025
+                            </a>
+                            <a href="images/2026/Conseil-17-mars.pdf" target="_blank" class="btn custom-btn btn-sm">
+                                <i class="bi bi-file-pdf me-2"></i>Nouveau Conseil d'Administration
+                            </a>
                         </div>
-                        <button class="carousel-control-prev" type="button" data-bs-target="#carouselLooberghe" data-bs-slide="prev">
-                            <span class="carousel-control-prev-icon"></span>
-                        </button>
-                        <button class="carousel-control-next" type="button" data-bs-target="#carouselLooberghe" data-bs-slide="next">
-                            <span class="carousel-control-next-icon"></span>
-                        </button>
+                        <!-- Carousel Looberghe -->
+                        <div id="carouselLooberghe" class="carousel slide rounded-4 shadow-sm" data-bs-ride="carousel"
+                             style="max-width:500px;">
+                            <div class="carousel-inner rounded-4">
+                                <div class="carousel-item active">
+                                    <img src="images/2026/Looberghe/loob1.JPG" class="d-block w-100 rounded-4"
+                                         style="height:320px;object-fit:cover;" alt="AG Looberghe 2026 - 1/4">
+                                </div>
+                                <div class="carousel-item">
+                                    <img src="images/2026/Looberghe/loob2.JPG" class="d-block w-100 rounded-4"
+                                         style="height:320px;object-fit:cover;" alt="AG Looberghe 2026 - 2/4">
+                                </div>
+                                <div class="carousel-item">
+                                    <img src="images/2026/Looberghe/loob3.JPG" class="d-block w-100 rounded-4"
+                                         style="height:320px;object-fit:cover;" alt="AG Looberghe 2026 - 3/4">
+                                </div>
+                                <div class="carousel-item">
+                                    <img src="images/2026/Looberghe/loob4.JPG" class="d-block w-100 rounded-4"
+                                         style="height:320px;object-fit:cover;" alt="AG Looberghe 2026 - 4/4">
+                                </div>
+                            </div>
+                            <button class="carousel-control-prev" type="button" data-bs-target="#carouselLooberghe"
+                                    data-bs-slide="prev">
+                                <span class="carousel-control-prev-icon"></span>
+                            </button>
+                            <button class="carousel-control-next" type="button" data-bs-target="#carouselLooberghe"
+                                    data-bs-slide="next">
+                                <span class="carousel-control-next-icon"></span>
+                            </button>
+                        </div>
                     </div>
-                </div>
 
-                <hr style="border-color:#e5e5e5;" class="my-5">
+                    <hr style="border-color:#e5e5e5;" class="my-5">
 
-                <!-- Messe Oudezeele février 2026 -->
-                <div class="mb-5">
-                    <h2 class="mb-1">Lundi 2 février 2026</h2>
-                    <p style="color:#555;line-height:1.8;font-weight:bold;">
-                        À 18h, une messe a été célébrée par le Père Thomas Vercoutre en l'église
-                        Saint-Jean-Baptiste d'Oudezeele.
-                    </p>
-                    <p style="color:#555;line-height:1.8;">
-                        La célébration a été accompagnée de chants grégoriens interprétés par la chorale
-                        <b>Cum Jubilo</b> de Watou, suivie d'une <b>dégustation de crêpes de la Chandeleur</b>.
-                    </p>
-                    <div class="row g-3 mt-1" style="max-width:600px;">
-                        <div class="col-6">
-                            <img src="images/2026/Jubilo-Watou.jpg" class="img-fluid rounded-4 shadow-sm"
-                                 style="width:100%;height:180px;object-fit:cover;"
-                                 alt="Chorale Cum Jubilo de Watou">
-                            <p class="text-center mt-1" style="font-size:.8rem;color:#717275;">Chorale Cum Jubilo - Watou</p>
-                        </div>
-                        <div class="col-6">
-                            <img src="images/2026/eglise-Oudezeele.JPG" class="img-fluid rounded-4 shadow-sm"
-                                 style="width:100%;height:180px;object-fit:cover;"
-                                 alt="Église Saint-Jean-Baptiste d'Oudezeele">
-                            <p class="text-center mt-1" style="font-size:.8rem;color:#717275;">Église d'Oudezeele</p>
+                    <!-- Messe Oudezeele février 2026 -->
+                    <div class="mb-5">
+                        <h2 class="mb-1">Lundi 2 février 2026</h2>
+                        <p style="color:#555;line-height:1.8;font-weight:bold;">
+                            À 18h, une messe a été célébrée par le Père Thomas Vercoutre en l'église
+                            Saint-Jean-Baptiste d'Oudezeele.
+                        </p>
+                        <p style="color:#555;line-height:1.8;">
+                            La célébration a été accompagnée de chants grégoriens interprétés par la chorale
+                            <b>Cum Jubilo</b> de Watou, suivie d'une <b>dégustation de crêpes de la Chandeleur</b>.
+                        </p>
+                        <div class="row g-3 mt-1" style="max-width:600px;">
+                            <div class="col-6">
+                                <img src="images/2026/Jubilo-Watou.jpg" class="img-fluid rounded-4 shadow-sm"
+                                     style="width:100%;height:180px;object-fit:cover;"
+                                     alt="Chorale Cum Jubilo de Watou">
+                                <p class="text-center mt-1" style="font-size:.8rem;color:#717275;">Chorale Cum Jubilo -
+                                    Watou</p>
+                            </div>
+                            <div class="col-6">
+                                <img src="images/2026/eglise-Oudezeele.JPG" class="img-fluid rounded-4 shadow-sm"
+                                     style="width:100%;height:180px;object-fit:cover;"
+                                     alt="Église Saint-Jean-Baptiste d'Oudezeele">
+                                <p class="text-center mt-1" style="font-size:.8rem;color:#717275;">Église
+                                    d'Oudezeele</p>
+                            </div>
                         </div>
                     </div>
-                </div>
 
-                <hr style="border-color:#e5e5e5;" class="my-5">
+                    <hr style="border-color:#e5e5e5;" class="my-5">
 
-                <!-- Témoignage Paulette Vanpoulle -->
-                <div class="mb-5">
-                    <h2 class="mb-3">Témoignage — Obsèques de Paulette VANPOULLE</h2>
-                    <p style="color:#555;line-height:1.8;">
-                        Lors des obsèques de Paulette VANPOULLE, l'Association des Retables de Flandre a tenu à
-                        rendre hommage à son engagement et à son attachement au patrimoine flamand. Ce témoignage
-                        a été porté par Régine Beaucamp, présidente de l'association, au nom de l'Association
-                        des Retables de Flandre et du Comité Flamand de France.
-                    </p>
-                    <a href="images/2025/retablesdeflandre/Temoignage_de_R.Beaucamp_pour_les obseques_de_Paulette_Vanpoulle.pdf"
-                       target="_blank" class="btn custom-btn btn-sm">
-                        <i class="bi bi-file-pdf me-2"></i>Lire le témoignage complet
-                    </a>
-                </div>
-
-                <hr style="border-color:#e5e5e5;" class="my-5">
-
-                <!-- Sortie culturelle Douai 2025 -->
-                <div class="mb-5">
-                    <h2 class="mb-1">Sortie culturelle à Douai</h2>
-                    <h5 class="mb-3" style="color:var(--primary-color);">15 mai 2025</h5>
-                    <p style="color:#555;line-height:1.8;font-weight:bold;">
-                        Quarante participants ont découvert Douai lors d'une sortie culturelle.
-                    </p>
-                    <p style="color:#555;line-height:1.8;">
-                        Accueillis à la collégiale Saint-Pierre par Françoise Baligand, ils ont admiré son
-                        architecture classique du XVIIIe siècle, ses œuvres religieuses majeures et les vitraux
-                        de Paul Bony. La visite s'est poursuivie au musée de la Chartreuse avec une exposition
-                        consacrée au peintre Nicolas-Guy Brenet.
-                    </p>
-                    <a href="images/2025/Douai/2025 article Douai.pdf" target="_blank" class="btn custom-btn btn-sm mb-3">
-                        <i class="bi bi-file-pdf me-2"></i>Lire le compte-rendu
-                    </a>
-                    <!-- Carousel Douai -->
-                    <div id="carouselDouai" class="carousel slide rounded-4 shadow-sm" data-bs-ride="carousel"
-                         style="max-width:500px;">
-                        <div class="carousel-inner rounded-4">
-                            <div class="carousel-item active">
-                                <img src="images/2025/Douai/DSC_0178.JPG" class="d-block w-100 rounded-4"
-                                     style="height:320px;object-fit:cover;" alt="Douai 1/6">
+                    <!-- Formation des guides 2025-2026 -->
+                    <div class="mb-5">
+                        <h2 class="mb-1">Formation des guides 2025–2026</h2>
+                        <h5 class="mb-3" style="color:var(--primary-color);">Octobre 2025 – Février 2026</h5>
+                        <p style="color:#555;line-height:1.8;">
+                            Une nouvelle session de formation des guides de l'association a réuni neuf futurs guides
+                            et douze guides expérimentés venus approfondir leurs connaissances, sur le territoire
+                            de Dunkerque et Hazebrouck.
+                        </p>
+                        <a href="images/2025/retablesdeflandre/2025 2026 programme Formation Retables de FlandreScan.jpg"
+                           target="_blank" class="btn custom-btn btn-sm mb-3">
+                            <i class="bi bi-eye me-2"></i>Voir le programme de formation
+                        </a>
+                        <div class="row g-3 mt-1" style="max-width:600px;">
+                            <div class="col-6 col-md-3">
+                                <img src="images/2025/retablesdeflandre/complmentdinfosretablesdeflandre/Guides-Bambecque-2025-01-08.jpg"
+                                     class="img-fluid rounded-4 shadow-sm"
+                                     style="height:150px;object-fit:cover;width:100%;"
+                                     alt="Formation guides Bambecque">
                             </div>
-                            <div class="carousel-item">
-                                <img src="images/2025/Douai/DSC_0186.JPG" class="d-block w-100 rounded-4"
-                                     style="height:320px;object-fit:cover;" alt="Douai 2/6">
+                            <div class="col-6 col-md-3">
+                                <img src="images/2025/retablesdeflandre/complmentdinfosretablesdeflandre/PXL_20260108_150236010.jpg"
+                                     class="img-fluid rounded-4 shadow-sm"
+                                     style="height:150px;object-fit:cover;width:100%;"
+                                     alt="Formation guides 2026">
                             </div>
-                            <div class="carousel-item">
-                                <img src="images/2025/Douai/DSC_0203.JPG" class="d-block w-100 rounded-4"
-                                     style="height:320px;object-fit:cover;" alt="Douai 3/6">
+                            <div class="col-6 col-md-3">
+                                <img src="images/2025/retablesdeflandre/PXL_20251105_090519186.jpeg"
+                                     class="img-fluid rounded-4 shadow-sm"
+                                     style="height:150px;object-fit:cover;width:100%;"
+                                     alt="Formation des guides 3">
                             </div>
-                            <div class="carousel-item">
-                                <img src="images/2025/Douai/DSC_0207.JPG" class="d-block w-100 rounded-4"
-                                     style="height:320px;object-fit:cover;" alt="Douai 4/6">
-                            </div>
-                            <div class="carousel-item">
-                                <img src="images/2025/Douai/DSC_0257.JPG" class="d-block w-100 rounded-4"
-                                     style="height:320px;object-fit:cover;" alt="Douai 5/6">
-                            </div>
-                            <div class="carousel-item">
-                                <img src="images/2025/Douai/DSC_0269.JPG" class="d-block w-100 rounded-4"
-                                     style="height:320px;object-fit:cover;" alt="Douai 6/6">
+                            <div class="col-6 col-md-3">
+                                <img src="images/2025/retablesdeflandre/PXL_20251105_105130837.jpeg"
+                                     class="img-fluid rounded-4 shadow-sm"
+                                     style="height:150px;object-fit:cover;width:100%;"
+                                     alt="Formation des guides 4">
                             </div>
                         </div>
-                        <button class="carousel-control-prev" type="button" data-bs-target="#carouselDouai" data-bs-slide="prev">
-                            <span class="carousel-control-prev-icon"></span>
-                        </button>
-                        <button class="carousel-control-next" type="button" data-bs-target="#carouselDouai" data-bs-slide="next">
-                            <span class="carousel-control-next-icon"></span>
-                        </button>
                     </div>
-                </div>
 
-                <hr style="border-color:#e5e5e5;" class="my-5">
+                    <hr style="border-color:#e5e5e5;" class="my-5">
 
-                <!-- AG Boeschèpe 2025 -->
-                <div class="mb-5">
-                    <h2 class="mb-1">Assemblée Générale 2025 à Boeschèpe</h2>
-                    <h5 class="mb-3" style="color:var(--primary-color);">29 mars 2025</h5>
-                    <p style="color:#555;line-height:1.8;">
-                        L'Assemblée Générale s'est tenue sous la présidence de Régine Beaucamp. Après une visite
-                        guidée de l'église Saint-Martin par Réginald Pasquier, le rapport d'activités 2024 et le
-                        rapport financier ont été approuvés à l'unanimité. Le renouvellement partiel du conseil a
-                        reconduit tous les membres sortants.
-                    </p>
-                    <a href="images/2025/Boeschepe/CR.AG 2025 - Boeschepe.pdf" target="_blank"
-                       class="btn custom-btn btn-sm mb-3">
-                        <i class="bi bi-file-pdf me-2"></i>Lire le compte-rendu
-                    </a>
-                    <!-- Carousel Boeschepe -->
-                    <div id="carouselBoeschepe" class="carousel slide rounded-4 shadow-sm" data-bs-ride="carousel"
-                         style="max-width:500px;">
-                        <div class="carousel-inner rounded-4">
-                            <div class="carousel-item active">
-                                <img src="images/2025/Boeschepe/AG Boeschepe 29 mars 2025.jpg"
-                                     class="d-block w-100 rounded-4" style="height:320px;object-fit:cover;" alt="AG Boeschèpe 1/9">
+                    <!-- Témoignage Paulette Vanpoulle -->
+                    <div class="mb-5">
+                        <h2 class="mb-3">Témoignage — Obsèques de Paulette VANPOULLE</h2>
+                        <p style="color:#555;line-height:1.8;">
+                            Lors des obsèques de Paulette VANPOULLE, l'Association des Retables de Flandre a tenu à
+                            rendre hommage à son engagement et à son attachement au patrimoine flamand. Ce témoignage
+                            a été porté par Régine Beaucamp, présidente de l'association, au nom de l'Association
+                            des Retables de Flandre et du Comité Flamand de France.
+                        </p>
+                        <a href="images/2025/retablesdeflandre/Temoignage_de_R.Beaucamp_pour_les obseques_de_Paulette_Vanpoulle.pdf"
+                           target="_blank" class="btn custom-btn btn-sm">
+                            <i class="bi bi-file-pdf me-2"></i>Lire le témoignage complet
+                        </a>
+                    </div>
+
+                    <hr style="border-color:#e5e5e5;" class="my-5">
+
+                    <!-- Découverte de Steenvoorde et Volckerinckhove -->
+                    <div class="mb-5">
+                        <h2 class="mb-1">Découverte de Steenvoorde et Volckerinckhove</h2>
+                        <h5 class="mb-3" style="color:var(--primary-color);">7 septembre 2025</h5>
+                        <p style="color:#555;line-height:1.8;">
+                            L'église Saint-Pierre de Steenvoorde, avec sa haute flèche de 92&nbsp;m, et l'église
+                            romane de Volckerinckhove, remarquable par ses poutres sculptées et ses fonds baptismaux.
+                        </p>
+                        <div class="row g-3 mt-1" style="max-width:500px;">
+                            <div class="col-6">
+                                <img src="images/2025/STEENVOORDE.jpeg" class="img-fluid rounded-4 shadow-sm"
+                                     style="width:100%;height:180px;object-fit:cover;" alt="Steenvoorde">
                             </div>
-                            <div class="carousel-item">
-                                <img src="images/2025/Boeschepe/AG Boeschèpe.JPG"
-                                     class="d-block w-100 rounded-4" style="height:320px;object-fit:cover;" alt="AG Boeschèpe 2/9">
-                            </div>
-                            <div class="carousel-item">
-                                <img src="images/2025/Boeschepe/église de Boeschèpe 1.JPG"
-                                     class="d-block w-100 rounded-4" style="height:320px;object-fit:cover;" alt="Église Boeschèpe 3/9">
-                            </div>
-                            <div class="carousel-item">
-                                <img src="images/2025/Boeschepe/église de Boeschèpe 2.JPG"
-                                     class="d-block w-100 rounded-4" style="height:320px;object-fit:cover;" alt="Église Boeschèpe 4/9">
-                            </div>
-                            <div class="carousel-item">
-                                <img src="images/2025/Boeschepe/église de Boeschèpe 3.JPG"
-                                     class="d-block w-100 rounded-4" style="height:320px;object-fit:cover;" alt="Église Boeschèpe 5/9">
-                            </div>
-                            <div class="carousel-item">
-                                <img src="images/2025/Boeschepe/église de Boeschèpe 4.JPG"
-                                     class="d-block w-100 rounded-4" style="height:320px;object-fit:cover;" alt="Église Boeschèpe 6/9">
-                            </div>
-                            <div class="carousel-item">
-                                <img src="images/2025/Boeschepe/photo de groupe à Boeschèpe.JPG"
-                                     class="d-block w-100 rounded-4" style="height:320px;object-fit:cover;" alt="Groupe Boeschèpe 7/9">
-                            </div>
-                            <div class="carousel-item">
-                                <img src="images/2025/Boeschepe/visite de l'église.JPG"
-                                     class="d-block w-100 rounded-4" style="height:320px;object-fit:cover;" alt="Visite 8/9">
-                            </div>
-                            <div class="carousel-item">
-                                <img src="images/2025/Boeschepe/vitrail église de Boeschèpe.JPG"
-                                     class="d-block w-100 rounded-4" style="height:320px;object-fit:cover;" alt="Vitrail 9/9">
+                            <div class="col-6">
+                                <img src="images/2025/Volckerinckove.JPG" class="img-fluid rounded-4 shadow-sm"
+                                     style="width:100%;height:180px;object-fit:cover;" alt="Volckerinckhove">
                             </div>
                         </div>
-                        <button class="carousel-control-prev" type="button" data-bs-target="#carouselBoeschepe" data-bs-slide="prev">
-                            <span class="carousel-control-prev-icon"></span>
-                        </button>
-                        <button class="carousel-control-next" type="button" data-bs-target="#carouselBoeschepe" data-bs-slide="next">
-                            <span class="carousel-control-next-icon"></span>
-                        </button>
                     </div>
-                </div>
 
-                <hr style="border-color:#e5e5e5;" class="my-5">
+                    <hr style="border-color:#e5e5e5;" class="my-5">
 
-                <!-- Rapport activités 2024 -->
-                <div class="mb-5">
-                    <h2 class="mb-3">Rapport d'activités 2024</h2>
-                    <p style="color:#555;line-height:1.8;">
-                        Depuis l'assemblée générale du 6 avril 2024 à Gravelines, l'association a poursuivi ses
-                        actions : réunions du conseil, participation au salon de généalogie à Gravelines, sortie
-                        annuelle à Abbeville et présence au forum des associations à Hazebrouck. Les visites
-                        estivales ont attiré <strong>470 personnes</strong> grâce à l'engagement des guides.
-                    </p>
-                    <a href="images/2025/Rapport Moral et d'activité  2024 pour AG.pdf" target="_blank"
-                       class="btn custom-btn btn-sm">
-                        <i class="bi bi-file-pdf me-2"></i>Lire le rapport d'activité
-                    </a>
-                </div>
-
-                <hr style="border-color:#e5e5e5;" class="my-5">
-
-                <!-- Décès José De Broucker -->
-                <div class="mb-5">
-                    <h2 class="mb-3">Le décès de José De Broucker</h2>
-                    <p style="color:#555;line-height:1.8;">
-                        Journaliste français éminent, catholique engagé, auteur de nombreux ouvrages, ami et
-                        "disciple" de Don Helder Camara, José de Broucker s'est éteint le <strong>lundi 4 octobre 2021</strong>,
-                        en la fête de saint François d'Assise. Il avait été Président de l'association pendant
-                        15 années de mandat.
-                    </p>
-                    <a href="https://www.facebook.com/groups/810126146577985/permalink/887238255533440/"
-                       target="_blank" class="btn custom-btn btn-sm">
-                        <i class="bi bi-box-arrow-up-right me-2"></i>Plus d'info
-                    </a>
-                </div>
-
-                <hr style="border-color:#e5e5e5;" class="my-5">
-
-                <!-- Journée des guides Hazebrouck 2021 -->
-                <div class="mb-5">
-                    <h2 class="mb-1">Journée des guides à Hazebrouck</h2>
-                    <h5 class="mb-3" style="color:var(--primary-color);">20 octobre 2021</h5>
-                    <p style="color:#555;line-height:1.8;">
-                        Sur une proposition d'Aïda Tellier, les guides se sont retrouvés à Hazebrouck pour
-                        partager un moment de convivialité en visitant divers lieux de la ville. Quelques membres
-                        du Conseil d'Administration ont rejoint le groupe.
-                    </p>
-                    <a href="images/previous-image/Retables_2021_CR_Journee_des_guides_Hazebouck_20oct_2021(1).pdf"
-                       target="_blank" class="btn custom-btn btn-sm mb-3">
-                        <i class="bi bi-file-pdf me-2"></i>Lire le compte-rendu
-                    </a>
-                    <!-- Carousel Hazebrouck -->
-                    <div id="carouselHazebrouck" class="carousel slide rounded-4 shadow-sm" data-bs-ride="carousel"
-                         style="max-width:500px;">
-                        <div class="carousel-inner rounded-4">
-                            <div class="carousel-item active">
-                                <img src="images/previous-image/DSC_0572(1).JPG" class="d-block w-100 rounded-4"
-                                     style="height:320px;object-fit:cover;" alt="Hazebrouck 1/12">
+                    <!-- Borre et Cassel -->
+                    <div class="mb-5">
+                        <h2 class="mb-1">Borre et Cassel</h2>
+                        <h5 class="mb-3" style="color:var(--primary-color);">31 août 2025</h5>
+                        <p style="color:#555;line-height:1.8;">
+                            L'église Saint-Jean-Baptiste de Borre avec sa tour de guet transformée en clocher,
+                            et la collégiale Notre-Dame de la Crypte de Cassel, classée monument historique.
+                        </p>
+                        <div class="row g-3 mt-1" style="max-width:500px;">
+                            <div class="col-6">
+                                <img src="images/2025/Borre.jpeg" class="img-fluid rounded-4 shadow-sm"
+                                     style="width:100%;height:180px;object-fit:cover;" alt="Borre">
                             </div>
-                            <div class="carousel-item">
-                                <img src="images/previous-image/DSC_0580(2).JPG" class="d-block w-100 rounded-4"
-                                     style="height:320px;object-fit:cover;" alt="Hazebrouck 2/12">
-                            </div>
-                            <div class="carousel-item">
-                                <img src="images/previous-image/DSC_0583(1).JPG" class="d-block w-100 rounded-4"
-                                     style="height:320px;object-fit:cover;" alt="Hazebrouck 3/12">
-                            </div>
-                            <div class="carousel-item">
-                                <img src="images/previous-image/209.JPG" class="d-block w-100 rounded-4"
-                                     style="height:320px;object-fit:cover;" alt="Hazebrouck 4/12">
-                            </div>
-                            <div class="carousel-item">
-                                <img src="images/previous-image/210.JPG" class="d-block w-100 rounded-4"
-                                     style="height:320px;object-fit:cover;" alt="Hazebrouck 5/12">
-                            </div>
-                            <div class="carousel-item">
-                                <img src="images/previous-image/211.JPG" class="d-block w-100 rounded-4"
-                                     style="height:320px;object-fit:cover;" alt="Hazebrouck 6/12">
-                            </div>
-                            <div class="carousel-item">
-                                <img src="images/previous-image/212.JPG" class="d-block w-100 rounded-4"
-                                     style="height:320px;object-fit:cover;" alt="Hazebrouck 7/12">
-                            </div>
-                            <div class="carousel-item">
-                                <img src="images/previous-image/213.JPG" class="d-block w-100 rounded-4"
-                                     style="height:320px;object-fit:cover;" alt="Hazebrouck 8/12">
-                            </div>
-                            <div class="carousel-item">
-                                <img src="images/previous-image/214.JPG" class="d-block w-100 rounded-4"
-                                     style="height:320px;object-fit:cover;" alt="Hazebrouck 9/12">
-                            </div>
-                            <div class="carousel-item">
-                                <img src="images/previous-image/215.JPG" class="d-block w-100 rounded-4"
-                                     style="height:320px;object-fit:cover;" alt="Hazebrouck 10/12">
-                            </div>
-                            <div class="carousel-item">
-                                <img src="images/previous-image/216.JPG" class="d-block w-100 rounded-4"
-                                     style="height:320px;object-fit:cover;" alt="Hazebrouck 11/12">
-                            </div>
-                            <div class="carousel-item">
-                                <img src="images/previous-image/217.JPG" class="d-block w-100 rounded-4"
-                                     style="height:320px;object-fit:cover;" alt="Hazebrouck 12/12">
+                            <div class="col-6">
+                                <img src="images/2025/Cassel.jpeg" class="img-fluid rounded-4 shadow-sm"
+                                     style="width:100%;height:180px;object-fit:cover;" alt="Cassel">
                             </div>
                         </div>
-                        <button class="carousel-control-prev" type="button" data-bs-target="#carouselHazebrouck" data-bs-slide="prev">
-                            <span class="carousel-control-prev-icon"></span>
-                        </button>
-                        <button class="carousel-control-next" type="button" data-bs-target="#carouselHazebrouck" data-bs-slide="next">
-                            <span class="carousel-control-next-icon"></span>
-                        </button>
                     </div>
+
+                    <hr style="border-color:#e5e5e5;" class="my-5">
+
+                    <!-- Bollezeele et Killem -->
+                    <div class="mb-5">
+                        <h2 class="mb-1">Bollezeele et Killem</h2>
+                        <h5 class="mb-3" style="color:var(--primary-color);">24 août 2025</h5>
+                        <p style="color:#555;line-height:1.8;">
+                            L'église Saint-Wandrille de Bollezeele, monument historique au riche mobilier classé,
+                            et l'église Saint-Michel de Killem avec ses retables baroques.
+                        </p>
+                        <div class="row g-3 mt-1" style="max-width:500px;">
+                            <div class="col-6">
+                                <img src="images/2025/Bollezeele.png" class="img-fluid rounded-4 shadow-sm"
+                                     style="width:100%;height:180px;object-fit:cover;" alt="Bollezeele">
+                            </div>
+                            <div class="col-6">
+                                <img src="images/2025/Killem.png" class="img-fluid rounded-4 shadow-sm"
+                                     style="width:100%;height:180px;object-fit:cover;" alt="Killem">
+                            </div>
+                        </div>
+                    </div>
+
+                    <hr style="border-color:#e5e5e5;" class="my-5">
+
+                    <!-- Herzeele et Wulverdinghe -->
+                    <div class="mb-5">
+                        <h2 class="mb-1">Herzeele et Wulverdinghe</h2>
+                        <h5 class="mb-3" style="color:var(--primary-color);">17 août 2025</h5>
+                        <p style="color:#555;line-height:1.8;">
+                            L'église Notre-Dame de l'Assomption d'Herzeele, église-halle en briques du
+                            XVI<sup>e</sup> siècle avec ses retables classés Monuments Historiques, et l'église
+                            Saint-Martin de Wulverdinghe à la façade romane rare en Flandre maritime.
+                        </p>
+                        <div class="row g-3 mt-1" style="max-width:500px;">
+                            <div class="col-6">
+                                <img src="images/2025/Herzeele.jpeg" class="img-fluid rounded-4 shadow-sm"
+                                     style="width:100%;height:180px;object-fit:cover;" alt="Herzeele">
+                            </div>
+                            <div class="col-6">
+                                <img src="images/2025/Wulverdinghe.jpeg" class="img-fluid rounded-4 shadow-sm"
+                                     style="width:100%;height:180px;object-fit:cover;" alt="Wulverdinghe">
+                            </div>
+                        </div>
+                    </div>
+
+                    <hr style="border-color:#e5e5e5;" class="my-5">
+
+                    <!-- Sortie culturelle Douai 2025 -->
+                    <div class="mb-5">
+                        <h2 class="mb-1">Sortie culturelle à Douai</h2>
+                        <h5 class="mb-3" style="color:var(--primary-color);">15 mai 2025</h5>
+                        <p style="color:#555;line-height:1.8;font-weight:bold;">
+                            Quarante participants ont découvert Douai lors d'une sortie culturelle.
+                        </p>
+                        <p style="color:#555;line-height:1.8;">
+                            Accueillis à la collégiale Saint-Pierre par Françoise Baligand, ils ont admiré son
+                            architecture classique du XVIIIe siècle, ses œuvres religieuses majeures et les vitraux
+                            de Paul Bony. La visite s'est poursuivie au musée de la Chartreuse avec une exposition
+                            consacrée au peintre Nicolas-Guy Brenet.
+                        </p>
+                        <a href="images/2025/Douai/2025 article Douai.pdf" target="_blank"
+                           class="btn custom-btn btn-sm mb-3">
+                            <i class="bi bi-file-pdf me-2"></i>Lire le compte-rendu
+                        </a>
+                        <!-- Carousel Douai -->
+                        <div id="carouselDouai" class="carousel slide rounded-4 shadow-sm" data-bs-ride="carousel"
+                             style="max-width:500px;">
+                            <div class="carousel-inner rounded-4">
+                                <div class="carousel-item active">
+                                    <img src="images/2025/Douai/DSC_0178.JPG" class="d-block w-100 rounded-4"
+                                         style="height:320px;object-fit:cover;" alt="Douai 1/6">
+                                </div>
+                                <div class="carousel-item">
+                                    <img src="images/2025/Douai/DSC_0186.JPG" class="d-block w-100 rounded-4"
+                                         style="height:320px;object-fit:cover;" alt="Douai 2/6">
+                                </div>
+                                <div class="carousel-item">
+                                    <img src="images/2025/Douai/DSC_0203.JPG" class="d-block w-100 rounded-4"
+                                         style="height:320px;object-fit:cover;" alt="Douai 3/6">
+                                </div>
+                                <div class="carousel-item">
+                                    <img src="images/2025/Douai/DSC_0207.JPG" class="d-block w-100 rounded-4"
+                                         style="height:320px;object-fit:cover;" alt="Douai 4/6">
+                                </div>
+                                <div class="carousel-item">
+                                    <img src="images/2025/Douai/DSC_0257.JPG" class="d-block w-100 rounded-4"
+                                         style="height:320px;object-fit:cover;" alt="Douai 5/6">
+                                </div>
+                                <div class="carousel-item">
+                                    <img src="images/2025/Douai/DSC_0269.JPG" class="d-block w-100 rounded-4"
+                                         style="height:320px;object-fit:cover;" alt="Douai 6/6">
+                                </div>
+                            </div>
+                            <button class="carousel-control-prev" type="button" data-bs-target="#carouselDouai"
+                                    data-bs-slide="prev">
+                                <span class="carousel-control-prev-icon"></span>
+                            </button>
+                            <button class="carousel-control-next" type="button" data-bs-target="#carouselDouai"
+                                    data-bs-slide="next">
+                                <span class="carousel-control-next-icon"></span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <hr style="border-color:#e5e5e5;" class="my-5">
+
+                    <!-- AG Boeschèpe 2025 -->
+                    <div class="mb-5">
+                        <h2 class="mb-1">Assemblée Générale 2025 à Boeschèpe</h2>
+                        <h5 class="mb-3" style="color:var(--primary-color);">29 mars 2025</h5>
+                        <p style="color:#555;line-height:1.8;">
+                            L'Assemblée Générale s'est tenue sous la présidence de Régine Beaucamp. Après une visite
+                            guidée de l'église Saint-Martin par Réginald Pasquier, le rapport d'activités 2024 et le
+                            rapport financier ont été approuvés à l'unanimité. Le renouvellement partiel du conseil a
+                            reconduit tous les membres sortants.
+                        </p>
+                        <a href="images/2025/Boeschepe/CR.AG 2025 - Boeschepe.pdf" target="_blank"
+                           class="btn custom-btn btn-sm mb-3">
+                            <i class="bi bi-file-pdf me-2"></i>Lire le compte-rendu
+                        </a>
+                        <!-- Carousel Boeschepe -->
+                        <div id="carouselBoeschepe" class="carousel slide rounded-4 shadow-sm" data-bs-ride="carousel"
+                             style="max-width:500px;">
+                            <div class="carousel-inner rounded-4">
+                                <div class="carousel-item active">
+                                    <img src="images/2025/Boeschepe/AG Boeschepe 29 mars 2025.jpg"
+                                         class="d-block w-100 rounded-4" style="height:320px;object-fit:cover;"
+                                         alt="AG Boeschèpe 1/9">
+                                </div>
+                                <div class="carousel-item">
+                                    <img src="images/2025/Boeschepe/AG Boeschèpe.JPG"
+                                         class="d-block w-100 rounded-4" style="height:320px;object-fit:cover;"
+                                         alt="AG Boeschèpe 2/9">
+                                </div>
+                                <div class="carousel-item">
+                                    <img src="images/2025/Boeschepe/église de Boeschèpe 1.JPG"
+                                         class="d-block w-100 rounded-4" style="height:320px;object-fit:cover;"
+                                         alt="Église Boeschèpe 3/9">
+                                </div>
+                                <div class="carousel-item">
+                                    <img src="images/2025/Boeschepe/église de Boeschèpe 2.JPG"
+                                         class="d-block w-100 rounded-4" style="height:320px;object-fit:cover;"
+                                         alt="Église Boeschèpe 4/9">
+                                </div>
+                                <div class="carousel-item">
+                                    <img src="images/2025/Boeschepe/église de Boeschèpe 3.JPG"
+                                         class="d-block w-100 rounded-4" style="height:320px;object-fit:cover;"
+                                         alt="Église Boeschèpe 5/9">
+                                </div>
+                                <div class="carousel-item">
+                                    <img src="images/2025/Boeschepe/église de Boeschèpe 4.JPG"
+                                         class="d-block w-100 rounded-4" style="height:320px;object-fit:cover;"
+                                         alt="Église Boeschèpe 6/9">
+                                </div>
+                                <div class="carousel-item">
+                                    <img src="images/2025/Boeschepe/photo de groupe à Boeschèpe.JPG"
+                                         class="d-block w-100 rounded-4" style="height:320px;object-fit:cover;"
+                                         alt="Groupe Boeschèpe 7/9">
+                                </div>
+                                <div class="carousel-item">
+                                    <img src="images/2025/Boeschepe/visite de l'église.JPG"
+                                         class="d-block w-100 rounded-4" style="height:320px;object-fit:cover;"
+                                         alt="Visite 8/9">
+                                </div>
+                                <div class="carousel-item">
+                                    <img src="images/2025/Boeschepe/vitrail église de Boeschèpe.JPG"
+                                         class="d-block w-100 rounded-4" style="height:320px;object-fit:cover;"
+                                         alt="Vitrail 9/9">
+                                </div>
+                            </div>
+                            <button class="carousel-control-prev" type="button" data-bs-target="#carouselBoeschepe"
+                                    data-bs-slide="prev">
+                                <span class="carousel-control-prev-icon"></span>
+                            </button>
+                            <button class="carousel-control-next" type="button" data-bs-target="#carouselBoeschepe"
+                                    data-bs-slide="next">
+                                <span class="carousel-control-next-icon"></span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <hr style="border-color:#e5e5e5;" class="my-5">
+
+                    <!-- Rapport activités 2024 -->
+                    <div class="mb-5">
+                        <h2 class="mb-3">Rapport d'activités 2024</h2>
+                        <p style="color:#555;line-height:1.8;">
+                            Depuis l'assemblée générale du 6 avril 2024 à Gravelines, l'association a poursuivi ses
+                            actions : réunions du conseil, participation au salon de généalogie à Gravelines, sortie
+                            annuelle à Abbeville et présence au forum des associations à Hazebrouck. Les visites
+                            estivales ont attiré <strong>470 personnes</strong> grâce à l'engagement des guides.
+                        </p>
+                        <a href="images/2025/Rapport Moral et d'activité  2024 pour AG.pdf" target="_blank"
+                           class="btn custom-btn btn-sm">
+                            <i class="bi bi-file-pdf me-2"></i>Lire le rapport d'activité
+                        </a>
+                    </div>
+
+                    <hr style="border-color:#e5e5e5;" class="my-5">
+
+                    <!-- Décès José De Broucker -->
+                    <div class="mb-5">
+                        <h2 class="mb-3">Le décès de José De Broucker</h2>
+                        <p style="color:#555;line-height:1.8;">
+                            Journaliste français éminent, catholique engagé, auteur de nombreux ouvrages, ami et
+                            "disciple" de Don Helder Camara, José de Broucker s'est éteint le <strong>lundi 4 octobre
+                            2021</strong>,
+                            en la fête de saint François d'Assise. Il avait été Président de l'association pendant
+                            15 années de mandat.
+                        </p>
+                        <a href="https://www.facebook.com/groups/810126146577985/permalink/887238255533440/"
+                           target="_blank" class="btn custom-btn btn-sm">
+                            <i class="bi bi-box-arrow-up-right me-2"></i>Plus d'info
+                        </a>
+                    </div>
+
+                    <hr style="border-color:#e5e5e5;" class="my-5">
+
+                    <!-- Journée des guides Hazebrouck 2021 -->
+                    <div class="mb-5">
+                        <h2 class="mb-1">Journée des guides à Hazebrouck</h2>
+                        <h5 class="mb-3" style="color:var(--primary-color);">20 octobre 2021</h5>
+                        <p style="color:#555;line-height:1.8;">
+                            Sur une proposition d'Aïda Tellier, les guides se sont retrouvés à Hazebrouck pour
+                            partager un moment de convivialité en visitant divers lieux de la ville. Quelques membres
+                            du Conseil d'Administration ont rejoint le groupe.
+                        </p>
+                        <a href="images/previous-image/Retables_2021_CR_Journee_des_guides_Hazebouck_20oct_2021(1).pdf"
+                           target="_blank" class="btn custom-btn btn-sm mb-3">
+                            <i class="bi bi-file-pdf me-2"></i>Lire le compte-rendu
+                        </a>
+                        <!-- Carousel Hazebrouck -->
+                        <div id="carouselHazebrouck" class="carousel slide rounded-4 shadow-sm" data-bs-ride="carousel"
+                             style="max-width:500px;">
+                            <div class="carousel-inner rounded-4">
+                                <div class="carousel-item active">
+                                    <img src="images/previous-image/DSC_0572(1).JPG" class="d-block w-100 rounded-4"
+                                         style="height:320px;object-fit:cover;" alt="Hazebrouck 1/12">
+                                </div>
+                                <div class="carousel-item">
+                                    <img src="images/previous-image/DSC_0580(2).JPG" class="d-block w-100 rounded-4"
+                                         style="height:320px;object-fit:cover;" alt="Hazebrouck 2/12">
+                                </div>
+                                <div class="carousel-item">
+                                    <img src="images/previous-image/DSC_0583(1).JPG" class="d-block w-100 rounded-4"
+                                         style="height:320px;object-fit:cover;" alt="Hazebrouck 3/12">
+                                </div>
+                                <div class="carousel-item">
+                                    <img src="images/previous-image/209.JPG" class="d-block w-100 rounded-4"
+                                         style="height:320px;object-fit:cover;" alt="Hazebrouck 4/12">
+                                </div>
+                                <div class="carousel-item">
+                                    <img src="images/previous-image/210.JPG" class="d-block w-100 rounded-4"
+                                         style="height:320px;object-fit:cover;" alt="Hazebrouck 5/12">
+                                </div>
+                                <div class="carousel-item">
+                                    <img src="images/previous-image/211.JPG" class="d-block w-100 rounded-4"
+                                         style="height:320px;object-fit:cover;" alt="Hazebrouck 6/12">
+                                </div>
+                                <div class="carousel-item">
+                                    <img src="images/previous-image/212.JPG" class="d-block w-100 rounded-4"
+                                         style="height:320px;object-fit:cover;" alt="Hazebrouck 7/12">
+                                </div>
+                                <div class="carousel-item">
+                                    <img src="images/previous-image/213.JPG" class="d-block w-100 rounded-4"
+                                         style="height:320px;object-fit:cover;" alt="Hazebrouck 8/12">
+                                </div>
+                                <div class="carousel-item">
+                                    <img src="images/previous-image/214.JPG" class="d-block w-100 rounded-4"
+                                         style="height:320px;object-fit:cover;" alt="Hazebrouck 9/12">
+                                </div>
+                                <div class="carousel-item">
+                                    <img src="images/previous-image/215.JPG" class="d-block w-100 rounded-4"
+                                         style="height:320px;object-fit:cover;" alt="Hazebrouck 10/12">
+                                </div>
+                                <div class="carousel-item">
+                                    <img src="images/previous-image/216.JPG" class="d-block w-100 rounded-4"
+                                         style="height:320px;object-fit:cover;" alt="Hazebrouck 11/12">
+                                </div>
+                                <div class="carousel-item">
+                                    <img src="images/previous-image/217.JPG" class="d-block w-100 rounded-4"
+                                         style="height:320px;object-fit:cover;" alt="Hazebrouck 12/12">
+                                </div>
+                            </div>
+                            <button class="carousel-control-prev" type="button" data-bs-target="#carouselHazebrouck"
+                                    data-bs-slide="prev">
+                                <span class="carousel-control-prev-icon"></span>
+                            </button>
+                            <button class="carousel-control-next" type="button" data-bs-target="#carouselHazebrouck"
+                                    data-bs-slide="next">
+                                <span class="carousel-control-next-icon"></span>
+                            </button>
+                        </div>
+                    </div>
+
                 </div>
+            </section>
 
-            </div>
-        </section>
+            <rf-contact></rf-contact>
+            <rf-footer></rf-footer>
 
-        <rf-contact></rf-contact>
-        <rf-footer></rf-footer>
-
+        </div>
+    
+        <rf-lightbox></rf-lightbox>
     </div>
-</div>
 </main>
 
 <script src="js/vue.global.prod.js"></script>

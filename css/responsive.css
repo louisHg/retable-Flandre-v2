@@ -21,38 +21,52 @@ html {
     --h4-font-size: clamp(1.05rem, 2vw + 0.1rem, 1.5rem);
     --h5-font-size: clamp(.95rem, 1.8vw, 1.375rem);
     --h6-font-size: clamp(.9rem, 1.5vw, 1.25rem);
-    --p-font-size:  clamp(.95rem, 1.2vw + 0.4rem, 1.125rem);
+    --p-font-size: clamp(.95rem, 1.2vw + 0.4rem, 1.125rem);
 }
 
 /* ─────────────────────────────────────────────────────
    2. SECTION PADDING — mobile-first
 ───────────────────────────────────────────────────── */
 .section-padding {
-    padding-top:    48px;
+    padding-top: 48px;
     padding-bottom: 48px;
 }
 
 @media (min-width: 576px) {
     .section-padding {
-        padding-top:    72px;
+        padding-top: 72px;
         padding-bottom: 72px;
     }
 }
 
 @media (min-width: 992px) {
     .section-padding {
-        padding-top:    100px;
+        padding-top: 100px;
         padding-bottom: 100px;
     }
 }
 
 /* Override inline padding-top / padding-bottom sur mobile */
 @media (max-width: 767px) {
-    [style*="padding-top: 80px"]    { padding-top:    40px !important; }
-    [style*="padding-bottom: 80px"] { padding-bottom: 40px !important; }
-    [style*="padding-top: 60px"]    { padding-top:    32px !important; }
-    [style*="padding-bottom: 60px"] { padding-bottom: 32px !important; }
-    [style*="padding-top: 40px"]    { padding-top:    24px !important; }
+    [style*="padding-top: 80px"] {
+        padding-top: 40px !important;
+    }
+
+    [style*="padding-bottom: 80px"] {
+        padding-bottom: 40px !important;
+    }
+
+    [style*="padding-top: 60px"] {
+        padding-top: 32px !important;
+    }
+
+    [style*="padding-bottom: 60px"] {
+        padding-bottom: 32px !important;
+    }
+
+    [style*="padding-top: 40px"] {
+        padding-top: 24px !important;
+    }
 }
 
 /* ─────────────────────────────────────────────────────
@@ -74,13 +88,19 @@ html {
 }
 
 @keyframes fadeIn {
-    from { opacity: 0; }
-    to   { opacity: 1; }
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
 }
 
 /* L'overlay n'est utile que sur mobile */
 @media (min-width: 992px) {
-    .rf-sidebar-overlay { display: none !important; }
+    .rf-sidebar-overlay {
+        display: none !important;
+    }
 }
 
 /* ─────────────────────────────────────────────────────
@@ -95,6 +115,7 @@ html {
     [id^="carousel"] {
         max-width: 100% !important;
     }
+
     [id^="carousel"] .carousel-item img {
         height: clamp(200px, 55vw, 320px) !important;
         object-fit: cover;
@@ -179,10 +200,12 @@ html {
         text-align: center;
         margin-bottom: .75rem;
     }
+
     .rf-card .row.align-items-start.g-3 > .col-8 {
         flex: 0 0 100%;
         max-width: 100%;
     }
+
     .rf-card .row.align-items-start.g-3 > .col-4 img {
         max-height: 140px;
         object-fit: contain;
@@ -221,6 +244,7 @@ iframe {
     .bi-newspaper {
         font-size: 2.5rem !important;
     }
+
     .section-padding .btn-lg {
         width: 100%;
     }
@@ -292,5 +316,18 @@ iframe {
     p, ul li {
         font-size: .97rem;
     }
+}
+
+/* ─────────────────────────────────────────────────────
+   19. LIGHTBOX — images cliquables feedback visuel
+───────────────────────────────────────────────────── */
+.rf-content img[data-lightbox-bound] {
+    transition: transform .2s ease, box-shadow .2s ease, opacity .2s ease;
+}
+
+.rf-content img[data-lightbox-bound]:hover {
+    transform: scale(1.02);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, .18);
+    opacity: .9;
 }
 
