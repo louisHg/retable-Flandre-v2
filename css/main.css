@@ -686,6 +686,51 @@ strong {
   background: rgba(0, 0, 0, .62);
 }
 
+/* Flèches prev/next */
+.image-modal-prev,
+.image-modal-next {
+  position: fixed;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 10000;
+  width: 52px;
+  height: 52px;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, .22);
+  background: rgba(0, 0, 0, .45);
+  color: #fff;
+  font-size: 22px;
+  line-height: 1;
+  cursor: pointer;
+  backdrop-filter: blur(10px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background .2s ease, transform .2s ease;
+}
+
+.image-modal-prev { left: 16px; }
+.image-modal-next { right: 16px; }
+
+.image-modal-prev:hover,
+.image-modal-next:hover {
+  background: rgba(0, 0, 0, .7);
+}
+
+.image-modal-prev:active,
+.image-modal-next:active {
+  transform: translateY(-50%) scale(0.95);
+}
+
+/* Compteur "1 / 31" dans le header */
+.image-modal-counter {
+  color: rgba(255, 255, 255, .7);
+  font-size: .85rem;
+  font-weight: 500;
+  margin-left: auto;
+  padding-right: 60px; /* laisse de la place à la croix */
+}
+
 @media (max-width: 576px) {
   .image-modal-img {
     max-height: 70vh;
@@ -702,6 +747,21 @@ strong {
     width: 40px;
     height: 40px;
     font-size: 18px;
+  }
+
+  .image-modal-prev,
+  .image-modal-next {
+    width: 42px;
+    height: 42px;
+    font-size: 18px;
+  }
+
+  .image-modal-prev { left: 8px; }
+  .image-modal-next { right: 8px; }
+
+  .image-modal-counter {
+    font-size: .75rem;
+    padding-right: 50px;
   }
 }
 

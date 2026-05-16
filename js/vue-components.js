@@ -500,10 +500,24 @@
             const retables = (window.RFContent && window.RFContent.galleries && window.RFContent.galleries.retables) || [];
             return {
                 modalOpen: false,
-                modalSrc: '',
-                modalTitle: '',
+                modalIndex: 0,
                 images: retables
             };
+        },
+        computed: {
+            modalImg() {
+                return this.images[this.modalIndex] || null;
+            },
+            modalSrc() {
+                return this.modalImg ? this.modalImg.src : '';
+            },
+            modalTitle() {
+                const img = this.modalImg;
+                if (!img) return '';
+                if (img.badge && img.heading) return `${img.heading} - ${img.badge}`;
+                if (img.heading) return img.heading;
+                return img.alt || 'Retable';
+            }
         },
         mounted() {
             // Initialiser le carrousel Bootstrap
@@ -512,11 +526,12 @@
                 ride: 'carousel'
             });
 
-            // Fermer la modale avec la touche Échap
+            // Fermer la modale avec Échap, naviguer avec ←/→
             this._onKeydown = (e) => {
-                if (e.key === 'Escape' && this.modalOpen) {
-                    this.closeModal();
-                }
+                if (!this.modalOpen) return;
+                if (e.key === 'Escape') this.closeModal();
+                else if (e.key === 'ArrowLeft') this.prevModal();
+                else if (e.key === 'ArrowRight') this.nextModal();
             };
             document.addEventListener('keydown', this._onKeydown);
         },
@@ -530,26 +545,23 @@
             openModalFromCarousel() {
                 const activeItem = this.$refs.carouselInner.querySelector('.carousel-item.active');
                 if (!activeItem) return;
-                const img = activeItem.querySelector('img');
-                if (!img) return;
-                const badge = activeItem.querySelector('.image-badge');
-                const heading = activeItem.querySelector('.image-heading');
-                let title = 'Retable';
-                if (badge && heading) {
-                    title = `${heading.textContent} - ${badge.textContent}`;
-                } else if (heading) {
-                    title = heading.textContent;
-                } else if (img.alt) {
-                    title = img.alt;
-                }
-                this.modalSrc = img.src;
-                this.modalTitle = title;
+                const items = Array.from(this.$refs.carouselInner.querySelectorAll('.carousel-item'));
+                const idx = items.indexOf(activeItem);
+                if (idx >= 0) this.modalIndex = idx;
                 this.modalOpen = true;
                 document.body.style.overflow = 'hidden';
             },
             closeModal() {
                 this.modalOpen = false;
                 document.body.style.overflow = '';
+            },
+            prevModal() {
+                if (!this.images.length) return;
+                this.modalIndex = (this.modalIndex - 1 + this.images.length) % this.images.length;
+            },
+            nextModal() {
+                if (!this.images.length) return;
+                this.modalIndex = (this.modalIndex + 1) % this.images.length;
             },
             downloadImage() {
                 const src = this.modalSrc;
@@ -617,10 +629,21 @@
                             aria-label="Télécharger" title="Télécharger l'image">
                         <i class="bi bi-download"></i>
                     </button>
+                    <button v-if="images.length > 1" class="image-modal-prev" type="button"
+                            @click.stop="prevModal" aria-label="Précédent">
+                        <i class="bi bi-chevron-left"></i>
+                    </button>
+                    <button v-if="images.length > 1" class="image-modal-next" type="button"
+                            @click.stop="nextModal" aria-label="Suivant">
+                        <i class="bi bi-chevron-right"></i>
+                    </button>
                     <div class="image-modal-content" role="dialog" aria-modal="true"
                          :aria-labelledby="modalOpen ? 'imageModalTitle' : undefined">
                         <div class="image-modal-header">
                             <h3 id="imageModalTitle" class="image-modal-title">{{ modalTitle }}</h3>
+                            <span v-if="images.length > 1" class="image-modal-counter">
+                                {{ modalIndex + 1 }} / {{ images.length }}
+                            </span>
                         </div>
                         <div class="image-modal-body">
                             <img :src="modalSrc" class="image-modal-img" :alt="modalTitle">
@@ -767,13 +790,27 @@
         data() {
             return {
                 open: false,
-                src: '',
-                title: ''
+                items: [],   // [{src, title}] snapshot des images cliquables au moment de l'ouverture
+                index: 0
             };
+        },
+        computed: {
+            src() {
+                return this.items[this.index] ? this.items[this.index].src : '';
+            },
+            title() {
+                return this.items[this.index] ? this.items[this.index].title : '';
+            },
+            hasMultiple() {
+                return this.items.length > 1;
+            }
         },
         mounted() {
             this._onKeydown = (e) => {
-                if (e.key === 'Escape' && this.open) this.close();
+                if (!this.open) return;
+                if (e.key === 'Escape') this.close();
+                else if (e.key === 'ArrowLeft') this.prev();
+                else if (e.key === 'ArrowRight') this.next();
             };
             document.addEventListener('keydown', this._onKeydown);
 
@@ -818,19 +855,35 @@
                             }
                             e.preventDefault();
                         }
-                        this.openModal(img.src, img.alt || 'Image');
+                        this.openFromImage(img);
                     });
                 });
             },
-            openModal(src, title) {
-                this.src = src;
-                this.title = title;
+            openFromImage(clickedImg) {
+                // Récupérer toutes les images cliquables actuellement visibles
+                // Limité à la galerie/section parente s'il y en a une, sinon toute la page
+                const gallery = clickedImg.closest('section') || document.querySelector('.rf-content');
+                const allImgs = Array.from(gallery.querySelectorAll('img[data-lightbox-bound]'));
+                this.items = allImgs.map((img) => ({
+                    src: img.src,
+                    title: img.alt || 'Image'
+                }));
+                this.index = allImgs.indexOf(clickedImg);
+                if (this.index < 0) this.index = 0;
                 this.open = true;
                 document.body.style.overflow = 'hidden';
             },
             close() {
                 this.open = false;
                 document.body.style.overflow = '';
+            },
+            prev() {
+                if (!this.hasMultiple) return;
+                this.index = (this.index - 1 + this.items.length) % this.items.length;
+            },
+            next() {
+                if (!this.hasMultiple) return;
+                this.index = (this.index + 1) % this.items.length;
             },
             download() {
                 fetch(this.src)
@@ -856,9 +909,20 @@
                         aria-label="Télécharger" title="Télécharger l'image">
                     <i class="bi bi-download"></i>
                 </button>
+                <button v-if="hasMultiple" class="image-modal-prev" type="button"
+                        @click.stop="prev" aria-label="Précédent">
+                    <i class="bi bi-chevron-left"></i>
+                </button>
+                <button v-if="hasMultiple" class="image-modal-next" type="button"
+                        @click.stop="next" aria-label="Suivant">
+                    <i class="bi bi-chevron-right"></i>
+                </button>
                 <div class="image-modal-content" role="dialog" aria-modal="true">
                     <div class="image-modal-header">
                         <h3 class="image-modal-title">{{ title }}</h3>
+                        <span v-if="hasMultiple" class="image-modal-counter">
+                            {{ index + 1 }} / {{ items.length }}
+                        </span>
                     </div>
                     <div class="image-modal-body">
                         <img :src="src" class="image-modal-img" :alt="title">

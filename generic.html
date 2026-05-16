@@ -23,8 +23,7 @@
 
     <rf-sidebar :is-open="sidebarOpen" current-page="generic" @close="sidebarOpen = false"></rf-sidebar>
 
-        <!-- Overlay backdrop mobile -->
-        <div class="rf-sidebar-overlay" :class="{ 'is-active': sidebarOpen }" @click="sidebarOpen = false"></div>
+    <div class="rf-sidebar-overlay" :class="{ 'is-active': sidebarOpen }" @click="sidebarOpen = false"></div>
 
     <button class="rf-sidebar-fab" type="button" aria-label="Toggle menu" @click="sidebarOpen = !sidebarOpen">
         <span></span><span></span><span></span>
@@ -32,23 +31,26 @@
 
     <div :class="['rf-content', { 'is-expanded': !sidebarOpen }]">
 
-        <!-- Hero -->
+        <!-- ─────────────────────────────────────────────
+             HERO — présentation rapide
+        ───────────────────────────────────────────────── -->
         <section class="about-section section-padding" id="section_1">
             <div class="container">
-                <div class="row align-items-start g-4">
+                <div class="row align-items-center g-4">
                     <div class="col-lg-7 col-12">
                         <div class="d-flex align-items-center mb-3">
                             <img src="images/previous-image/logo.jpg" alt="Logo"
                                  style="width:70px;height:70px;object-fit:cover;border-radius:12px;margin-right:15px;">
                             <div>
-                                <h2 class="mb-0">Association</h2>
+                                <h2 class="mb-0">L'association</h2>
                                 <p class="mb-0" style="color:#717275;">RETABLES de FLANDRE</p>
                             </div>
                         </div>
-                        <p class="mt-3" style="line-height:1.8;">
-                            Dans l'arrondissement de Dunkerque sont situées 115 communes dont
-                            62 possèdent un ou plusieurs retables classés ou inscrits à
-                            l'Inventaire des Monuments historiques.
+                        <p class="mt-3" style="line-height:1.8;font-size:1.05rem;">
+                            Créée en <strong>1991</strong>, notre association loi 1901 protège, restaure et fait
+                            connaître les retables des églises de Flandre française —
+                            <strong>près de 150 œuvres</strong> du <strong>XVII<sup>e</sup> et XVIII<sup>e</sup> siècle</strong>
+                            réparties dans une cinquantaine d'églises de l'arrondissement de Dunkerque.
                         </p>
                         <a href="images/previous-image/Composition-du-CA-et-du.pdf" target="_blank"
                            class="btn custom-btn me-2 mb-2">
@@ -56,124 +58,235 @@
                         </a>
                         <a href="images/previous-image/Bulletin_adhesion_2022.pdf" target="_blank"
                            class="btn custom-btn mb-2">
-                            <i class="bi bi-file-pdf me-2"></i>Bulletin d'adhésion 2022
+                            <i class="bi bi-file-pdf me-2"></i>Bulletin d'adhésion
                         </a>
                     </div>
                     <div class="col-lg-5 col-12">
                         <img src="images/previous-image/WEMAERS-Cappel.jpg" class="img-fluid w-100 rounded-4 shadow-sm"
                              style="height:300px;object-fit:cover;" alt="Retable du maître-autel - Wemaers-Cappel">
                         <p class="text-center mt-2" style="font-size:.9rem;color:#717275;">
-                            Retable du maître-autel - Wemaers-Cappel
+                            Retable du maître-autel — Wemaers-Cappel
                         </p>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- Contexte & Histoire -->
+        <!-- ─────────────────────────────────────────────
+             L'ASSOCIATION EN UN COUP D'ŒIL — 3 colonnes
+        ───────────────────────────────────────────────── -->
+        <section class="section-padding" style="background:#fafafa;padding-top:60px;padding-bottom:60px;">
+            <div class="container">
+                <div class="text-center mb-5">
+                    <h2 class="mb-2">L'association en un coup d'œil</h2>
+                    <p class="text-muted mb-0">Le patrimoine, nos missions et notre organisation.</p>
+                </div>
+
+                <div class="row g-4">
+
+                    <!-- Col 1 : Le patrimoine -->
+                    <div class="col-lg-4 col-md-6 col-12">
+                        <div class="rf-panorama-card">
+                            <div class="rf-panorama-icon">
+                                <i class="bi bi-bank"></i>
+                            </div>
+                            <h3>Le patrimoine</h3>
+                            <p>Un corpus homogène de retables, de la mer du Nord à la Lys, témoin d'une époque et d'un savoir-faire flamand.</p>
+
+                            <div class="rf-stat-row">
+                                <div class="rf-stat">
+                                    <div class="rf-stat-number">~150</div>
+                                    <div class="rf-stat-label">retables</div>
+                                </div>
+                                <div class="rf-stat">
+                                    <div class="rf-stat-number">50</div>
+                                    <div class="rf-stat-label">églises</div>
+                                </div>
+                                <div class="rf-stat">
+                                    <div class="rf-stat-number">62</div>
+                                    <div class="rf-stat-label">communes</div>
+                                </div>
+                            </div>
+
+                            <ul>
+                                <li>Arrondissement de Dunkerque (115 communes)</li>
+                                <li>XVII<sup>e</sup> et XVIII<sup>e</sup> siècles</li>
+                                <li>Faux marbre, polychromie, bois des forêts de Nieppe et Clairmarais</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Col 2 : Nos missions -->
+                    <div class="col-lg-4 col-md-6 col-12">
+                        <div class="rf-panorama-card">
+                            <div class="rf-panorama-icon">
+                                <i class="bi bi-stars"></i>
+                            </div>
+                            <h3>Nos missions</h3>
+                            <p>Quatre engagements qui guident l'action de l'association depuis sa fondation.</p>
+
+                            <ul>
+                                <li><strong>Rechercher</strong> sur l'histoire et l'environnement des retables</li>
+                                <li><strong>Diffuser</strong> l'information (documents, conférences, visites)</li>
+                                <li><strong>Financer</strong> la sauvegarde par les moyens publics et privés</li>
+                                <li><strong>Valoriser</strong> via des circuits touristiques en Flandre</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Col 3 : Notre organisation -->
+                    <div class="col-lg-4 col-md-6 col-12">
+                        <div class="rf-panorama-card">
+                            <div class="rf-panorama-icon">
+                                <i class="bi bi-people"></i>
+                            </div>
+                            <h3>Notre organisation</h3>
+                            <p>Association loi 1901, gouvernée par un Conseil d'administration de 26 membres répartis en 5 collèges.</p>
+
+                            <ul>
+                                <li>Représentants de l'État (Sous-préfet, DRAC, CMH)</li>
+                                <li>Représentants des collectivités locales</li>
+                                <li>Représentants des curés desservants</li>
+                                <li>Représentants des adhérents</li>
+                                <li>Guides certifiés (depuis 2003)</li>
+                            </ul>
+
+                            <p class="mt-3 mb-0" style="font-size:.9rem;color:#717275;">
+                                <i class="bi bi-cash-coin me-1"></i>
+                                Financement&nbsp;: cotisations, subventions, dons.
+                                <strong>41 retables restaurés</strong> entre 1989 et 2021.
+                            </p>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- ─────────────────────────────────────────────
+             FRISE CHRONOLOGIQUE — Notre histoire
+        ───────────────────────────────────────────────── -->
         <section class="section-padding" style="padding-top:60px;padding-bottom:60px;">
             <div class="container">
+                <div class="text-center mb-5">
+                    <h2 class="mb-2">Notre histoire</h2>
+                    <p class="text-muted mb-0">Plus de 30 ans d'engagement pour les retables de Flandre.</p>
+                </div>
 
-                <h2 class="mb-4">Le contexte</h2>
-                <p style="line-height:1.8;color:#555;">
-                    <u>Situation juridique</u><br>
-                    Les églises et leur mobilier sont propriété des communes depuis 1905. Le clergé affectataire
-                    en a l'usage mais ne peut en disposer. Les inspecteurs et contrôleurs des Monuments historiques
-                    et les Conservateurs départementaux des Antiquités Objets d'Art (C.A.O.A) ont des missions
-                    importantes en matière de protection et de surveillance, de conseil en conservation, de conduite
-                    des travaux de restauration, d'instruction des dossiers de subvention. Ces subventions peuvent
-                    aller jusqu'à 80&nbsp;% des travaux de restauration.
-                </p>
+                <div class="row justify-content-center">
+                    <div class="col-lg-9 col-12">
+                        <div class="rf-timeline">
 
-                <p style="line-height:1.8;color:#555;" class="mt-3">
-                    <u>Cri d'alarme</u><br>
-                    « Credo ou Requiem pour les retables de Flandre ». C'est le titre de l'article du Paul Ravera
-                    paru dans un numéro 1990 de la revue Archeologia. Ce journaliste s'était bien documenté et
-                    savait déjà que les responsables locaux et nationaux des Monuments historiques et les C.A.O.A.
-                    avaient demandé, encore en vain, une aide d'urgence de l'État pour « un état des lieux ».
-                </p>
+                            <div class="rf-timeline-item">
+                                <span class="rf-timeline-date">1990</span>
+                                <h4 class="rf-timeline-title">Le cri d'alarme</h4>
+                                <p class="rf-timeline-desc">
+                                    Dans la revue <em>Archeologia</em>, le journaliste Paul Ravera publie
+                                    « Credo ou Requiem pour les retables de Flandre ». Une alerte sur
+                                    l'état dégradé du patrimoine, restée jusque-là sans réponse de l'État.
+                                </p>
+                            </div>
 
-                <p style="line-height:1.8;color:#555;" class="mt-3">
-                    <u>Opération Mon Patrimoine</u><br>
-                    Jack Lang, alors ministre de la culture, répond à ce cri d'alarme et décide que pour sa
-                    4ème édition, l'Opération Mon Patrimoine sera consacrée aux retables des églises rurales
-                    flamandes. Les journées de sensibilisation sont fixées aux 24, 25 et 26 mai 1991 et sont
-                    organisées avec le concours de la sous-préfecture de Dunkerque et de la ville de Dunkerque.
-                </p>
+                            <div class="rf-timeline-item">
+                                <span class="rf-timeline-date">24-26 mai 1991</span>
+                                <h4 class="rf-timeline-title">Opération Mon Patrimoine</h4>
+                                <p class="rf-timeline-desc">
+                                    Jack Lang, ministre de la Culture, consacre la 4<sup>e</sup> édition
+                                    de l'Opération Mon Patrimoine aux retables flamands. Journées de
+                                    sensibilisation organisées avec la sous-préfecture de Dunkerque.
+                                </p>
+                            </div>
 
-                <hr class="my-5" style="border-color:#e5e5e5;">
+                            <div class="rf-timeline-item is-highlight">
+                                <span class="rf-timeline-date">19 avril 1991</span>
+                                <h4 class="rf-timeline-title">Création de l'association</h4>
+                                <p class="rf-timeline-desc">
+                                    Dépôt officiel des statuts. <strong>Bernard PREVOST</strong>, sous-préfet,
+                                    et <strong>Francis THULIE</strong>, son proche collaborateur, en sont
+                                    les co-fondateurs. André VIAU est le premier président.
+                                </p>
+                            </div>
 
-                <h2 class="mb-4">La création de l'association</h2>
-                <p style="line-height:1.8;color:#555;">
-                    Une structure juridique s'avérait indispensable pour faire connaître ce patrimoine et recueillir
-                    des fonds aux fins d'aider financièrement les communes qui engageaient des programmes de
-                    restauration. Le Sous-Préfet, Bernard PREVOST, et Francis THULIE, son proche collaborateur,
-                    furent co-fondateurs de l'association dont les statuts ont été déposés le <strong>19 avril 1991</strong>.
-                </p>
-                <p style="line-height:1.8;color:#555;" class="mt-3">
-                    L'association est dirigée par un Conseil d'administration de 24 membres répartis en 4 collèges :
-                </p>
-                <ul style="color:#555;line-height:1.8;">
-                    <li>Représentants de l'État (sous-préfet, DRAC, Conservateur régional des Monuments historiques…)</li>
-                    <li>Représentants des collectivités locales</li>
-                    <li>Représentants des curés desservants</li>
-                    <li>Représentants des adhérents</li>
-                </ul>
-                <p style="line-height:1.8;color:#555;">
-                    <strong>En 1993</strong>, M. José de BROUCKER est élu Président après André VIAU. Il présidera
-                    pendant 15 années de mandat.<br>
-                    <strong>En 2003</strong>, l'Assemblée Générale crée un 5e collège de guides certifiés.
-                    Le Conseil comprend désormais 31 membres.<br>
-                    <strong>En 2007</strong>, une modification statutaire recompose le Conseil à 26 membres.
-                </p>
+                            <div class="rf-timeline-item">
+                                <span class="rf-timeline-date">1993</span>
+                                <h4 class="rf-timeline-title">Présidence de José de BROUCKER</h4>
+                                <p class="rf-timeline-desc">
+                                    Il succède à André VIAU et présidera pendant 15 années, structurant
+                                    durablement l'action de l'association.
+                                </p>
+                            </div>
 
-                <hr class="my-5" style="border-color:#e5e5e5;">
+                            <div class="rf-timeline-item">
+                                <span class="rf-timeline-date">2003</span>
+                                <h4 class="rf-timeline-title">5<sup>e</sup> collège : les guides certifiés</h4>
+                                <p class="rf-timeline-desc">
+                                    L'Assemblée générale crée un 5<sup>e</sup> collège réservé aux guides
+                                    certifiés. Le Conseil d'administration passe à 31 membres.
+                                </p>
+                            </div>
 
-                <h2 class="mb-4">Les buts de l'association</h2>
-                <div class="row g-3">
-                    <div class="col-lg-6 col-12">
-                        <div class="d-flex align-items-start gap-3">
-                            <i class="bi bi-search" style="font-size:1.4rem;color:var(--primary-color);margin-top:3px;"></i>
-                            <p style="color:#555;margin:0;">Poursuivre la recherche sur l'histoire et l'environnement des retables.</p>
-                        </div>
-                    </div>
-                    <div class="col-lg-6 col-12">
-                        <div class="d-flex align-items-start gap-3">
-                            <i class="bi bi-megaphone" style="font-size:1.4rem;color:var(--primary-color);margin-top:3px;"></i>
-                            <p style="color:#555;margin:0;">Diffuser l'information concernant ce patrimoine (documents, conférences, visites…)</p>
-                        </div>
-                    </div>
-                    <div class="col-lg-6 col-12">
-                        <div class="d-flex align-items-start gap-3">
-                            <i class="bi bi-cash-coin" style="font-size:1.4rem;color:var(--primary-color);margin-top:3px;"></i>
-                            <p style="color:#555;margin:0;">Rechercher et mobiliser les moyens financiers publics et privés pour la sauvegarde.</p>
-                        </div>
-                    </div>
-                    <div class="col-lg-6 col-12">
-                        <div class="d-flex align-items-start gap-3">
-                            <i class="bi bi-map" style="font-size:1.4rem;color:var(--primary-color);margin-top:3px;"></i>
-                            <p style="color:#555;margin:0;">Participer au développement de circuits touristiques intégrant les retables de Flandre.</p>
+                            <div class="rf-timeline-item">
+                                <span class="rf-timeline-date">2007</span>
+                                <h4 class="rf-timeline-title">Recomposition statutaire</h4>
+                                <p class="rf-timeline-desc">
+                                    Une modification des statuts ramène le Conseil à 26 membres,
+                                    sa composition actuelle.
+                                </p>
+                            </div>
+
+                            <div class="rf-timeline-item is-highlight">
+                                <span class="rf-timeline-date">2021</span>
+                                <h4 class="rf-timeline-title">Bilan : 41 retables restaurés</h4>
+                                <p class="rf-timeline-desc">
+                                    De 1989 à 2021, <strong>41 retables</strong> ont été restaurés.
+                                    Notre Fonds de ressources a contribué à <strong>39 d'entre eux</strong>.
+                                </p>
+                            </div>
+
                         </div>
                     </div>
                 </div>
+            </div>
+        </section>
 
-                <hr class="my-5" style="border-color:#e5e5e5;">
+        <!-- ─────────────────────────────────────────────
+             CONTEXTE — texte court pour aller plus loin
+        ───────────────────────────────────────────────── -->
+        <section class="section-padding" style="background:#fafafa;padding-top:60px;padding-bottom:60px;">
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-lg-9 col-12">
+                        <h2 class="mb-4 text-center">Pour aller plus loin</h2>
 
-                <h2 class="mb-4">Ressources</h2>
-                <p style="line-height:1.8;color:#555;">
-                    <u>Les cotisations des adhérents et les subventions des collectivités territoriales</u>
-                    assurent pour l'essentiel le fonctionnement de l'association.
-                </p>
-                <p style="line-height:1.8;color:#555;" class="mt-2">
-                    <u>Les dons reçus</u>, notamment à l'occasion des visites guidées, ainsi que les produits de
-                    vente des livres sont portés au compte d'un Fonds de ressources affecté aux aides sollicitées
-                    par les communes qui réalisent des programmes de restauration de retables.
-                </p>
-                <p style="line-height:1.8;color:#555;" class="mt-2">
-                    De 1989 à 2021, <strong>quarante et un retables</strong> ont été restaurés.
-                    Notre Fonds de ressources y a contribué pour 39 d'entre eux.
-                </p>
+                        <h5 class="mt-4 mb-2"><i class="bi bi-shield-check me-2" style="color:var(--primary-color);"></i>Cadre juridique</h5>
+                        <p style="line-height:1.7;color:#555;">
+                            Depuis 1905, les églises et leur mobilier sont propriété des communes ; le clergé
+                            affectataire en a l'usage. Inspecteurs des Monuments historiques et Conservateurs
+                            départementaux des Antiquités Objets d'Art (C.A.O.A.) assurent la protection,
+                            la surveillance et la conduite des restaurations. Les subventions peuvent
+                            atteindre <strong>80 %</strong> du coût des travaux.
+                        </p>
 
+                        <h5 class="mt-4 mb-2"><i class="bi bi-coin me-2" style="color:var(--primary-color);"></i>Ressources de l'association</h5>
+                        <p style="line-height:1.7;color:#555;">
+                            Les <strong>cotisations</strong> des adhérents et les <strong>subventions</strong>
+                            des collectivités assurent le fonctionnement courant. Les <strong>dons</strong>
+                            reçus lors des visites guidées et les ventes de livres alimentent un
+                            <strong>Fonds de ressources</strong>, destiné à aider financièrement les
+                            communes qui restaurent leurs retables.
+                        </p>
+
+                        <div class="text-center mt-4">
+                            <a href="#section_contact" class="btn custom-btn me-2">
+                                <i class="bi bi-envelope me-2"></i>Nous contacter
+                            </a>
+                            <a href="images/previous-image/Bulletin_adhesion_2022.pdf" target="_blank"
+                               class="btn btn-outline-secondary">
+                                <i class="bi bi-file-pdf me-2"></i>Adhérer
+                            </a>
+                        </div>
+                    </div>
+                </div>
             </div>
         </section>
 
@@ -183,8 +296,8 @@
 
     </div>
 
-        <rf-lightbox></rf-lightbox>
-    </div>
+    <rf-lightbox></rf-lightbox>
+</div>
 </main>
 
 <script src="js/vue.global.prod.js"></script>
@@ -196,4 +309,3 @@
 <script src="js/vue-app.js"></script>
 </body>
 </html>
-
