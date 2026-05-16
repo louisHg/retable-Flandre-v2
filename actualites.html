@@ -5,10 +5,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Actualités - RETABLES de FLANDRE</title>
     <link rel="icon" type="image/jpg" href="images/previous-image/logo.jpg">
+
+    <!-- SEO & partages sociaux -->
+    <meta name="description" content="Toutes les actualités de l'association : assemblées générales 2025-2026, visites estivales, sorties culturelles, formations de guides et hommages.">
+    <meta name="theme-color" content="#81b29a">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Actualités — RETABLES de FLANDRE">
+    <meta property="og:description" content="L'association en mouvement : AG, visites, sorties, formations.">
+    <meta property="og:image" content="images/2026/Looberghe/loob1.JPG">
+    <meta name="twitter:card" content="summary_large_image">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,700;1,400&display=swap"
-          rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,700;1,400&display=swap" rel="stylesheet">
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="css/bootstrap-icons.css" rel="stylesheet">
     <link href="css/main.css" rel="stylesheet">
@@ -20,75 +28,87 @@
 </head>
 <body>
 <main>
-    <div id="app">
+<div id="app">
 
-        <rf-sidebar :is-open="sidebarOpen" current-page="actualites" @close="sidebarOpen = false"></rf-sidebar>
+    <rf-sidebar :is-open="sidebarOpen" current-page="actualites" @close="sidebarOpen = false"></rf-sidebar>
 
-        <!-- Overlay backdrop mobile -->
-        <div class="rf-sidebar-overlay" :class="{ 'is-active': sidebarOpen }" @click="sidebarOpen = false"></div>
+    <div class="rf-sidebar-overlay" :class="{ 'is-active': sidebarOpen }" @click="sidebarOpen = false"></div>
 
-        <button class="rf-sidebar-fab" type="button" aria-label="Toggle menu" @click="sidebarOpen = !sidebarOpen">
-            <span></span><span></span><span></span>
-        </button>
+    <button class="rf-sidebar-fab" type="button" aria-label="Toggle menu" @click="sidebarOpen = !sidebarOpen">
+        <span></span><span></span><span></span>
+    </button>
 
-        <div :class="['rf-content', { 'is-expanded': !sidebarOpen }]">
+    <div :class="['rf-content', { 'is-expanded': !sidebarOpen }]">
 
-            <!-- Hero -->
-            <section class="about-section section-padding" id="section_1">
-                <div class="container">
-                    <div class="d-flex align-items-center mb-3">
-                        <img src="images/previous-image/logo.jpg" alt="Logo"
-                             style="width:70px;height:70px;object-fit:cover;border-radius:12px;margin-right:15px;">
-                        <div>
-                            <h2 class="mb-0">Actualités</h2>
-                            <p class="mb-0" style="color:#717275;">Association RETABLES de FLANDRE</p>
-                        </div>
+        <!-- ─────────────────────────────────────────────
+             HERO + Navigation par année
+        ───────────────────────────────────────────────── -->
+        <section class="about-section section-padding" id="section_1">
+            <div class="container">
+                <div class="d-flex align-items-center mb-3">
+                    <img src="images/previous-image/logo.jpg" alt="Logo"
+                         style="width:70px;height:70px;object-fit:cover;border-radius:12px;margin-right:15px;">
+                    <div>
+                        <h2 class="mb-0">Actualités</h2>
+                        <p class="mb-0" style="color:#717275;">L'association en mouvement</p>
                     </div>
                 </div>
-            </section>
+                <p class="mt-3 mb-0" style="line-height:1.7;color:#555;max-width:780px;">
+                    Retrouvez ici les dernières nouvelles de l'association :
+                    assemblées générales, visites guidées, formations, sorties culturelles
+                    et hommages.
+                </p>
 
-            <!-- Actualités -->
-            <section class="section-padding" style="padding-top:40px;padding-bottom:80px;">
-                <div class="container">
+                <nav class="rf-actu-anchor-nav" aria-label="Navigation par année">
+                    <a href="#annee-2026">2026</a>
+                    <a href="#annee-2025">2025</a>
+                    <a href="#annee-avant">Avant 2025</a>
+                </nav>
+            </div>
+        </section>
 
-                    <!-- Calendrier des visites été 2026 -->
-                    <div class="mb-5">
-                        <h2 class="mb-1">Calendrier des visites — été 2026</h2>
-                        <p style="color:#555;line-height:1.8;">
-                            Le programme des visites d'églises à retables pour l'été 2026 est disponible.
-                        </p>
+        <!-- ─────────────────────────────────────────────
+             2026
+        ───────────────────────────────────────────────── -->
+        <section class="section-padding" style="padding-top:20px;padding-bottom:40px;" id="annee-2026">
+            <div class="container">
+                <div class="rf-actu-year">
+                    <h2>2026</h2>
+                </div>
+
+                <!-- Calendrier des visites été 2026 -->
+                <article class="rf-actu-card">
+                    <span class="rf-actu-date"><i class="bi bi-calendar3 me-1"></i>Été 2026</span>
+                    <h3>Calendrier des visites — été 2026</h3>
+                    <p>Le programme des visites d'églises à retables pour l'été 2026 est disponible.</p>
+                    <div class="rf-actu-buttons">
                         <a href="images/2026/2026_visite_eglise.pdf" target="_blank" class="btn custom-btn btn-sm">
-                            <i class="bi bi-calendar3 me-2"></i>Télécharger le calendrier 2026
+                            <i class="bi bi-download me-2"></i>Télécharger le calendrier
                         </a>
                     </div>
+                </article>
 
-                    <hr style="border-color:#e5e5e5;" class="my-5">
-
-                    <!-- AG Looberghe 2026 -->
-                    <div class="mb-5">
-                        <h2 class="mb-1">Assemblée Générale 2026 à Looberghe</h2>
-                        <h5 class="mb-3" style="color:var(--primary-color);">Samedi 7 mars 2026</h5>
-                        <p style="color:#555;line-height:1.8;font-weight:bold;">
-                            L'Assemblée Générale de l'Association des Retables de Flandre s'est tenue le
-                            <b>samedi 7 mars 2026</b> à <b>Looberghe</b>.
-                        </p>
-                        <p style="color:#555;line-height:1.8;">
-                            Après une visite de l'église et la tenue de l'assemblée générale ordinaire, un nouveau
-                            <b>Conseil d'Administration</b> a été élu le <b>17 mars 2026</b>.
-                        </p>
-                        <div class="d-flex flex-wrap gap-3 mb-3">
-                            <a href="images/2026/Looberghe/CR-AG2026Loob.pdf" target="_blank"
-                               class="btn custom-btn btn-sm">
-                                <i class="bi bi-file-pdf me-2"></i>Compte-rendu AG 2026
-                            </a>
-                            <a href="images/2026/AG-2025.pdf" target="_blank" class="btn custom-btn btn-sm">
-                                <i class="bi bi-file-pdf me-2"></i>Rapport moral et d'activités 2025
-                            </a>
-                            <a href="images/2026/Conseil-17-mars.pdf" target="_blank" class="btn custom-btn btn-sm">
-                                <i class="bi bi-file-pdf me-2"></i>Nouveau Conseil d'Administration
-                            </a>
-                        </div>
-                        <!-- Carousel Looberghe -->
+                <!-- AG Looberghe 2026 -->
+                <article class="rf-actu-card">
+                    <span class="rf-actu-date"><i class="bi bi-calendar-event me-1"></i>Samedi 7 mars 2026</span>
+                    <h3>Assemblée Générale à Looberghe</h3>
+                    <p>
+                        L'Assemblée Générale de l'association s'est tenue le <strong>7 mars 2026</strong>
+                        à Looberghe. Après une visite de l'église et la tenue de l'assemblée générale ordinaire,
+                        un nouveau <strong>Conseil d'Administration</strong> a été élu le 17 mars 2026.
+                    </p>
+                    <div class="rf-actu-buttons">
+                        <a href="images/2026/Looberghe/CR-AG2026Loob.pdf" target="_blank" class="btn custom-btn btn-sm">
+                            <i class="bi bi-file-pdf me-2"></i>Compte-rendu AG 2026
+                        </a>
+                        <a href="images/2026/AG-2025.pdf" target="_blank" class="btn custom-btn btn-sm">
+                            <i class="bi bi-file-pdf me-2"></i>Rapport moral 2025
+                        </a>
+                        <a href="images/2026/Conseil-17-mars.pdf" target="_blank" class="btn custom-btn btn-sm">
+                            <i class="bi bi-file-pdf me-2"></i>Nouveau CA
+                        </a>
+                    </div>
+                    <div class="rf-actu-media">
                         <div id="carouselLooberghe" class="carousel slide rounded-4 shadow-sm" data-bs-ride="carousel"
                              style="max-width:500px;">
                             <div class="carousel-inner rounded-4">
@@ -119,54 +139,57 @@
                             </button>
                         </div>
                     </div>
+                </article>
 
-                    <hr style="border-color:#e5e5e5;" class="my-5">
-
-                    <!-- Messe Oudezeele février 2026 -->
-                    <div class="mb-5">
-                        <h2 class="mb-1">Lundi 2 février 2026</h2>
-                        <p style="color:#555;line-height:1.8;font-weight:bold;">
-                            À 18h, une messe a été célébrée par le Père Thomas Vercoutre en l'église
-                            Saint-Jean-Baptiste d'Oudezeele.
-                        </p>
-                        <p style="color:#555;line-height:1.8;">
-                            La célébration a été accompagnée de chants grégoriens interprétés par la chorale
-                            <b>Cum Jubilo</b> de Watou, suivie d'une <b>dégustation de crêpes de la Chandeleur</b>.
-                        </p>
-                        <div class="row g-3 mt-1" style="max-width:600px;">
+                <!-- Messe Oudezeele février 2026 -->
+                <article class="rf-actu-card">
+                    <span class="rf-actu-date"><i class="bi bi-calendar-event me-1"></i>Lundi 2 février 2026</span>
+                    <h3>Messe & dégustation à Oudezeele</h3>
+                    <p>
+                        À 18h, une messe a été célébrée par le Père Thomas Vercoutre en l'église
+                        Saint-Jean-Baptiste d'Oudezeele. La célébration a été accompagnée de chants grégoriens
+                        interprétés par la chorale <strong>Cum Jubilo</strong> de Watou, suivie d'une dégustation
+                        de crêpes de la Chandeleur.
+                    </p>
+                    <div class="rf-actu-media">
+                        <div class="row g-3" style="max-width:600px;">
                             <div class="col-6">
                                 <img src="images/2026/Jubilo-Watou.jpg" class="img-fluid rounded-4 shadow-sm"
                                      style="width:100%;height:180px;object-fit:cover;"
                                      alt="Chorale Cum Jubilo de Watou">
-                                <p class="text-center mt-1" style="font-size:.8rem;color:#717275;">Chorale Cum Jubilo -
-                                    Watou</p>
+                                <p class="text-center mt-1 mb-0" style="font-size:.8rem;color:#717275;">
+                                    Chorale Cum Jubilo — Watou
+                                </p>
                             </div>
                             <div class="col-6">
                                 <img src="images/2026/eglise-Oudezeele.JPG" class="img-fluid rounded-4 shadow-sm"
                                      style="width:100%;height:180px;object-fit:cover;"
                                      alt="Église Saint-Jean-Baptiste d'Oudezeele">
-                                <p class="text-center mt-1" style="font-size:.8rem;color:#717275;">Église
-                                    d'Oudezeele</p>
+                                <p class="text-center mt-1 mb-0" style="font-size:.8rem;color:#717275;">
+                                    Église d'Oudezeele
+                                </p>
                             </div>
                         </div>
                     </div>
+                </article>
 
-                    <hr style="border-color:#e5e5e5;" class="my-5">
-
-                    <!-- Formation des guides 2025-2026 -->
-                    <div class="mb-5">
-                        <h2 class="mb-1">Formation des guides 2025–2026</h2>
-                        <h5 class="mb-3" style="color:var(--primary-color);">Octobre 2025 – Février 2026</h5>
-                        <p style="color:#555;line-height:1.8;">
-                            Une nouvelle session de formation des guides de l'association a réuni neuf futurs guides
-                            et douze guides expérimentés venus approfondir leurs connaissances, sur le territoire
-                            de Dunkerque et Hazebrouck.
-                        </p>
+                <!-- Formation des guides 2025-2026 -->
+                <article class="rf-actu-card">
+                    <span class="rf-actu-date"><i class="bi bi-mortarboard me-1"></i>Octobre 2025 – Février 2026</span>
+                    <h3>Formation des guides 2025–2026</h3>
+                    <p>
+                        Une nouvelle session de formation des guides de l'association a réuni
+                        <strong>9 futurs guides</strong> et <strong>12 guides expérimentés</strong>
+                        venus approfondir leurs connaissances, sur le territoire de Dunkerque et Hazebrouck.
+                    </p>
+                    <div class="rf-actu-buttons">
                         <a href="images/2025/retablesdeflandre/2025 2026 programme Formation Retables de FlandreScan.jpg"
-                           target="_blank" class="btn custom-btn btn-sm mb-3">
-                            <i class="bi bi-eye me-2"></i>Voir le programme de formation
+                           target="_blank" class="btn custom-btn btn-sm">
+                            <i class="bi bi-eye me-2"></i>Voir le programme
                         </a>
-                        <div class="row g-3 mt-1" style="max-width:600px;">
+                    </div>
+                    <div class="rf-actu-media">
+                        <div class="row g-3" style="max-width:600px;">
                             <div class="col-6 col-md-3">
                                 <img src="images/2025/retablesdeflandre/complmentdinfosretablesdeflandre/Guides-Bambecque-2025-01-08.jpg"
                                      class="img-fluid rounded-4 shadow-sm"
@@ -193,133 +216,142 @@
                             </div>
                         </div>
                     </div>
+                </article>
 
-                    <hr style="border-color:#e5e5e5;" class="my-5">
+            </div>
+        </section>
 
-                    <!-- Témoignage Paulette Vanpoulle -->
-                    <div class="mb-5">
-                        <h2 class="mb-3">Témoignage — Obsèques de Paulette VANPOULLE</h2>
-                        <p style="color:#555;line-height:1.8;">
-                            Lors des obsèques de Paulette VANPOULLE, l'Association des Retables de Flandre a tenu à
-                            rendre hommage à son engagement et à son attachement au patrimoine flamand. Ce témoignage
-                            a été porté par Régine Beaucamp, présidente de l'association, au nom de l'Association
-                            des Retables de Flandre et du Comité Flamand de France.
-                        </p>
+        <!-- ─────────────────────────────────────────────
+             2025
+        ───────────────────────────────────────────────── -->
+        <section class="section-padding" style="background:#fafafa;padding-top:40px;padding-bottom:60px;" id="annee-2025">
+            <div class="container">
+                <div class="rf-actu-year">
+                    <h2>2025</h2>
+                </div>
+
+                <!-- Témoignage Paulette -->
+                <article class="rf-actu-card">
+                    <span class="rf-actu-date"><i class="bi bi-flower1 me-1"></i>Hommage</span>
+                    <h3>Témoignage — Obsèques de Paulette VANPOULLE</h3>
+                    <p>
+                        Lors des obsèques de Paulette VANPOULLE, l'Association des Retables de Flandre a tenu
+                        à rendre hommage à son engagement et à son attachement au patrimoine flamand.
+                        Ce témoignage a été porté par Régine Beaucamp, présidente de l'association, au nom
+                        des Retables de Flandre et du Comité Flamand de France.
+                    </p>
+                    <div class="rf-actu-buttons">
                         <a href="images/2025/retablesdeflandre/Temoignage_de_R.Beaucamp_pour_les obseques_de_Paulette_Vanpoulle.pdf"
                            target="_blank" class="btn custom-btn btn-sm">
                             <i class="bi bi-file-pdf me-2"></i>Lire le témoignage complet
                         </a>
                     </div>
+                </article>
 
-                    <hr style="border-color:#e5e5e5;" class="my-5">
+                <!-- Visites estivales 2025 regroupées -->
+                <article class="rf-actu-card">
+                    <span class="rf-actu-date"><i class="bi bi-sun me-1"></i>Été 2025</span>
+                    <h3>Visites estivales — Découverte de nos églises</h3>
+                    <p>
+                        Tout l'été, les guides de l'association ont accompagné des visiteurs à la découverte
+                        des plus belles églises flamandes et de leurs retables. Quatre sorties au programme.
+                    </p>
 
-                    <!-- Découverte de Steenvoorde et Volckerinckhove -->
-                    <div class="mb-5">
-                        <h2 class="mb-1">Découverte de Steenvoorde et Volckerinckhove</h2>
-                        <h5 class="mb-3" style="color:var(--primary-color);">7 septembre 2025</h5>
-                        <p style="color:#555;line-height:1.8;">
+                    <div class="rf-actu-visite mt-3">
+                        <div class="rf-actu-visite-date">7 septembre 2025</div>
+                        <h4>Steenvoorde et Volckerinckhove</h4>
+                        <p class="mb-2">
                             L'église Saint-Pierre de Steenvoorde, avec sa haute flèche de 92&nbsp;m, et l'église
-                            romane de Volckerinckhove, remarquable par ses poutres sculptées et ses fonds baptismaux.
+                            romane de Volckerinckhove, remarquable par ses poutres sculptées et ses fonts baptismaux.
                         </p>
-                        <div class="row g-3 mt-1" style="max-width:500px;">
+                        <div class="row g-3" style="max-width:500px;">
                             <div class="col-6">
                                 <img src="images/2025/STEENVOORDE.jpeg" class="img-fluid rounded-4 shadow-sm"
-                                     style="width:100%;height:180px;object-fit:cover;" alt="Steenvoorde">
+                                     style="width:100%;height:150px;object-fit:cover;" alt="Steenvoorde">
                             </div>
                             <div class="col-6">
                                 <img src="images/2025/Volckerinckove.JPG" class="img-fluid rounded-4 shadow-sm"
-                                     style="width:100%;height:180px;object-fit:cover;" alt="Volckerinckhove">
+                                     style="width:100%;height:150px;object-fit:cover;" alt="Volckerinckhove">
                             </div>
                         </div>
                     </div>
 
-                    <hr style="border-color:#e5e5e5;" class="my-5">
-
-                    <!-- Borre et Cassel -->
-                    <div class="mb-5">
-                        <h2 class="mb-1">Borre et Cassel</h2>
-                        <h5 class="mb-3" style="color:var(--primary-color);">31 août 2025</h5>
-                        <p style="color:#555;line-height:1.8;">
+                    <div class="rf-actu-visite">
+                        <div class="rf-actu-visite-date">31 août 2025</div>
+                        <h4>Borre et Cassel</h4>
+                        <p class="mb-2">
                             L'église Saint-Jean-Baptiste de Borre avec sa tour de guet transformée en clocher,
                             et la collégiale Notre-Dame de la Crypte de Cassel, classée monument historique.
                         </p>
-                        <div class="row g-3 mt-1" style="max-width:500px;">
+                        <div class="row g-3" style="max-width:500px;">
                             <div class="col-6">
                                 <img src="images/2025/Borre.jpeg" class="img-fluid rounded-4 shadow-sm"
-                                     style="width:100%;height:180px;object-fit:cover;" alt="Borre">
+                                     style="width:100%;height:150px;object-fit:cover;" alt="Borre">
                             </div>
                             <div class="col-6">
                                 <img src="images/2025/Cassel.jpeg" class="img-fluid rounded-4 shadow-sm"
-                                     style="width:100%;height:180px;object-fit:cover;" alt="Cassel">
+                                     style="width:100%;height:150px;object-fit:cover;" alt="Cassel">
                             </div>
                         </div>
                     </div>
 
-                    <hr style="border-color:#e5e5e5;" class="my-5">
-
-                    <!-- Bollezeele et Killem -->
-                    <div class="mb-5">
-                        <h2 class="mb-1">Bollezeele et Killem</h2>
-                        <h5 class="mb-3" style="color:var(--primary-color);">24 août 2025</h5>
-                        <p style="color:#555;line-height:1.8;">
+                    <div class="rf-actu-visite">
+                        <div class="rf-actu-visite-date">24 août 2025</div>
+                        <h4>Bollezeele et Killem</h4>
+                        <p class="mb-2">
                             L'église Saint-Wandrille de Bollezeele, monument historique au riche mobilier classé,
                             et l'église Saint-Michel de Killem avec ses retables baroques.
                         </p>
-                        <div class="row g-3 mt-1" style="max-width:500px;">
+                        <div class="row g-3" style="max-width:500px;">
                             <div class="col-6">
                                 <img src="images/2025/Bollezeele.png" class="img-fluid rounded-4 shadow-sm"
-                                     style="width:100%;height:180px;object-fit:cover;" alt="Bollezeele">
+                                     style="width:100%;height:150px;object-fit:cover;" alt="Bollezeele">
                             </div>
                             <div class="col-6">
                                 <img src="images/2025/Killem.png" class="img-fluid rounded-4 shadow-sm"
-                                     style="width:100%;height:180px;object-fit:cover;" alt="Killem">
+                                     style="width:100%;height:150px;object-fit:cover;" alt="Killem">
                             </div>
                         </div>
                     </div>
 
-                    <hr style="border-color:#e5e5e5;" class="my-5">
-
-                    <!-- Herzeele et Wulverdinghe -->
-                    <div class="mb-5">
-                        <h2 class="mb-1">Herzeele et Wulverdinghe</h2>
-                        <h5 class="mb-3" style="color:var(--primary-color);">17 août 2025</h5>
-                        <p style="color:#555;line-height:1.8;">
+                    <div class="rf-actu-visite">
+                        <div class="rf-actu-visite-date">17 août 2025</div>
+                        <h4>Herzeele et Wulverdinghe</h4>
+                        <p class="mb-2">
                             L'église Notre-Dame de l'Assomption d'Herzeele, église-halle en briques du
-                            XVI<sup>e</sup> siècle avec ses retables classés Monuments Historiques, et l'église
-                            Saint-Martin de Wulverdinghe à la façade romane rare en Flandre maritime.
+                            XVI<sup>e</sup> siècle avec ses retables classés, et l'église Saint-Martin de
+                            Wulverdinghe à la façade romane rare en Flandre maritime.
                         </p>
-                        <div class="row g-3 mt-1" style="max-width:500px;">
+                        <div class="row g-3" style="max-width:500px;">
                             <div class="col-6">
                                 <img src="images/2025/Herzeele.jpeg" class="img-fluid rounded-4 shadow-sm"
-                                     style="width:100%;height:180px;object-fit:cover;" alt="Herzeele">
+                                     style="width:100%;height:150px;object-fit:cover;" alt="Herzeele">
                             </div>
                             <div class="col-6">
                                 <img src="images/2025/Wulverdinghe.jpeg" class="img-fluid rounded-4 shadow-sm"
-                                     style="width:100%;height:180px;object-fit:cover;" alt="Wulverdinghe">
+                                     style="width:100%;height:150px;object-fit:cover;" alt="Wulverdinghe">
                             </div>
                         </div>
                     </div>
+                </article>
 
-                    <hr style="border-color:#e5e5e5;" class="my-5">
-
-                    <!-- Sortie culturelle Douai 2025 -->
-                    <div class="mb-5">
-                        <h2 class="mb-1">Sortie culturelle à Douai</h2>
-                        <h5 class="mb-3" style="color:var(--primary-color);">15 mai 2025</h5>
-                        <p style="color:#555;line-height:1.8;font-weight:bold;">
-                            Quarante participants ont découvert Douai lors d'une sortie culturelle.
-                        </p>
-                        <p style="color:#555;line-height:1.8;">
-                            Accueillis à la collégiale Saint-Pierre par Françoise Baligand, ils ont admiré son
-                            architecture classique du XVIIIe siècle, ses œuvres religieuses majeures et les vitraux
-                            de Paul Bony. La visite s'est poursuivie au musée de la Chartreuse avec une exposition
-                            consacrée au peintre Nicolas-Guy Brenet.
-                        </p>
-                        <a href="images/2025/Douai/2025 article Douai.pdf" target="_blank"
-                           class="btn custom-btn btn-sm mb-3">
+                <!-- Sortie Douai -->
+                <article class="rf-actu-card">
+                    <span class="rf-actu-date"><i class="bi bi-bus-front me-1"></i>15 mai 2025</span>
+                    <h3>Sortie culturelle à Douai</h3>
+                    <p>
+                        <strong>Quarante participants</strong> ont découvert Douai lors d'une sortie culturelle.
+                        Accueillis à la collégiale Saint-Pierre par Françoise Baligand, ils ont admiré son
+                        architecture classique du XVIII<sup>e</sup> siècle, ses œuvres religieuses majeures
+                        et les vitraux de Paul Bony. La visite s'est poursuivie au musée de la Chartreuse avec
+                        une exposition consacrée au peintre Nicolas-Guy Brenet.
+                    </p>
+                    <div class="rf-actu-buttons">
+                        <a href="images/2025/Douai/2025 article Douai.pdf" target="_blank" class="btn custom-btn btn-sm">
                             <i class="bi bi-file-pdf me-2"></i>Lire le compte-rendu
                         </a>
-                        <!-- Carousel Douai -->
+                    </div>
+                    <div class="rf-actu-media">
                         <div id="carouselDouai" class="carousel slide rounded-4 shadow-sm" data-bs-ride="carousel"
                              style="max-width:500px;">
                             <div class="carousel-inner rounded-4">
@@ -358,24 +390,24 @@
                             </button>
                         </div>
                     </div>
+                </article>
 
-                    <hr style="border-color:#e5e5e5;" class="my-5">
-
-                    <!-- AG Boeschèpe 2025 -->
-                    <div class="mb-5">
-                        <h2 class="mb-1">Assemblée Générale 2025 à Boeschèpe</h2>
-                        <h5 class="mb-3" style="color:var(--primary-color);">29 mars 2025</h5>
-                        <p style="color:#555;line-height:1.8;">
-                            L'Assemblée Générale s'est tenue sous la présidence de Régine Beaucamp. Après une visite
-                            guidée de l'église Saint-Martin par Réginald Pasquier, le rapport d'activités 2024 et le
-                            rapport financier ont été approuvés à l'unanimité. Le renouvellement partiel du conseil a
-                            reconduit tous les membres sortants.
-                        </p>
-                        <a href="images/2025/Boeschepe/CR.AG 2025 - Boeschepe.pdf" target="_blank"
-                           class="btn custom-btn btn-sm mb-3">
+                <!-- AG Boeschèpe -->
+                <article class="rf-actu-card">
+                    <span class="rf-actu-date"><i class="bi bi-calendar-event me-1"></i>29 mars 2025</span>
+                    <h3>Assemblée Générale à Boeschèpe</h3>
+                    <p>
+                        L'Assemblée Générale s'est tenue sous la présidence de Régine Beaucamp. Après une visite
+                        guidée de l'église Saint-Martin par Réginald Pasquier, le rapport d'activités 2024 et le
+                        rapport financier ont été approuvés à l'unanimité. Le renouvellement partiel du conseil
+                        a reconduit tous les membres sortants.
+                    </p>
+                    <div class="rf-actu-buttons">
+                        <a href="images/2025/Boeschepe/CR.AG 2025 - Boeschepe.pdf" target="_blank" class="btn custom-btn btn-sm">
                             <i class="bi bi-file-pdf me-2"></i>Lire le compte-rendu
                         </a>
-                        <!-- Carousel Boeschepe -->
+                    </div>
+                    <div class="rf-actu-media">
                         <div id="carouselBoeschepe" class="carousel slide rounded-4 shadow-sm" data-bs-ride="carousel"
                              style="max-width:500px;">
                             <div class="carousel-inner rounded-4">
@@ -435,58 +467,72 @@
                             </button>
                         </div>
                     </div>
+                </article>
 
-                    <hr style="border-color:#e5e5e5;" class="my-5">
+            </div>
+        </section>
 
-                    <!-- Rapport activités 2024 -->
-                    <div class="mb-5">
-                        <h2 class="mb-3">Rapport d'activités 2024</h2>
-                        <p style="color:#555;line-height:1.8;">
-                            Depuis l'assemblée générale du 6 avril 2024 à Gravelines, l'association a poursuivi ses
-                            actions : réunions du conseil, participation au salon de généalogie à Gravelines, sortie
-                            annuelle à Abbeville et présence au forum des associations à Hazebrouck. Les visites
-                            estivales ont attiré <strong>470 personnes</strong> grâce à l'engagement des guides.
-                        </p>
+        <!-- ─────────────────────────────────────────────
+             AVANT 2025
+        ───────────────────────────────────────────────── -->
+        <section class="section-padding" style="padding-top:40px;padding-bottom:60px;" id="annee-avant">
+            <div class="container">
+                <div class="rf-actu-year">
+                    <h2>Avant 2025</h2>
+                </div>
+
+                <!-- Rapport 2024 -->
+                <article class="rf-actu-card">
+                    <span class="rf-actu-date"><i class="bi bi-file-text me-1"></i>2024</span>
+                    <h3>Rapport d'activités 2024</h3>
+                    <p>
+                        Depuis l'assemblée générale du 6 avril 2024 à Gravelines, l'association a poursuivi
+                        ses actions : réunions du conseil, salon de généalogie à Gravelines, sortie annuelle
+                        à Abbeville et forum des associations à Hazebrouck. Les visites estivales ont attiré
+                        <strong>470 personnes</strong> grâce à l'engagement des guides.
+                    </p>
+                    <div class="rf-actu-buttons">
                         <a href="images/2025/Rapport Moral et d'activité  2024 pour AG.pdf" target="_blank"
                            class="btn custom-btn btn-sm">
-                            <i class="bi bi-file-pdf me-2"></i>Lire le rapport d'activité
+                            <i class="bi bi-file-pdf me-2"></i>Lire le rapport
                         </a>
                     </div>
+                </article>
 
-                    <hr style="border-color:#e5e5e5;" class="my-5">
-
-                    <!-- Décès José De Broucker -->
-                    <div class="mb-5">
-                        <h2 class="mb-3">Le décès de José De Broucker</h2>
-                        <p style="color:#555;line-height:1.8;">
-                            Journaliste français éminent, catholique engagé, auteur de nombreux ouvrages, ami et
-                            "disciple" de Don Helder Camara, José de Broucker s'est éteint le <strong>lundi 4 octobre
-                            2021</strong>,
-                            en la fête de saint François d'Assise. Il avait été Président de l'association pendant
-                            15 années de mandat.
-                        </p>
+                <!-- Décès De Broucker -->
+                <article class="rf-actu-card">
+                    <span class="rf-actu-date"><i class="bi bi-flower1 me-1"></i>4 octobre 2021</span>
+                    <h3>Le décès de José De Broucker</h3>
+                    <p>
+                        Journaliste français éminent, catholique engagé, auteur de nombreux ouvrages, ami et
+                        « disciple » de Don Helder Camara, José de Broucker s'est éteint le
+                        <strong>lundi 4 octobre 2021</strong>, en la fête de saint François d'Assise.
+                        Il avait été Président de l'association pendant <strong>15 années de mandat</strong>.
+                    </p>
+                    <div class="rf-actu-buttons">
                         <a href="https://www.facebook.com/groups/810126146577985/permalink/887238255533440/"
                            target="_blank" class="btn custom-btn btn-sm">
                             <i class="bi bi-box-arrow-up-right me-2"></i>Plus d'info
                         </a>
                     </div>
+                </article>
 
-                    <hr style="border-color:#e5e5e5;" class="my-5">
-
-                    <!-- Journée des guides Hazebrouck 2021 -->
-                    <div class="mb-5">
-                        <h2 class="mb-1">Journée des guides à Hazebrouck</h2>
-                        <h5 class="mb-3" style="color:var(--primary-color);">20 octobre 2021</h5>
-                        <p style="color:#555;line-height:1.8;">
-                            Sur une proposition d'Aïda Tellier, les guides se sont retrouvés à Hazebrouck pour
-                            partager un moment de convivialité en visitant divers lieux de la ville. Quelques membres
-                            du Conseil d'Administration ont rejoint le groupe.
-                        </p>
+                <!-- Journée des guides Hazebrouck 2021 -->
+                <article class="rf-actu-card">
+                    <span class="rf-actu-date"><i class="bi bi-people me-1"></i>20 octobre 2021</span>
+                    <h3>Journée des guides à Hazebrouck</h3>
+                    <p>
+                        Sur une proposition d'Aïda Tellier, les guides se sont retrouvés à Hazebrouck pour
+                        partager un moment de convivialité en visitant divers lieux de la ville.
+                        Quelques membres du Conseil d'Administration ont rejoint le groupe.
+                    </p>
+                    <div class="rf-actu-buttons">
                         <a href="images/previous-image/Retables_2021_CR_Journee_des_guides_Hazebouck_20oct_2021(1).pdf"
-                           target="_blank" class="btn custom-btn btn-sm mb-3">
+                           target="_blank" class="btn custom-btn btn-sm">
                             <i class="bi bi-file-pdf me-2"></i>Lire le compte-rendu
                         </a>
-                        <!-- Carousel Hazebrouck -->
+                    </div>
+                    <div class="rf-actu-media">
                         <div id="carouselHazebrouck" class="carousel slide rounded-4 shadow-sm" data-bs-ride="carousel"
                              style="max-width:500px;">
                             <div class="carousel-inner rounded-4">
@@ -549,17 +595,18 @@
                             </button>
                         </div>
                     </div>
+                </article>
 
-                </div>
-            </section>
+            </div>
+        </section>
 
-            <rf-contact></rf-contact>
-            <rf-footer></rf-footer>
+        <rf-contact></rf-contact>
+        <rf-footer></rf-footer>
 
-        </div>
-    
-        <rf-lightbox></rf-lightbox>
     </div>
+
+    <rf-lightbox></rf-lightbox>
+</div>
 </main>
 
 <script src="js/vue.global.prod.js"></script>
@@ -571,4 +618,3 @@
 <script src="js/vue-app.js"></script>
 </body>
 </html>
-

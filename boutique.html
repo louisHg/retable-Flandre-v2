@@ -5,6 +5,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Boutique - RETABLES de FLANDRE</title>
     <link rel="icon" type="image/jpg" href="images/previous-image/logo.jpg">
+
+    <!-- SEO & partages sociaux -->
+    <meta name="description" content="Publications et articles de l'association : livre sur les vitraux, Bible en images, pochette des retables restaurés, médaille en bronze. Soutenez nos restaurations.">
+    <meta name="theme-color" content="#81b29a">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Boutique — RETABLES de FLANDRE">
+    <meta property="og:description" content="Livres, fiches, CD et médaille — chaque achat alimente notre Fonds de restauration.">
+    <meta property="og:image" content="images/previous-image/boutique/couverture_livre_sur_les_vitraux.png">
+    <meta name="twitter:card" content="summary_large_image">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,700;1,400&display=swap" rel="stylesheet">
@@ -23,8 +32,7 @@
 
     <rf-sidebar :is-open="sidebarOpen" current-page="boutique" @close="sidebarOpen = false"></rf-sidebar>
 
-        <!-- Overlay backdrop mobile -->
-        <div class="rf-sidebar-overlay" :class="{ 'is-active': sidebarOpen }" @click="sidebarOpen = false"></div>
+    <div class="rf-sidebar-overlay" :class="{ 'is-active': sidebarOpen }" @click="sidebarOpen = false"></div>
 
     <button class="rf-sidebar-fab" type="button" aria-label="Toggle menu" @click="sidebarOpen = !sidebarOpen">
         <span></span><span></span><span></span>
@@ -32,7 +40,9 @@
 
     <div :class="['rf-content', { 'is-expanded': !sidebarOpen }]">
 
-        <!-- Hero -->
+        <!-- ─────────────────────────────────────────────
+             HERO
+        ───────────────────────────────────────────────── -->
         <section class="about-section section-padding" id="section_1">
             <div class="container">
                 <div class="d-flex align-items-center mb-3">
@@ -43,152 +53,192 @@
                         <p class="mb-0" style="color:#717275;">Publications et articles de l'association</p>
                     </div>
                 </div>
+                <p class="mt-3 mb-0" style="line-height:1.7;color:#555;max-width:780px;">
+                    Soutenez l'association en acquérant nos publications, médailles et fiches sur
+                    les retables et vitraux de Flandre. Les recettes alimentent notre Fonds de
+                    restauration.
+                </p>
+                <a href="#section_commander" class="btn custom-btn mt-3">
+                    <i class="bi bi-arrow-down-circle me-2"></i>Comment commander
+                </a>
             </div>
         </section>
 
-        <!-- Produits -->
-        <section class="section-padding" style="padding-top:40px;padding-bottom:80px;">
+        <!-- ─────────────────────────────────────────────
+             PRODUITS — grille uniforme
+        ───────────────────────────────────────────────── -->
+        <section class="section-padding" style="background:#fafafa;padding-top:40px;padding-bottom:60px;">
             <div class="container">
                 <div class="row g-4">
 
                     <!-- Livre Vitraux -->
-                    <div class="col-lg-6 col-12">
-                        <div class="rf-card rf-card-article h-100">
-                            <div class="rf-card-body rf-card-body-lg">
-                                <div class="row align-items-start g-3">
-                                    <div class="col-4">
-                                        <img src="images/previous-image/boutique/couverture_livre_sur_les_vitraux.png"
-                                             class="img-fluid rounded-3 shadow-sm" alt="Couverture Lumière couleur et dévotion">
+                    <div class="col-lg-3 col-md-6 col-12">
+                        <div class="rf-product-card">
+                            <div class="rf-product-image">
+                                <img src="images/previous-image/boutique/couverture_livre_sur_les_vitraux.png"
+                                     alt="Couverture Lumière, couleur et dévotion">
+                            </div>
+                            <div class="rf-product-body">
+                                <h4>Lumière, couleur et dévotion</h4>
+                                <div class="rf-product-subtitle">Vitraux en Flandre — 2010</div>
+                                <p class="rf-product-desc">
+                                    Ouvrage largement illustré, complété par un DVD d'environ 700 verrières.
+                                    Notices sur les 62 églises du Chemin des Retables.
+                                </p>
+                                <div class="rf-product-footer">
+                                    <div class="rf-product-price">
+                                        <small>Prix</small>10&nbsp;€
                                     </div>
-                                    <div class="col-8">
-                                        <h4 class="mb-2">Lumière, couleur et dévotion</h4>
-                                        <h6 class="mb-3" style="color:#717275;">VITRAUX en FLANDRE</h6>
-                                        <p style="line-height:1.8;color:#555;">
-                                            Paru le 16 décembre 2010. Ouvrage largement illustré, complété par un DVD
-                                            d'environ 700 verrières. Les notices concernent les 62 églises du Chemin
-                                            des Retables.
-                                        </p>
-                                        <p class="mb-3">
-                                            <span class="badge rounded-pill"
-                                                  style="background:var(--primary-color);font-size:.95rem;padding:6px 14px;">
-                                                10 €
-                                            </span>
-                                        </p>
-                                        <a href="livre.html" class="btn custom-btn btn-sm">Lire la suite</a>
-                                    </div>
+                                    <a href="#section_commander" class="btn custom-btn btn-sm">
+                                        <i class="bi bi-cart3 me-1"></i>Commander
+                                    </a>
                                 </div>
                             </div>
                         </div>
                     </div>
 
                     <!-- Bible en images -->
-                    <div class="col-lg-6 col-12">
-                        <div class="rf-card rf-card-article h-100">
-                            <div class="rf-card-body rf-card-body-lg">
-                                <div class="row align-items-start g-3">
-                                    <div class="col-4">
-                                        <img src="images/previous-image/boutique/photo_livre_La_Bible_en_images.jpg"
-                                             class="img-fluid rounded-3 shadow-sm" alt="La Bible en images">
+                    <div class="col-lg-3 col-md-6 col-12">
+                        <div class="rf-product-card">
+                            <div class="rf-product-image">
+                                <img src="images/previous-image/boutique/photo_livre_La_Bible_en_images.jpg"
+                                     alt="La Bible en images">
+                            </div>
+                            <div class="rf-product-body">
+                                <h4>La Bible en images dans les Églises de Flandre</h4>
+                                <div class="rf-product-subtitle">« Clefs de lecture » — 2005</div>
+                                <p class="rf-product-desc">
+                                    Lire et comprendre l'histoire de l'Eucharistie, de la Genèse à
+                                    l'Apocalypse, écrite par les artisans sculpteurs et peintres.
+                                </p>
+                                <div class="rf-product-footer">
+                                    <div class="rf-product-price">
+                                        <small>Prix</small>5&nbsp;€
                                     </div>
-                                    <div class="col-8">
-                                        <h4 class="mb-2">La Bible en images dans les Églises de Flandre</h4>
-                                        <h6 class="mb-3" style="color:#717275;">« Clefs de lecture » — 2005</h6>
-                                        <p style="line-height:1.8;color:#555;">
-                                            Il a pour ambition de permettre de lire et comprendre l'Histoire de
-                                            l'Eucharistie de la Genèse à l'Apocalypse, écrite par les artisans
-                                            sculpteurs et artistes peintres.
-                                        </p>
-                                        <p class="mb-3">
-                                            <span class="badge rounded-pill"
-                                                  style="background:var(--primary-color);font-size:.95rem;padding:6px 14px;">
-                                                5 €
-                                            </span>
-                                        </p>
-                                    </div>
+                                    <a href="#section_commander" class="btn custom-btn btn-sm">
+                                        <i class="bi bi-cart3 me-1"></i>Commander
+                                    </a>
                                 </div>
                             </div>
                         </div>
                     </div>
 
                     <!-- Pochette retables -->
-                    <div class="col-lg-6 col-12">
-                        <div class="rf-card rf-card-article h-100">
-                            <div class="rf-card-body rf-card-body-lg">
-                                <div class="row align-items-start g-3">
-                                    <div class="col-4">
-                                        <img src="images/previous-image/boutique/photo_fiches_retables_illustres.jpg"
-                                             class="img-fluid rounded-3 shadow-sm mb-2" alt="Fiches retables illustrés">
-                                        <img src="images/previous-image/boutique/photo_du_CD_interactif_des_retables.jpg"
-                                             class="img-fluid rounded-3 shadow-sm" alt="CD interactif">
+                    <div class="col-lg-3 col-md-6 col-12">
+                        <div class="rf-product-card">
+                            <div class="rf-product-image">
+                                <img src="images/previous-image/boutique/photo_fiches_retables_illustres.jpg"
+                                     alt="Fiches retables illustrées">
+                            </div>
+                            <div class="rf-product-body">
+                                <h4>Pochette des retables restaurés</h4>
+                                <div class="rf-product-subtitle">1969 → 2016</div>
+                                <p class="rf-product-desc">
+                                    Comprend les fiches retables illustrées et détaillées, plus un
+                                    CD interactif avec détails et illustration musicale.
+                                </p>
+                                <div class="rf-product-footer">
+                                    <div class="rf-product-price">
+                                        <small>Fiches + CD</small>15&nbsp;€
                                     </div>
-                                    <div class="col-8">
-                                        <h4 class="mb-2">Pochette des retables restaurés de 1969 à 2016</h4>
-                                        <p style="line-height:1.8;color:#555;">
-                                            Comprend&nbsp;:<br>
-                                            • Fiches retables illustrées et détaillées<br>
-                                            • CD interactif des retables restaurés avec détails et illustration musicale
-                                        </p>
-                                        <p class="mb-3">
-                                            <span class="badge rounded-pill"
-                                                  style="background:var(--primary-color);font-size:.95rem;padding:6px 14px;">
-                                                Fiches + CD : 15 €
-                                            </span>
-                                        </p>
-                                    </div>
+                                    <a href="#section_commander" class="btn custom-btn btn-sm">
+                                        <i class="bi bi-cart3 me-1"></i>Commander
+                                    </a>
                                 </div>
                             </div>
                         </div>
                     </div>
 
                     <!-- Médaille Gadenne -->
-                    <div class="col-lg-6 col-12">
-                        <div class="rf-card rf-card-article h-100">
-                            <div class="rf-card-body rf-card-body-lg">
-                                <div class="row align-items-start g-3">
-                                    <div class="col-4">
-                                        <img src="images/previous-image/boutique/photo_de_la_medaille_de_gadenne.jpg"
-                                             class="img-fluid rounded-3 shadow-sm" alt="Médaille Charles Gadenne">
+                    <div class="col-lg-3 col-md-6 col-12">
+                        <div class="rf-product-card">
+                            <div class="rf-product-image">
+                                <img src="images/previous-image/boutique/photo_de_la_medaille_de_gadenne.jpg"
+                                     alt="Médaille en bronze de Charles Gadenne">
+                            </div>
+                            <div class="rf-product-body">
+                                <h4>Médaille en bronze</h4>
+                                <div class="rf-product-subtitle">Charles GADENNE — artiste gravelinois</div>
+                                <p class="rf-product-desc">
+                                    Dimensions 9 × 15 cm — poids 920&nbsp;g.
+                                    Pièce d'orfèvrerie de l'artiste Charles Gadenne.
+                                </p>
+                                <div class="rf-product-footer">
+                                    <div class="rf-product-price">
+                                        <small>Prix</small>10&nbsp;€
                                     </div>
-                                    <div class="col-8">
-                                        <h4 class="mb-2">Médaille en bronze</h4>
-                                        <h6 class="mb-3" style="color:#717275;">Charles GADENNE — artiste gravelinois</h6>
-                                        <p style="line-height:1.8;color:#555;">
-                                            Dimensions 9 × 15 cm — poids 920&nbsp;g
-                                        </p>
-                                        <p class="mb-3">
-                                            <span class="badge rounded-pill"
-                                                  style="background:var(--primary-color);font-size:.95rem;padding:6px 14px;">
-                                                10 €
-                                            </span>
-                                        </p>
-                                    </div>
+                                    <a href="#section_commander" class="btn custom-btn btn-sm">
+                                        <i class="bi bi-cart3 me-1"></i>Commander
+                                    </a>
                                 </div>
                             </div>
                         </div>
                     </div>
 
                 </div>
+            </div>
+        </section>
 
-                <!-- Commande -->
-                <div class="mt-5 p-4 rounded-4 shadow-sm" style="background:#f8f9fa;">
-                    <h3 class="mb-3">Comment commander ?</h3>
-                    <p style="color:#555;line-height:1.8;">
-                        Imprimez le bon de commande et adressez-le à&nbsp;:<br>
-                        <strong>Association Retables de Flandre</strong><br>
-                        B.P. 70002 — 59470 Wormhout
-                    </p>
-                    <p style="color:#555;">
-                        <i class="bi bi-telephone me-2"></i>
-                        <a href="tel:0627712538" style="color:inherit;">06 27 71 25 38</a><br>
-                        <i class="bi bi-envelope me-2"></i>
-                        <a href="mailto:retables@orange.fr" style="color:inherit;">retables@orange.fr</a>
-                    </p>
-                    <a href="images/previous-image/bon_de_commande_site_web.pdf" target="_blank"
-                       class="btn custom-btn mt-2">
-                        <i class="bi bi-file-pdf me-2"></i>Télécharger le bon de commande
-                    </a>
+        <!-- ─────────────────────────────────────────────
+             COMMENT COMMANDER — étapes
+        ───────────────────────────────────────────────── -->
+        <section class="section-padding" style="padding-top:40px;padding-bottom:60px;" id="section_commander">
+            <div class="container">
+                <div class="rf-order-block">
+                    <h3 class="mb-2"><i class="bi bi-cart-check me-2" style="color:var(--primary-color);"></i>Comment commander ?</h3>
+                    <p class="text-muted mb-0">Trois étapes pour passer commande.</p>
+
+                    <div class="rf-order-steps">
+                        <div class="rf-order-step">
+                            <div class="rf-order-step-num">1</div>
+                            <div class="rf-order-step-body">
+                                <strong>Téléchargez le bon</strong>
+                                <p>Récupérez et imprimez le bon de commande au format PDF.</p>
+                            </div>
+                        </div>
+                        <div class="rf-order-step">
+                            <div class="rf-order-step-num">2</div>
+                            <div class="rf-order-step-body">
+                                <strong>Complétez et signez</strong>
+                                <p>Remplissez vos coordonnées, sélectionnez les articles, joignez votre règlement.</p>
+                            </div>
+                        </div>
+                        <div class="rf-order-step">
+                            <div class="rf-order-step-num">3</div>
+                            <div class="rf-order-step-body">
+                                <strong>Envoyez par courrier</strong>
+                                <p>Adressez le tout à l'association à l'adresse ci-dessous.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row g-4 mt-2">
+                        <div class="col-lg-6 col-12">
+                            <h6 class="mb-2"><i class="bi bi-envelope-paper me-2" style="color:var(--primary-color);"></i>Adresse postale</h6>
+                            <p class="mb-0" style="line-height:1.7;color:#555;">
+                                <strong>Association Retables de Flandre</strong><br>
+                                B.P. 70002<br>
+                                59470 Wormhout
+                            </p>
+                        </div>
+                        <div class="col-lg-6 col-12">
+                            <h6 class="mb-2"><i class="bi bi-telephone me-2" style="color:var(--primary-color);"></i>Une question ?</h6>
+                            <p class="mb-0" style="line-height:1.7;color:#555;">
+                                <i class="bi bi-telephone me-1"></i>
+                                <a href="tel:0627712538" style="color:inherit;">06 27 71 25 38</a><br>
+                                <i class="bi bi-envelope me-1"></i>
+                                <a href="mailto:retables@orange.fr" style="color:inherit;">retables@orange.fr</a>
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="text-center mt-4">
+                        <a href="images/previous-image/bon_de_commande_site_web.pdf" target="_blank"
+                           class="btn custom-btn btn-lg">
+                            <i class="bi bi-file-pdf me-2"></i>Télécharger le bon de commande
+                        </a>
+                    </div>
                 </div>
-
             </div>
         </section>
 
@@ -197,8 +247,8 @@
 
     </div>
 
-        <rf-lightbox></rf-lightbox>
-    </div>
+    <rf-lightbox></rf-lightbox>
+</div>
 </main>
 
 <script src="js/vue.global.prod.js"></script>
@@ -210,4 +260,3 @@
 <script src="js/vue-app.js"></script>
 </body>
 </html>
-

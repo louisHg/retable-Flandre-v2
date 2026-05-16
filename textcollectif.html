@@ -5,6 +5,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Texte collectif — Qu'est-ce qu'un retable ? - RETABLES de FLANDRE</title>
     <link rel="icon" type="image/jpg" href="images/previous-image/logo.jpg">
+
+    <!-- SEO & partages sociaux -->
+    <meta name="description" content="Essai en 4 temps sur les retables de Flandre : matériaux (faux marbre, polychromie), structure architecturale, évolution historique (Contre-Réforme) et emplacement dans l'église-halle.">
+    <meta name="theme-color" content="#81b29a">
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="Texte collectif sur les retables — RETABLES de FLANDRE">
+    <meta property="og:description" content="Comprendre les retables flamands : matériaux, structure, évolution, emplacement.">
+    <meta property="og:image" content="images/previous-image/schemadunretable.jpg">
+    <meta name="twitter:card" content="summary_large_image">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,700;1,400&display=swap" rel="stylesheet">
@@ -23,8 +32,7 @@
 
     <rf-sidebar :is-open="sidebarOpen" current-page="retable" @close="sidebarOpen = false"></rf-sidebar>
 
-        <!-- Overlay backdrop mobile -->
-        <div class="rf-sidebar-overlay" :class="{ 'is-active': sidebarOpen }" @click="sidebarOpen = false"></div>
+    <div class="rf-sidebar-overlay" :class="{ 'is-active': sidebarOpen }" @click="sidebarOpen = false"></div>
 
     <button class="rf-sidebar-fab" type="button" aria-label="Toggle menu" @click="sidebarOpen = !sidebarOpen">
         <span></span><span></span><span></span>
@@ -32,7 +40,9 @@
 
     <div :class="['rf-content', { 'is-expanded': !sidebarOpen }]">
 
-        <!-- Hero -->
+        <!-- ─────────────────────────────────────────────
+             HERO + nav rapide vers les 4 thèmes
+        ───────────────────────────────────────────────── -->
         <section class="about-section section-padding" id="section_1">
             <div class="container">
                 <div class="row align-items-center g-4">
@@ -42,123 +52,231 @@
                         </a>
                         <h2 class="mb-1">« Retables »</h2>
                         <h5 class="mb-3" style="color:#717275;">Texte écrit par un collectif</h5>
-                        <ul style="color:#555;line-height:2;">
-                            <li><strong>Matériaux : bois, faux marbre et polychromie</strong></li>
-                            <li><strong>Structure architecturale</strong></li>
-                            <li><strong>Évolution</strong></li>
-                            <li><strong>Emplacement dans l'édifice</strong></li>
-                        </ul>
+                        <p style="line-height:1.7;color:#555;">
+                            Un essai en quatre temps pour comprendre les retables de Flandre française :
+                            leurs matériaux, leur structure, leur histoire et leur emplacement dans nos églises.
+                        </p>
+
+                        <nav class="rf-actu-anchor-nav" aria-label="Navigation thématique" style="justify-content:flex-start;">
+                            <a href="#materiaux"><i class="bi bi-palette me-1"></i>Matériaux</a>
+                            <a href="#structure"><i class="bi bi-bricks me-1"></i>Structure</a>
+                            <a href="#evolution"><i class="bi bi-hourglass-split me-1"></i>Évolution</a>
+                            <a href="#emplacement"><i class="bi bi-pin-map me-1"></i>Emplacement</a>
+                        </nav>
                     </div>
                     <div class="col-lg-5 col-12">
                         <img src="images/previous-image/schemadunretable.jpg"
                              class="img-fluid w-100 rounded-4 shadow-sm"
                              style="height:340px;object-fit:cover;"
                              alt="Schéma d'un retable">
+                        <p class="text-center mt-2" style="font-size:.85rem;color:#717275;">
+                            Schéma type d'un retable de Flandre
+                        </p>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- Texte -->
-        <section class="section-padding" style="padding-top:60px;padding-bottom:60px;">
+        <!-- ─────────────────────────────────────────────
+             Matériaux
+        ───────────────────────────────────────────────── -->
+        <section class="section-padding" style="padding-top:40px;padding-bottom:40px;" id="materiaux">
             <div class="container">
                 <div class="row justify-content-center">
                     <div class="col-lg-9 col-12">
 
-                        <h3 class="mb-3">Matériaux : faux marbre et polychromie</h3>
+                        <div class="rf-section-heading">
+                            <div class="rf-section-heading-icon"><i class="bi bi-palette"></i></div>
+                            <h3>Matériaux : faux marbre et polychromie</h3>
+                        </div>
+
                         <p style="line-height:1.9;color:#555;">
                             L'ensemble des retables de Flandre française constitue un corpus homogène, formant à
-                            l'intérieur de l'arrondissement de Dunkerque, de la mer du Nord à la Lys, un ensemble de
-                            près de 150 œuvres réparties dans une cinquantaine d'églises. Leur cohérence vient de
-                            l'unité de leur époque de construction, les XVII° et XVIII° siècles, de leur structure
-                            architecturale et de leur matériau de construction, le bois.
-                        </p>
-                        <p style="line-height:1.9;color:#555;">
-                            Les forêts de Nieppe et de Clairmarais pouvaient fournir le chêne, dont sont faits les
-                            lambris, les confessionnaux, les chaires, les tables de communion et certains retables qui,
-                            cirés ou vernis, reçoivent éventuellement quelques rehauts de dorure. Mais là où l'on croit
-                            voir le marbre et le bronze on rencontre encore le bois, la peinture, la dorure. La
-                            structure, sans exclure parfois le recours à quelques éléments en chêne, est constituée de
-                            planches de bois résineux, matériau d'importation qui fait l'objet d'un commerce
-                            traditionnel depuis le Moyen Age entre les pays nordiques et Dunkerque.
-                        </p>
-                        <p style="line-height:1.9;color:#555;">
-                            La statuaire et le décor d'applique sont réalisés dans des bois locaux, arbres isolés ou
-                            arbres de haie, essentiellement des tilleuls, mais aussi des aulnes, des bouleaux, des
-                            peupliers, des ormes. La polychromie apporte à l'ensemble une cohérence finale. Des détails
-                            sont relevés d'or et accrochent la lumière.
+                            l'intérieur de l'arrondissement de Dunkerque, de la mer du Nord à la Lys, un ensemble
+                            cohérent par son époque, sa structure architecturale et son matériau&nbsp;: le bois.
                         </p>
 
-                        <hr class="my-4" style="border-color:#e5e5e5;">
+                        <div class="rf-pullquote">
+                            <strong>~150 œuvres</strong> réparties dans <strong>une cinquantaine d'églises</strong>,
+                            unifiées par les <strong>XVII<sup>e</sup>&nbsp;et&nbsp;XVIII<sup>e</sup>&nbsp;siècles</strong>.
+                        </div>
 
-                        <h3 class="mb-3">Structure architecturale</h3>
                         <p style="line-height:1.9;color:#555;">
-                            Un retable est un ornement dressé verticalement derrière la table d'autel, qui a pour but
-                            de soutenir et d'orienter la dévotion des fidèles à l'aide des représentations. Cette
-                            définition fixe une fonction — il ne peut y avoir de retable sans autel — et laisse la
-                            forme libre de varier suivant le temps et le lieu.
-                        </p>
-                        <p style="line-height:1.9;color:#555;">
-                            La forme la plus communément associée à l'idée de retable étant les triptyques et les
-                            polyptyques peints ou sculptés universellement répandus dans l'Occident médiéval. Toute
-                            cette production reste du domaine de l'objet d'art aisément déplaçable.
+                            Les forêts de Nieppe et de Clairmarais fournissaient le chêne, dont sont faits les
+                            lambris, les confessionnaux, les chaires, les tables de communion et certains retables
+                            qui, cirés ou vernis, reçoivent éventuellement quelques rehauts de dorure. Mais là où
+                            l'on croit voir le marbre et le bronze, on rencontre encore le bois, la peinture, la
+                            dorure. La structure, sans exclure parfois le recours à quelques éléments en chêne, est
+                            constituée de planches de bois résineux, matériau d'importation issu d'un commerce
+                            traditionnel entre les pays nordiques et Dunkerque depuis le Moyen Âge.
                         </p>
 
-                        <hr class="my-4" style="border-color:#e5e5e5;">
+                        <p style="line-height:1.9;color:#555;">
+                            La statuaire et le décor d'applique sont réalisés dans des bois locaux —
+                            essentiellement des tilleuls, mais aussi des aulnes, bouleaux, peupliers et ormes.
+                            La polychromie apporte à l'ensemble une cohérence finale, certains détails relevés
+                            d'or accrochant la lumière.
+                        </p>
 
-                        <h3 class="mb-3">Évolution</h3>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ─────────────────────────────────────────────
+             Structure architecturale
+        ───────────────────────────────────────────────── -->
+        <section class="section-padding" style="background:#fafafa;padding-top:40px;padding-bottom:40px;" id="structure">
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-lg-9 col-12">
+
+                        <div class="rf-section-heading">
+                            <div class="rf-section-heading-icon"><i class="bi bi-bricks"></i></div>
+                            <h3>Structure architecturale</h3>
+                        </div>
+
+                        <div class="rf-pullquote">
+                            Un retable est un <strong>ornement dressé verticalement derrière la table d'autel</strong>,
+                            qui a pour but de soutenir et d'orienter la dévotion des fidèles à l'aide des
+                            représentations.
+                        </div>
+
                         <p style="line-height:1.9;color:#555;">
-                            À partir de la 2ème moitié du XVI° siècle, en concordance avec l'affirmation de la
-                            Contre-Réforme catholique, apparaît une nouvelle famille de retables monumentaux, à
-                            caractère triomphal, dont la composition est inspirée d'ouvrages d'architecture. Les
-                            retables de Flandre française appartiennent à cet ensemble.
+                            Cette définition fixe une fonction — il ne peut y avoir de retable sans autel — et laisse
+                            la forme libre de varier suivant le temps et le lieu.
                         </p>
+
                         <p style="line-height:1.9;color:#555;">
-                            Les atroces guerres politico-religieuses qui ont ravagé la Flandre dans la 2ème moitié du
-                            XVI° siècle avaient provoqué la destruction ou la mise à mal d'un grand nombre d'églises.
-                            La reconstitution du patrimoine religieux intervint en deux temps : dès les années 1590,
-                            les édifices sont rebâtis ou restaurés&nbsp;; puis l'ameublement est réalisé progressivement
-                            dans la 2ème moitié du XVII° siècle.
+                            La forme la plus communément associée à l'idée de retable étant les <strong>triptyques</strong>
+                            et les <strong>polyptyques</strong> peints ou sculptés, universellement répandus dans
+                            l'Occident médiéval. Toute cette production reste du domaine de l'objet d'art aisément
+                            déplaçable.
                         </p>
+
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ─────────────────────────────────────────────
+             Évolution historique
+        ───────────────────────────────────────────────── -->
+        <section class="section-padding" style="padding-top:40px;padding-bottom:40px;" id="evolution">
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-lg-9 col-12">
+
+                        <div class="rf-section-heading">
+                            <div class="rf-section-heading-icon"><i class="bi bi-hourglass-split"></i></div>
+                            <h3>Évolution historique</h3>
+                        </div>
+
+                        <p style="line-height:1.9;color:#555;">
+                            À partir de la 2<sup>e</sup>&nbsp;moitié du XVI<sup>e</sup>&nbsp;siècle, en concordance
+                            avec l'affirmation de la <strong>Contre-Réforme catholique</strong>, apparaît une nouvelle
+                            famille de retables monumentaux, à caractère triomphal, dont la composition est inspirée
+                            d'ouvrages d'architecture. Les retables de Flandre française appartiennent à cet ensemble.
+                        </p>
+
+                        <p style="line-height:1.9;color:#555;">
+                            Les atroces guerres politico-religieuses qui ont ravagé la Flandre dans la
+                            2<sup>e</sup>&nbsp;moitié du XVI<sup>e</sup>&nbsp;siècle avaient provoqué la destruction
+                            ou la mise à mal d'un grand nombre d'églises. La reconstitution du patrimoine religieux
+                            intervint en deux temps :
+                        </p>
+
+                        <ul style="line-height:1.9;color:#555;">
+                            <li>Dès <strong>les années 1590</strong> : les édifices sont rebâtis ou restaurés.</li>
+                            <li>Puis dans la <strong>2<sup>e</sup>&nbsp;moitié du XVII<sup>e</sup>&nbsp;siècle</strong> :
+                                l'ameublement est réalisé progressivement.</li>
+                        </ul>
+
+                        <div class="rf-pullquote">
+                            L'art baroque est le <strong>dernier art globalisant</strong> pour l'expression de la
+                            foi chrétienne — l'architecture des retables en est le miroir.
+                        </div>
+
                         <p style="line-height:1.9;color:#555;">
                             Les retables baroques flamands se sont élevés après la période des incertitudes et des
-                            controverses au sein d'une stabilité et à cause d'elle. L'art baroque est le dernier art
-                            globalisant pour l'expression de la foi chrétienne. L'architecture des retables inspirée
-                            directement de la Contre-Réforme est le miroir d'un système que l'on sent, à l'époque,
-                            comme complet et définitif.
+                            controverses, au sein d'une stabilité et à cause d'elle. L'architecture des retables,
+                            inspirée directement de la Contre-Réforme, est le miroir d'un système que l'on sent, à
+                            l'époque, comme complet et définitif.
                         </p>
 
-                        <hr class="my-4" style="border-color:#e5e5e5;">
+                    </div>
+                </div>
+            </div>
+        </section>
 
-                        <h3 class="mb-3">Emplacement dans l'église</h3>
+        <!-- ─────────────────────────────────────────────
+             Emplacement
+        ───────────────────────────────────────────────── -->
+        <section class="section-padding" style="background:#fafafa;padding-top:40px;padding-bottom:40px;" id="emplacement">
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-lg-9 col-12">
+
+                        <div class="rf-section-heading">
+                            <div class="rf-section-heading-icon"><i class="bi bi-pin-map"></i></div>
+                            <h3>Emplacement dans l'église</h3>
+                        </div>
+
                         <p style="line-height:1.9;color:#555;">
-                            L'emplacement des autels-retables est évidemment fonction du plan du bâtiment. Le plan le
-                            plus fréquent, celui de l'église-halle, se caractérise par l'existence de trois vaisseaux
-                            de hauteur et de largeur sensiblement égales, sans véritable transept ni chapelles
-                            latérales ou absidiales.
-                        </p>
-                        <p style="line-height:1.9;color:#555;">
-                            Les trois absides accueillent chacune un autel, maître-autel au centre, autels secondaires
-                            de part et d'autre, accompagnés de leur retable. L'église flamande réserve donc au fidèle
-                            ou au visiteur qui remonte l'allée centrale la vision simultanée de ces trois grands
-                            retables. Cette scénographie est encore plus frappante lorsque les deux retables latéraux
-                            fonctionnent en pendants ou jouent d'effet de symétrie.
-                        </p>
-                        <p style="line-height:1.9;color:#555;">
-                            Sur l'autel est posé un tabernacle. Sa présence à cet endroit est nouvelle. Avant la
-                            Contre-Réforme les hosties étaient généralement conservées dans une armoire dans le mur ou
-                            dans une tour eucharistique. Une exposition surmonte souvent le tabernacle pouvant pivoter
-                            et dévoiler plusieurs positions : pour l'Eucharistie, pour la croix, et parfois une
-                            troisième pour les reliques.
+                            L'emplacement des autels-retables est évidemment fonction du plan du bâtiment. Le plan
+                            le plus fréquent en Flandre, celui de l'<strong>église-halle</strong>, se caractérise par
+                            l'existence de trois vaisseaux de hauteur et de largeur sensiblement égales, sans
+                            véritable transept ni chapelles latérales ou absidiales.
                         </p>
 
-                        <hr class="my-4" style="border-color:#e5e5e5;">
+                        <p style="line-height:1.9;color:#555;">
+                            Les <strong>trois absides accueillent chacune un autel</strong>&nbsp;: maître-autel au
+                            centre, autels secondaires de part et d'autre, accompagnés de leur retable.
+                            L'église flamande offre donc au fidèle qui remonte l'allée centrale la vision simultanée
+                            de ces trois grands retables. Cette scénographie est encore plus frappante lorsque les
+                            deux retables latéraux fonctionnent en pendants ou jouent d'un effet de symétrie.
+                        </p>
 
-                        <h5 class="mb-2">Bibliographie</h5>
-                        <ul style="color:#717275;line-height:2;font-size:.9rem;">
-                            <li>Luc DELEPLANQUE, abbé, <em>Le Catholicisme Tridentin dans les Pays Bas du Sud</em>, cours de formation de guides, Merville, septembre 2001.</li>
-                            <li>Geneviève DUPREZ, <em>Architecture et Trésors des Églises de Flandre</em>, Association Retables de Flandre, 1997.</li>
-                            <li>Philippe HERTEL, Anita OGER-LEURENT, <em>Les retables de Flandre française des XVIIe, XVIIIe et XIXe siècles</em>, in 11es Journées d'études SFIIC, Colloque international, Roubaix, 2004.</li>
+                        <p style="line-height:1.9;color:#555;">
+                            Sur l'autel est posé un <strong>tabernacle</strong>. Sa présence à cet endroit est nouvelle.
+                            Avant la Contre-Réforme, les hosties étaient généralement conservées dans une armoire
+                            dans le mur ou dans une tour eucharistique. Une exposition surmonte souvent le tabernacle,
+                            pouvant pivoter et dévoiler plusieurs positions&nbsp;: pour l'Eucharistie, pour la croix,
+                            et parfois une troisième pour les reliques.
+                        </p>
+
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ─────────────────────────────────────────────
+             Bibliographie
+        ───────────────────────────────────────────────── -->
+        <section class="section-padding" style="padding-top:40px;padding-bottom:60px;">
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-lg-9 col-12">
+
+                        <div class="rf-section-heading">
+                            <div class="rf-section-heading-icon"><i class="bi bi-journals"></i></div>
+                            <h3>Bibliographie</h3>
+                        </div>
+
+                        <ul class="rf-biblio">
+                            <li>
+                                <strong>Luc DELEPLANQUE</strong>, abbé, <em>Le Catholicisme Tridentin dans les Pays-Bas du Sud</em>,
+                                cours de formation de guides, Merville, septembre 2001.
+                            </li>
+                            <li>
+                                <strong>Geneviève DUPREZ</strong>, <em>Architecture et Trésors des Églises de Flandre</em>,
+                                Association Retables de Flandre, 1997.
+                            </li>
+                            <li>
+                                <strong>Philippe HERTEL, Anita OGER-LEURENT</strong>, <em>Les retables de Flandre
+                                française des XVII<sup>e</sup>, XVIII<sup>e</sup> et XIX<sup>e</sup> siècles</em>,
+                                in 11<sup>es</sup> Journées d'études SFIIC, Colloque international, Roubaix, 2004.
+                            </li>
                         </ul>
 
                     </div>
@@ -172,8 +290,8 @@
 
     </div>
 
-        <rf-lightbox></rf-lightbox>
-    </div>
+    <rf-lightbox></rf-lightbox>
+</div>
 </main>
 
 <script src="js/vue.global.prod.js"></script>
@@ -185,4 +303,3 @@
 <script src="js/vue-app.js"></script>
 </body>
 </html>
-
