@@ -358,26 +358,8 @@ iframe {
 }
 
 /* ─────────────────────────────────────────────────────
-   22. GALERIES (Visite, Activités) — grilles & captions
+   22. VITRAUX ARNÈKE — gutter plus serré sur mobile
 ───────────────────────────────────────────────────── */
-.rf-gallery-card img {
-    aspect-ratio: 4 / 3;
-    object-fit: cover;
-}
-
-.rf-gallery-caption {
-    font-size: .8rem;
-    padding: .4rem .5rem;
-}
-
-@media (min-width: 576px) {
-    .rf-gallery-caption {
-        font-size: .9rem;
-        padding: .5rem .75rem;
-    }
-}
-
-/* Vitraux Arnèke : carrés un peu plus généreux sur mobile */
 @media (max-width: 575px) {
     #section_arneke + .row,
     #section_arneke ~ .row {
@@ -386,20 +368,7 @@ iframe {
 }
 
 /* ─────────────────────────────────────────────────────
-   23. ACTIVITÉS — galerie événements compacte sur mobile
-───────────────────────────────────────────────────── */
-@media (max-width: 575px) {
-    #section_evenements .row.g-2 img {
-        aspect-ratio: 16 / 10;
-    }
-
-    #section_evenements h3 {
-        font-size: 1.15rem;
-    }
-}
-
-/* ─────────────────────────────────────────────────────
-   24. ÉLÉMENTS GLOBAUX — sécurités responsive
+   23. ÉLÉMENTS GLOBAUX — sécurités responsive
 ───────────────────────────────────────────────────── */
 
 /* Images jamais > leur container, jamais de débordement vertical violent */

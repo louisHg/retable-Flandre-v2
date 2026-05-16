@@ -1,25 +1,20 @@
 #!/bin/zsh
 
-# 🚀 SCRIPT DE DÉMARRAGE - Retables de Flandre v2
-# Lance le serveur local et ouvre le site
+# Lance un serveur local sur le port 8080 et ouvre l'accueil dans le navigateur.
 
-echo "🔄 Génération du bundle de composants..."
-python3 build-components.py
-
-echo ""
-echo "🚀 Démarrage du serveur local sur http://localhost:8080"
-echo "📖 Pages disponibles:"
+echo "Démarrage du serveur local sur http://localhost:8080"
+echo "Pages :"
 echo "   • http://localhost:8080/index.html"
+echo "   • http://localhost:8080/generic.html              (Qui sommes-nous ?)"
 echo "   • http://localhost:8080/qu-est-ce-qu-un-retable.html"
-echo "   • http://localhost:8080/components-demo.html"
+echo "   • http://localhost:8080/depliants-eglises.html   (Que peut-on visiter ?)"
+echo "   • http://localhost:8080/actualites.html"
+echo "   • http://localhost:8080/boutique.html"
 echo ""
-echo "⚠️  Pour arrêter le serveur: Ctrl+C"
+echo "Pour arrêter le serveur : Ctrl+C"
 echo ""
 
-# Ouvrir le navigateur
 sleep 1
 open http://localhost:8080/index.html
 
-# Lancer le serveur
 python3 -m http.server 8080
-

@@ -1,16 +1,16 @@
 // ==========================================
-// CONTENT — donnees editoriales (textes, photos, articles)
+// CONTENT — donnees editoriales (textes, photos, articles, actualites)
 // ==========================================
 //
-// Tout ce qui est susceptible d'etre modifie regulierement par un non-developpeur
-// est concentre ici (galeries, textes d'articles). Le code des composants Vue
-// reste dans js/vue-components.js et lit ces donnees via window.RFContent.
+// Source unique des donnees affichees sur le site. Modifier ici, pas dans
+// vue-components.js. Tous les composants Vue lisent depuis window.RFContent.
 //
 // Pour ajouter / modifier :
-//   - Une photo d'evenement : editer RFContent.galleries.activites.events
-//   - Une eglise : editer RFContent.galleries.eglises.eglises
-//   - Un retable du carrousel : editer RFContent.galleries.retables
-//   - Le texte d'un article : editer RFContent.articles.hertel ou .oger
+//   - Une actualite (feed + cloche)   : editer RFContent.actualites
+//   - Une eglise a visiter             : editer RFContent.eglisesVisite
+//   - Un retable du carrousel d'accueil: editer RFContent.galleries.retables
+//   - Un vitrail d'Arneke              : editer RFContent.galleries.eglises.arneke
+//   - Le texte d'un article            : editer RFContent.articles.hertel/.oger
 //
 // ==========================================
 
@@ -148,7 +148,7 @@
           heading: 'Retable sud' }
     ];
 
-    // ===== GALERIE VISITE DES EGLISES =====
+    // ===== VITRAUX D'ARNEKE (carrousel sur la page 'Que peut-on visiter ?') =====
     const arnekePhotos = [];
     for (let i = 2; i <= 28; i++) {
         arnekePhotos.push({
@@ -161,110 +161,7 @@
         src: 'images/previous-image/boutique/arneke_eglise_saint_artin_baie_pape_pie_vremerciant_la_vierge_du_rosaire.jpg'
     });
 
-    const eglises = {
-        document: {
-            label: 'Programme de visites des églises 2025',
-            href: 'images/2025/visite-des-eglises-corrige2025.pdf'
-        },
-        eglises: [
-            { name: 'Bollezeele', src: 'images/2025/Bollezeele.png' },
-            { name: 'Borre', src: 'images/2025/Borre.jpeg' },
-            { name: 'Cassel', src: 'images/2025/Cassel.jpeg' },
-            { name: 'Herzeele', src: 'images/2025/Herzeele.jpeg' },
-            { name: 'Killem', src: 'images/2025/Killem.png' },
-            { name: 'Steenvoorde', src: 'images/2025/STEENVOORDE.jpeg' },
-            { name: 'Wulverdinghe', src: 'images/2025/Wulverdinghe.jpeg' }
-        ],
-        hondschoote: [
-            { name: 'Hondschoote (1)', src: 'images/2025/Hondschoote-Oudezeele/Hondschoote1.png' },
-            { name: 'Hondschoote (2)', src: 'images/2025/Hondschoote-Oudezeele/Hondschoote2.png' },
-            { name: 'Oudezeele (1)', src: 'images/2025/Hondschoote-Oudezeele/Oudezeele1.png' },
-            { name: 'Oudezeele (2)', src: 'images/2025/Hondschoote-Oudezeele/Oudezeele2.png' }
-        ],
-        arneke: arnekePhotos
-    };
-
-    // ===== GALERIE EVENEMENTS =====
-    const activites = {
-        documents: [
-            { label: 'Invitation AG 2026', href: 'images/2026/INVITATION-AG-2026.pdf' },
-            { label: "Rapport Moral et d'activité 2024", href: "images/2025/Rapport Moral et d'activité  2024 pour AG.pdf" }
-        ],
-        events: [
-            {
-                id: 'ag-looberghe-2026',
-                title: 'AG Looberghe',
-                subtitle: '2026',
-                docs: [
-                    { label: 'Compte-rendu AG Looberghe', href: 'images/2026/Looberghe/CR-AG2026Loob.pdf' }
-                ],
-                photos: [
-                    { src: 'images/2026/Looberghe/loob1.JPG', alt: 'Looberghe — vue 1' },
-                    { src: 'images/2026/Looberghe/loob2.JPG', alt: 'Looberghe — vue 2' },
-                    { src: 'images/2026/Looberghe/loob3.JPG', alt: 'Looberghe — vue 3' },
-                    { src: 'images/2026/Looberghe/loob4.JPG', alt: 'Looberghe — vue 4' }
-                ]
-            },
-            {
-                id: 'reunion-guides-2026',
-                title: 'Réunion des guides',
-                subtitle: '2026',
-                docs: [],
-                photos: [
-                    { src: 'images/2026/photos-reunion-des-guides.jpeg', alt: 'Réunion des guides' }
-                ]
-            },
-            {
-                id: 'travaux-retables-2025',
-                title: 'Travaux retables de Flandre',
-                subtitle: '5 novembre 2025',
-                docs: [],
-                photos: [
-                    { src: 'images/2025/retablesdeflandre/PXL_20251105_120941092.jpeg', alt: 'Travaux retables — vue 1' },
-                    { src: 'images/2025/retablesdeflandre/PXL_20251105_134914154.jpeg', alt: 'Travaux retables — vue 2' }
-                ]
-            },
-            {
-                id: 'visite-douai-2025',
-                title: 'Visite de Douai',
-                subtitle: '2025',
-                docs: [
-                    { label: 'Article visite Douai', href: 'images/2025/Douai/2025 article Douai.pdf' }
-                ],
-                photos: [
-                    { src: 'images/2025/Douai/DSC_0178.JPG', alt: 'Douai' },
-                    { src: 'images/2025/Douai/DSC_0186.JPG', alt: 'Douai' },
-                    { src: 'images/2025/Douai/DSC_0203.JPG', alt: 'Douai' },
-                    { src: 'images/2025/Douai/DSC_0207.JPG', alt: 'Douai' },
-                    { src: 'images/2025/Douai/DSC_0257.JPG', alt: 'Douai' },
-                    { src: 'images/2025/Douai/DSC_0269.JPG', alt: 'Douai' }
-                ]
-            },
-            {
-                id: 'ag-boeschepe-2025',
-                title: 'AG Boeschèpe',
-                subtitle: '29 mars 2025',
-                docs: [
-                    { label: 'Compte-rendu AG 2025', href: 'images/2025/Boeschepe/CR.AG 2025 - Boeschepe.pdf' }
-                ],
-                photos: [
-                    { src: 'images/2025/Boeschepe/AG Boeschèpe.JPG', alt: 'AG Boeschèpe' },
-                    { src: 'images/2025/Boeschepe/photo de groupe à Boeschèpe.JPG', alt: 'Photo de groupe' },
-                    { src: 'images/2025/Boeschepe/visite guidée par Réginald Pasquier.JPG', alt: 'Visite guidée par Réginald Pasquier' },
-                    { src: "images/2025/Boeschepe/visite de l'église.JPG", alt: "Visite de l'église" },
-                    { src: 'images/2025/Boeschepe/église de Boeschèpe 1.JPG', alt: 'Église de Boeschèpe' },
-                    { src: 'images/2025/Boeschepe/église de Boeschèpe 2.JPG', alt: 'Église de Boeschèpe' },
-                    { src: 'images/2025/Boeschepe/église de Boeschèpe 3.JPG', alt: 'Église de Boeschèpe' },
-                    { src: 'images/2025/Boeschepe/église de Boeschèpe 4.JPG', alt: 'Église de Boeschèpe' },
-                    { src: 'images/2025/Boeschepe/vitrail église de Boeschèpe.JPG', alt: 'Vitrail' }
-                ]
-            }
-        ],
-        isolatedPhotos: [
-            { src: 'images/2025/Volckerinckove.JPG', name: 'Volckerinckhove' },
-            { src: 'images/2026/eglise-Oudezeele.JPG', name: "Église d'Oudezeele" }
-        ]
-    };
+    const eglises = { arneke: arnekePhotos };
 
     // ===== ARTICLES (HTML stocke comme template) =====
     const articleHertel = `
@@ -576,15 +473,14 @@
     // ===== EXPORT =====
     window.RFContent = {
         galleries: {
-            retables: retables,
-            eglises: eglises,
-            activites: activites
+            retables: retables,   // carrousel d'accueil
+            eglises: eglises      // contient juste { arneke: [...] }
         },
         articles: {
             hertel: articleHertel,
             oger: articleOger
         },
-        actualites: actualites,
-        eglisesVisite: eglisesVisite
+        actualites: actualites,    // feed unifié + source de la cloche
+        eglisesVisite: eglisesVisite  // 37 fiches églises (page 'Que peut-on visiter ?')
     };
 })();

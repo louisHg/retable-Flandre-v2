@@ -2,38 +2,36 @@
 // COMPOSANTS VUE 3 — RETABLES DE FLANDRE
 // ==========================================
 //
-// ORGANISATION DU FICHIER
+// Organisation du fichier (composants exportés sur window.RFComponents).
+// Numéros de ligne approximatifs, à mettre à jour à la main si besoin.
 //
 //   Layout / navigation
-//     rf-sidebar              ligne  11   sidebar gauche + cloche nouveautés
-//     rf-footer               ligne 410   pied de page
+//     rf-sidebar              sidebar gauche (nav + brand + footer social)
+//     rf-footer               pied de page du site
 //
-//   Page d'accueil
-//     rf-hero-home            ligne 143   hero accueil
-//     rf-gallery-carousel     ligne 464   carrousel retables (data: RFContent.galleries.retables)
-//     rf-newsletter-cta       ligne 263   CTA newsletter
+//   Hero / présentation
+//     rf-hero-home            hero accueil
+//     rf-hero-retable         hero "Qu'est-ce qu'un retable" + schéma
+//     rf-texte-collectif      texte collectif (préambule)
 //
-//   Page "Qu'est-ce qu'un retable"
-//     rf-hero-retable         ligne 183   hero + schéma
-//     rf-texte-collectif      ligne 227   texte collectif
-//
-//   Pages activités / visite / dépliants
-//     rf-gallery-activites    ligne 603   galerie événements (data: RFContent.galleries.activites)
-//     rf-gallery-eglises      ligne 666   galerie églises    (data: RFContent.galleries.eglises)
+//   Galeries / feeds
+//     rf-gallery-carousel     carrousel retables d'accueil      (data: RFContent.galleries.retables)
+//     rf-eglises-grid         grille des 37 fiches églises      (data: RFContent.eglisesVisite)
+//     rf-gallery-arneke       carrousel vitraux d'Arnèke         (data: RFContent.galleries.eglises.arneke)
+//     rf-actu-feed            feed actualités filtrable          (data: RFContent.actualites)
 //
 //   Articles
-//     rf-article-hertel       ligne 432   article Hertel (texte: RFContent.articles.hertel)
-//     rf-article-oger         ligne 448   article Oger   (texte: RFContent.articles.oger)
+//     rf-article-hertel       article Hertel  (HTML: RFContent.articles.hertel)
+//     rf-article-oger         article Oger    (HTML: RFContent.articles.oger)
 //
 //   Transversal
-//     rf-contact              ligne 289   formulaire contact (EmailJS)
-//     rf-lightbox             ligne 732   modale d'agrandissement automatique
-//     rf-news-banner          ligne 840   bandeau "Nouveautés" (data: RFNews)
+//     rf-newsletter-cta       CTA newsletter
+//     rf-contact              formulaire contact (EmailJS)
+//     rf-lightbox             modale d'agrandissement automatique (toutes images)
+//     rf-news-banner          strip "Nouveautés" en haut de chaque page (data: window.RFNewsAPI)
 //
-// DONNÉES (textes, photos, articles)  →  js/content.js
-// NOUVEAUTÉS / cloche                 →  js/news.js
-//
-// Les numéros de ligne ci-dessus peuvent dériver. Mettre à jour à la main si besoin.
+// Données  →  js/content.js
+// Cloche / état lu-non-lu  →  js/news.js
 // ==========================================
 
 (function () {
@@ -575,72 +573,6 @@
         `
     };
 
-    // ==========================================
-    // 📅 rf-gallery-activites — Galerie événements (AG, visites, rencontres)
-    // ==========================================
-    const RFGalleryActivites = {
-        data() {
-            const a = (window.RFContent && window.RFContent.galleries && window.RFContent.galleries.activites) || {};
-            return {
-                events: a.events || [],
-                isolatedPhotos: a.isolatedPhotos || [],
-                documents: a.documents || []
-            };
-        },
-        template: `
-            <section class="section-padding" id="section_evenements" style="background: #fafafa;">
-                <div class="container">
-                    <h2 class="mb-3">Nos événements en images</h2>
-                    <p class="text-muted mb-4">Retours en photos sur les assemblées générales, visites guidées et rencontres de l'association.</p>
-
-                    <div v-if="documents.length" class="mb-5">
-                        <a v-for="doc in documents" :key="doc.href"
-                           :href="doc.href" target="_blank"
-                           class="btn btn-outline-secondary me-2 mb-2">
-                            <i class="bi bi-file-pdf me-2"></i>{{ doc.label }}
-                        </a>
-                    </div>
-
-                    <div v-for="ev in events" :key="ev.id" :id="ev.id" class="mb-5">
-                        <div class="d-flex align-items-baseline flex-wrap mb-2">
-                            <h3 class="mb-0 me-3">{{ ev.title }}</h3>
-                            <span class="text-muted">{{ ev.subtitle }}</span>
-                        </div>
-                        <div v-if="ev.docs && ev.docs.length" class="mb-3">
-                            <a v-for="doc in ev.docs" :key="doc.href"
-                               :href="doc.href" target="_blank"
-                               class="btn btn-sm btn-outline-secondary me-2 mb-2">
-                                <i class="bi bi-file-pdf me-2"></i>{{ doc.label }}
-                            </a>
-                        </div>
-                        <div class="row g-2">
-                            <div v-for="img in ev.photos" :key="img.src" class="col-lg-3 col-md-4 col-6">
-                                <img :src="img.src" :alt="img.alt" loading="lazy"
-                                     class="img-fluid rounded shadow-sm w-100"
-                                     style="aspect-ratio: 4/3; object-fit: cover;">
-                            </div>
-                        </div>
-                    </div>
-
-                    <div v-if="isolatedPhotos.length">
-                        <h3 class="mb-3">Autres lieux</h3>
-                        <div class="row g-3">
-                            <div v-for="img in isolatedPhotos" :key="img.src" class="col-lg-3 col-md-4 col-6">
-                                <figure class="rf-gallery-card m-0">
-                                    <img :src="img.src" :alt="img.name" loading="lazy" class="img-fluid">
-                                    <figcaption class="rf-gallery-caption">{{ img.name }}</figcaption>
-                                </figure>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-        `
-    };
-
-    // ==========================================
-    // 🏛️ rf-gallery-eglises — Galerie photos d'églises et vitraux
-    // ==========================================
     // ==========================================
     // ⛪ rf-eglises-grid — Grille de fiches églises avec recherche
     // ==========================================
@@ -1301,7 +1233,6 @@
         'rf-gallery-carousel': RFGalleryCarousel,
         'rf-eglises-grid': RFEglisesGrid,
         'rf-gallery-arneke': RFGalleryArneke,
-        'rf-gallery-activites': RFGalleryActivites,
         'rf-lightbox': RFLightbox,
         'rf-news-banner': RFNewsBanner,
         'rf-actu-feed': RFActuFeed
