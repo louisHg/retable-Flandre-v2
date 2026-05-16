@@ -332,132 +332,17 @@ iframe {
 }
 
 /* ─────────────────────────────────────────────────────
-   20. BANDEAU NOUVEAUTÉS (accueil) — mobile-first compact
-   Sur mobile, on cache les descriptions (cliquer = ouvrir
-   l'item) et on resserre tout pour ne pas voler le hero.
+   20. BANDEAU NOUVEAUTÉS — styles dans notifications.css
+   (strip compact 1 ligne, déjà mobile-friendly par défaut)
 ───────────────────────────────────────────────────── */
-.rf-news-banner {
-    padding: 10px 0;
-}
-
-.rf-news-banner-inner {
-    padding: 0 14px;
-}
-
-.rf-news-banner-head {
-    margin-bottom: 6px;
-}
-
-.rf-news-banner-head .bi-megaphone-fill {
-    font-size: 1rem;
-}
-
-.rf-news-banner-title {
-    font-size: .8rem;
-}
-
-.rf-news-banner-close {
-    width: 28px;
-    height: 28px;
-    font-size: .85rem;
-}
-
-.rf-news-banner-list {
-    grid-template-columns: 1fr;
-    gap: 6px;
-}
-
-.rf-news-banner-list a {
-    padding: 8px 12px;
-}
-
-.rf-news-banner-list strong {
-    font-size: .9rem;
-    margin-bottom: 1px;
-}
-
-.rf-news-banner-list .rf-news-banner-date {
-    font-size: .7rem;
-    margin-bottom: 0;
-}
-
-/* Description : cachée sur mobile, visible à partir de 576px */
-.rf-news-banner-list .rf-news-banner-desc {
-    display: none;
-}
-
-@media (min-width: 576px) {
-    .rf-news-banner {
-        padding: 14px 0;
-    }
-
-    .rf-news-banner-head {
-        margin-bottom: 8px;
-    }
-
-    .rf-news-banner-head .bi-megaphone-fill {
-        font-size: 1.3rem;
-    }
-
-    .rf-news-banner-title {
-        font-size: .95rem;
-    }
-
-    .rf-news-banner-close {
-        width: 32px;
-        height: 32px;
-        font-size: 1rem;
-    }
-
-    .rf-news-banner-list {
-        grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-        gap: 10px;
-    }
-
-    .rf-news-banner-list a {
-        padding: 10px 14px;
-    }
-
-    .rf-news-banner-list strong {
-        font-size: .95rem;
-        margin-bottom: 2px;
-    }
-
-    .rf-news-banner-list .rf-news-banner-date {
-        font-size: .75rem;
-        margin-bottom: 4px;
-    }
-
-    .rf-news-banner-list .rf-news-banner-desc {
-        display: block;
-        font-size: .85rem;
-    }
-}
-
-@media (min-width: 768px) {
-    .rf-news-banner {
-        padding: 22px 0;
-    }
-
-    .rf-news-banner-inner {
-        padding: 0 20px;
-    }
-}
 
 /* ─────────────────────────────────────────────────────
-   21. SIDEBAR — cloche, panneau, scroll de la nav
+   21. SIDEBAR — scroll de la nav si trop d'items
 ───────────────────────────────────────────────────── */
 .rf-sidebar-nav {
     overflow-y: auto;
-    /* Laisse de la place au brand + cloche + footer */
-    max-height: calc(100vh - 360px);
-    /* Scrollbar discrète */
+    max-height: calc(100vh - 240px);
     scrollbar-width: thin;
-}
-
-.rf-news-panel .rf-notification-list {
-    max-height: 45vh;
-    overflow-y: auto;
 }
 
 /* Écrans très courts (paysage mobile) : compacter la sidebar */
@@ -467,30 +352,8 @@ iframe {
         margin-bottom: 18px;
     }
 
-    .rf-sidebar-bell {
-        padding: 8px 10px;
-        margin-bottom: 10px;
-    }
-
-    .rf-news-panel .rf-notification-list {
-        max-height: 35vh;
-    }
-
     .rf-sidebar-nav {
-        max-height: calc(100vh - 220px);
-    }
-}
-
-/* Très petits écrans : badge cloche plus compact */
-@media (max-width: 360px) {
-    .rf-sidebar-bell {
-        font-size: .9rem;
-    }
-
-    .rf-bell-badge {
-        font-size: .7rem;
-        padding: 2px 6px;
-        min-width: 20px;
+        max-height: calc(100vh - 180px);
     }
 }
 

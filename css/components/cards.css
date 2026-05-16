@@ -257,17 +257,25 @@
   box-shadow: 0 10px 24px rgba(0, 0, 0, 0.08);
 }
 
+/* Pills date + catégorie (alignées par flex, hauteur identique) */
+.rf-actu-date,
+.rf-actu-category {
+  display: inline-flex;
+  align-items: center;
+  height: 28px;
+  padding: 0 0.75rem;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  border-radius: 999px;
+  line-height: 1;
+  white-space: nowrap;
+}
+
 .rf-actu-date {
-  display: inline-block;
   background: rgba(129, 178, 154, 0.18);
   color: var(--primary-color);
-  font-weight: 700;
-  font-size: 0.8rem;
-  letter-spacing: 0.03em;
-  text-transform: uppercase;
-  padding: 0.3rem 0.75rem;
-  border-radius: 999px;
-  margin-bottom: 0.75rem;
 }
 
 .rf-actu-card h3 {
@@ -294,18 +302,10 @@
   margin-top: 1rem;
 }
 
-/* Badge catégorie sur card actu */
+/* Style spécifique du badge catégorie (plein, contrasté avec la date) */
 .rf-actu-category {
-  display: inline-block;
-  background: rgba(129, 178, 154, 0.15);
-  color: var(--primary-color);
-  font-weight: 700;
-  font-size: 0.75rem;
-  letter-spacing: 0.04em;
-  text-transform: uppercase;
-  padding: 0.25rem 0.6rem;
-  border-radius: 6px;
-  border: 1px solid rgba(129, 178, 154, 0.35);
+  background: var(--primary-color);
+  color: #fff;
 }
 
 .rf-actu-summary {
@@ -626,6 +626,94 @@
   font-size: 0.95rem;
   line-height: 1.6;
   margin: 0;
+}
+
+/* ===== Carte fiche église (grille 'Que peut-on visiter ?') ===== */
+.rf-eglise-card {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  background: #fff;
+  border-radius: 0.85rem;
+  overflow: hidden;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+  text-decoration: none;
+  color: inherit;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.rf-eglise-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 14px 28px rgba(0, 0, 0, 0.10);
+  color: inherit;
+}
+
+.rf-eglise-card-media {
+  position: relative;
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+  background: #f0f4f1;
+}
+
+.rf-eglise-card-media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.4s ease;
+}
+
+.rf-eglise-card:hover .rf-eglise-card-media img {
+  transform: scale(1.05);
+}
+
+/* Placeholder coloré quand pas d'image */
+.rf-eglise-card-placeholder {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 3rem;
+  color: rgba(255, 255, 255, 0.85);
+  text-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+}
+
+.rf-eglise-card-body {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  padding: 1rem 1.1rem 1.1rem;
+}
+
+.rf-eglise-card-body h4 {
+  font-size: 1.05rem;
+  font-weight: 700;
+  margin: 0 0 0.3rem 0;
+  color: #222;
+}
+
+.rf-eglise-card-body p {
+  flex: 1;
+  font-size: 0.85rem;
+  color: #555;
+  line-height: 1.45;
+  margin: 0 0 0.75rem 0;
+}
+
+.rf-eglise-card-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: var(--primary-color);
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  margin-top: auto;
+}
+
+.rf-eglise-card:hover .rf-eglise-card-cta {
+  color: #5a9d84;
 }
 
 /* ===== Bloc citation / chiffre clé ===== */

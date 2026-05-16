@@ -77,6 +77,14 @@
         } catch (e) { /* quota / private mode */ }
     }
 
+    // Évènement global : toutes les UI qui affichent l'état lu/non-lu peuvent
+    // se synchroniser en écoutant 'rf-news-changed' sur document.
+    function emitChange() {
+        try {
+            document.dispatchEvent(new CustomEvent('rf-news-changed'));
+        } catch (e) { /* IE etc. */ }
+    }
+
     function isRead(id) {
         return readSet().has(id);
     }
@@ -86,12 +94,14 @@
         if (!set.has(id)) {
             set.add(id);
             writeSet(set);
+            emitChange();
         }
     }
 
     function markAllAsRead() {
         const set = new Set(bellItems().map(function (it) { return it.id; }));
         writeSet(set);
+        emitChange();
     }
 
     function unreadCount() {
@@ -99,6 +109,12 @@
         return bellItems().reduce(function (acc, it) {
             return acc + (set.has(it.id) ? 0 : 1);
         }, 0);
+    }
+
+    // Items non lus, dans le pool de la cloche → source unique
+    function unreadItems() {
+        const set = readSet();
+        return bellItems().filter(function (it) { return !set.has(it.id); });
     }
 
     // ----- BANDEAU ACCUEIL (etat dismiss) -----
@@ -122,8 +138,9 @@
 
     // ----- EXPORT -----
     window.RFNewsAPI = {
-        all: function () { return bellItems(); },     // pour la cloche
-        latest: function (n) { return latest(n || MAX_BANNER); },  // pour le bandeau
+        all: function () { return bellItems(); },     // pour la cloche (avec lus + non-lus)
+        unreadItems: unreadItems,                       // pour le bandeau (non-lus uniquement)
+        latest: function (n) { return latest(n || MAX_BANNER); },  // legacy
         isRead: isRead,
         markAsRead: markAsRead,
         markAllAsRead: markAllAsRead,

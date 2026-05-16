@@ -43,64 +43,6 @@
     text-transform: uppercase;
 }
 
-/* CLOCHE NOUVEAUTES */
-
-.rf-sidebar-bell {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    width: 100%;
-    background: rgba(242, 204, 143, .18);
-    border: 1px solid rgba(0, 0, 0, .06);
-    border-radius: 12px;
-    padding: 10px 12px;
-    margin-bottom: 14px;
-    color: var(--dark-color);
-    font-weight: 600;
-    font-size: 0.95rem;
-    cursor: pointer;
-    transition: background .2s ease;
-}
-
-.rf-sidebar-bell:hover {
-    background: rgba(242, 204, 143, .35);
-}
-
-.rf-sidebar-bell .bi-bell-fill {
-    font-size: 1.1rem;
-}
-
-.rf-bell-label {
-    flex: 1;
-    text-align: left;
-}
-
-.rf-bell-badge {
-    background: #dc3545;
-    color: #fff;
-    font-size: 0.75rem;
-    font-weight: 700;
-    border-radius: 999px;
-    padding: 2px 8px;
-    line-height: 1.2;
-    min-width: 22px;
-    text-align: center;
-}
-
-.rf-news-panel {
-    margin: -6px 0 14px;
-    padding: 8px 4px 4px;
-    background: #fff;
-    border: 1px solid rgba(0, 0, 0, .06);
-    border-radius: 12px;
-}
-
-.rf-news-actions {
-    display: flex;
-    justify-content: flex-end;
-    padding: 0 6px;
-}
-
 /* NAV */
 
 .rf-sidebar-nav {

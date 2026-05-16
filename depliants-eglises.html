@@ -7,11 +7,11 @@
     <link rel="icon" type="image/jpg" href="images/previous-image/logo.jpg">
 
     <!-- SEO & partages sociaux -->
-    <meta name="description" content="Découvrez les églises de Flandre à visiter : galerie photos + 36 dépliants paroissiaux à télécharger gratuitement, de Arnèke à Zegerscappel.">
+    <meta name="description" content="37 églises de Flandre à visiter : fiche par commune avec photo, description et dépliant paroissial PDF. Plus la galerie des vitraux d'Arnèke.">
     <meta name="theme-color" content="#81b29a">
     <meta property="og:type" content="website">
     <meta property="og:title" content="Que peut-on visiter ? — RETABLES de FLANDRE">
-    <meta property="og:description" content="Galerie photos des églises à retables + 36 dépliants paroissiaux à télécharger.">
+    <meta property="og:description" content="37 fiches d'églises à visiter avec dépliant à télécharger + galerie vitraux d'Arnèke.">
     <meta property="og:image" content="images/2025/Bollezeele.png">
     <meta name="twitter:card" content="summary_large_image">
 
@@ -41,6 +41,8 @@
 
     <div :class="['rf-content', { 'is-expanded': !sidebarOpen }]">
 
+        <rf-news-banner></rf-news-banner>
+
         <!-- ─────────────────────────────────────────────
              HERO
         ───────────────────────────────────────────────── -->
@@ -55,89 +57,27 @@
                     </div>
                 </div>
                 <p class="mt-3" style="line-height:1.7;max-width:780px;color:#555;">
-                    Une cinquantaine d'églises de Flandre française abritent des retables
-                    des XVII<sup>e</sup> et XVIII<sup>e</sup>&nbsp;siècles. Découvrez-les
-                    en images dans la galerie ci-dessous, puis téléchargez le
-                    <strong>dépliant paroissial</strong> de chaque commune avant votre visite.
+                    <strong>37 églises</strong> de Flandre française abritent des retables des
+                    XVII<sup>e</sup> et XVIII<sup>e</sup>&nbsp;siècles. Chaque fiche ci-dessous
+                    présente une église et donne accès à son <strong>dépliant paroissial PDF</strong>
+                    pour préparer votre visite. Cliquez sur une carte pour télécharger le dépliant.
                 </p>
-                <nav class="rf-actu-anchor-nav" style="justify-content:flex-start;" aria-label="Navigation rapide">
-                    <a href="#section_visite"><i class="bi bi-images me-1"></i>Galerie photos</a>
-                    <a href="#section_depliants"><i class="bi bi-file-pdf me-1"></i>Dépliants paroissiaux</a>
-                </nav>
+                <a href="images/2026/2026_visite_eglise.pdf" target="_blank"
+                   class="btn btn-outline-secondary mt-2">
+                    <i class="bi bi-calendar3 me-2"></i>Programme de visites guidées 2026
+                </a>
             </div>
         </section>
 
         <!-- ─────────────────────────────────────────────
-             GALERIE PHOTOS (composant existant)
+             Grille de fiches églises (avec recherche)
         ───────────────────────────────────────────────── -->
-        <rf-gallery-eglises></rf-gallery-eglises>
+        <rf-eglises-grid></rf-eglises-grid>
 
         <!-- ─────────────────────────────────────────────
-             DÉPLIANTS PAROISSIAUX
+             Galerie spéciale : vitraux d'Arnèke
         ───────────────────────────────────────────────── -->
-        <section class="section-padding" id="section_depliants" style="background:#fafafa;padding-top:40px;padding-bottom:60px;">
-            <div class="container">
-
-                <div class="rf-section-heading">
-                    <div class="rf-section-heading-icon"><i class="bi bi-file-pdf"></i></div>
-                    <h3>Dépliants paroissiaux</h3>
-                </div>
-                <p class="text-muted mb-4" style="max-width:780px;">
-                    36 communes du Chemin des Retables. Chaque dépliant est un guide
-                    de visite illustré, à imprimer ou consulter sur place.
-                </p>
-
-                <!-- Barre de recherche -->
-                <div class="rf-actu-search mb-4" style="max-width:500px;">
-                    <i class="bi bi-search"></i>
-                    <input type="text" id="depliantSearch"
-                           placeholder="Rechercher une commune (Wormhout, Cassel...)">
-                </div>
-                <p id="depliantCount" class="mb-3 text-muted small"></p>
-
-                <!-- Liste des dépliants -->
-                <div class="row g-2" id="depliantList">
-                    <div class="col-lg-3 col-md-4 col-6"><a href="images/2025/Depliants_des_eglises_a_retables/Arneke.pdf" target="_blank" class="btn btn-outline-secondary w-100 text-start"><i class="bi bi-file-pdf me-2"></i>Arnèke</a></div>
-                    <div class="col-lg-3 col-md-4 col-6"><a href="images/2025/Depliants_des_eglises_a_retables/Bambecque.pdf" target="_blank" class="btn btn-outline-secondary w-100 text-start"><i class="bi bi-file-pdf me-2"></i>Bambecque</a></div>
-                    <div class="col-lg-3 col-md-4 col-6"><a href="images/2025/Depliants_des_eglises_a_retables/Bavinchove.pdf" target="_blank" class="btn btn-outline-secondary w-100 text-start"><i class="bi bi-file-pdf me-2"></i>Bavinchove</a></div>
-                    <div class="col-lg-3 col-md-4 col-6"><a href="images/2025/Depliants_des_eglises_a_retables/Blaringhem.pdf" target="_blank" class="btn btn-outline-secondary w-100 text-start"><i class="bi bi-file-pdf me-2"></i>Blaringhem</a></div>
-                    <div class="col-lg-3 col-md-4 col-6"><a href="images/2025/Depliants_des_eglises_a_retables/Boeseghem.pdf" target="_blank" class="btn btn-outline-secondary w-100 text-start"><i class="bi bi-file-pdf me-2"></i>Boëseghem</a></div>
-                    <div class="col-lg-3 col-md-4 col-6"><a href="images/2025/Depliants_des_eglises_a_retables/Bollezeele.pdf" target="_blank" class="btn btn-outline-secondary w-100 text-start"><i class="bi bi-file-pdf me-2"></i>Bollezeele</a></div>
-                    <div class="col-lg-3 col-md-4 col-6"><a href="images/2025/Depliants_des_eglises_a_retables/Borre.pdf" target="_blank" class="btn btn-outline-secondary w-100 text-start"><i class="bi bi-file-pdf me-2"></i>Borre</a></div>
-                    <div class="col-lg-3 col-md-4 col-6"><a href="images/2025/Depliants_des_eglises_a_retables/Brouckerque.pdf" target="_blank" class="btn btn-outline-secondary w-100 text-start"><i class="bi bi-file-pdf me-2"></i>Brouckerque</a></div>
-                    <div class="col-lg-3 col-md-4 col-6"><a href="images/2025/Depliants_des_eglises_a_retables/Crochte.pdf" target="_blank" class="btn btn-outline-secondary w-100 text-start"><i class="bi bi-file-pdf me-2"></i>Crochte</a></div>
-                    <div class="col-lg-3 col-md-4 col-6"><a href="images/2025/Depliants_des_eglises_a_retables/Drincham.pdf" target="_blank" class="btn btn-outline-secondary w-100 text-start"><i class="bi bi-file-pdf me-2"></i>Drincham</a></div>
-                    <div class="col-lg-3 col-md-4 col-6"><a href="images/2025/Depliants_des_eglises_a_retables/Eecke.pdf" target="_blank" class="btn btn-outline-secondary w-100 text-start"><i class="bi bi-file-pdf me-2"></i>Eecke</a></div>
-                    <div class="col-lg-3 col-md-4 col-6"><a href="images/2025/Depliants_des_eglises_a_retables/Gravelines.pdf" target="_blank" class="btn btn-outline-secondary w-100 text-start"><i class="bi bi-file-pdf me-2"></i>Gravelines</a></div>
-                    <div class="col-lg-3 col-md-4 col-6"><a href="images/2025/Depliants_des_eglises_a_retables/Hazebrouck.pdf" target="_blank" class="btn btn-outline-secondary w-100 text-start"><i class="bi bi-file-pdf me-2"></i>Hazebrouck</a></div>
-                    <div class="col-lg-3 col-md-4 col-6"><a href="images/2025/Depliants_des_eglises_a_retables/Herzeele.pdf" target="_blank" class="btn btn-outline-secondary w-100 text-start"><i class="bi bi-file-pdf me-2"></i>Herzeele</a></div>
-                    <div class="col-lg-3 col-md-4 col-6"><a href="images/2025/Depliants_des_eglises_a_retables/Hondschoote.pdf" target="_blank" class="btn btn-outline-secondary w-100 text-start"><i class="bi bi-file-pdf me-2"></i>Hondschoote</a></div>
-                    <div class="col-lg-3 col-md-4 col-6"><a href="images/2025/Depliants_des_eglises_a_retables/Houtkerque.pdf" target="_blank" class="btn btn-outline-secondary w-100 text-start"><i class="bi bi-file-pdf me-2"></i>Houtkerque</a></div>
-                    <div class="col-lg-3 col-md-4 col-6"><a href="images/2025/Depliants_des_eglises_a_retables/Killem.pdf" target="_blank" class="btn btn-outline-secondary w-100 text-start"><i class="bi bi-file-pdf me-2"></i>Killem</a></div>
-                    <div class="col-lg-3 col-md-4 col-6"><a href="images/2025/Depliants_des_eglises_a_retables/Ledringhem.pdf" target="_blank" class="btn btn-outline-secondary w-100 text-start"><i class="bi bi-file-pdf me-2"></i>Ledringhem</a></div>
-                    <div class="col-lg-3 col-md-4 col-6"><a href="images/2025/Depliants_des_eglises_a_retables/Lynde.pdf" target="_blank" class="btn btn-outline-secondary w-100 text-start"><i class="bi bi-file-pdf me-2"></i>Lynde</a></div>
-                    <div class="col-lg-3 col-md-4 col-6"><a href="images/2025/Depliants_des_eglises_a_retables/Millam.pdf" target="_blank" class="btn btn-outline-secondary w-100 text-start"><i class="bi bi-file-pdf me-2"></i>Millam</a></div>
-                    <div class="col-lg-3 col-md-4 col-6"><a href="images/2025/Depliants_des_eglises_a_retables/Oudezeele.pdf" target="_blank" class="btn btn-outline-secondary w-100 text-start"><i class="bi bi-file-pdf me-2"></i>Oudezeele</a></div>
-                    <div class="col-lg-3 col-md-4 col-6"><a href="images/2025/Depliants_des_eglises_a_retables/Pitgam.pdf" target="_blank" class="btn btn-outline-secondary w-100 text-start"><i class="bi bi-file-pdf me-2"></i>Pitgam</a></div>
-                    <div class="col-lg-3 col-md-4 col-6"><a href="images/2025/Depliants_des_eglises_a_retables/Rexpoede.pdf" target="_blank" class="btn btn-outline-secondary w-100 text-start"><i class="bi bi-file-pdf me-2"></i>Rexpoëde</a></div>
-                    <div class="col-lg-3 col-md-4 col-6"><a href="images/2025/Depliants_des_eglises_a_retables/Saint Georges de l'Aa.pdf" target="_blank" class="btn btn-outline-secondary w-100 text-start"><i class="bi bi-file-pdf me-2"></i>Saint Georges de l'Aa</a></div>
-                    <div class="col-lg-3 col-md-4 col-6"><a href="images/2025/Depliants_des_eglises_a_retables/Sercus.pdf" target="_blank" class="btn btn-outline-secondary w-100 text-start"><i class="bi bi-file-pdf me-2"></i>Sercus</a></div>
-                    <div class="col-lg-3 col-md-4 col-6"><a href="images/2025/Depliants_des_eglises_a_retables/Socx.pdf" target="_blank" class="btn btn-outline-secondary w-100 text-start"><i class="bi bi-file-pdf me-2"></i>Socx</a></div>
-                    <div class="col-lg-3 col-md-4 col-6"><a href="images/2025/Depliants_des_eglises_a_retables/Steenbecque.pdf" target="_blank" class="btn btn-outline-secondary w-100 text-start"><i class="bi bi-file-pdf me-2"></i>Steenbecque</a></div>
-                    <div class="col-lg-3 col-md-4 col-6"><a href="images/2025/Depliants_des_eglises_a_retables/Steene.pdf" target="_blank" class="btn btn-outline-secondary w-100 text-start"><i class="bi bi-file-pdf me-2"></i>Steene</a></div>
-                    <div class="col-lg-3 col-md-4 col-6"><a href="images/2025/Depliants_des_eglises_a_retables/Steenvoorde.pdf" target="_blank" class="btn btn-outline-secondary w-100 text-start"><i class="bi bi-file-pdf me-2"></i>Steenvoorde</a></div>
-                    <div class="col-lg-3 col-md-4 col-6"><a href="images/2025/Depliants_des_eglises_a_retables/Volckerinckhove.pdf" target="_blank" class="btn btn-outline-secondary w-100 text-start"><i class="bi bi-file-pdf me-2"></i>Volckerinckhove</a></div>
-                    <div class="col-lg-3 col-md-4 col-6"><a href="images/2025/Depliants_des_eglises_a_retables/Warhem.pdf" target="_blank" class="btn btn-outline-secondary w-100 text-start"><i class="bi bi-file-pdf me-2"></i>Warhem</a></div>
-                    <div class="col-lg-3 col-md-4 col-6"><a href="images/2025/Depliants_des_eglises_a_retables/Wemaers-Cappel.pdf" target="_blank" class="btn btn-outline-secondary w-100 text-start"><i class="bi bi-file-pdf me-2"></i>Wemaers-Cappel</a></div>
-                    <div class="col-lg-3 col-md-4 col-6"><a href="images/2025/Depliants_des_eglises_a_retables/West-Cappel.pdf" target="_blank" class="btn btn-outline-secondary w-100 text-start"><i class="bi bi-file-pdf me-2"></i>West-Cappel</a></div>
-                    <div class="col-lg-3 col-md-4 col-6"><a href="images/2025/Depliants_des_eglises_a_retables/Winnezeele.pdf" target="_blank" class="btn btn-outline-secondary w-100 text-start"><i class="bi bi-file-pdf me-2"></i>Winnezeele</a></div>
-                    <div class="col-lg-3 col-md-4 col-6"><a href="images/2025/Depliants_des_eglises_a_retables/Wormhout.pdf" target="_blank" class="btn btn-outline-secondary w-100 text-start"><i class="bi bi-file-pdf me-2"></i>Wormhout</a></div>
-                    <div class="col-lg-3 col-md-4 col-6"><a href="images/2025/Depliants_des_eglises_a_retables/Wulverdinghe.pdf" target="_blank" class="btn btn-outline-secondary w-100 text-start"><i class="bi bi-file-pdf me-2"></i>Wulverdinghe</a></div>
-                    <div class="col-lg-3 col-md-4 col-6"><a href="images/2025/Depliants_des_eglises_a_retables/Zegerscappel.pdf" target="_blank" class="btn btn-outline-secondary w-100 text-start"><i class="bi bi-file-pdf me-2"></i>Zegerscappel</a></div>
-                </div>
-
-            </div>
-        </section>
+        <rf-gallery-arneke></rf-gallery-arneke>
 
         <rf-contact></rf-contact>
         <rf-footer></rf-footer>

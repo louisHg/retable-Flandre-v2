@@ -48,14 +48,6 @@
             currentPage: {type: String, default: ''}
         },
         emits: ['close'],
-        data() {
-            const api = window.RFNewsAPI;
-            return {
-                showNews: false,
-                notifications: api ? api.all() : [],
-                unread: api ? api.unreadCount() : 0
-            };
-        },
         methods: {
             handleNavClick() {
                 if (window.matchMedia('(max-width: 991px)').matches) {
@@ -70,39 +62,6 @@
                     window.location.href = 'index.html#section_contact';
                 }
                 this.handleNavClick();
-            },
-            toggleNews() {
-                this.showNews = !this.showNews;
-            },
-            isRead(id) {
-                return window.RFNewsAPI ? window.RFNewsAPI.isRead(id) : false;
-            },
-            refreshUnread() {
-                if (window.RFNewsAPI) this.unread = window.RFNewsAPI.unreadCount();
-            },
-            openNewsItem(item) {
-                if (window.RFNewsAPI) {
-                    window.RFNewsAPI.markAsRead(item.id);
-                    this.refreshUnread();
-                }
-                const samePage = item.page && window.location.pathname.endsWith('/' + item.page);
-                if (samePage && item.anchor) {
-                    const target = document.getElementById(item.anchor);
-                    if (target) {
-                        target.scrollIntoView({behavior: 'smooth'});
-                        this.handleNavClick();
-                        return;
-                    }
-                }
-                if (item.page) {
-                    window.location.href = item.page + (item.anchor ? '#' + item.anchor : '');
-                }
-            },
-            markAllRead() {
-                if (window.RFNewsAPI) {
-                    window.RFNewsAPI.markAllAsRead();
-                    this.refreshUnread();
-                }
             }
         },
         template: `
@@ -114,42 +73,6 @@
                         <small>de Flandre</small>
                     </span>
                 </a>
-
-                <button type="button" class="rf-sidebar-bell" @click="toggleNews"
-                        :aria-expanded="showNews" aria-controls="rfNewsPanel">
-                    <i class="bi bi-bell-fill"></i>
-                    <span class="rf-bell-label">Nouveautés</span>
-                    <span v-if="unread > 0" class="rf-bell-badge">{{ unread }}</span>
-                    <i class="bi" :class="showNews ? 'bi-chevron-up' : 'bi-chevron-down'"></i>
-                </button>
-
-                <div v-show="showNews" id="rfNewsPanel" class="rf-news-panel">
-                    <div v-if="notifications.length === 0" class="text-muted small px-2 py-2">
-                        Aucune nouveauté pour l'instant.
-                    </div>
-                    <div v-else>
-                        <div class="rf-news-actions" v-if="unread > 0">
-                            <button type="button" class="btn btn-link btn-sm" @click="markAllRead">
-                                Tout marquer comme lu
-                            </button>
-                        </div>
-                        <div class="rf-notification-list">
-                            <div v-for="item in notifications" :key="item.id"
-                                 class="rf-notification rf-notification-compact"
-                                 :class="{ 'rf-notification-unread': !isRead(item.id) }"
-                                 @click="openNewsItem(item)">
-                                <div class="rf-notification-icon">
-                                    <i class="bi bi-bell"></i>
-                                </div>
-                                <div class="rf-notification-content">
-                                    <div class="rf-notification-title">{{ item.label }}</div>
-                                    <div class="rf-notification-text">{{ item.description }}</div>
-                                    <div class="rf-notification-date">{{ item.date }}</div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
 
                 <nav class="rf-sidebar-nav">
                     <a class="nav-link" :class="{ active: currentPage === 'index' }" href="index.html" @click="handleNavClick">Accueil</a>
@@ -718,64 +641,159 @@
     // ==========================================
     // 🏛️ rf-gallery-eglises — Galerie photos d'églises et vitraux
     // ==========================================
-    const RFGalleryEglises = {
+    // ==========================================
+    // ⛪ rf-eglises-grid — Grille de fiches églises avec recherche
+    // ==========================================
+    const RFEglisesGrid = {
+        data() {
+            const list = (window.RFContent && window.RFContent.eglisesVisite) || [];
+            return {
+                items: list.slice().sort(function (a, b) {
+                    return a.name.localeCompare(b.name, 'fr');
+                }),
+                search: ''
+            };
+        },
+        computed: {
+            filtered() {
+                const q = this.normalize(this.search);
+                if (!q) return this.items;
+                const self = this;
+                return this.items.filter(function (it) {
+                    const hay = self.normalize(
+                        [it.name, it.description, (it.tags || []).join(' ')].join(' ')
+                    );
+                    return hay.indexOf(q) !== -1;
+                });
+            },
+            total() { return this.items.length; },
+            count() { return this.filtered.length; }
+        },
+        methods: {
+            normalize(s) {
+                return (s || '').toString().toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '');
+            },
+            // Hash déterministe du nom → teinte HSL pour les placeholders
+            hueForName(name) {
+                let hash = 0;
+                const s = (name || '').toString();
+                for (let i = 0; i < s.length; i++) {
+                    hash = ((hash << 5) - hash) + s.charCodeAt(i);
+                    hash |= 0;
+                }
+                return ((hash % 360) + 360) % 360;
+            },
+            placeholderStyle(name) {
+                const h = this.hueForName(name);
+                return 'background: linear-gradient(135deg, hsl(' + h + ', 45%, 58%) 0%, hsl(' + ((h + 35) % 360) + ', 50%, 48%) 100%);';
+            }
+        },
+        template: `
+            <section class="section-padding" id="section_eglises_grid" style="padding-top:30px;padding-bottom:60px;">
+                <div class="container">
+
+                    <div class="rf-actu-search mb-3" style="max-width:520px;">
+                        <i class="bi bi-search"></i>
+                        <input type="search" v-model="search"
+                               placeholder="Rechercher une église (Wormhout, vitraux, romane...)"
+                               aria-label="Rechercher une église">
+                    </div>
+
+                    <p class="text-muted small mb-4">
+                        <span v-if="count === total">{{ total }} églises à découvrir</span>
+                        <span v-else>{{ count }} résultat<span v-if="count > 1">s</span> sur {{ total }}</span>
+                    </p>
+
+                    <div v-if="count === 0" class="rf-actu-empty">
+                        <i class="bi bi-inbox"></i>
+                        <p class="mt-3 mb-0">Aucune église ne correspond à votre recherche.</p>
+                    </div>
+
+                    <div class="row g-3">
+                        <div v-for="eglise in filtered" :key="eglise.pdf"
+                             class="col-lg-3 col-md-4 col-sm-6 col-12">
+                            <a :href="eglise.pdf" target="_blank" class="rf-eglise-card">
+                                <div class="rf-eglise-card-media">
+                                    <img v-if="eglise.image" :src="eglise.image" :alt="eglise.name" loading="lazy">
+                                    <div v-else class="rf-eglise-card-placeholder"
+                                         :style="placeholderStyle(eglise.name)">
+                                        <i class="bi bi-bank"></i>
+                                    </div>
+                                </div>
+                                <div class="rf-eglise-card-body">
+                                    <h4>{{ eglise.name }}</h4>
+                                    <p v-if="eglise.description">{{ eglise.description }}</p>
+                                    <p v-else class="fst-italic" style="opacity:.6;">Église à retables (XVIIᵉ–XVIIIᵉ).</p>
+                                    <span class="rf-eglise-card-cta">
+                                        <i class="bi bi-file-pdf"></i>Dépliant
+                                    </span>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+
+                </div>
+            </section>
+        `
+    };
+
+    // ==========================================
+    // 🪟 rf-gallery-arneke — Carrousel des vitraux d'Arnèke
+    // ==========================================
+    const RFGalleryArneke = {
         data() {
             const e = (window.RFContent && window.RFContent.galleries && window.RFContent.galleries.eglises) || {};
             return {
-                document: e.document || null,
-                eglises: e.eglises || [],
-                hondschoote: e.hondschoote || [],
                 arneke: e.arneke || []
             };
         },
+        mounted() {
+            this.$nextTick(() => {
+                if (typeof bootstrap === 'undefined') return;
+                const el = this.$refs.carouselEl;
+                if (el && !bootstrap.Carousel.getInstance(el)) {
+                    new bootstrap.Carousel(el, { interval: 4000, ride: 'carousel' });
+                }
+            });
+        },
         template: `
-            <section class="section-padding" id="section_visite">
+            <section class="section-padding" id="section_arneke" style="background:#fafafa;padding-top:40px;padding-bottom:60px;">
                 <div class="container">
-                    <div class="d-flex align-items-center mb-3">
-                        <img src="images/previous-image/logo.jpg" alt="Logo"
-                             style="width: 70px; height: 70px; object-fit: cover; border-radius: 12px; margin-right: 15px;">
-                        <div>
-                            <h2 class="mb-0">Visite des églises à retables</h2>
-                            <p class="mb-0" style="color:#717275;">Quelques églises de Flandre qui abritent ce patrimoine</p>
+                    <div class="rf-section-heading">
+                        <div class="rf-section-heading-icon"><i class="bi bi-image"></i></div>
+                        <h3>Vitraux de l'église d'Arnèke</h3>
+                    </div>
+                    <p class="text-muted mb-4" style="max-width:780px;">
+                        Ensemble remarquable de vitraux de l'église Saint-Martin d'Arnèke.
+                        Faites défiler avec les flèches, cliquez pour agrandir.
+                    </p>
+
+                    <div v-if="arneke.length"
+                         id="carouselArneke" ref="carouselEl"
+                         class="carousel slide rounded-4 shadow-sm mx-auto"
+                         data-bs-ride="carousel"
+                         style="max-width:500px;background:#fff;">
+                        <div class="carousel-inner rounded-4">
+                            <div v-for="(img, idx) in arneke" :key="img.src"
+                                 :class="['carousel-item', { active: idx === 0 }]">
+                                <img :src="img.src" :alt="img.name" class="d-block w-100 rounded-4"
+                                     style="height:480px;object-fit:contain;background:#fff;">
+                                <div class="carousel-caption d-none d-md-block"
+                                     style="background:rgba(0,0,0,.55);border-radius:.5rem;padding:.4rem .9rem;bottom:1rem;left:auto;right:auto;display:inline-block;width:auto;">
+                                    <span style="font-size:.85rem;">{{ img.name }}</span>
+                                </div>
+                            </div>
                         </div>
+                        <button class="carousel-control-prev" type="button" data-bs-target="#carouselArneke" data-bs-slide="prev">
+                            <span class="carousel-control-prev-icon"></span>
+                            <span class="visually-hidden">Précédent</span>
+                        </button>
+                        <button class="carousel-control-next" type="button" data-bs-target="#carouselArneke" data-bs-slide="next">
+                            <span class="carousel-control-next-icon"></span>
+                            <span class="visually-hidden">Suivant</span>
+                        </button>
                     </div>
 
-                    <a v-if="document" :href="document.href" target="_blank"
-                       class="btn btn-outline-secondary mb-4">
-                        <i class="bi bi-file-pdf me-2"></i>{{ document.label }}
-                    </a>
-
-                    <h3 class="mt-4 mb-3" id="section_eglises">Églises à retables</h3>
-                    <div class="row g-3 mb-5">
-                        <div v-for="img in eglises" :key="img.src" class="col-lg-3 col-md-4 col-6">
-                            <figure class="rf-gallery-card m-0">
-                                <img :src="img.src" :alt="img.name" loading="lazy"
-                                     class="img-fluid rounded shadow-sm w-100">
-                                <figcaption class="rf-gallery-caption">{{ img.name }}</figcaption>
-                            </figure>
-                        </div>
-                    </div>
-
-                    <h3 class="mt-5 mb-3" id="section_hondschoote">Hondschoote – Oudezeele</h3>
-                    <div class="row g-3 mb-5">
-                        <div v-for="img in hondschoote" :key="img.src" class="col-lg-3 col-md-4 col-6">
-                            <figure class="rf-gallery-card m-0">
-                                <img :src="img.src" :alt="img.name" loading="lazy"
-                                     class="img-fluid rounded shadow-sm w-100">
-                                <figcaption class="rf-gallery-caption">{{ img.name }}</figcaption>
-                            </figure>
-                        </div>
-                    </div>
-
-                    <h3 class="mt-5 mb-3" id="section_arneke">Vitraux de l'église d'Arnèke</h3>
-                    <p class="text-muted mb-3">Ensemble remarquable de vitraux de l'église Saint-Martin d'Arnèke.</p>
-                    <div class="row g-2">
-                        <div v-for="img in arneke" :key="img.src" class="col-lg-2 col-md-3 col-4">
-                            <img :src="img.src" :alt="img.name" loading="lazy"
-                                 class="img-fluid rounded shadow-sm w-100"
-                                 style="aspect-ratio: 1; object-fit: cover;">
-                        </div>
-                    </div>
                 </div>
             </section>
         `
@@ -1158,28 +1176,82 @@
     };
 
     // ==========================================
-    // 🔔 rf-news-banner — bandeau de nouveautés (page d'accueil)
+    // 🔔 rf-news-banner — strip 1 ligne avec auto-rotation
     // ==========================================
     const RFNewsBanner = {
         data() {
             const api = window.RFNewsAPI;
             return {
                 visible: api ? api.shouldShowBanner() : false,
-                items: api ? api.latest(3) : []
+                items: api ? api.unreadItems() : [],
+                currentIndex: 0,
+                _interval: null,
+                _onChange: null
             };
         },
+        computed: {
+            currentItem() { return this.items[this.currentIndex] || null; },
+            multiple() { return this.items.length > 1; }
+        },
+        mounted() {
+            this.startRotation();
+            // Sync avec la cloche : si l'utilisateur lit une notif via la cloche,
+            // le bandeau se met à jour automatiquement (et vice-versa).
+            this._onChange = () => this.refresh();
+            document.addEventListener('rf-news-changed', this._onChange);
+        },
+        beforeUnmount() {
+            this.stopRotation();
+            if (this._onChange) {
+                document.removeEventListener('rf-news-changed', this._onChange);
+            }
+        },
         methods: {
+            refresh() {
+                if (!window.RFNewsAPI) return;
+                this.items = window.RFNewsAPI.unreadItems();
+                if (this.currentIndex >= this.items.length) this.currentIndex = 0;
+                if (this.items.length === 0) {
+                    this.visible = false;
+                    this.stopRotation();
+                } else if (this.items.length === 1) {
+                    this.stopRotation();
+                }
+            },
+            startRotation() {
+                if (this.multiple && !this._interval) {
+                    this._interval = setInterval(() => {
+                        this.currentIndex = (this.currentIndex + 1) % this.items.length;
+                    }, 5000);
+                }
+            },
+            stopRotation() {
+                if (this._interval) {
+                    clearInterval(this._interval);
+                    this._interval = null;
+                }
+            },
+            goTo(idx) {
+                this.currentIndex = idx;
+                this.stopRotation();
+                this.startRotation();
+            },
             dismiss() {
                 if (window.RFNewsAPI) window.RFNewsAPI.dismissBanner();
                 this.visible = false;
             },
-            openItem(item) {
+            openCurrent() {
+                const item = this.currentItem;
+                if (!item) return;
+                // 1) Marque comme lu immédiatement (déclenche aussi rf-news-changed
+                //    pour synchroniser la cloche)
                 if (window.RFNewsAPI) window.RFNewsAPI.markAsRead(item.id);
+                // 2) Navigation
                 const samePage = item.page && window.location.pathname.endsWith('/' + item.page);
                 if (samePage && item.anchor) {
                     const target = document.getElementById(item.anchor);
                     if (target) {
-                        target.scrollIntoView({behavior: 'smooth'});
+                        target.scrollIntoView({ behavior: 'smooth' });
                         return;
                     }
                 }
@@ -1189,22 +1261,25 @@
             }
         },
         template: `
-            <div v-if="visible && items.length > 0" class="rf-news-banner" role="region" aria-label="Nouveautés">
+            <div v-if="visible && currentItem" class="rf-news-banner" role="region" aria-label="Nouveautés"
+                 @mouseenter="stopRotation" @mouseleave="startRotation">
                 <div class="rf-news-banner-inner">
-                    <div class="rf-news-banner-head">
-                        <i class="bi bi-megaphone-fill"></i>
-                        <span class="rf-news-banner-title">Nouveautés</span>
-                        <button type="button" class="rf-news-banner-close" @click="dismiss" aria-label="Fermer">✕</button>
-                    </div>
-                    <ul class="rf-news-banner-list">
-                        <li v-for="item in items" :key="item.id">
-                            <a href="#" @click.prevent="openItem(item)">
-                                <strong>{{ item.label }}</strong>
-                                <span class="rf-news-banner-date">{{ item.date }}</span>
-                                <span class="rf-news-banner-desc">{{ item.description }}</span>
+                    <i class="bi bi-megaphone-fill rf-news-banner-icon"></i>
+                    <div class="rf-news-banner-content">
+                        <span class="rf-news-banner-label">Nouveau</span>
+                        <transition name="rf-news-fade" mode="out-in">
+                            <a href="#" class="rf-news-banner-link" :key="currentIndex" @click.prevent="openCurrent">
+                                {{ currentItem.label }}
                             </a>
-                        </li>
-                    </ul>
+                        </transition>
+                        <span v-if="multiple" class="rf-news-banner-dots" :aria-label="(currentIndex + 1) + ' sur ' + items.length">
+                            <button v-for="(_, idx) in items" :key="idx" type="button"
+                                    :class="['rf-news-banner-dot', { active: idx === currentIndex }]"
+                                    :aria-label="'Voir nouveauté ' + (idx + 1)"
+                                    @click="goTo(idx)"></button>
+                        </span>
+                    </div>
+                    <button type="button" class="rf-news-banner-close" @click="dismiss" aria-label="Fermer">✕</button>
                 </div>
             </div>
         `
@@ -1224,7 +1299,8 @@
         'rf-article-hertel': RFArticleHertel,
         'rf-article-oger': RFArticleOger,
         'rf-gallery-carousel': RFGalleryCarousel,
-        'rf-gallery-eglises': RFGalleryEglises,
+        'rf-eglises-grid': RFEglisesGrid,
+        'rf-gallery-arneke': RFGalleryArneke,
         'rf-gallery-activites': RFGalleryActivites,
         'rf-lightbox': RFLightbox,
         'rf-news-banner': RFNewsBanner,

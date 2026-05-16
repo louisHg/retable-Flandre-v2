@@ -303,6 +303,56 @@
         </a>
     `;
 
+    // ===== FICHES D'EGLISES A VISITER (grille unifiée) =====
+    //
+    // Une fiche par dépliant disponible.
+    // - name        : nom à afficher
+    // - image       : chemin photo (null si pas encore disponible → placeholder coloré)
+    // - description : courte phrase de présentation (optionnelle, à enrichir au fur et à mesure)
+    // - tags        : pour la recherche (en plus du nom et de la description)
+    // - pdf         : lien vers le dépliant paroissial
+    //
+    const DEPLIANT_BASE = 'images/2025/Depliants_des_eglises_a_retables/';
+    const eglisesVisite = [
+        { name: 'Arnèke',            image: null,                                                     description: "Église Saint-Martin, célèbre pour son ensemble de vitraux remarquables.", tags: ['vitraux', 'Saint-Martin'], pdf: DEPLIANT_BASE + 'Arneke.pdf' },
+        { name: 'Bambecque',         image: 'images/previous-image/bambecque.jpg',                    description: "", tags: [], pdf: DEPLIANT_BASE + 'Bambecque.pdf' },
+        { name: 'Bavinchove',        image: null,                                                     description: "Église Saint-Omer, retable nord remarquable.", tags: ['Saint-Omer'], pdf: DEPLIANT_BASE + 'Bavinchove.pdf' },
+        { name: 'Blaringhem',        image: null,                                                     description: "", tags: [], pdf: DEPLIANT_BASE + 'Blaringhem.pdf' },
+        { name: 'Boëseghem',         image: null,                                                     description: "", tags: [], pdf: DEPLIANT_BASE + 'Boeseghem.pdf' },
+        { name: 'Bollezeele',        image: 'images/2025/Bollezeele.png',                             description: "Église Saint-Wandrille, monument historique au riche mobilier classé.", tags: ['Saint-Wandrille', 'monument historique'], pdf: DEPLIANT_BASE + 'Bollezeele.pdf' },
+        { name: 'Borre',             image: 'images/2025/Borre.jpeg',                                 description: "Église Saint-Jean-Baptiste, tour de guet transformée en clocher.", tags: ['Saint-Jean-Baptiste', 'tour de guet'], pdf: DEPLIANT_BASE + 'Borre.pdf' },
+        { name: 'Brouckerque',       image: null,                                                     description: "", tags: [], pdf: DEPLIANT_BASE + 'Brouckerque.pdf' },
+        { name: 'Crochte',           image: null,                                                     description: "", tags: [], pdf: DEPLIANT_BASE + 'Crochte.pdf' },
+        { name: 'Drincham',          image: null,                                                     description: "", tags: [], pdf: DEPLIANT_BASE + 'Drincham.pdf' },
+        { name: 'Eecke',             image: null,                                                     description: "", tags: [], pdf: DEPLIANT_BASE + 'Eecke.pdf' },
+        { name: 'Gravelines',        image: null,                                                     description: "", tags: [], pdf: DEPLIANT_BASE + 'Gravelines.pdf' },
+        { name: 'Hazebrouck',        image: null,                                                     description: "Église Saint-Éloi, retables nord et sud (Vierge Marie, Trinité). Chapelle Saint-Jacques également.", tags: ['Saint-Éloi', 'Saint-Jacques'], pdf: DEPLIANT_BASE + 'Hazebrouck.pdf' },
+        { name: 'Herzeele',          image: 'images/2025/Herzeele.jpeg',                              description: "Notre-Dame de l'Assomption, église-halle en briques du XVIᵉ siècle.", tags: ['Notre-Dame', 'église-halle', 'XVIe'], pdf: DEPLIANT_BASE + 'Herzeele.pdf' },
+        { name: 'Hondschoote',       image: 'images/2025/Hondschoote-Oudezeele/Hondschoote1.png',     description: "Église Saint-Vaast, retables du Saint Esprit et de Saint-Sébastien.", tags: ['Saint-Vaast'], pdf: DEPLIANT_BASE + 'Hondschoote.pdf' },
+        { name: 'Houtkerque',        image: null,                                                     description: "", tags: [], pdf: DEPLIANT_BASE + 'Houtkerque.pdf' },
+        { name: 'Killem',            image: 'images/2025/Killem.png',                                 description: "Église Saint-Michel, retables baroques (Rosaire au nord).", tags: ['Saint-Michel', 'baroque', 'Rosaire'], pdf: DEPLIANT_BASE + 'Killem.pdf' },
+        { name: 'Ledringhem',        image: null,                                                     description: "", tags: [], pdf: DEPLIANT_BASE + 'Ledringhem.pdf' },
+        { name: 'Lynde',             image: null,                                                     description: "", tags: [], pdf: DEPLIANT_BASE + 'Lynde.pdf' },
+        { name: 'Millam',            image: null,                                                     description: "", tags: [], pdf: DEPLIANT_BASE + 'Millam.pdf' },
+        { name: 'Oudezeele',         image: 'images/2025/Hondschoote-Oudezeele/Oudezeele1.png',       description: "Église Saint-Omer, retables nord (Couronnement de la Vierge) et sud (Sainte Anne Trinitaire).", tags: ['Saint-Omer'], pdf: DEPLIANT_BASE + 'Oudezeele.pdf' },
+        { name: 'Pitgam',            image: null,                                                     description: "Église Saint-Folquin, retable nord du Rosaire.", tags: ['Saint-Folquin', 'Rosaire'], pdf: DEPLIANT_BASE + 'Pitgam.pdf' },
+        { name: 'Rexpoëde',          image: null,                                                     description: "", tags: [], pdf: DEPLIANT_BASE + 'Rexpoede.pdf' },
+        { name: "Saint Georges de l'Aa", image: null,                                                  description: "", tags: [], pdf: DEPLIANT_BASE + "Saint Georges de l'Aa.pdf" },
+        { name: 'Sercus',            image: null,                                                     description: "", tags: [], pdf: DEPLIANT_BASE + 'Sercus.pdf' },
+        { name: 'Socx',              image: null,                                                     description: "Église Saint-Maxime, retables du maître-autel, de la Vierge et de Saint-Léger.", tags: ['Saint-Maxime', 'Saint-Léger'], pdf: DEPLIANT_BASE + 'Socx.pdf' },
+        { name: 'Steenbecque',       image: null,                                                     description: "Église Saint-Léger, retable du maître-autel.", tags: ['Saint-Léger'], pdf: DEPLIANT_BASE + 'Steenbecque.pdf' },
+        { name: 'Steene',            image: null,                                                     description: "", tags: [], pdf: DEPLIANT_BASE + 'Steene.pdf' },
+        { name: 'Steenvoorde',       image: 'images/2025/STEENVOORDE.jpeg',                           description: "Église Saint-Pierre, haute flèche de 92 mètres.", tags: ['Saint-Pierre', 'flèche'], pdf: DEPLIANT_BASE + 'Steenvoorde.pdf' },
+        { name: 'Volckerinckhove',   image: 'images/2025/Volckerinckove.JPG',                         description: "Église romane, poutres sculptées et fonts baptismaux remarquables.", tags: ['romane'], pdf: DEPLIANT_BASE + 'Volckerinckhove.pdf' },
+        { name: 'Warhem',            image: null,                                                     description: "Église Saint-Martin, retable du Rosaire.", tags: ['Saint-Martin', 'Rosaire'], pdf: DEPLIANT_BASE + 'Warhem.pdf' },
+        { name: 'Wemaers-Cappel',    image: 'images/previous-image/WEMAERS-Cappel.jpg',               description: "Église Saint-Sylvestre, retable du maître-autel.", tags: ['Saint-Sylvestre'], pdf: DEPLIANT_BASE + 'Wemaers-Cappel.pdf' },
+        { name: 'West-Cappel',       image: null,                                                     description: "", tags: [], pdf: DEPLIANT_BASE + 'West-Cappel.pdf' },
+        { name: 'Winnezeele',        image: null,                                                     description: "", tags: [], pdf: DEPLIANT_BASE + 'Winnezeele.pdf' },
+        { name: 'Wormhout',          image: null,                                                     description: "Église Saint-Martin, retable sud du XVIIIᵉ siècle.", tags: ['Saint-Martin', 'XVIIIe'], pdf: DEPLIANT_BASE + 'Wormhout.pdf' },
+        { name: 'Wulverdinghe',      image: 'images/2025/Wulverdinghe.jpeg',                          description: "Église Saint-Martin, façade romane rare en Flandre maritime.", tags: ['Saint-Martin', 'romane'], pdf: DEPLIANT_BASE + 'Wulverdinghe.pdf' },
+        { name: 'Zegerscappel',      image: null,                                                     description: "Église Saint-Folquin, retable nord du Rosaire.", tags: ['Saint-Folquin', 'Rosaire'], pdf: DEPLIANT_BASE + 'Zegerscappel.pdf' }
+    ];
+
     // ===== ACTUALITES (feed unifié — alimente aussi la cloche) =====
     //
     // Categories : AG, Visite, Formation, Sortie, Hommage, Cérémonie, Programme, Rapport
@@ -534,6 +584,7 @@
             hertel: articleHertel,
             oger: articleOger
         },
-        actualites: actualites
+        actualites: actualites,
+        eglisesVisite: eglisesVisite
     };
 })();
