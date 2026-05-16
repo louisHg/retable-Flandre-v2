@@ -47,6 +47,7 @@
 
         <!-- Contenu principal -->
         <div :class="['rf-content', { 'is-expanded': !sidebarOpen }]">
+            <rf-news-banner></rf-news-banner>
             <rf-hero-home></rf-hero-home>
             <rf-gallery-carousel></rf-gallery-carousel>
             <rf-newsletter-cta></rf-newsletter-cta>
@@ -65,6 +66,10 @@
 <!-- Bootstrap + EmailJS -->
 <script src="js/bootstrap.bundle.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+
+<!-- Données (à charger AVANT les composants) -->
+<script src="js/content.js"></script>
+<script src="js/news.js"></script>
 
 <!-- Composants Vue partagés -->
 <script src="js/vue-components.js"></script>

@@ -1,11 +1,43 @@
 // ==========================================
-// 🧩 COMPOSANTS VUE 3 - RETABLES DE FLANDRE
+// COMPOSANTS VUE 3 — RETABLES DE FLANDRE
+// ==========================================
+//
+// ORGANISATION DU FICHIER
+//
+//   Layout / navigation
+//     rf-sidebar              ligne  11   sidebar gauche + cloche nouveautés
+//     rf-footer               ligne 410   pied de page
+//
+//   Page d'accueil
+//     rf-hero-home            ligne 143   hero accueil
+//     rf-gallery-carousel     ligne 464   carrousel retables (data: RFContent.galleries.retables)
+//     rf-newsletter-cta       ligne 263   CTA newsletter
+//
+//   Page "Qu'est-ce qu'un retable"
+//     rf-hero-retable         ligne 183   hero + schéma
+//     rf-texte-collectif      ligne 227   texte collectif
+//
+//   Pages activités / visite / dépliants
+//     rf-gallery-activites    ligne 603   galerie événements (data: RFContent.galleries.activites)
+//     rf-gallery-eglises      ligne 666   galerie églises    (data: RFContent.galleries.eglises)
+//
+//   Articles
+//     rf-article-hertel       ligne 432   article Hertel (texte: RFContent.articles.hertel)
+//     rf-article-oger         ligne 448   article Oger   (texte: RFContent.articles.oger)
+//
+//   Transversal
+//     rf-contact              ligne 289   formulaire contact (EmailJS)
+//     rf-lightbox             ligne 732   modale d'agrandissement automatique
+//     rf-news-banner          ligne 840   bandeau "Nouveautés" (data: RFNews)
+//
+// DONNÉES (textes, photos, articles)  →  js/content.js
+// NOUVEAUTÉS / cloche                 →  js/news.js
+//
+// Les numéros de ligne ci-dessus peuvent dériver. Mettre à jour à la main si besoin.
 // ==========================================
 
 (function () {
     'use strict';
-
-    const BASE = 'images/previous-image/diaporamaActivites/';
 
     // ==========================================
     // 📌 rf-sidebar
@@ -16,6 +48,14 @@
             currentPage: {type: String, default: ''}
         },
         emits: ['close'],
+        data() {
+            const api = window.RFNewsAPI;
+            return {
+                showNews: false,
+                notifications: api ? api.all() : [],
+                unread: api ? api.unreadCount() : 0
+            };
+        },
         methods: {
             handleNavClick() {
                 if (window.matchMedia('(max-width: 991px)').matches) {
@@ -30,6 +70,39 @@
                     window.location.href = 'index.html#section_contact';
                 }
                 this.handleNavClick();
+            },
+            toggleNews() {
+                this.showNews = !this.showNews;
+            },
+            isRead(id) {
+                return window.RFNewsAPI ? window.RFNewsAPI.isRead(id) : false;
+            },
+            refreshUnread() {
+                if (window.RFNewsAPI) this.unread = window.RFNewsAPI.unreadCount();
+            },
+            openNewsItem(item) {
+                if (window.RFNewsAPI) {
+                    window.RFNewsAPI.markAsRead(item.id);
+                    this.refreshUnread();
+                }
+                const samePage = item.page && window.location.pathname.endsWith('/' + item.page);
+                if (samePage && item.anchor) {
+                    const target = document.getElementById(item.anchor);
+                    if (target) {
+                        target.scrollIntoView({behavior: 'smooth'});
+                        this.handleNavClick();
+                        return;
+                    }
+                }
+                if (item.page) {
+                    window.location.href = item.page + (item.anchor ? '#' + item.anchor : '');
+                }
+            },
+            markAllRead() {
+                if (window.RFNewsAPI) {
+                    window.RFNewsAPI.markAllAsRead();
+                    this.refreshUnread();
+                }
             }
         },
         template: `
@@ -41,12 +114,50 @@
                         <small>de Flandre</small>
                     </span>
                 </a>
+
+                <button type="button" class="rf-sidebar-bell" @click="toggleNews"
+                        :aria-expanded="showNews" aria-controls="rfNewsPanel">
+                    <i class="bi bi-bell-fill"></i>
+                    <span class="rf-bell-label">Nouveautés</span>
+                    <span v-if="unread > 0" class="rf-bell-badge">{{ unread }}</span>
+                    <i class="bi" :class="showNews ? 'bi-chevron-up' : 'bi-chevron-down'"></i>
+                </button>
+
+                <div v-show="showNews" id="rfNewsPanel" class="rf-news-panel">
+                    <div v-if="notifications.length === 0" class="text-muted small px-2 py-2">
+                        Aucune nouveauté pour l'instant.
+                    </div>
+                    <div v-else>
+                        <div class="rf-news-actions" v-if="unread > 0">
+                            <button type="button" class="btn btn-link btn-sm" @click="markAllRead">
+                                Tout marquer comme lu
+                            </button>
+                        </div>
+                        <div class="rf-notification-list">
+                            <div v-for="item in notifications" :key="item.id"
+                                 class="rf-notification rf-notification-compact"
+                                 :class="{ 'rf-notification-unread': !isRead(item.id) }"
+                                 @click="openNewsItem(item)">
+                                <div class="rf-notification-icon">
+                                    <i class="bi bi-bell"></i>
+                                </div>
+                                <div class="rf-notification-content">
+                                    <div class="rf-notification-title">{{ item.label }}</div>
+                                    <div class="rf-notification-text">{{ item.description }}</div>
+                                    <div class="rf-notification-date">{{ item.date }}</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
                 <nav class="rf-sidebar-nav">
                     <a class="nav-link" :class="{ active: currentPage === 'index' }" href="index.html" @click="handleNavClick">Accueil</a>
                     <a class="nav-link" :class="{ active: currentPage === 'generic' }" href="generic.html" @click="handleNavClick">Association</a>
                     <a class="nav-link" :class="{ active: currentPage === 'activites' }" href="activites.html" @click="handleNavClick">Activités</a>
                     <a class="nav-link" :class="{ active: currentPage === 'retable' }" href="qu-est-ce-qu-un-retable.html" @click="handleNavClick">Qu'est-ce qu'un retable ?</a>
                     <a class="nav-link" :class="{ active: currentPage === 'depliants' }" href="depliants-eglises.html" @click="handleNavClick">Dépliants des églises à retables</a>
+                    <a class="nav-link" :class="{ active: currentPage === 'visite' }" href="visite-eglises.html" @click="handleNavClick">Visite des églises</a>
                     <a class="nav-link" :class="{ active: currentPage === 'actualites' }" href="actualites.html" @click="handleNavClick">Actualités</a>
                     <a class="nav-link" :class="{ active: currentPage === 'boutique' }" href="boutique.html" @click="handleNavClick">Boutique</a>
                     <a class="nav-link" href="#section_contact" @click.prevent="scrollToContact">Contact</a>
@@ -350,257 +461,48 @@
     };
 
     // ==========================================
-    // 📄 rf-article-hertel
+    // 📄 rf-article-hertel — texte dans RFContent.articles.hertel
     // ==========================================
     const RFArticleHertel = {
+        computed: {
+            body() {
+                return (window.RFContent && window.RFContent.articles && window.RFContent.articles.hertel) || '';
+            }
+        },
         template: `
             <div class="rf-card rf-card-article">
-                <div class="rf-card-body rf-card-body-lg">
-                    <h4 class="mb-3">Les retables de Flandre française des XVIIe, XVIIIe et XIXe siècles</h4>
-                    <h6 class="mb-3" style="color: #717275;">Philippe HERTEL, Anita OGER-LEURENT</h6>
-                    <p style="line-height: 1.8; color: #555;">
-                        « Les retables de Flandre française des XVIIe, XVIIIe et XIXe siècles » :
-                        contexte spirituel et historique, Réforme et Contre-Réforme ; essai de typologie.
-                    </p>
-                    <p class="mb-3" style="font-size: 0.95rem; color: #717275;">
-                        In 11ES JOURNÉES D'ÉTUDES DE LA SECTION FRANÇAISE DE L'INSTITUT INTERNATIONAL DE CONSERVATION (S.F.I.I.C.).
-                        Colloque international (2004 ; Roubaix). Retables in situ, conservation et restauration.
-                    </p>
-                    <p class="fst-italic mb-4" style="font-size: 0.9rem; color: #999;">
-                        "Cet article est publié avec l'accord des auteurs et de l'éditeur."
-                    </p>
-                    <a href="images/previous-image/extrait_du_livre_de_HERTEL_et_OGER-LEURENT.pdf"
-                       target="_blank" class="btn custom-btn w-100">
-                        <i class="bi bi-file-pdf me-2"></i>Télécharger le PDF
-                    </a>
-                </div>
+                <div class="rf-card-body rf-card-body-lg" v-html="body"></div>
             </div>
         `
     };
 
     // ==========================================
-    // 📄 rf-article-oger
+    // 📄 rf-article-oger — texte dans RFContent.articles.oger
     // ==========================================
     const RFArticleOger = {
+        computed: {
+            body() {
+                return (window.RFContent && window.RFContent.articles && window.RFContent.articles.oger) || '';
+            }
+        },
         template: `
             <div class="rf-card rf-card-article">
-                <div class="rf-card-body rf-card-body-lg">
-                    <h4 class="mb-3">Retables de Flandre : un patrimoine partagé</h4>
-                    <h6 class="mb-3" style="color: #717275;">Anita OGER-LEURENT</h6>
-                    <p style="line-height: 1.8; color: #555;">
-                        « Retables de Flandre : un patrimoine partagé » explore les liens culturels et
-                        artistiques qui unissent les retables flamands des deux côtés de la frontière.
-                    </p>
-                    <p class="mb-4" style="font-size: 0.95rem; color: #717275;">
-                        In Situ, n°3, printemps 2003, Territoires d'inventaire
-                    </p>
-                    <a href="images/previous-image/article_dAnita_Oger-Leurent.pdf"
-                       target="_blank" class="btn custom-btn w-100">
-                        <i class="bi bi-file-pdf me-2"></i>Télécharger le PDF
-                    </a>
-                </div>
+                <div class="rf-card-body rf-card-body-lg" v-html="body"></div>
             </div>
         `
     };
 
     // ==========================================
-    // 🖼️ rf-gallery-carousel
+    // 🖼️ rf-gallery-carousel — donnees dans RFContent.galleries.retables
     // ==========================================
     const RFGalleryCarousel = {
         data() {
+            const retables = (window.RFContent && window.RFContent.galleries && window.RFContent.galleries.retables) || [];
             return {
                 modalOpen: false,
                 modalSrc: '',
                 modalTitle: '',
-                images: [
-                    {
-                        src: BASE + 'crbst_Bollezeele_20retable_20de_20la_20Sainte_20Famille.jpg',
-                        alt: 'Retable de la Sainte Famille - Église Saint-Omer de Bollezeele',
-                        badge: 'Église Saint-Omer de Bollezeele',
-                        heading: 'Retable de la Sainte Famille'
-                    },
-                    {
-                        src: BASE + 'crbst_Bollezeele_20retable_20Re_CC_81surrection.jpg',
-                        alt: 'Retable de la Résurrection - Église Saint-Omer de Bollezeele',
-                        badge: 'Église Saint-Omer de Bollezeele',
-                        heading: 'Retable de la Résurrection'
-                    },
-                    {
-                        src: BASE + 'crbst_Bollezeele_20Retable_20Vierge.jpg',
-                        alt: 'Retable de la Vierge - Église Saint-Omer de Bollezeele',
-                        badge: 'Église Saint-Omer de Bollezeele',
-                        heading: 'Retable de la Vierge'
-                    },
-                    {
-                        src: BASE + 'crbst_Borre_20retable_20du_20ma_C3_AEtre-autel.jpg',
-                        alt: 'Retable du maître-autel - Église Saint-Martin de Borre',
-                        badge: 'Église Saint-Martin de Borre',
-                        heading: 'Retable du maître-autel'
-                    },
-                    {
-                        src: BASE + 'crbst_Craywick_20retable_20du_20ma_C3_AEtre-autel.jpg',
-                        alt: 'Retable du maître-autel - Église Saint-Gilles de Craywick',
-                        badge: 'Église Saint-Gilles de Craywick',
-                        heading: 'Retable du maître-autel'
-                    },
-                    {
-                        src: BASE + 'crbst_Craywick_20retable_20nord.jpg',
-                        alt: 'Retable de Saint Gilles - Église Saint-Gilles de Craywick',
-                        badge: 'Église Saint-Gilles de Craywick',
-                        heading: 'Retable de Saint Gilles'
-                    },
-                    {
-                        src: BASE + 'crbst_Craywick_20retable_20sud.jpg',
-                        alt: "Retable de l'Assomption - Église Saint-Gilles de Craywick",
-                        badge: 'Église Saint-Gilles de Craywick',
-                        heading: "Retable de l'Assomption"
-                    },
-                    {
-                        src: BASE + 'crbst_Hazebrouck_20nord.jpg',
-                        alt: "Retable de la Vierge Marie - Église Saint-Eloi d'Hazebrouck",
-                        badge: "Église Saint-Eloi d'Hazebrouck",
-                        heading: 'Retable de la Vierge Marie'
-                    },
-                    {
-                        src: BASE + 'crbst_Hazebrouck_20sud.jpg',
-                        alt: "Retable de la Trinité - Église Saint-Eloi d'Hazebrouck",
-                        badge: "Église Saint-Eloi d'Hazebrouck",
-                        heading: 'Retable de la Trinité'
-                    },
-                    {
-                        src: BASE + 'crbst_IMG_2246_20retable_20nord_20sRVB_208_20bits_20jpg_20leger_20bavinchove.jpg',
-                        alt: 'Retable nord - Église Saint-Omer de Bavinchove',
-                        badge: 'Église Saint-Omer de Bavinchove',
-                        heading: 'Retable nord'
-                    },
-                    {
-                        src: BASE + 'crbst_IMG_6716_20rec_20herzeele_20sud.jpg',
-                        alt: "Retable de Saint Antoine - Église Saint-Martin d'Herzeele",
-                        badge: "Église Saint-Martin d'Herzeele",
-                        heading: 'Retable de Saint Antoine'
-                    },
-                    {
-                        src: BASE + 'crbst_IMG_7777_20Zegers_20nord.jpg',
-                        alt: 'Retable du Rosaire - Église Saint-Folquin de Zegerscappel',
-                        badge: 'Église Saint-Folquin de Zegerscappel',
-                        heading: 'Retable du Rosaire'
-                    },
-                    {
-                        src: BASE + 'crbst_IMG_7805_20rubrouck_20centre.jpg',
-                        alt: 'Retable du maître-autel - Église Notre-Dame de Rubrouck',
-                        badge: 'Église Notre-Dame de Rubrouck',
-                        heading: 'Retable du maître-autel'
-                    },
-                    {
-                        src: BASE + 'crbst_IMG_7836_20herzeele_20centre_20rec_20rot_203_C2_B0.jpg',
-                        alt: "Retable de l'Assomption - Église Saint-Martin d'Herzeele",
-                        badge: "Église Saint-Martin d'Herzeele",
-                        heading: "Retable de l'Assomption"
-                    },
-                    {
-                        src: BASE + 'crbst_IMG_7863_20killem_20nord_20rec.jpg',
-                        alt: 'Retable du Rosaire - Église Saint-Pierre de Killem',
-                        badge: 'Église Saint-Pierre de Killem',
-                        heading: 'Retable du Rosaire'
-                    },
-                    {
-                        src: BASE + 'crbst_IMG_7877_20hondschodt_20sud.jpg',
-                        alt: "Retable du Saint Esprit - Église Saint-Vaast d'Hondschoote",
-                        badge: "Église Saint-Vaast d'Hondschoote",
-                        heading: 'Retable du Saint Esprit'
-                    },
-                    {
-                        src: BASE + 'crbst_IMG_7884_20hondchodt_20St_20Sebastien_20transf_20rec.jpg',
-                        alt: "Retable de Saint-Sébastien - Église Saint-Vaast d'Hondschoote",
-                        badge: "Église Saint-Vaast d'Hondschoote",
-                        heading: 'Retable de Saint-Sébastien'
-                    },
-                    {
-                        src: BASE + 'crbst_IMG_8150_20rot_202_C2_B0_20rec_20wemaers_20centre.jpg',
-                        alt: 'Retable du maître-autel - Église Saint-Sylvestre de Wemaers-Cappel',
-                        badge: 'Église Saint-Sylvestre de Wemaers-Cappel',
-                        heading: 'Retable du maître-autel'
-                    },
-                    {
-                        src: BASE + 'crbst_IMG_8402_20steenbecque_20centre_20transf.jpg',
-                        alt: 'Retable du maître-autel - Église Saint-Léger de Steenbecque',
-                        badge: 'Église Saint-Léger de Steenbecque',
-                        heading: 'Retable du maître-autel'
-                    },
-                    {
-                        src: BASE + 'crbst_IMG_9694_20ret_20Herzeele_20nord.jpg',
-                        alt: "Retable du Sacré-Cœur - Église Saint-Martin d'Herzeele",
-                        badge: "Église Saint-Martin d'Herzeele",
-                        heading: 'Retable du Sacré-Cœur'
-                    },
-                    {src: BASE + 'crbst_import28.png', alt: 'Retable de Flandre', badge: null, heading: null},
-                    {
-                        src: BASE + "crbst_Oudezeele_20retable_20nord.jpg",
-                        alt: "Retable du Couronnement de la Vierge - Église Saint-Omer d'Oudezeele",
-                        badge: "Église Saint-Omer d'Oudezeele",
-                        heading: 'Retable du Couronnement de la Vierge'
-                    },
-                    {
-                        src: BASE + 'crbst_Oudezeele_20retable_20sud.jpg',
-                        alt: "Retable de Sainte Anne Trinitaire - Église Saint-Omer d'Oudezeele",
-                        badge: "Église Saint-Omer d'Oudezeele",
-                        heading: 'Retable de Sainte Anne Trinitaire'
-                    },
-                    {
-                        src: BASE + 'crbst_Pitgam_20retable_20nord.jpg',
-                        alt: 'Retable du Rosaire - Église Saint-Folquin de Pitgam',
-                        badge: 'Église Saint-Folquin de Pitgam',
-                        heading: 'Retable du Rosaire'
-                    },
-                    {
-                        src: BASE + 'crbst_Saint-Pierre_20_C3_A0_20Lo.jpg',
-                        alt: 'Retable de Saint-Pierre',
-                        badge: null,
-                        heading: null
-                    },
-                    {
-                        src: BASE + 'crbst_Sainte_20Mildr_C3_A8de_20_C3_A0_20Izenberge.jpg',
-                        alt: "Retable de Saint-Pierre - Église Sainte-Mildrède d'Izenberge",
-                        badge: "Église Sainte-Mildrède d'Izenberge",
-                        heading: 'Retable de Saint-Pierre'
-                    },
-                    {
-                        src: BASE + 'crbst_Socx_20retable_20du_20ma_C3_AEtre-autel.jpg',
-                        alt: 'Retable du maître-autel - Église Saint-Maxime de Socx',
-                        badge: 'Église Saint-Maxime de Socx',
-                        heading: 'Retable du maître-autel'
-                    },
-                    {
-                        src: BASE + 'crbst_Socx_20retable_20nord.jpg',
-                        alt: 'Retable de la Vierge - Église Saint-Maxime de Socx',
-                        badge: 'Église Saint-Maxime de Socx',
-                        heading: 'Retable de la Vierge'
-                    },
-                    {
-                        src: BASE + 'crbst_Socx_20retable_20sud.jpg',
-                        alt: 'Retable de Saint-Léger - Église Saint-Maxime de Socx',
-                        badge: 'Église Saint-Maxime de Socx',
-                        heading: 'Retable de Saint-Léger'
-                    },
-                    {
-                        src: BASE + 'crbst_ST_20Jacques_20Hazebrouck_20A4.jpg',
-                        alt: "Retable de Saint-Antoine de Padoue - Chapelle Saint-Jacques d'Hazebrouck",
-                        badge: "Chapelle Saint-Jacques d'Hazebrouck",
-                        heading: 'Retable de Saint-Antoine de Padoue'
-                    },
-                    {
-                        src: BASE + 'crbst_Wahrem_20nouvelle_20version_20Jpg.jpg',
-                        alt: 'Retable du Rosaire - Église Saint-Martin de Warhem',
-                        badge: 'Église Saint-Martin de Warhem',
-                        heading: 'Retable du Rosaire'
-                    },
-                    {
-                        src: BASE + 'crbst_Wormhout_20sud_20_20site_20web_20-_20Copie.jpg',
-                        alt: 'Retable sud - Église Saint-Martin de Wormhout',
-                        badge: 'Église Saint-Martin de Wormhout',
-                        heading: 'Retable sud'
-                    }
-                ]
+                images: retables
             };
         },
         mounted() {
@@ -730,6 +632,135 @@
     };
 
     // ==========================================
+    // 📅 rf-gallery-activites — Galerie événements (AG, visites, rencontres)
+    // ==========================================
+    const RFGalleryActivites = {
+        data() {
+            const a = (window.RFContent && window.RFContent.galleries && window.RFContent.galleries.activites) || {};
+            return {
+                events: a.events || [],
+                isolatedPhotos: a.isolatedPhotos || [],
+                documents: a.documents || []
+            };
+        },
+        template: `
+            <section class="section-padding" id="section_evenements" style="background: #fafafa;">
+                <div class="container">
+                    <h2 class="mb-3">Nos événements en images</h2>
+                    <p class="text-muted mb-4">Retours en photos sur les assemblées générales, visites guidées et rencontres de l'association.</p>
+
+                    <div v-if="documents.length" class="mb-5">
+                        <a v-for="doc in documents" :key="doc.href"
+                           :href="doc.href" target="_blank"
+                           class="btn btn-outline-secondary me-2 mb-2">
+                            <i class="bi bi-file-pdf me-2"></i>{{ doc.label }}
+                        </a>
+                    </div>
+
+                    <div v-for="ev in events" :key="ev.id" :id="ev.id" class="mb-5">
+                        <div class="d-flex align-items-baseline flex-wrap mb-2">
+                            <h3 class="mb-0 me-3">{{ ev.title }}</h3>
+                            <span class="text-muted">{{ ev.subtitle }}</span>
+                        </div>
+                        <div v-if="ev.docs && ev.docs.length" class="mb-3">
+                            <a v-for="doc in ev.docs" :key="doc.href"
+                               :href="doc.href" target="_blank"
+                               class="btn btn-sm btn-outline-secondary me-2 mb-2">
+                                <i class="bi bi-file-pdf me-2"></i>{{ doc.label }}
+                            </a>
+                        </div>
+                        <div class="row g-2">
+                            <div v-for="img in ev.photos" :key="img.src" class="col-lg-3 col-md-4 col-6">
+                                <img :src="img.src" :alt="img.alt" loading="lazy"
+                                     class="img-fluid rounded shadow-sm w-100"
+                                     style="aspect-ratio: 4/3; object-fit: cover;">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div v-if="isolatedPhotos.length">
+                        <h3 class="mb-3">Autres lieux</h3>
+                        <div class="row g-3">
+                            <div v-for="img in isolatedPhotos" :key="img.src" class="col-lg-3 col-md-4 col-6">
+                                <figure class="rf-gallery-card m-0">
+                                    <img :src="img.src" :alt="img.name" loading="lazy" class="img-fluid">
+                                    <figcaption class="rf-gallery-caption">{{ img.name }}</figcaption>
+                                </figure>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        `
+    };
+
+    // ==========================================
+    // 🏛️ rf-gallery-eglises — Galerie photos d'églises et vitraux
+    // ==========================================
+    const RFGalleryEglises = {
+        data() {
+            const e = (window.RFContent && window.RFContent.galleries && window.RFContent.galleries.eglises) || {};
+            return {
+                document: e.document || null,
+                eglises: e.eglises || [],
+                hondschoote: e.hondschoote || [],
+                arneke: e.arneke || []
+            };
+        },
+        template: `
+            <section class="section-padding" id="section_visite">
+                <div class="container">
+                    <div class="d-flex align-items-center mb-3">
+                        <img src="images/previous-image/logo.jpg" alt="Logo"
+                             style="width: 70px; height: 70px; object-fit: cover; border-radius: 12px; margin-right: 15px;">
+                        <div>
+                            <h2 class="mb-0">Visite des églises à retables</h2>
+                            <p class="mb-0" style="color:#717275;">Quelques églises de Flandre qui abritent ce patrimoine</p>
+                        </div>
+                    </div>
+
+                    <a v-if="document" :href="document.href" target="_blank"
+                       class="btn btn-outline-secondary mb-4">
+                        <i class="bi bi-file-pdf me-2"></i>{{ document.label }}
+                    </a>
+
+                    <h3 class="mt-4 mb-3" id="section_eglises">Églises à retables</h3>
+                    <div class="row g-3 mb-5">
+                        <div v-for="img in eglises" :key="img.src" class="col-lg-3 col-md-4 col-6">
+                            <figure class="rf-gallery-card m-0">
+                                <img :src="img.src" :alt="img.name" loading="lazy"
+                                     class="img-fluid rounded shadow-sm w-100">
+                                <figcaption class="rf-gallery-caption">{{ img.name }}</figcaption>
+                            </figure>
+                        </div>
+                    </div>
+
+                    <h3 class="mt-5 mb-3" id="section_hondschoote">Hondschoote – Oudezeele</h3>
+                    <div class="row g-3 mb-5">
+                        <div v-for="img in hondschoote" :key="img.src" class="col-lg-3 col-md-4 col-6">
+                            <figure class="rf-gallery-card m-0">
+                                <img :src="img.src" :alt="img.name" loading="lazy"
+                                     class="img-fluid rounded shadow-sm w-100">
+                                <figcaption class="rf-gallery-caption">{{ img.name }}</figcaption>
+                            </figure>
+                        </div>
+                    </div>
+
+                    <h3 class="mt-5 mb-3" id="section_arneke">Vitraux de l'église d'Arnèke</h3>
+                    <p class="text-muted mb-3">Ensemble remarquable de vitraux de l'église Saint-Martin d'Arnèke.</p>
+                    <div class="row g-2">
+                        <div v-for="img in arneke" :key="img.src" class="col-lg-2 col-md-3 col-4">
+                            <img :src="img.src" :alt="img.name" loading="lazy"
+                                 class="img-fluid rounded shadow-sm w-100"
+                                 style="aspect-ratio: 1; object-fit: cover;">
+                        </div>
+                    </div>
+                </div>
+            </section>
+        `
+    };
+
+    // ==========================================
     // 🔍 rf-lightbox — Rend TOUTES les images cliquables
     // ==========================================
     const RFLightbox = {
@@ -838,6 +869,59 @@
     };
 
     // ==========================================
+    // 🔔 rf-news-banner — bandeau de nouveautés (page d'accueil)
+    // ==========================================
+    const RFNewsBanner = {
+        data() {
+            const api = window.RFNewsAPI;
+            return {
+                visible: api ? api.shouldShowBanner() : false,
+                items: api ? api.latest(3) : []
+            };
+        },
+        methods: {
+            dismiss() {
+                if (window.RFNewsAPI) window.RFNewsAPI.dismissBanner();
+                this.visible = false;
+            },
+            openItem(item) {
+                if (window.RFNewsAPI) window.RFNewsAPI.markAsRead(item.id);
+                const samePage = item.page && window.location.pathname.endsWith('/' + item.page);
+                if (samePage && item.anchor) {
+                    const target = document.getElementById(item.anchor);
+                    if (target) {
+                        target.scrollIntoView({behavior: 'smooth'});
+                        return;
+                    }
+                }
+                if (item.page) {
+                    window.location.href = item.page + (item.anchor ? '#' + item.anchor : '');
+                }
+            }
+        },
+        template: `
+            <div v-if="visible && items.length > 0" class="rf-news-banner" role="region" aria-label="Nouveautés">
+                <div class="rf-news-banner-inner">
+                    <div class="rf-news-banner-head">
+                        <i class="bi bi-megaphone-fill"></i>
+                        <span class="rf-news-banner-title">Nouveautés</span>
+                        <button type="button" class="rf-news-banner-close" @click="dismiss" aria-label="Fermer">✕</button>
+                    </div>
+                    <ul class="rf-news-banner-list">
+                        <li v-for="item in items" :key="item.id">
+                            <a href="#" @click.prevent="openItem(item)">
+                                <strong>{{ item.label }}</strong>
+                                <span class="rf-news-banner-date">{{ item.date }}</span>
+                                <span class="rf-news-banner-desc">{{ item.description }}</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        `
+    };
+
+    // ==========================================
     // 📦 Export global
     // ==========================================
     window.RFComponents = {
@@ -851,7 +935,10 @@
         'rf-article-hertel': RFArticleHertel,
         'rf-article-oger': RFArticleOger,
         'rf-gallery-carousel': RFGalleryCarousel,
-        'rf-lightbox': RFLightbox
+        'rf-gallery-eglises': RFGalleryEglises,
+        'rf-gallery-activites': RFGalleryActivites,
+        'rf-lightbox': RFLightbox,
+        'rf-news-banner': RFNewsBanner
     };
 
     console.log('✅ RFComponents chargés :', Object.keys(window.RFComponents).length, 'composants');
