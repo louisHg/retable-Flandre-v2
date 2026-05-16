@@ -303,6 +303,226 @@
         </a>
     `;
 
+    // ===== ACTUALITES (feed unifié — alimente aussi la cloche) =====
+    //
+    // Categories : AG, Visite, Formation, Sortie, Hommage, Cérémonie, Programme, Rapport
+    // featured: true → mise en avant dans la cloche / bandeau accueil
+    //
+    const actualites = [
+        {
+            id: 'calendrier-ete-2026',
+            date: '2026-04-15',
+            category: 'Programme',
+            title: 'Calendrier des visites — été 2026',
+            summary: "Le programme des visites d'églises à retables pour l'été 2026 est disponible au téléchargement.",
+            tags: ['calendrier', 'visites', 'été', '2026', 'programme'],
+            docs: [
+                { label: 'Télécharger le calendrier 2026', href: 'images/2026/2026_visite_eglise.pdf' }
+            ],
+            featured: true
+        },
+        {
+            id: 'ag-looberghe-2026',
+            date: '2026-03-07',
+            category: 'AG',
+            title: 'Assemblée Générale à Looberghe',
+            summary: "L'Assemblée Générale s'est tenue le 7 mars 2026 à Looberghe, suivie de l'élection d'un nouveau Conseil d'Administration le 17 mars.",
+            body: "<p>Après une visite de l'église et la tenue de l'assemblée générale ordinaire, un nouveau <strong>Conseil d'Administration</strong> a été élu le 17 mars 2026.</p>",
+            tags: ['AG', 'assemblée générale', 'Looberghe', '2026', 'CA'],
+            docs: [
+                { label: 'Compte-rendu AG 2026', href: 'images/2026/Looberghe/CR-AG2026Loob.pdf' },
+                { label: 'Rapport moral 2025', href: 'images/2026/AG-2025.pdf' },
+                { label: 'Nouveau CA', href: 'images/2026/Conseil-17-mars.pdf' }
+            ],
+            carousel: [
+                { src: 'images/2026/Looberghe/loob1.JPG', alt: 'AG Looberghe 2026 - 1/4' },
+                { src: 'images/2026/Looberghe/loob2.JPG', alt: 'AG Looberghe 2026 - 2/4' },
+                { src: 'images/2026/Looberghe/loob3.JPG', alt: 'AG Looberghe 2026 - 3/4' },
+                { src: 'images/2026/Looberghe/loob4.JPG', alt: 'AG Looberghe 2026 - 4/4' }
+            ],
+            featured: true
+        },
+        {
+            id: 'messe-oudezeele-2026',
+            date: '2026-02-02',
+            category: 'Cérémonie',
+            title: 'Messe & dégustation à Oudezeele',
+            summary: "Messe célébrée par le Père Thomas Vercoutre, accompagnée de chants grégoriens de la chorale Cum Jubilo, suivie d'une dégustation de crêpes de la Chandeleur.",
+            body: "<p>À 18h, une messe a été célébrée par le Père Thomas Vercoutre en l'église Saint-Jean-Baptiste d'Oudezeele. La célébration a été accompagnée de chants grégoriens interprétés par la chorale <strong>Cum Jubilo</strong> de Watou, suivie d'une dégustation de crêpes de la Chandeleur.</p>",
+            tags: ['messe', 'Oudezeele', 'Chandeleur', 'Cum Jubilo', 'chants grégoriens'],
+            photos: [
+                { src: 'images/2026/Jubilo-Watou.jpg', alt: 'Chorale Cum Jubilo de Watou', caption: 'Chorale Cum Jubilo — Watou' },
+                { src: 'images/2026/eglise-Oudezeele.JPG', alt: "Église Saint-Jean-Baptiste d'Oudezeele", caption: "Église d'Oudezeele" }
+            ]
+        },
+        {
+            id: 'formation-guides-2025-2026',
+            date: '2025-10-01',
+            category: 'Formation',
+            title: 'Formation des guides 2025–2026',
+            summary: "9 futurs guides et 12 guides expérimentés ont approfondi leurs connaissances sur le territoire de Dunkerque et Hazebrouck (octobre 2025 – février 2026).",
+            tags: ['formation', 'guides', 'Dunkerque', 'Hazebrouck'],
+            docs: [
+                { label: 'Voir le programme', href: 'images/2025/retablesdeflandre/2025 2026 programme Formation Retables de FlandreScan.jpg' }
+            ],
+            photos: [
+                { src: 'images/2025/retablesdeflandre/complmentdinfosretablesdeflandre/Guides-Bambecque-2025-01-08.jpg', alt: 'Formation guides Bambecque' },
+                { src: 'images/2025/retablesdeflandre/complmentdinfosretablesdeflandre/PXL_20260108_150236010.jpg', alt: 'Formation guides 2026' },
+                { src: 'images/2025/retablesdeflandre/PXL_20251105_090519186.jpeg', alt: 'Formation des guides 3' },
+                { src: 'images/2025/retablesdeflandre/PXL_20251105_105130837.jpeg', alt: 'Formation des guides 4' }
+            ]
+        },
+        {
+            id: 'temoignage-paulette-vanpoulle',
+            date: '2025-09-15',
+            category: 'Hommage',
+            title: 'Témoignage — Obsèques de Paulette VANPOULLE',
+            summary: "L'Association des Retables de Flandre rend hommage à Paulette VANPOULLE, par la voix de sa présidente Régine Beaucamp, au nom de l'asso et du Comité Flamand de France.",
+            tags: ['hommage', 'témoignage', 'Vanpoulle', 'Beaucamp'],
+            docs: [
+                { label: 'Lire le témoignage complet', href: "images/2025/retablesdeflandre/Temoignage_de_R.Beaucamp_pour_les obseques_de_Paulette_Vanpoulle.pdf" }
+            ]
+        },
+        {
+            id: 'visite-steenvoorde-volckerinckhove-2025',
+            date: '2025-09-07',
+            category: 'Visite',
+            title: 'Visite — Steenvoorde et Volckerinckhove',
+            summary: "L'église Saint-Pierre de Steenvoorde (flèche de 92 m) et l'église romane de Volckerinckhove avec ses poutres sculptées.",
+            tags: ['visite', 'Steenvoorde', 'Volckerinckhove', 'estivale', '2025'],
+            photos: [
+                { src: 'images/2025/STEENVOORDE.jpeg', alt: 'Steenvoorde' },
+                { src: 'images/2025/Volckerinckove.JPG', alt: 'Volckerinckhove' }
+            ]
+        },
+        {
+            id: 'visite-borre-cassel-2025',
+            date: '2025-08-31',
+            category: 'Visite',
+            title: 'Visite — Borre et Cassel',
+            summary: "Saint-Jean-Baptiste de Borre (tour de guet) et collégiale Notre-Dame de la Crypte de Cassel, classée monument historique.",
+            tags: ['visite', 'Borre', 'Cassel', 'estivale', '2025'],
+            photos: [
+                { src: 'images/2025/Borre.jpeg', alt: 'Borre' },
+                { src: 'images/2025/Cassel.jpeg', alt: 'Cassel' }
+            ]
+        },
+        {
+            id: 'visite-bollezeele-killem-2025',
+            date: '2025-08-24',
+            category: 'Visite',
+            title: 'Visite — Bollezeele et Killem',
+            summary: "Saint-Wandrille de Bollezeele (mobilier classé) et Saint-Michel de Killem avec ses retables baroques.",
+            tags: ['visite', 'Bollezeele', 'Killem', 'estivale', '2025'],
+            photos: [
+                { src: 'images/2025/Bollezeele.png', alt: 'Bollezeele' },
+                { src: 'images/2025/Killem.png', alt: 'Killem' }
+            ]
+        },
+        {
+            id: 'visite-herzeele-wulverdinghe-2025',
+            date: '2025-08-17',
+            category: 'Visite',
+            title: 'Visite — Herzeele et Wulverdinghe',
+            summary: "Notre-Dame de l'Assomption d'Herzeele (église-halle en briques XVIᵉ) et Saint-Martin de Wulverdinghe (façade romane).",
+            tags: ['visite', 'Herzeele', 'Wulverdinghe', 'estivale', '2025'],
+            photos: [
+                { src: 'images/2025/Herzeele.jpeg', alt: 'Herzeele' },
+                { src: 'images/2025/Wulverdinghe.jpeg', alt: 'Wulverdinghe' }
+            ]
+        },
+        {
+            id: 'sortie-douai-2025',
+            date: '2025-05-15',
+            category: 'Sortie',
+            title: 'Sortie culturelle à Douai',
+            summary: "40 participants ont découvert la collégiale Saint-Pierre, les vitraux de Paul Bony, et l'exposition Nicolas-Guy Brenet au musée de la Chartreuse.",
+            body: "<p>Accueillis à la collégiale Saint-Pierre par Françoise Baligand, les participants ont admiré son architecture classique du XVIIIᵉ siècle, ses œuvres religieuses majeures et les vitraux de Paul Bony. La visite s'est poursuivie au musée de la Chartreuse avec une exposition consacrée au peintre Nicolas-Guy Brenet.</p>",
+            tags: ['sortie', 'Douai', 'culture', 'Brenet', 'Bony'],
+            docs: [
+                { label: 'Lire le compte-rendu', href: 'images/2025/Douai/2025 article Douai.pdf' }
+            ],
+            carousel: [
+                { src: 'images/2025/Douai/DSC_0178.JPG', alt: 'Douai 1/6' },
+                { src: 'images/2025/Douai/DSC_0186.JPG', alt: 'Douai 2/6' },
+                { src: 'images/2025/Douai/DSC_0203.JPG', alt: 'Douai 3/6' },
+                { src: 'images/2025/Douai/DSC_0207.JPG', alt: 'Douai 4/6' },
+                { src: 'images/2025/Douai/DSC_0257.JPG', alt: 'Douai 5/6' },
+                { src: 'images/2025/Douai/DSC_0269.JPG', alt: 'Douai 6/6' }
+            ]
+        },
+        {
+            id: 'ag-boeschepe-2025',
+            date: '2025-03-29',
+            category: 'AG',
+            title: 'Assemblée Générale à Boeschèpe',
+            summary: "AG sous la présidence de Régine Beaucamp, visite guidée par Réginald Pasquier, rapports approuvés à l'unanimité.",
+            body: "<p>Après une visite guidée de l'église Saint-Martin par Réginald Pasquier, le rapport d'activités 2024 et le rapport financier ont été approuvés à l'unanimité. Le renouvellement partiel du conseil a reconduit tous les membres sortants.</p>",
+            tags: ['AG', 'assemblée générale', 'Boeschèpe', 'Beaucamp', 'Pasquier', '2025'],
+            docs: [
+                { label: 'Lire le compte-rendu', href: 'images/2025/Boeschepe/CR.AG 2025 - Boeschepe.pdf' }
+            ],
+            carousel: [
+                { src: 'images/2025/Boeschepe/AG Boeschepe 29 mars 2025.jpg', alt: 'AG Boeschèpe 1/9' },
+                { src: 'images/2025/Boeschepe/AG Boeschèpe.JPG', alt: 'AG Boeschèpe 2/9' },
+                { src: 'images/2025/Boeschepe/église de Boeschèpe 1.JPG', alt: 'Église Boeschèpe 3/9' },
+                { src: 'images/2025/Boeschepe/église de Boeschèpe 2.JPG', alt: 'Église Boeschèpe 4/9' },
+                { src: 'images/2025/Boeschepe/église de Boeschèpe 3.JPG', alt: 'Église Boeschèpe 5/9' },
+                { src: 'images/2025/Boeschepe/église de Boeschèpe 4.JPG', alt: 'Église Boeschèpe 6/9' },
+                { src: 'images/2025/Boeschepe/photo de groupe à Boeschèpe.JPG', alt: 'Groupe Boeschèpe 7/9' },
+                { src: "images/2025/Boeschepe/visite de l'église.JPG", alt: 'Visite 8/9' },
+                { src: 'images/2025/Boeschepe/vitrail église de Boeschèpe.JPG', alt: 'Vitrail 9/9' }
+            ]
+        },
+        {
+            id: 'rapport-2024',
+            date: '2024-12-31',
+            category: 'Rapport',
+            title: "Rapport d'activités 2024",
+            summary: "Depuis l'AG du 6 avril 2024 à Gravelines : réunions du conseil, salon de généalogie, sortie à Abbeville, forum à Hazebrouck. 470 visiteurs en été.",
+            tags: ['rapport', 'activités', '2024', 'Gravelines', 'Abbeville'],
+            docs: [
+                { label: 'Lire le rapport', href: "images/2025/Rapport Moral et d'activité  2024 pour AG.pdf" }
+            ]
+        },
+        {
+            id: 'deces-de-broucker',
+            date: '2021-10-04',
+            category: 'Hommage',
+            title: 'Le décès de José De Broucker',
+            summary: "Journaliste, catholique engagé, président de l'association pendant 15 années. Décédé le 4 octobre 2021, en la fête de saint François d'Assise.",
+            tags: ['hommage', 'De Broucker', 'président', '2021'],
+            docs: [
+                { label: "Plus d'info", href: 'https://www.facebook.com/groups/810126146577985/permalink/887238255533440/' }
+            ]
+        },
+        {
+            id: 'journee-guides-hazebrouck-2021',
+            date: '2021-10-20',
+            category: 'Formation',
+            title: 'Journée des guides à Hazebrouck',
+            summary: "Sur proposition d'Aïda Tellier, les guides se sont retrouvés à Hazebrouck pour partager un moment de convivialité.",
+            tags: ['guides', 'Hazebrouck', 'Tellier', '2021'],
+            docs: [
+                { label: 'Lire le compte-rendu', href: 'images/previous-image/Retables_2021_CR_Journee_des_guides_Hazebouck_20oct_2021(1).pdf' }
+            ],
+            carousel: [
+                { src: 'images/previous-image/DSC_0572(1).JPG', alt: 'Hazebrouck 1/12' },
+                { src: 'images/previous-image/DSC_0580(2).JPG', alt: 'Hazebrouck 2/12' },
+                { src: 'images/previous-image/DSC_0583(1).JPG', alt: 'Hazebrouck 3/12' },
+                { src: 'images/previous-image/209.JPG', alt: 'Hazebrouck 4/12' },
+                { src: 'images/previous-image/210.JPG', alt: 'Hazebrouck 5/12' },
+                { src: 'images/previous-image/211.JPG', alt: 'Hazebrouck 6/12' },
+                { src: 'images/previous-image/212.JPG', alt: 'Hazebrouck 7/12' },
+                { src: 'images/previous-image/213.JPG', alt: 'Hazebrouck 8/12' },
+                { src: 'images/previous-image/214.JPG', alt: 'Hazebrouck 9/12' },
+                { src: 'images/previous-image/215.JPG', alt: 'Hazebrouck 10/12' },
+                { src: 'images/previous-image/216.JPG', alt: 'Hazebrouck 11/12' },
+                { src: 'images/previous-image/217.JPG', alt: 'Hazebrouck 12/12' }
+            ]
+        }
+    ];
+
     // ===== EXPORT =====
     window.RFContent = {
         galleries: {
@@ -313,6 +533,7 @@
         articles: {
             hertel: articleHertel,
             oger: articleOger
-        }
+        },
+        actualites: actualites
     };
 })();

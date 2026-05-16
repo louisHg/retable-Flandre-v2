@@ -153,11 +153,9 @@
 
                 <nav class="rf-sidebar-nav">
                     <a class="nav-link" :class="{ active: currentPage === 'index' }" href="index.html" @click="handleNavClick">Accueil</a>
-                    <a class="nav-link" :class="{ active: currentPage === 'generic' }" href="generic.html" @click="handleNavClick">Association</a>
-                    <a class="nav-link" :class="{ active: currentPage === 'activites' }" href="activites.html" @click="handleNavClick">Activités</a>
+                    <a class="nav-link" :class="{ active: currentPage === 'generic' }" href="generic.html" @click="handleNavClick">Qui sommes-nous ?</a>
                     <a class="nav-link" :class="{ active: currentPage === 'retable' }" href="qu-est-ce-qu-un-retable.html" @click="handleNavClick">Qu'est-ce qu'un retable ?</a>
-                    <a class="nav-link" :class="{ active: currentPage === 'depliants' }" href="depliants-eglises.html" @click="handleNavClick">Dépliants des églises à retables</a>
-                    <a class="nav-link" :class="{ active: currentPage === 'visite' }" href="visite-eglises.html" @click="handleNavClick">Visite des églises</a>
+                    <a class="nav-link" :class="{ active: currentPage === 'visite' }" href="depliants-eglises.html" @click="handleNavClick">Que peut-on visiter ?</a>
                     <a class="nav-link" :class="{ active: currentPage === 'actualites' }" href="actualites.html" @click="handleNavClick">Actualités</a>
                     <a class="nav-link" :class="{ active: currentPage === 'boutique' }" href="boutique.html" @click="handleNavClick">Boutique</a>
                     <a class="nav-link" href="#section_contact" @click.prevent="scrollToContact">Contact</a>
@@ -933,6 +931,233 @@
     };
 
     // ==========================================
+    // 📰 rf-actu-feed — feed unifié des actualités (filtres + recherche + pagination)
+    // ==========================================
+    const RFActuFeed = {
+        props: {
+            perPage: { type: Number, default: 6 }
+        },
+        data() {
+            const all = (window.RFContent && window.RFContent.actualites) || [];
+            return {
+                allItems: all.slice().sort(function (a, b) {
+                    return (b.date || '').localeCompare(a.date || '');
+                }),
+                search: '',
+                activeCategory: 'all',
+                currentPage: 1
+            };
+        },
+        computed: {
+            categories() {
+                const set = new Set();
+                this.allItems.forEach(function (it) { if (it.category) set.add(it.category); });
+                return ['all'].concat(Array.from(set).sort());
+            },
+            filtered() {
+                const q = this.normalize(this.search);
+                const cat = this.activeCategory;
+                const self = this;
+                return this.allItems.filter(function (it) {
+                    if (cat !== 'all' && it.category !== cat) return false;
+                    if (!q) return true;
+                    const hay = self.normalize(
+                        [it.title, it.summary, it.category, (it.tags || []).join(' ')].join(' ')
+                    );
+                    return hay.indexOf(q) !== -1;
+                });
+            },
+            paginated() {
+                const start = (this.currentPage - 1) * this.perPage;
+                return this.filtered.slice(start, start + this.perPage);
+            },
+            totalPages() {
+                return Math.max(1, Math.ceil(this.filtered.length / this.perPage));
+            },
+            pageNumbers() {
+                const pages = [];
+                for (let i = 1; i <= this.totalPages; i++) pages.push(i);
+                return pages;
+            }
+        },
+        watch: {
+            search() { this.currentPage = 1; },
+            activeCategory() { this.currentPage = 1; }
+        },
+        mounted() {
+            this.initCarousels();
+            // Si une ancre est dans l'URL, essayer de scroller vers l'item correspondant
+            if (window.location.hash) {
+                const id = window.location.hash.slice(1);
+                const item = this.allItems.find(function (it) { return it.id === id; });
+                if (item) {
+                    // Détecter sur quelle page se trouve l'item
+                    const idx = this.filtered.findIndex(function (it) { return it.id === id; });
+                    if (idx >= 0) {
+                        this.currentPage = Math.floor(idx / this.perPage) + 1;
+                    }
+                }
+            }
+        },
+        updated() {
+            this.initCarousels();
+        },
+        methods: {
+            normalize(s) {
+                return (s || '').toString().toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '');
+            },
+            setCategory(cat) {
+                this.activeCategory = cat;
+            },
+            goToPage(p) {
+                this.currentPage = Math.max(1, Math.min(this.totalPages, p));
+                this.$nextTick(() => {
+                    const el = document.getElementById('section_actu_feed');
+                    if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                });
+            },
+            formatDate(date) {
+                if (!date) return '';
+                const months = ['janvier', 'février', 'mars', 'avril', 'mai', 'juin',
+                                'juillet', 'août', 'septembre', 'octobre', 'novembre', 'décembre'];
+                const m = date.match(/^(\d{4})-(\d{2})-(\d{2})$/);
+                if (m) {
+                    const y = m[1];
+                    const mo = parseInt(m[2], 10) - 1;
+                    const d = parseInt(m[3], 10);
+                    return d + ' ' + months[mo] + ' ' + y;
+                }
+                return date;
+            },
+            carouselId(item) {
+                return 'carouselActu_' + (item.id || '').replace(/[^a-z0-9]/gi, '_');
+            },
+            initCarousels() {
+                this.$nextTick(() => {
+                    if (typeof bootstrap === 'undefined') return;
+                    document.querySelectorAll('#section_actu_feed .carousel').forEach((el) => {
+                        if (!bootstrap.Carousel.getInstance(el)) {
+                            new bootstrap.Carousel(el, { interval: 4000, ride: 'carousel' });
+                        }
+                    });
+                });
+            }
+        },
+        template: `
+            <section class="section-padding" id="section_actu_feed" style="padding-top:30px;padding-bottom:60px;">
+                <div class="container">
+
+                    <!-- Contrôles : recherche + filtres -->
+                    <div class="rf-actu-controls mb-3">
+                        <div class="rf-actu-search">
+                            <i class="bi bi-search"></i>
+                            <input type="search" v-model="search"
+                                   placeholder="Rechercher (AG, visite, Boeschèpe, formation...)"
+                                   aria-label="Rechercher dans les actualités">
+                        </div>
+                        <div class="rf-actu-filters">
+                            <button v-for="cat in categories" :key="cat"
+                                    type="button"
+                                    :class="['rf-actu-filter', { active: activeCategory === cat }]"
+                                    @click="setCategory(cat)">
+                                {{ cat === 'all' ? 'Toutes' : cat }}
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Compteur résultats -->
+                    <p class="text-muted small mb-4" v-if="filtered.length > 0">
+                        {{ filtered.length }} actualité<span v-if="filtered.length > 1">s</span>
+                        <span v-if="totalPages > 1"> — page {{ currentPage }} / {{ totalPages }}</span>
+                    </p>
+
+                    <!-- Empty state -->
+                    <div v-if="filtered.length === 0" class="rf-actu-empty">
+                        <i class="bi bi-inbox"></i>
+                        <p class="mt-3 mb-0">Aucune actualité ne correspond à votre recherche.</p>
+                    </div>
+
+                    <!-- Liste des actualités -->
+                    <article v-for="item in paginated" :key="item.id" :id="item.id" class="rf-actu-card">
+                        <div class="d-flex align-items-center flex-wrap gap-2 mb-2">
+                            <span class="rf-actu-date">
+                                <i class="bi bi-calendar-event me-1"></i>{{ formatDate(item.date) }}
+                            </span>
+                            <span class="rf-actu-category">{{ item.category }}</span>
+                        </div>
+                        <h3>{{ item.title }}</h3>
+                        <p class="rf-actu-summary">{{ item.summary }}</p>
+                        <div v-if="item.body" v-html="item.body"></div>
+
+                        <!-- Documents PDF -->
+                        <div v-if="item.docs && item.docs.length" class="rf-actu-buttons">
+                            <a v-for="doc in item.docs" :key="doc.href"
+                               :href="doc.href" target="_blank"
+                               class="btn custom-btn btn-sm">
+                                <i class="bi bi-file-pdf me-2"></i>{{ doc.label }}
+                            </a>
+                        </div>
+
+                        <!-- Photos (grille) -->
+                        <div v-if="item.photos && item.photos.length" class="rf-actu-media">
+                            <div class="row g-3" style="max-width:600px;">
+                                <div v-for="(photo, idx) in item.photos" :key="idx"
+                                     :class="item.photos.length <= 2 ? 'col-6' : 'col-6 col-md-3'">
+                                    <img :src="photo.src" :alt="photo.alt" loading="lazy"
+                                         class="img-fluid rounded-4 shadow-sm"
+                                         style="width:100%;height:180px;object-fit:cover;">
+                                    <p v-if="photo.caption" class="text-center mt-1 mb-0"
+                                       style="font-size:.8rem;color:#717275;">{{ photo.caption }}</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Carrousel -->
+                        <div v-if="item.carousel && item.carousel.length" class="rf-actu-media">
+                            <div :id="carouselId(item)" class="carousel slide rounded-4 shadow-sm"
+                                 data-bs-ride="carousel" style="max-width:500px;">
+                                <div class="carousel-inner rounded-4">
+                                    <div v-for="(img, idx) in item.carousel" :key="idx"
+                                         :class="['carousel-item', { active: idx === 0 }]">
+                                        <img :src="img.src" :alt="img.alt" class="d-block w-100 rounded-4"
+                                             style="height:320px;object-fit:cover;">
+                                    </div>
+                                </div>
+                                <button class="carousel-control-prev" type="button"
+                                        :data-bs-target="'#' + carouselId(item)" data-bs-slide="prev">
+                                    <span class="carousel-control-prev-icon"></span>
+                                </button>
+                                <button class="carousel-control-next" type="button"
+                                        :data-bs-target="'#' + carouselId(item)" data-bs-slide="next">
+                                    <span class="carousel-control-next-icon"></span>
+                                </button>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- Pagination -->
+                    <nav v-if="totalPages > 1" class="rf-pagination" aria-label="Pagination">
+                        <button class="rf-page-btn" :disabled="currentPage === 1"
+                                @click="goToPage(currentPage - 1)" aria-label="Précédent">
+                            <i class="bi bi-chevron-left"></i>
+                        </button>
+                        <button v-for="p in pageNumbers" :key="p"
+                                :class="['rf-page-btn', { active: p === currentPage }]"
+                                @click="goToPage(p)">
+                            {{ p }}
+                        </button>
+                        <button class="rf-page-btn" :disabled="currentPage === totalPages"
+                                @click="goToPage(currentPage + 1)" aria-label="Suivant">
+                            <i class="bi bi-chevron-right"></i>
+                        </button>
+                    </nav>
+
+                </div>
+            </section>
+        `
+    };
+
+    // ==========================================
     // 🔔 rf-news-banner — bandeau de nouveautés (page d'accueil)
     // ==========================================
     const RFNewsBanner = {
@@ -1002,7 +1227,8 @@
         'rf-gallery-eglises': RFGalleryEglises,
         'rf-gallery-activites': RFGalleryActivites,
         'rf-lightbox': RFLightbox,
-        'rf-news-banner': RFNewsBanner
+        'rf-news-banner': RFNewsBanner,
+        'rf-actu-feed': RFActuFeed
     };
 
     console.log('✅ RFComponents chargés :', Object.keys(window.RFComponents).length, 'composants');

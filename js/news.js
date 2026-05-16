@@ -1,55 +1,65 @@
 // ==========================================
-// NEWS / NOUVEAUTES — donnees + etat lu/non-lu
+// NEWS — couche fine sur RFContent.actualites
 // ==========================================
 //
-// Pour ajouter une nouveaute :
-//   1. Ajouter une entree dans RFNews ci-dessous (id unique, date au format YYYY-MM-DD)
-//   2. Poser id="<anchor>" sur l'element cible dans la page concernee
+// Cette API alimente la cloche de la sidebar et le bandeau d'accueil.
+// La source de vérité unique = RFContent.actualites (dans js/content.js).
 //
-// La cloche de la sidebar et le bandeau d'accueil se mettent a jour automatiquement.
+// Pour qu'une actu apparaisse dans la cloche, deux options :
+//   - automatique : c'est l'une des MAX_BELL plus récentes
+//   - manuelle    : ajouter "featured: true" à l'item dans content.js
+//
+// Etat lu/non-lu : localStorage, persisté par id.
+// Etat dismiss du bandeau : localStorage, mémorise l'id le plus récent vu.
+//
+// ==========================================
 
 (function () {
     'use strict';
 
     const STORAGE_KEY = 'rf-news-read';
     const BANNER_KEY = 'rf-news-banner-dismissed';
+    const MAX_BELL = 5;    // nb max d'items dans la cloche
+    const MAX_BANNER = 3;  // nb max d'items dans le bandeau d'accueil
 
-    // ----- DONNEES -----
-    // Plus recent en premier (l'ordre n'a pas d'importance, on trie par date).
-    const RFNews = [
-        {
-            id: 'galerie-evenements-2026',
-            date: '2026-05-16',
-            label: 'Nos événements en images',
-            page: 'activites.html',
-            anchor: 'section_evenements',
-            description: 'Retours en photos sur les AG, visites guidées et rencontres récentes.'
-        },
-        {
-            id: 'visite-eglises-2026',
-            date: '2026-05-16',
-            label: 'Galerie : visite des églises',
-            page: 'visite-eglises.html',
-            anchor: 'section_visite',
-            description: '39 photos d\'églises de Flandre et des vitraux d\'Arnèke à découvrir.'
-        },
-        {
-            id: 'redecouvrir-51',
-            date: '2026-01-15',
-            label: 'Lettre Redecouvrir N.51',
-            page: 'index.html',
-            anchor: 'section_hero',
-            description: "La nouvelle lettre d'infos est en ligne, telechargez-la depuis l'accueil."
-        },
-        {
-            id: 'depliants-eglises',
-            date: '2025-11-10',
-            label: 'Depliants des eglises a retables',
-            page: 'depliants-eglises.html',
-            anchor: '',
-            description: '36 depliants paroissiaux sont desormais consultables en ligne.'
-        }
-    ];
+    // ----- ACCES AUX DONNEES (depuis content.js) -----
+    function rawActualites() {
+        return (window.RFContent && window.RFContent.actualites) || [];
+    }
+
+    // Convertit une actualité en item de news (forme attendue par la cloche + bandeau)
+    function toNewsItem(actu) {
+        return {
+            id: actu.id,
+            date: actu.date,
+            label: actu.title,
+            page: 'actualites.html',
+            anchor: actu.id,
+            description: actu.summary,
+            category: actu.category,
+            featured: !!actu.featured
+        };
+    }
+
+    function sortedByDateDesc() {
+        return rawActualites()
+            .slice()
+            .sort(function (a, b) { return (b.date || '').localeCompare(a.date || ''); })
+            .map(toNewsItem);
+    }
+
+    // Items à afficher dans la cloche : tous les "featured" + complétés par les plus récents
+    function bellItems() {
+        const all = sortedByDateDesc();
+        const featured = all.filter(function (it) { return it.featured; });
+        if (featured.length >= MAX_BELL) return featured.slice(0, MAX_BELL);
+        const others = all.filter(function (it) { return !it.featured; });
+        return featured.concat(others).slice(0, MAX_BELL);
+    }
+
+    function latest(n) {
+        return sortedByDateDesc().slice(0, n);
+    }
 
     // ----- ETAT LU / NON-LU (localStorage) -----
     function readSet() {
@@ -80,31 +90,18 @@
     }
 
     function markAllAsRead() {
-        const set = new Set(RFNews.map(function (n) { return n.id; }));
+        const set = new Set(bellItems().map(function (it) { return it.id; }));
         writeSet(set);
     }
 
     function unreadCount() {
         const set = readSet();
-        return RFNews.reduce(function (acc, n) {
-            return acc + (set.has(n.id) ? 0 : 1);
+        return bellItems().reduce(function (acc, it) {
+            return acc + (set.has(it.id) ? 0 : 1);
         }, 0);
     }
 
-    // ----- TRI / SELECTION -----
-    function sortedByDateDesc() {
-        return RFNews.slice().sort(function (a, b) {
-            return (b.date || '').localeCompare(a.date || '');
-        });
-    }
-
-    function latest(n) {
-        return sortedByDateDesc().slice(0, n);
-    }
-
     // ----- BANDEAU ACCUEIL (etat dismiss) -----
-    // On stocke l'id le plus recent vu par l'utilisateur.
-    // Le bandeau ne reapparait que lorsqu'une nouveaute plus recente est publiee.
     function bannerDismissedUpTo() {
         try {
             return localStorage.getItem(BANNER_KEY) || '';
@@ -112,22 +109,21 @@
     }
 
     function dismissBanner() {
-        const top = sortedByDateDesc()[0];
+        const top = latest(1)[0];
         if (!top) return;
         try { localStorage.setItem(BANNER_KEY, top.id); } catch (e) {}
     }
 
     function shouldShowBanner() {
-        const top = sortedByDateDesc()[0];
+        const top = latest(1)[0];
         if (!top) return false;
         return bannerDismissedUpTo() !== top.id;
     }
 
     // ----- EXPORT -----
-    window.RFNews = RFNews;
     window.RFNewsAPI = {
-        all: sortedByDateDesc,
-        latest: latest,
+        all: function () { return bellItems(); },     // pour la cloche
+        latest: function (n) { return latest(n || MAX_BANNER); },  // pour le bandeau
         isRead: isRead,
         markAsRead: markAsRead,
         markAllAsRead: markAllAsRead,
