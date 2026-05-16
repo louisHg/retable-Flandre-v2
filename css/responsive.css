@@ -331,3 +331,245 @@ iframe {
     opacity: .9;
 }
 
+/* ─────────────────────────────────────────────────────
+   20. BANDEAU NOUVEAUTÉS (accueil) — mobile-first compact
+   Sur mobile, on cache les descriptions (cliquer = ouvrir
+   l'item) et on resserre tout pour ne pas voler le hero.
+───────────────────────────────────────────────────── */
+.rf-news-banner {
+    padding: 10px 0;
+}
+
+.rf-news-banner-inner {
+    padding: 0 14px;
+}
+
+.rf-news-banner-head {
+    margin-bottom: 6px;
+}
+
+.rf-news-banner-head .bi-megaphone-fill {
+    font-size: 1rem;
+}
+
+.rf-news-banner-title {
+    font-size: .8rem;
+}
+
+.rf-news-banner-close {
+    width: 28px;
+    height: 28px;
+    font-size: .85rem;
+}
+
+.rf-news-banner-list {
+    grid-template-columns: 1fr;
+    gap: 6px;
+}
+
+.rf-news-banner-list a {
+    padding: 8px 12px;
+}
+
+.rf-news-banner-list strong {
+    font-size: .9rem;
+    margin-bottom: 1px;
+}
+
+.rf-news-banner-list .rf-news-banner-date {
+    font-size: .7rem;
+    margin-bottom: 0;
+}
+
+/* Description : cachée sur mobile, visible à partir de 576px */
+.rf-news-banner-list .rf-news-banner-desc {
+    display: none;
+}
+
+@media (min-width: 576px) {
+    .rf-news-banner {
+        padding: 14px 0;
+    }
+
+    .rf-news-banner-head {
+        margin-bottom: 8px;
+    }
+
+    .rf-news-banner-head .bi-megaphone-fill {
+        font-size: 1.3rem;
+    }
+
+    .rf-news-banner-title {
+        font-size: .95rem;
+    }
+
+    .rf-news-banner-close {
+        width: 32px;
+        height: 32px;
+        font-size: 1rem;
+    }
+
+    .rf-news-banner-list {
+        grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+        gap: 10px;
+    }
+
+    .rf-news-banner-list a {
+        padding: 10px 14px;
+    }
+
+    .rf-news-banner-list strong {
+        font-size: .95rem;
+        margin-bottom: 2px;
+    }
+
+    .rf-news-banner-list .rf-news-banner-date {
+        font-size: .75rem;
+        margin-bottom: 4px;
+    }
+
+    .rf-news-banner-list .rf-news-banner-desc {
+        display: block;
+        font-size: .85rem;
+    }
+}
+
+@media (min-width: 768px) {
+    .rf-news-banner {
+        padding: 22px 0;
+    }
+
+    .rf-news-banner-inner {
+        padding: 0 20px;
+    }
+}
+
+/* ─────────────────────────────────────────────────────
+   21. SIDEBAR — cloche, panneau, scroll de la nav
+───────────────────────────────────────────────────── */
+.rf-sidebar-nav {
+    overflow-y: auto;
+    /* Laisse de la place au brand + cloche + footer */
+    max-height: calc(100vh - 360px);
+    /* Scrollbar discrète */
+    scrollbar-width: thin;
+}
+
+.rf-news-panel .rf-notification-list {
+    max-height: 45vh;
+    overflow-y: auto;
+}
+
+/* Écrans très courts (paysage mobile) : compacter la sidebar */
+@media (max-height: 650px) {
+    .rf-brand {
+        margin-top: 16px;
+        margin-bottom: 18px;
+    }
+
+    .rf-sidebar-bell {
+        padding: 8px 10px;
+        margin-bottom: 10px;
+    }
+
+    .rf-news-panel .rf-notification-list {
+        max-height: 35vh;
+    }
+
+    .rf-sidebar-nav {
+        max-height: calc(100vh - 220px);
+    }
+}
+
+/* Très petits écrans : badge cloche plus compact */
+@media (max-width: 360px) {
+    .rf-sidebar-bell {
+        font-size: .9rem;
+    }
+
+    .rf-bell-badge {
+        font-size: .7rem;
+        padding: 2px 6px;
+        min-width: 20px;
+    }
+}
+
+/* ─────────────────────────────────────────────────────
+   22. GALERIES (Visite, Activités) — grilles & captions
+───────────────────────────────────────────────────── */
+.rf-gallery-card img {
+    aspect-ratio: 4 / 3;
+    object-fit: cover;
+}
+
+.rf-gallery-caption {
+    font-size: .8rem;
+    padding: .4rem .5rem;
+}
+
+@media (min-width: 576px) {
+    .rf-gallery-caption {
+        font-size: .9rem;
+        padding: .5rem .75rem;
+    }
+}
+
+/* Vitraux Arnèke : carrés un peu plus généreux sur mobile */
+@media (max-width: 575px) {
+    #section_arneke + .row,
+    #section_arneke ~ .row {
+        --bs-gutter-x: .5rem;
+    }
+}
+
+/* ─────────────────────────────────────────────────────
+   23. ACTIVITÉS — galerie événements compacte sur mobile
+───────────────────────────────────────────────────── */
+@media (max-width: 575px) {
+    #section_evenements .row.g-2 img {
+        aspect-ratio: 16 / 10;
+    }
+
+    #section_evenements h3 {
+        font-size: 1.15rem;
+    }
+}
+
+/* ─────────────────────────────────────────────────────
+   24. ÉLÉMENTS GLOBAUX — sécurités responsive
+───────────────────────────────────────────────────── */
+
+/* Images jamais > leur container, jamais de débordement vertical violent */
+img {
+    max-width: 100%;
+    height: auto;
+}
+
+/* Boutons en groupe : wrap auto si nécessaire (au lieu d'étirer la page) */
+.d-flex.flex-wrap {
+    flex-wrap: wrap !important;
+}
+
+/* PDF / docs row : empilés sur très petit écran */
+@media (max-width: 480px) {
+    .rf-card-body a.btn,
+    .rf-card-body a.btn-outline-secondary {
+        width: 100%;
+    }
+}
+
+/* Force-cap les images "hero" col-lg-5 sur tablette/mobile, même hors about-section */
+@media (max-width: 991px) {
+    .col-lg-5 > img[style*="height: 420px"],
+    .col-lg-5 > img[style*="height:420px"] {
+        height: 320px !important;
+    }
+}
+
+@media (max-width: 575px) {
+    .col-lg-5 > img[style*="height: 420px"],
+    .col-lg-5 > img[style*="height:420px"] {
+        height: 220px !important;
+    }
+}
+
