@@ -73,7 +73,7 @@
   width: 56px;
   height: 56px;
   border-radius: 14px;
-  background: rgba(129, 178, 154, 0.15);
+  background: rgba(154, 176, 209, 0.15);
   color: var(--primary-color);
   display: inline-flex;
   align-items: center;
@@ -183,7 +183,7 @@
 }
 
 .rf-actu-date {
-  background: rgba(129, 178, 154, 0.18);
+  background: rgba(154, 176, 209, 0.18);
   color: var(--primary-color);
 }
 
@@ -265,7 +265,7 @@
 .rf-actu-search input:focus {
   outline: none;
   border-color: var(--primary-color);
-  box-shadow: 0 0 0 3px rgba(129, 178, 154, 0.18);
+  box-shadow: 0 0 0 3px rgba(154, 176, 209, 0.18);
 }
 
 .rf-actu-filters {
@@ -411,10 +411,10 @@
   width: 2px;
   background: linear-gradient(
     to bottom,
-    rgba(129, 178, 154, 0.2) 0%,
+    rgba(154, 176, 209, 0.2) 0%,
     var(--primary-color) 15%,
     var(--primary-color) 85%,
-    rgba(129, 178, 154, 0.2) 100%
+    rgba(154, 176, 209, 0.2) 100%
   );
 }
 
@@ -445,7 +445,7 @@
 .rf-timeline-item.is-highlight::before {
   background: var(--primary-color);
   border-color: #fff;
-  box-shadow: 0 0 0 4px var(--primary-color), 0 0 0 6px rgba(129, 178, 154, 0.3);
+  box-shadow: 0 0 0 4px var(--primary-color), 0 0 0 6px rgba(154, 176, 209, 0.3);
 }
 
 .rf-timeline-date {
@@ -559,12 +559,12 @@
 }
 
 .rf-eglise-card:hover .rf-eglise-card-cta {
-  color: #5a9d84;
+  color: #6B85AE;
 }
 
 /* ===== Bloc citation / chiffre clé ===== */
 .rf-pullquote {
-  background: rgba(129, 178, 154, 0.10);
+  background: rgba(154, 176, 209, 0.10);
   border-left: 4px solid var(--primary-color);
   padding: 1rem 1.25rem;
   border-radius: 0.5rem;
@@ -588,7 +588,7 @@
   gap: 0.75rem;
   margin-bottom: 1.25rem;
   padding-bottom: 0.5rem;
-  border-bottom: 2px solid rgba(129, 178, 154, 0.25);
+  border-bottom: 2px solid rgba(154, 176, 209, 0.25);
 }
 
 .rf-section-heading-icon {
@@ -596,7 +596,7 @@
   width: 44px;
   height: 44px;
   border-radius: 12px;
-  background: rgba(129, 178, 154, 0.15);
+  background: rgba(154, 176, 209, 0.15);
   color: var(--primary-color);
   display: inline-flex;
   align-items: center;

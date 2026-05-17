@@ -1,6 +1,6 @@
 /* ===== Bandeau Nouveautés (accueil) — strip compact 1 ligne ===== */
 .rf-news-banner {
-  background: linear-gradient(135deg, var(--primary-color) 0%, #5a9d84 100%);
+  background: linear-gradient(135deg, var(--primary-color) 0%, #6B85AE 100%);
   color: #fff;
   padding: 8px 0;
 }

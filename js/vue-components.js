@@ -215,7 +215,7 @@
     // ==========================================
     const RFNewsletterCta = {
         template: `
-            <section class="section-padding" style="background: linear-gradient(135deg, var(--primary-color) 0%, #5a9d84 100%); padding-top: 60px; padding-bottom: 60px;">
+            <section class="section-padding" style="background: linear-gradient(135deg, var(--primary-color) 0%, #6B85AE 100%); padding-top: 60px; padding-bottom: 60px;">
                 <div class="container">
                     <div class="row justify-content-center text-center">
                         <div class="col-lg-8">
