@@ -205,7 +205,7 @@
     // Une fiche par dépliant disponible.
     // - name        : nom à afficher
     // - image       : chemin photo (null si pas encore disponible → placeholder coloré)
-    // - description : courte phrase de présentation (optionnelle, à enrichir au fur et à mesure)
+    // - description : courte phrase de présentation (optionnelle)
     // - tags        : pour la recherche (en plus du nom et de la description)
     // - pdf         : lien vers le dépliant paroissial
     //
@@ -470,6 +470,82 @@
         }
     ];
 
+    // ===== PLANS INTERACTIFS DES ÉGLISES =====
+    //
+    // Pour chaque église, structure :
+    //   { plan: 'images/eglises-plans/xxx.jpg',
+    //     points: [
+    //       { n: 1, x: 50, y: 12, title: '...', body: 'description...' },
+    //       ...
+    //     ] }
+    //
+    // - n     : numéro du point sur le plan (visible sur la pastille)
+    // - x, y  : position en % sur l'image (0,0 = top-left, 100,100 = bottom-right)
+    // - title : courte étiquette
+    // - body  : description (peut contenir du HTML)
+    //
+    // La clé de premier niveau est le nom de la commune en minuscules sans accents
+    // (utiliser la même normalisation que pour les fichiers PDF).
+    //
+    const eglisesPlans = {
+        wormhout: {
+            plan: 'images/eglises-plans/wormhout.jpg',
+            points: [
+                {
+                    n: 1, x: 50, y: 14,
+                    title: "Retable du maître-autel",
+                    body: "Retable lambris de la deuxième partie du XVIIIᵉ siècle, épouse les murs de l'abside jusqu'au berceau lambrissé. Thème : « Gloire à la Trinité et au Christ présent dans l'eucharistie ». Bois peint faux marbre brun et or veiné de blanc et rouge. Voûte en cul-de-four séparée en cinq compartiments représentant saint Placide, saint Vincent de Paul, saint François-Xavier et saint Maurus. Au centre, ostensoir rayonnant, anges et Jésus."
+                },
+                {
+                    n: 2, x: 26, y: 13,
+                    title: "Retable nord — Vierge Marie",
+                    body: "Installé en 1785. Plan demi-circulaire concave, 3 travées séparées par des colonnes corinthiennes. Style baroque, bois peint faux marbre brun veiné de vert. Transformé au XIXᵉ. Niche centrale : Notre-Dame des Larmes (1876)."
+                },
+                {
+                    n: 3, x: 74, y: 13,
+                    title: "Retable sud — Sainte Famille (M.H.)",
+                    body: "Restauré en 2013, caractéristique du XVIIᵉ siècle. Une seule travée + ailerons. Structure en chêne, faux marbre veiné ocre et vert, rehauts d'or. Chapiteaux corinthiens. Tableau d'autel : Sainte Famille. Niche supérieure : saint Nicolas (XIXᵉ)."
+                },
+                {
+                    n: 4, x: 50, y: 26,
+                    title: "Table de communion (M.H.)",
+                    body: "Style Louis XV en chêne sculpté, offerte en 1731 par Alexandre Van De Walle, curé. L'abbé Blanckaert la fait exécuter en 1763. Dix panneaux figuratifs représentent le mystère de l'Eucharistie (Ancien et Nouveau Testament). En 1881, agrandissement du chœur avec recul de la partie centrale."
+                },
+                {
+                    n: 5, x: 32, y: 50,
+                    title: "Chaire à prêcher",
+                    body: "Style Empire, chêne coloré acajou. Donnée en 1841 par Ignace Coudeville, marguillier. Démontée en 1966 : la cuve est conservée dans l'abside sud, avec la statue de saint Pierre qui lui servait de support."
+                },
+                {
+                    n: 6, x: 26, y: 65,
+                    title: "Les six confessionnaux (M.H.)",
+                    body: "Trois confessionnaux rectangulaires de 1731, décor rocaille, donnés par le curé Alexandre Van De Walle. Trois autres galbés, style baroque, plutôt de la fin du XVIIIᵉ siècle."
+                },
+                {
+                    n: 7, x: 50, y: 78,
+                    title: "Les portails",
+                    body: "Vers 1723, Alexandre Van De Walle élève deux nouveaux portails en chêne se faisant face à l'entrée de l'église, de style Renaissance."
+                },
+                {
+                    n: 8, x: 50, y: 92,
+                    title: "Tribune, buffet d'orgue et orgue",
+                    body: "Seul subsiste le positif d'un instrument antérieur, mis en place en 1823. Le grand orgue actuel a été racheté à l'église Saint-Éloi de Dunkerque et installé en 1856. Restauration complète en 1912 par Frédéric Loncke, facteur d'orgues."
+                },
+                {
+                    n: 9, x: 50, y: 38,
+                    title: "Les stalles",
+                    body: "Style néogothique, réalisées par les ateliers Collesson à Wormhout (nombreuses œuvres dans les églises de Flandre). Mises en place en 1863 après agrandissement du chœur."
+                },
+                {
+                    n: 10, x: 74, y: 65,
+                    title: "Fonts baptismaux",
+                    body: "Cuve à droite quand on entre dans l'église. La cérémonie de baptême se déroule maintenant près de la table de communion. La chapelle dédiée originellement aux fonts est maintenant consacrée au monument aux morts."
+                }
+            ]
+        }
+        // À enrichir progressivement : autres églises sur le même modèle.
+    };
+
     // ===== EXPORT =====
     window.RFContent = {
         galleries: {
@@ -481,6 +557,7 @@
             oger: articleOger
         },
         actualites: actualites,    // feed unifié + source de la cloche
-        eglisesVisite: eglisesVisite  // 37 fiches églises (page 'Que peut-on visiter ?')
+        eglisesVisite: eglisesVisite, // 37 fiches églises (page 'Que peut-on visiter ?')
+        eglisesPlans: eglisesPlans    // plans interactifs (mvp : Wormhout — à enrichir)
     };
 })();

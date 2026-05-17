@@ -579,10 +579,12 @@
     const RFEglisesGrid = {
         data() {
             const list = (window.RFContent && window.RFContent.eglisesVisite) || [];
+            const plans = (window.RFContent && window.RFContent.eglisesPlans) || {};
             return {
                 items: list.slice().sort(function (a, b) {
                     return a.name.localeCompare(b.name, 'fr');
                 }),
+                plansAvailable: plans,
                 search: ''
             };
         },
@@ -604,6 +606,17 @@
         methods: {
             normalize(s) {
                 return (s || '').toString().toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '');
+            },
+            slug(name) {
+                return this.normalize(name).replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '');
+            },
+            hasPlan(eglise) {
+                return !!this.plansAvailable[this.slug(eglise.name)];
+            },
+            openPlan(eglise) {
+                document.dispatchEvent(new CustomEvent('rf-open-plan', {
+                    detail: { slug: this.slug(eglise.name), name: eglise.name }
+                }));
             },
             // Hash déterministe du nom → teinte HSL pour les placeholders
             hueForName(name) {
@@ -644,7 +657,7 @@
                     <div class="row g-3">
                         <div v-for="eglise in filtered" :key="eglise.pdf"
                              class="col-lg-3 col-md-4 col-sm-6 col-12">
-                            <a :href="eglise.pdf" target="_blank" class="rf-eglise-card">
+                            <div class="rf-eglise-card">
                                 <div class="rf-eglise-card-media">
                                     <img v-if="eglise.image" :src="eglise.image" :alt="eglise.name" loading="lazy">
                                     <div v-else class="rf-eglise-card-placeholder"
@@ -656,16 +669,133 @@
                                     <h4>{{ eglise.name }}</h4>
                                     <p v-if="eglise.description">{{ eglise.description }}</p>
                                     <p v-else class="fst-italic" style="opacity:.6;">Église à retables (XVIIᵉ–XVIIIᵉ).</p>
-                                    <span class="rf-eglise-card-cta">
-                                        <i class="bi bi-file-pdf"></i>Dépliant
-                                    </span>
+                                    <div class="rf-eglise-card-actions">
+                                        <button v-if="hasPlan(eglise)" type="button"
+                                                class="rf-eglise-btn rf-eglise-btn-primary"
+                                                @click="openPlan(eglise)">
+                                            <i class="bi bi-geo-alt"></i>Plan interactif
+                                        </button>
+                                        <a :href="eglise.pdf" target="_blank"
+                                           class="rf-eglise-btn rf-eglise-btn-outline">
+                                            <i class="bi bi-file-pdf"></i>Dépliant
+                                        </a>
+                                    </div>
                                 </div>
-                            </a>
+                            </div>
                         </div>
                     </div>
 
                 </div>
             </section>
+        `
+    };
+
+    // ==========================================
+    // 🗺️ rf-eglise-plan-modal — Plan interactif de l'église (modale)
+    // ==========================================
+    const RFEglisePlanModal = {
+        data() {
+            return {
+                open: false,
+                slug: null,
+                churchName: '',
+                activeIdx: null
+            };
+        },
+        computed: {
+            plan() {
+                const plans = window.RFContent && window.RFContent.eglisesPlans;
+                return plans && this.slug ? plans[this.slug] : null;
+            },
+            points() { return this.plan ? this.plan.points : []; },
+            activePoint() {
+                return this.activeIdx !== null ? this.points[this.activeIdx] : null;
+            }
+        },
+        mounted() {
+            this._onOpen = (e) => {
+                if (!e || !e.detail) return;
+                const slug = e.detail.slug;
+                const plans = window.RFContent && window.RFContent.eglisesPlans;
+                if (!plans || !plans[slug]) return;
+                this.slug = slug;
+                this.churchName = e.detail.name || slug;
+                this.activeIdx = null;
+                this.open = true;
+                document.body.style.overflow = 'hidden';
+            };
+            this._onKey = (e) => {
+                if (!this.open) return;
+                if (e.key === 'Escape') this.close();
+            };
+            document.addEventListener('rf-open-plan', this._onOpen);
+            document.addEventListener('keydown', this._onKey);
+        },
+        beforeUnmount() {
+            if (this._onOpen) document.removeEventListener('rf-open-plan', this._onOpen);
+            if (this._onKey) document.removeEventListener('keydown', this._onKey);
+        },
+        methods: {
+            close() {
+                this.open = false;
+                document.body.style.overflow = '';
+            },
+            selectPoint(idx) {
+                this.activeIdx = this.activeIdx === idx ? null : idx;
+            }
+        },
+        template: `
+            <div v-if="open && plan" class="rf-plan-modal" role="dialog" aria-modal="true"
+                 @click.self="close">
+                <button type="button" class="rf-plan-modal-close" @click="close" aria-label="Fermer">✕</button>
+
+                <div class="rf-plan-modal-content">
+                    <header class="rf-plan-modal-header">
+                        <h3>{{ churchName }} — Plan interactif</h3>
+                        <p class="text-muted mb-0">
+                            Cliquez sur un numéro du plan ou de la liste pour découvrir l'élément correspondant.
+                        </p>
+                    </header>
+
+                    <div class="rf-plan-modal-body">
+                        <div class="rf-plan-modal-mapwrap">
+                            <img :src="plan.plan" :alt="'Plan de ' + churchName" class="rf-plan-modal-map">
+                            <button v-for="(p, idx) in points" :key="p.n"
+                                    type="button"
+                                    class="rf-plan-modal-marker"
+                                    :class="{ active: idx === activeIdx }"
+                                    :style="'left:' + p.x + '%; top:' + p.y + '%;'"
+                                    :title="p.title"
+                                    :aria-label="p.n + '. ' + p.title"
+                                    @click="selectPoint(idx)">
+                                {{ p.n }}
+                            </button>
+                        </div>
+
+                        <aside class="rf-plan-modal-side">
+                            <div v-if="activePoint" class="rf-plan-modal-detail">
+                                <div class="rf-plan-modal-detail-num">{{ activePoint.n }}</div>
+                                <h4>{{ activePoint.title }}</h4>
+                                <p v-html="activePoint.body"></p>
+                            </div>
+                            <div v-else class="rf-plan-modal-detail rf-plan-modal-detail-empty">
+                                <i class="bi bi-info-circle"></i>
+                                <p>Sélectionnez un numéro pour afficher sa description.</p>
+                            </div>
+
+                            <h5 class="rf-plan-modal-list-title">Tous les éléments</h5>
+                            <ol class="rf-plan-modal-list">
+                                <li v-for="(p, idx) in points" :key="p.n"
+                                    :class="{ active: idx === activeIdx }"
+                                    @click="selectPoint(idx)">
+                                    <span class="rf-plan-modal-list-num">{{ p.n }}</span>
+                                    {{ p.title }}
+                                </li>
+                            </ol>
+                        </aside>
+                    </div>
+                </div>
+            </div>
         `
     };
 
@@ -1232,6 +1362,7 @@
         'rf-article-oger': RFArticleOger,
         'rf-gallery-carousel': RFGalleryCarousel,
         'rf-eglises-grid': RFEglisesGrid,
+        'rf-eglise-plan-modal': RFEglisePlanModal,
         'rf-gallery-arneke': RFGalleryArneke,
         'rf-lightbox': RFLightbox,
         'rf-news-banner': RFNewsBanner,
