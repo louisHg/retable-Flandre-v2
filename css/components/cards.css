@@ -589,17 +589,22 @@
   color: var(--primary-dark);
 }
 
-/* ===== Modale plan interactif d'une église ===== */
+/* ===== Modale plan interactif d'une église — mobile-first =====
+ * Mobile (default) : plein écran, plan en haut, panel scrollable dessous.
+ * Tablet (≥768px)  : modale centrée avec marges, bord arrondi.
+ * Desktop (≥992px) : layout 2 colonnes (plan 55% / panel 45%).
+ */
+/* Mobile par défaut : plan plein écran, la description apparait en pop-up flottant. */
 .rf-plan-modal {
   position: fixed;
   inset: 0;
-  background: rgba(20, 28, 40, 0.78);
-  backdrop-filter: blur(6px);
+  background: rgba(20, 28, 40, 0.85);
+  backdrop-filter: blur(4px);
   z-index: 9999;
   display: flex;
-  align-items: center;
+  align-items: stretch;
   justify-content: center;
-  padding: 16px;
+  padding: 0;
   animation: rf-plan-fade 0.2s ease;
 }
 
@@ -608,99 +613,98 @@
   to   { opacity: 1; }
 }
 
-.rf-plan-modal-close {
-  position: fixed;
-  top: 16px;
-  right: 16px;
-  z-index: 10000;
-  width: 44px;
-  height: 44px;
-  border-radius: 999px;
-  border: 1px solid rgba(255, 255, 255, 0.22);
-  background: rgba(0, 0, 0, 0.45);
-  color: #fff;
-  font-size: 20px;
-  line-height: 1;
-  cursor: pointer;
-  backdrop-filter: blur(8px);
-}
-
-.rf-plan-modal-close:hover {
-  background: rgba(0, 0, 0, 0.65);
-}
-
 .rf-plan-modal-content {
-  width: min(1200px, 100%);
-  max-height: calc(100vh - 32px);
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  max-height: 100vh;
   background: #fff;
-  border-radius: 1rem;
-  overflow: hidden;
+  border-radius: 0;
   display: flex;
   flex-direction: column;
+  overflow: hidden;
   box-shadow: 0 30px 80px rgba(0, 0, 0, 0.45);
 }
 
+.rf-plan-modal-close {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  z-index: 10000;
+  width: 40px;
+  height: 40px;
+  border-radius: 999px;
+  border: 1px solid rgba(0, 0, 0, 0.12);
+  background: rgba(255, 255, 255, 0.95);
+  color: #333;
+  font-size: 18px;
+  line-height: 1;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.18);
+}
+
+.rf-plan-modal-close:hover {
+  background: #fff;
+  color: #000;
+}
+
 .rf-plan-modal-header {
-  padding: 1rem 1.5rem 0.75rem;
+  flex-shrink: 0;
+  padding: 0.75rem 56px 0.5rem 1rem;
   border-bottom: 1px solid rgba(0, 0, 0, 0.06);
 }
 
 .rf-plan-modal-header h3 {
-  font-size: 1.25rem;
+  font-size: 1rem;
   font-weight: 700;
-  margin: 0 0 0.25rem 0;
+  margin: 0 0 0.15rem 0;
   color: #222;
+  line-height: 1.3;
+}
+
+.rf-plan-modal-header p {
+  font-size: 0.8rem;
 }
 
 .rf-plan-modal-body {
   flex: 1;
   display: flex;
   flex-direction: column;
-  overflow: hidden;
-}
-
-@media (min-width: 992px) {
-  .rf-plan-modal-body {
-    flex-direction: row;
-  }
+  min-height: 0;
 }
 
 .rf-plan-modal-mapwrap {
   position: relative;
   flex: 1;
-  min-width: 0;
   display: flex;
   align-items: center;
   justify-content: center;
   background: #f6f7f9;
-  padding: 1rem;
-  max-height: 50vh;
-}
-
-@media (min-width: 992px) {
-  .rf-plan-modal-mapwrap {
-    max-height: none;
-    flex: 0 0 55%;
-  }
+  padding: 0.75rem;
+  min-height: 0;
 }
 
 .rf-plan-modal-map {
+  display: block;
+  width: auto;
   max-width: 100%;
   max-height: 100%;
-  display: block;
   object-fit: contain;
 }
 
 .rf-plan-modal-marker {
   position: absolute;
   transform: translate(-50%, -50%);
-  width: 32px;
-  height: 32px;
+  width: 40px;
+  height: 40px;
   border-radius: 50%;
   background: var(--primary-color);
   color: #fff;
   font-weight: 700;
-  font-size: 0.85rem;
+  font-size: 0.95rem;
   border: 2px solid #fff;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
   cursor: pointer;
@@ -714,30 +718,161 @@
 
 .rf-plan-modal-marker:hover {
   background: var(--primary-dark);
-  transform: translate(-50%, -50%) scale(1.18);
+  transform: translate(-50%, -50%) scale(1.15);
   z-index: 3;
 }
 
 .rf-plan-modal-marker.active {
   background: var(--custom-btn-bg-hover-color);
-  transform: translate(-50%, -50%) scale(1.3);
-  box-shadow: 0 0 0 4px rgba(224, 122, 95, 0.3), 0 2px 8px rgba(0, 0, 0, 0.3);
+  transform: translate(-50%, -50%) scale(1.25);
+  box-shadow: 0 0 0 4px rgba(224, 122, 95, 0.35), 0 2px 8px rgba(0, 0, 0, 0.3);
   z-index: 4;
 }
 
+/* Mobile (default) : side panel masqué — devient un pop-up flottant quand .is-active */
 .rf-plan-modal-side {
-  flex: 1;
-  min-width: 0;
-  padding: 1rem 1.25rem 1.25rem;
-  overflow-y: auto;
-  border-top: 1px solid rgba(0, 0, 0, 0.06);
+  display: none;
 }
 
+.rf-plan-modal-side.is-active {
+  display: block;
+  position: absolute;
+  left: 12px;
+  right: 12px;
+  bottom: 12px;
+  max-height: 60vh;
+  overflow-y: auto;
+  background: #fff;
+  border-radius: 1rem;
+  padding: 1rem 1.1rem 1.2rem;
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.35), 0 0 0 1px rgba(0, 0, 0, 0.06);
+  z-index: 10001;
+  -webkit-overflow-scrolling: touch;
+  animation: rf-popup-slide 0.25s cubic-bezier(.2, .9, .3, 1.1);
+}
+
+@keyframes rf-popup-slide {
+  from { transform: translateY(24px); opacity: 0; }
+  to   { transform: translateY(0); opacity: 1; }
+}
+
+/* Sur mobile, masquer la liste 'tous les éléments' dans le pop-up (juste le détail) */
+.rf-plan-modal-side.is-active .rf-plan-modal-list-title,
+.rf-plan-modal-side.is-active .rf-plan-modal-list {
+  display: none;
+}
+
+/* Bouton de fermeture du pop-up mobile */
+.rf-plan-popup-close {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  background: #f5f5f5;
+  color: #555;
+  font-size: 14px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.rf-plan-popup-close:hover {
+  background: #e5e5e5;
+  color: #000;
+}
+
+/* Sur desktop, masquer ce bouton (le panel est inline) */
 @media (min-width: 992px) {
+  .rf-plan-popup-close {
+    display: none;
+  }
+}
+
+/* Tablet : remettre du padding autour de la modale + bords arrondis */
+@media (min-width: 768px) {
+  .rf-plan-modal {
+    align-items: center;
+    padding: 16px;
+  }
+
+  .rf-plan-modal-content {
+    width: min(1200px, 100%);
+    height: auto;
+    max-height: calc(100vh - 32px);
+    border-radius: 1rem;
+  }
+
+  .rf-plan-modal-close {
+    top: 12px;
+    right: 12px;
+  }
+
+  .rf-plan-modal-header {
+    padding: 1rem 60px 0.75rem 1.5rem;
+  }
+
+  .rf-plan-modal-header h3 {
+    font-size: 1.25rem;
+  }
+
+  .rf-plan-modal-header p {
+    font-size: 0.875rem;
+  }
+
+  .rf-plan-modal-mapwrap {
+    padding: 1rem;
+  }
+
+  .rf-plan-modal-map {
+    max-height: 60vh;
+  }
+
   .rf-plan-modal-side {
+    padding: 1.25rem 1.5rem;
+  }
+}
+
+/* Desktop : passer en layout 2 colonnes côte à côte (side panel inline) */
+@media (min-width: 992px) {
+  .rf-plan-modal-body {
+    flex-direction: row;
+    overflow: hidden;
+  }
+
+  .rf-plan-modal-mapwrap {
+    flex: 0 0 55%;
+    padding: 1.5rem;
+  }
+
+  .rf-plan-modal-map {
+    max-height: 100%;
+  }
+
+  /* Annule l'état pop-up flottant : redevient une colonne inline */
+  .rf-plan-modal-side,
+  .rf-plan-modal-side.is-active {
+    display: block;
+    position: static;
     flex: 0 0 45%;
+    margin: 0;
+    max-height: none;
+    overflow-y: auto;
+    border-radius: 0;
     border-top: none;
     border-left: 1px solid rgba(0, 0, 0, 0.06);
+    background: #fff;
+    padding: 1.25rem 1.5rem;
+    box-shadow: none;
+    animation: none;
+  }
+
+  .rf-plan-modal-side.is-active .rf-plan-modal-list-title,
+  .rf-plan-modal-side.is-active .rf-plan-modal-list {
+    display: block;
   }
 }
 

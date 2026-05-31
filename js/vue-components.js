@@ -772,7 +772,10 @@
                             </button>
                         </div>
 
-                        <aside class="rf-plan-modal-side">
+                        <aside class="rf-plan-modal-side" :class="{ 'is-active': activePoint }">
+                            <button type="button" class="rf-plan-popup-close"
+                                    @click="selectPoint(activeIdx)" aria-label="Fermer la description">✕</button>
+
                             <div v-if="activePoint" class="rf-plan-modal-detail">
                                 <div class="rf-plan-modal-detail-num">{{ activePoint.n }}</div>
                                 <h4>{{ activePoint.title }}</h4>
@@ -938,9 +941,17 @@
                 });
             },
             openFromImage(clickedImg) {
-                // Récupérer toutes les images cliquables actuellement visibles
-                // Limité à la galerie/section parente s'il y en a une, sinon toute la page
-                const gallery = clickedImg.closest('section') || document.querySelector('.rf-content');
+                // Scope la navigation à la plus petite galerie pertinente :
+                // 1) un conteneur explicite (data-lightbox-group ou .rf-actu-media)
+                // 2) l'article courant (.rf-actu-card) si on est dans le feed actu
+                // 3) sinon la <section> parente, puis .rf-content en dernier recours
+                const gallery =
+                    clickedImg.closest('[data-lightbox-group]') ||
+                    clickedImg.closest('.rf-actu-media') ||
+                    clickedImg.closest('.rf-actu-card') ||
+                    clickedImg.closest('article') ||
+                    clickedImg.closest('section') ||
+                    document.querySelector('.rf-content');
                 const allImgs = Array.from(gallery.querySelectorAll('img[data-lightbox-bound]'));
                 this.items = allImgs.map((img) => ({
                     src: img.src,
@@ -1238,17 +1249,20 @@
     };
 
     // ==========================================
-    // 🔔 rf-news-banner — strip 1 ligne avec auto-rotation
+    // 🔔 rf-news-banner — bandeau permanent "Nouveautés"
     // ==========================================
+    //
+    // Source de vérité : RFContent.bannerItems (curé manuellement dans content.js).
+    // Permanent : pas de bouton fermer, pas d'état lu/non-lu, pas de persistance.
+    // S'il y a plusieurs entrées, défilement automatique toutes les 5 s.
+    //
     const RFNewsBanner = {
         data() {
-            const api = window.RFNewsAPI;
+            const content = window.RFContent || {};
             return {
-                visible: api ? api.shouldShowBanner() : false,
-                items: api ? api.unreadItems() : [],
+                items: Array.isArray(content.bannerItems) ? content.bannerItems.slice() : [],
                 currentIndex: 0,
-                _interval: null,
-                _onChange: null
+                _interval: null
             };
         },
         computed: {
@@ -1257,29 +1271,11 @@
         },
         mounted() {
             this.startRotation();
-            // Sync avec la cloche : si l'utilisateur lit une notif via la cloche,
-            // le bandeau se met à jour automatiquement (et vice-versa).
-            this._onChange = () => this.refresh();
-            document.addEventListener('rf-news-changed', this._onChange);
         },
         beforeUnmount() {
             this.stopRotation();
-            if (this._onChange) {
-                document.removeEventListener('rf-news-changed', this._onChange);
-            }
         },
         methods: {
-            refresh() {
-                if (!window.RFNewsAPI) return;
-                this.items = window.RFNewsAPI.unreadItems();
-                if (this.currentIndex >= this.items.length) this.currentIndex = 0;
-                if (this.items.length === 0) {
-                    this.visible = false;
-                    this.stopRotation();
-                } else if (this.items.length === 1) {
-                    this.stopRotation();
-                }
-            },
             startRotation() {
                 if (this.multiple && !this._interval) {
                     this._interval = setInterval(() => {
@@ -1298,32 +1294,31 @@
                 this.stopRotation();
                 this.startRotation();
             },
-            dismiss() {
-                if (window.RFNewsAPI) window.RFNewsAPI.dismissBanner();
-                this.visible = false;
-            },
             openCurrent() {
                 const item = this.currentItem;
                 if (!item) return;
-                // 1) Marque comme lu immédiatement (déclenche aussi rf-news-changed
-                //    pour synchroniser la cloche)
-                if (window.RFNewsAPI) window.RFNewsAPI.markAsRead(item.id);
-                // 2) Navigation
-                const samePage = item.page && window.location.pathname.endsWith('/' + item.page);
-                if (samePage && item.anchor) {
-                    const target = document.getElementById(item.anchor);
-                    if (target) {
-                        target.scrollIntoView({ behavior: 'smooth' });
-                        return;
-                    }
+                // href direct (URL externe ou interne complète) — prioritaire
+                if (item.href) {
+                    window.location.href = item.href;
+                    return;
                 }
-                if (item.page) {
-                    window.location.href = item.page + (item.anchor ? '#' + item.anchor : '');
+                // Lien vers une actualité (id de la fiche)
+                if (item.actuId) {
+                    const page = item.page || 'actualites.html';
+                    const samePage = window.location.pathname.endsWith('/' + page);
+                    if (samePage) {
+                        const target = document.getElementById(item.actuId);
+                        if (target) {
+                            target.scrollIntoView({ behavior: 'smooth' });
+                            return;
+                        }
+                    }
+                    window.location.href = page + '#' + item.actuId;
                 }
             }
         },
         template: `
-            <div v-if="visible && currentItem" class="rf-news-banner" role="region" aria-label="Nouveautés"
+            <div v-if="currentItem" class="rf-news-banner" role="region" aria-label="Nouveautés"
                  @mouseenter="stopRotation" @mouseleave="startRotation">
                 <div class="rf-news-banner-inner">
                     <i class="bi bi-megaphone-fill rf-news-banner-icon"></i>
@@ -1341,7 +1336,6 @@
                                     @click="goTo(idx)"></button>
                         </span>
                     </div>
-                    <button type="button" class="rf-news-banner-close" @click="dismiss" aria-label="Fermer">✕</button>
                 </div>
             </div>
         `

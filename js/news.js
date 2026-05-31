@@ -18,9 +18,8 @@
     'use strict';
 
     const STORAGE_KEY = 'rf-news-read';
-    const BANNER_KEY = 'rf-news-banner-dismissed';
     const MAX_BELL = 5;    // nb max d'items dans la cloche
-    const MAX_BANNER = 3;  // nb max d'items dans le bandeau d'accueil
+    const MAX_BANNER = 3;  // nb max d'items renvoyés par latest() (legacy)
 
     // ----- ACCES AUX DONNEES (depuis content.js) -----
     function rawActualites() {
@@ -117,35 +116,16 @@
         return bellItems().filter(function (it) { return !set.has(it.id); });
     }
 
-    // ----- BANDEAU ACCUEIL (etat dismiss) -----
-    function bannerDismissedUpTo() {
-        try {
-            return localStorage.getItem(BANNER_KEY) || '';
-        } catch (e) { return ''; }
-    }
-
-    function dismissBanner() {
-        const top = latest(1)[0];
-        if (!top) return;
-        try { localStorage.setItem(BANNER_KEY, top.id); } catch (e) {}
-    }
-
-    function shouldShowBanner() {
-        const top = latest(1)[0];
-        if (!top) return false;
-        return bannerDismissedUpTo() !== top.id;
-    }
-
     // ----- EXPORT -----
+    // (le bandeau "Nouveautés" est désormais permanent et lit RFContent.bannerItems
+    //  — voir rf-news-banner dans vue-components.js)
     window.RFNewsAPI = {
         all: function () { return bellItems(); },     // pour la cloche (avec lus + non-lus)
-        unreadItems: unreadItems,                       // pour le bandeau (non-lus uniquement)
+        unreadItems: unreadItems,                       // non-lus (cloche)
         latest: function (n) { return latest(n || MAX_BANNER); },  // legacy
         isRead: isRead,
         markAsRead: markAsRead,
         markAllAsRead: markAllAsRead,
-        unreadCount: unreadCount,
-        shouldShowBanner: shouldShowBanner,
-        dismissBanner: dismissBanner
+        unreadCount: unreadCount
     };
 })();

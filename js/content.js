@@ -257,6 +257,39 @@
     //
     const actualites = [
         {
+            id: 'voyage-lille-2026',
+            date: '2026-05-07',
+            category: 'Sortie',
+            title: 'Voyage annuel — Journée du 7 mai 2026 à Lille',
+            summary: "Voyage annuel consacré à la découverte de l'architecture religieuse moderne dans le quartier Saint-Maurice Pellevoisin à Lille : Maison Paul VI, couvent des Dominicains et cathédrale Notre-Dame de la Treille.",
+            body: "<p>Notre matinée fut dominée par la découverte de l'architecture religieuse moderne dans le quartier <strong>Saint-Maurice Pellevoisin</strong> — « un quartier où l'on se déplace à pied et où les gens se saluent dans la rue… là-haut, il y a de l'air, de la verdure, des arbres… »</p>"
+                + "<h4>I — La maison Paul VI</h4>"
+                + "<p>Ancien grand séminaire de théologie du diocèse de Lille, voulu par le cardinal Achille Liénard (1884-1973) et construit en 1930-1931 sur le site d'une ancienne briqueterie. Les travaux furent dirigés par le chanoine Ernest Lotthé et menés par l'architecte Paul Vilain, alors chargé du chantier de la cathédrale Notre-Dame de la Treille, assisté de Charles Serex. Le bâtiment monumental en béton armé recouvert de briques adopte un plan en Z et incarne l'art déco, en rupture avec le néo-gothique. Véritable manifeste de la Commission diocésaine d'Art sacré (1930) et de la Société Saint-Marc (1928), il associe sculpteurs (Masselot, Weert), peintre fresquiste (Eugène Nys), maître-verrier (Pierre Turpin) et l'abbé Paul Pruvost pour les cartons des vitraux.</p>"
+                + "<h4>II — Le couvent des Dominicains</h4>"
+                + "<p>Présents à Lille depuis 1224, les frères dominicains s'établissent intra-muros après la Libération. Le couvent Saint-Thomas-d'Aquin, inauguré en 1957, est le premier bâtiment religieux classé patrimoine du XXᵉ siècle. Œuvre des architectes Pierre Pinsard (assisté de Hutchinson et Vollmar), du maître-verrier Gérard Lardeur et de l'ingénieur Bernard Lafaille, il est un modèle de simplicité et d'harmonie avec la nature. L'église est recouverte d'une voûte d'un seul tenant évoquant un voile de béton, soutenue par deux fois sept piliers. 150 carreaux de verre colorés sont disposés dans chaque mur latéral, correspondant au nombre de psaumes chantés toute la semaine. La tribune accueille une tapisserie de Mannessier (1947) représentant un Christ à la colonne.</p>"
+                + "<h4>III — La cathédrale Notre-Dame de la Treille</h4>"
+                + "<p>Édifiée à partir du milieu du XIXᵉ siècle pour accueillir le pèlerinage à Notre-Dame-de-la-Treille (établi à Lille depuis le XIIIᵉ siècle), élevée au rang de cathédrale en 1913 et inaugurée en 1999. L'édifice conjugue les styles : façade en marbre de Peter Rice et Pierre-Louis Carlier, portail de la Vierge de Georges Jeanclos, rosace de la Résurrection de Ladislas Kijno. Sept chapelles, dont celle de Notre-Dame de la Treille (1856-1897) inspirée de la Sainte-Chapelle de Paris. Deux orgues : un Cavaillé-Coll romantique au transept nord et un Danion-Gonzalez néo-classique (7600 tuyaux, acquis en 2007 du studio de la Maison de la Radio). La crypte néo-gothique abrite les tombeaux des évêques et le « Centre d'Art Sacré de Lille ».</p>"
+                + "<p>Une journée riche en découvertes : nous avons laissé pour un temps les retables et le baroque pour découvrir que l'art-déco de ces bâtiments était plein de belles surprises.</p>",
+            tags: ['sortie', 'voyage', 'Lille', 'Pellevoisin', 'art déco', 'Paul VI', 'Dominicains', 'Notre-Dame de la Treille', '2026'],
+            docs: [
+                { label: 'Lire le compte-rendu complet', href: 'images/2026/mai/Compte-rendu.pdf' }
+            ],
+            carousel: [
+                { src: 'images/2026/mai/DSC_0351.JPG', alt: 'Voyage 7 mai 2026 — 1/11' },
+                { src: 'images/2026/mai/DSC_0359.JPG', alt: 'Voyage 7 mai 2026 — 2/11' },
+                { src: 'images/2026/mai/DSC_0367.JPG', alt: 'Voyage 7 mai 2026 — 3/11' },
+                { src: 'images/2026/mai/DSC_0370.JPG', alt: 'Voyage 7 mai 2026 — 4/11' },
+                { src: 'images/2026/mai/DSC_0382.JPG', alt: 'Voyage 7 mai 2026 — 5/11' },
+                { src: 'images/2026/mai/DSC_0391.JPG', alt: 'Voyage 7 mai 2026 — 6/11' },
+                { src: 'images/2026/mai/DSC_0392.JPG', alt: 'Voyage 7 mai 2026 — 7/11' },
+                { src: 'images/2026/mai/DSC_0396.JPG', alt: 'Voyage 7 mai 2026 — 8/11' },
+                { src: 'images/2026/mai/DSC_0402.JPG', alt: 'Voyage 7 mai 2026 — 9/11' },
+                { src: 'images/2026/mai/DSC_0422.JPG', alt: 'Voyage 7 mai 2026 — 10/11' },
+                { src: 'images/2026/mai/DSC_0425.JPG', alt: 'Voyage 7 mai 2026 — 11/11' }
+            ],
+            featured: true
+        },
+        {
             id: 'calendrier-ete-2026',
             date: '2026-04-15',
             category: 'Programme',
@@ -546,6 +579,29 @@
         // À enrichir progressivement : autres églises sur le même modèle.
     };
 
+    // ===== BANDEAU NOUVEAUTÉS (haut de toutes les pages) =====
+    //
+    // Liste curée manuellement, du plus récent au plus ancien.
+    // Chaque entrée s'affiche dans le bandeau jaune en haut du site.
+    // S'il y en a plusieurs, elles défilent automatiquement (5 s).
+    //
+    // Pour publier une nouvelle modif :
+    //   1. ajouter l'entrée en TÊTE du tableau
+    //   2. supprimer une (ou plusieurs) ancienne(s) entrée(s) en bas si on
+    //      souhaite garder uniquement les N plus récentes
+    //
+    // Champs :
+    //   - label  : texte affiché dans le bandeau
+    //   - actuId : id d'une actualité (ouvre actualites.html#<id>)
+    //   - href   : URL directe (alternative à actuId, prioritaire)
+    //
+    const bannerItems = [
+        {
+            label: "Voyage annuel du 7 mai 2026 à Lille — découverte de l'architecture religieuse moderne",
+            actuId: 'voyage-lille-2026'
+        }
+    ];
+
     // ===== EXPORT =====
     window.RFContent = {
         galleries: {
@@ -557,6 +613,7 @@
             oger: articleOger
         },
         actualites: actualites,    // feed unifié + source de la cloche
+        bannerItems: bannerItems,  // bandeau "Nouveau" en haut des pages
         eglisesVisite: eglisesVisite, // 37 fiches églises (page 'Que peut-on visiter ?')
         eglisesPlans: eglisesPlans    // plans interactifs (mvp : Wormhout — à enrichir)
     };
