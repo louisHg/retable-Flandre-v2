@@ -612,8 +612,8 @@
     //
     const bannerItems = [
         {
-            label: "Voyage annuel du 7 mai 2026 à Lille — découverte de l'architecture religieuse moderne",
-            actuId: 'voyage-lille-2026'
+            label: "Visite du dimanche 28 juin 2026 — les églises de Sercus et de Wylder",
+            actuId: 'visite-sercus-wylder-2026'
         }
     ];
 

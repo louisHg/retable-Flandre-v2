@@ -1249,6 +1249,76 @@
     };
 
     // ==========================================
+    // 🆕 rf-latest-news — bloc "Dernières actualités" (page d'accueil)
+    // ==========================================
+    //
+    // Affiche les N actualités les plus récentes (RFContent.actualites) sous
+    // forme de cartes cliquables vers actualites.html#<id>. Aucune curation :
+    // se met à jour automatiquement quand on ajoute une actu dans content.js.
+    //
+    const RFLatestNews = {
+        props: {
+            limit: { type: Number, default: 3 }
+        },
+        data() {
+            const all = (window.RFContent && window.RFContent.actualites) || [];
+            return {
+                items: all.slice()
+                    .sort(function (a, b) { return (b.date || '').localeCompare(a.date || ''); })
+                    .slice(0, this.limit)
+            };
+        },
+        methods: {
+            formatDate(date) {
+                if (!date) return '';
+                const months = ['janvier', 'février', 'mars', 'avril', 'mai', 'juin',
+                                'juillet', 'août', 'septembre', 'octobre', 'novembre', 'décembre'];
+                const m = date.match(/^(\d{4})-(\d{2})-(\d{2})$/);
+                if (m) return parseInt(m[3], 10) + ' ' + months[parseInt(m[2], 10) - 1] + ' ' + m[1];
+                return date;
+            },
+            thumb(item) {
+                if (item.photos && item.photos.length) return item.photos[0].src;
+                if (item.carousel && item.carousel.length) return item.carousel[0].src;
+                return null;
+            }
+        },
+        template: `
+            <section class="section-padding" id="section_latest_news" style="padding-top:40px;padding-bottom:20px;">
+                <div class="container">
+                    <div class="d-flex align-items-center justify-content-between flex-wrap gap-2 mb-4">
+                        <h2 class="mb-0">Dernières actualités</h2>
+                        <a href="actualites.html" class="btn custom-btn btn-sm">
+                            Toutes les actualités<i class="bi bi-arrow-right ms-2"></i>
+                        </a>
+                    </div>
+                    <div class="row g-4">
+                        <div v-for="item in items" :key="item.id" class="col-12 col-md-4">
+                            <a :href="'actualites.html#' + item.id" class="rf-latest-card">
+                                <img v-if="thumb(item)" :src="thumb(item)" :alt="item.title"
+                                     loading="lazy" class="rf-latest-card-img">
+                                <div v-else class="rf-latest-card-img rf-latest-card-placeholder">
+                                    <i class="bi bi-card-image"></i>
+                                </div>
+                                <div class="rf-latest-card-body">
+                                    <div class="d-flex align-items-center flex-wrap gap-2 mb-2">
+                                        <span class="rf-actu-date">
+                                            <i class="bi bi-calendar-event me-1"></i>{{ formatDate(item.date) }}
+                                        </span>
+                                        <span class="rf-actu-category">{{ item.category }}</span>
+                                    </div>
+                                    <h3>{{ item.title }}</h3>
+                                    <p>{{ item.summary }}</p>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        `
+    };
+
+    // ==========================================
     // 🔔 rf-news-banner — bandeau permanent "Nouveautés"
     // ==========================================
     //
@@ -1360,7 +1430,8 @@
         'rf-gallery-arneke': RFGalleryArneke,
         'rf-lightbox': RFLightbox,
         'rf-news-banner': RFNewsBanner,
-        'rf-actu-feed': RFActuFeed
+        'rf-actu-feed': RFActuFeed,
+        'rf-latest-news': RFLatestNews
     };
 
     console.log('✅ RFComponents chargés :', Object.keys(window.RFComponents).length, 'composants');
