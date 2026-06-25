@@ -235,7 +235,7 @@
         { name: 'Pitgam',            image: null,                                                     description: "Église Saint-Folquin, retable nord du Rosaire.", tags: ['Saint-Folquin', 'Rosaire'], pdf: DEPLIANT_BASE + 'Pitgam.pdf' },
         { name: 'Rexpoëde',          image: null,                                                     description: "", tags: [], pdf: DEPLIANT_BASE + 'Rexpoede.pdf' },
         { name: "Saint Georges de l'Aa", image: null,                                                  description: "", tags: [], pdf: DEPLIANT_BASE + "Saint Georges de l'Aa.pdf" },
-        { name: 'Sercus',            image: null,                                                     description: "", tags: [], pdf: DEPLIANT_BASE + 'Sercus.pdf' },
+        { name: 'Sercus',            image: 'images/2026/Sercus-Wylder/Sercus.jpg',                   description: "", tags: [], pdf: DEPLIANT_BASE + 'Sercus.pdf' },
         { name: 'Socx',              image: null,                                                     description: "Église Saint-Maxime, retables du maître-autel, de la Vierge et de Saint-Léger.", tags: ['Saint-Maxime', 'Saint-Léger'], pdf: DEPLIANT_BASE + 'Socx.pdf' },
         { name: 'Steenbecque',       image: null,                                                     description: "Église Saint-Léger, retable du maître-autel.", tags: ['Saint-Léger'], pdf: DEPLIANT_BASE + 'Steenbecque.pdf' },
         { name: 'Steene',            image: null,                                                     description: "", tags: [], pdf: DEPLIANT_BASE + 'Steene.pdf' },
@@ -256,6 +256,21 @@
     // featured: true → mise en avant dans la cloche / bandeau accueil
     //
     const actualites = [
+        {
+            id: 'visite-sercus-wylder-2026',
+            date: '2026-06-28',
+            category: 'Visite',
+            title: 'Visite — Sercus et Wylder',
+            summary: "Ouverture de la saison des visites estivales le dimanche 28 juin 2026, avec deux églises de la Flandre intérieure : Sercus et Wylder.",
+            body: "<p>La saison des visites guidées de l'été 2026 s'ouvre le <strong>dimanche 28 juin</strong> avec deux églises de la Flandre intérieure : l'église de <strong>Sercus</strong> et celle de <strong>Wylder</strong>.</p>",
+            tags: ['visite', 'Sercus', 'Wylder', 'estivale', 'été', '2026'],
+            photos: [
+                { src: 'images/2026/Sercus-Wylder/Sercus.jpg', alt: 'Église de Sercus', caption: 'Sercus' },
+                { src: 'images/2026/Sercus-Wylder/Sercus-clocher.jpg', alt: "Clocher de l'église de Sercus", caption: 'Sercus — le clocher' },
+                { src: 'images/2026/Sercus-Wylder/Wylder.jpg', alt: 'Église de Wylder', caption: 'Wylder' }
+            ],
+            featured: true
+        },
         {
             id: 'voyage-lille-2026',
             date: '2026-05-07',
