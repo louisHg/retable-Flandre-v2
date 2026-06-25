@@ -1,20 +1,17 @@
 #!/bin/zsh
+# Lance le serveur Node local + ouvre la home dans le navigateur.
+# Joignable depuis le téléphone (même Wi-Fi) — l'URL réseau s'affiche au démarrage.
 
-# Lance un serveur local sur le port 8080 et ouvre l'accueil dans le navigateur.
+cd "$(dirname "$0")"
 
-echo "Démarrage du serveur local sur http://localhost:8080"
-echo "Pages :"
-echo "   • http://localhost:8080/index.html"
-echo "   • http://localhost:8080/generic.html              (Qui sommes-nous ?)"
-echo "   • http://localhost:8080/qu-est-ce-qu-un-retable.html"
-echo "   • http://localhost:8080/depliants-eglises.html   (Que peut-on visiter ?)"
-echo "   • http://localhost:8080/actualites.html"
-echo "   • http://localhost:8080/boutique.html"
-echo ""
-echo "Pour arrêter le serveur : Ctrl+C"
-echo ""
+PORT="${PORT:-8080}"
 
-sleep 1
-open http://localhost:8080/index.html
+if ! command -v node >/dev/null 2>&1; then
+    echo "❌ Node n'est pas installé. Installe-le depuis https://nodejs.org puis relance."
+    exit 1
+fi
 
-python3 -m http.server 8080
+# Ouvre le navigateur dès que le serveur écoute (petit délai)
+( sleep 1 && open "http://localhost:$PORT/index.html" ) &
+
+PORT="$PORT" exec node server.js
