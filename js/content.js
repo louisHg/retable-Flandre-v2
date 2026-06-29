@@ -222,7 +222,7 @@
         { name: 'Crochte',           image: null,                                                     description: "", tags: [], pdf: DEPLIANT_BASE + 'Crochte.pdf' },
         { name: 'Drincham',          image: null,                                                     description: "", tags: [], pdf: DEPLIANT_BASE + 'Drincham.pdf' },
         { name: 'Eecke',             image: null,                                                     description: "", tags: [], pdf: DEPLIANT_BASE + 'Eecke.pdf' },
-        { name: 'Gravelines',        image: null,                                                     description: "", tags: [], pdf: DEPLIANT_BASE + 'Gravelines.pdf' },
+        { name: 'Gravelines',        image: 'images/2026/Warhem-Gravelines/Gravelines.jpg',           description: "", tags: [], pdf: DEPLIANT_BASE + 'Gravelines.pdf' },
         { name: 'Hazebrouck',        image: null,                                                     description: "Église Saint-Éloi, retables nord et sud (Vierge Marie, Trinité). Chapelle Saint-Jacques également.", tags: ['Saint-Éloi', 'Saint-Jacques'], pdf: DEPLIANT_BASE + 'Hazebrouck.pdf' },
         { name: 'Herzeele',          image: 'images/2025/Herzeele.jpeg',                              description: "Notre-Dame de l'Assomption, église-halle en briques du XVIᵉ siècle.", tags: ['Notre-Dame', 'église-halle', 'XVIe'], pdf: DEPLIANT_BASE + 'Herzeele.pdf' },
         { name: 'Hondschoote',       image: 'images/2025/Hondschoote-Oudezeele/Hondschoote1.png',     description: "Église Saint-Vaast, retables du Saint Esprit et de Saint-Sébastien.", tags: ['Saint-Vaast'], pdf: DEPLIANT_BASE + 'Hondschoote.pdf' },
@@ -241,7 +241,7 @@
         { name: 'Steene',            image: null,                                                     description: "", tags: [], pdf: DEPLIANT_BASE + 'Steene.pdf' },
         { name: 'Steenvoorde',       image: 'images/2025/STEENVOORDE.jpeg',                           description: "Église Saint-Pierre, haute flèche de 92 mètres.", tags: ['Saint-Pierre', 'flèche'], pdf: DEPLIANT_BASE + 'Steenvoorde.pdf' },
         { name: 'Volckerinckhove',   image: 'images/2025/Volckerinckove.JPG',                         description: "Église romane, poutres sculptées et fonts baptismaux remarquables.", tags: ['romane'], pdf: DEPLIANT_BASE + 'Volckerinckhove.pdf' },
-        { name: 'Warhem',            image: null,                                                     description: "Église Saint-Martin, retable du Rosaire.", tags: ['Saint-Martin', 'Rosaire'], pdf: DEPLIANT_BASE + 'Warhem.pdf' },
+        { name: 'Warhem',            image: 'images/2026/Warhem-Gravelines/Warhem.jpg',               description: "Église Saint-Martin, retable du Rosaire.", tags: ['Saint-Martin', 'Rosaire'], pdf: DEPLIANT_BASE + 'Warhem.pdf' },
         { name: 'Wemaers-Cappel',    image: 'images/previous-image/WEMAERS-Cappel.jpg',               description: "Église Saint-Sylvestre, retable du maître-autel.", tags: ['Saint-Sylvestre'], pdf: DEPLIANT_BASE + 'Wemaers-Cappel.pdf' },
         { name: 'West-Cappel',       image: null,                                                     description: "", tags: [], pdf: DEPLIANT_BASE + 'West-Cappel.pdf' },
         { name: 'Winnezeele',        image: null,                                                     description: "", tags: [], pdf: DEPLIANT_BASE + 'Winnezeele.pdf' },
@@ -257,19 +257,35 @@
     //
     const actualites = [
         {
+            id: 'visite-warhem-gravelines-2026',
+            date: '2026-07-05',
+            category: 'Visite',
+            title: 'Visite — Warhem et Gravelines',
+            summary: "Les visites estivales se poursuivent le dimanche 5 juillet 2026 avec deux nouvelles églises : Warhem et Gravelines.",
+            body: "<p>Les visites guidées de l'été 2026 se poursuivent le <strong>dimanche 5 juillet</strong> avec deux nouvelles églises : l'église <strong>Saint-Martin de Warhem</strong>, qui abrite un retable du Rosaire, et l'église de <strong>Gravelines</strong>.</p>",
+            tags: ['visite', 'Warhem', 'Gravelines', 'estivale', 'été', '2026'],
+            photos: [
+                { src: 'images/2026/Warhem-Gravelines/Warhem.jpg', alt: 'Église Saint-Martin de Warhem', caption: 'Warhem — église Saint-Martin' },
+                { src: 'images/2026/Warhem-Gravelines/Warhem-2.jpg', alt: 'Façade de l\'église Saint-Martin de Warhem', caption: 'Warhem — la façade' },
+                { src: 'images/2026/Warhem-Gravelines/Gravelines.jpg', alt: 'Église de Gravelines', caption: 'Gravelines' }
+            ],
+            featured: true
+        },
+        {
             id: 'visite-sercus-wylder-2026',
             date: '2026-06-28',
             category: 'Visite',
             title: 'Visite — Sercus et Wylder',
             summary: "Ouverture de la saison des visites estivales le dimanche 28 juin 2026, avec deux églises de la Flandre intérieure : Sercus et Wylder.",
-            body: "<p>La saison des visites guidées de l'été 2026 s'ouvre le <strong>dimanche 28 juin</strong> avec deux églises de la Flandre intérieure : l'église de <strong>Sercus</strong> et celle de <strong>Wylder</strong>.</p>",
+            body: "<p>La saison des visites guidées de l'été 2026 s'ouvre le <strong>dimanche 28 juin</strong> avec deux églises de la Flandre intérieure : l'église de <strong>Sercus</strong> et celle de <strong>Wylder</strong>.</p>"
+                + "<p>Cette première visite a réuni 15 visiteurs à Wylder.</p>",
             tags: ['visite', 'Sercus', 'Wylder', 'estivale', 'été', '2026'],
             photos: [
                 { src: 'images/2026/Sercus-Wylder/Sercus.jpg', alt: 'Église de Sercus', caption: 'Sercus' },
                 { src: 'images/2026/Sercus-Wylder/Sercus-clocher.jpg', alt: "Clocher de l'église de Sercus", caption: 'Sercus — le clocher' },
                 { src: 'images/2026/Sercus-Wylder/Wylder.jpg', alt: 'Église de Wylder', caption: 'Wylder' }
             ],
-            featured: true
+            featured: false
         },
         {
             id: 'voyage-lille-2026',
@@ -612,8 +628,8 @@
     //
     const bannerItems = [
         {
-            label: "Visite du dimanche 28 juin 2026 — les églises de Sercus et de Wylder",
-            actuId: 'visite-sercus-wylder-2026'
+            label: "Visite du dimanche 5 juillet 2026 — les églises de Warhem et de Gravelines",
+            actuId: 'visite-warhem-gravelines-2026'
         }
     ];
 
