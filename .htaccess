@@ -3,4 +3,4 @@
 Redirect 301 /retable.html /qu-est-ce-qu-un-retable.html
 Redirect 301 /activites.html /generic.html
 Redirect 301 /visiteDesEglises.html /depliants-eglises.html
-Redirect 301 /livre.html /boutique.html
+Redirect 301 /livre.html /boutique.html#section_livre
