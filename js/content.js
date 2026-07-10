@@ -148,20 +148,42 @@
           heading: 'Retable sud' }
     ];
 
-    // ===== VITRAUX D'ARNEKE (carrousel sur la page 'Que peut-on visiter ?') =====
-    const arnekePhotos = [];
-    for (let i = 2; i <= 28; i++) {
-        arnekePhotos.push({
-            name: 'Vitrail ' + i,
-            src: 'images/previous-image/boutique/arneke_eglise' + i + '.jpg'
-        });
-    }
-    arnekePhotos.push({
-        name: 'Saint Martin — Pape Pie V remerciant la Vierge du Rosaire',
-        src: 'images/previous-image/boutique/arneke_eglise_saint_artin_baie_pape_pie_vremerciant_la_vierge_du_rosaire.jpg'
-    });
+    // ===== VITRAUX DES ÉGLISES (carrousel sur la page 'Que peut-on visiter ?') =====
+    // Photos issues du livre « Lumière, couleur et dévotion — Vitraux en Flandre ».
+    // Malgré leur nom de fichier (arneke_egliseN), elles proviennent d'églises
+    // différentes — légendes reprises du diaporama de la page livre du site v1.
+    const VITRAUX = 'images/previous-image/boutique/';
+    const vitrauxLivre = [
+        { name: 'Arnèke — Pape Pie V remerciant la Vierge du Rosaire', src: VITRAUX + 'arneke_eglise_saint_artin_baie_pape_pie_vremerciant_la_vierge_du_rosaire.jpg' },
+        { name: 'Arnèke', src: VITRAUX + 'arneke_eglise2.jpg' },
+        { name: 'Bavinchove', src: VITRAUX + 'arneke_eglise3.jpg' },
+        { name: 'Bergues', src: VITRAUX + 'arneke_eglise4.jpg' },
+        { name: 'Bollezeele', src: VITRAUX + 'arneke_eglise5.jpg' },
+        { name: 'Bollezeele', src: VITRAUX + 'arneke_eglise6.jpg' },
+        { name: 'Bollezeele', src: VITRAUX + 'arneke_eglise7.jpg' },
+        { name: 'Borre', src: VITRAUX + 'arneke_eglise8.jpg' },
+        { name: 'Bourbourg', src: VITRAUX + 'arneke_eglise9.jpg' },
+        { name: 'Cassel', src: VITRAUX + 'arneke_eglise10.jpg' },
+        { name: 'Cassel', src: VITRAUX + 'arneke_eglise11.jpg' },
+        { name: 'Herzeele', src: VITRAUX + 'arneke_eglise12.jpg' },
+        { name: 'Steene', src: VITRAUX + 'arneke_eglise13.jpg' },
+        { name: 'West-Cappel', src: VITRAUX + 'arneke_eglise14.jpg' },
+        { name: 'Hazebrouck', src: VITRAUX + 'arneke_eglise15.jpg' },
+        { name: 'Holque', src: VITRAUX + 'arneke_eglise17.jpg' },
+        { name: 'Oudezeele', src: VITRAUX + 'arneke_eglise18.jpg' },
+        { name: 'Sercus', src: VITRAUX + 'arneke_eglise19.jpg' },
+        { name: 'Sercus', src: VITRAUX + 'arneke_eglise20.jpg' },
+        { name: 'Socx', src: VITRAUX + 'arneke_eglise21.jpg' },
+        { name: 'Steene', src: VITRAUX + 'arneke_eglise22.jpg' },
+        { name: 'Steenvoorde', src: VITRAUX + 'arneke_eglise23.jpg' },
+        { name: 'Volckerinckhove', src: VITRAUX + 'arneke_eglise24.jpg' },
+        { name: 'Watten', src: VITRAUX + 'arneke_eglise25.jpg' },
+        { name: 'West-Cappel', src: VITRAUX + 'arneke_eglise26.jpg' },
+        { name: 'Zegerscappel', src: VITRAUX + 'arneke_eglise27.jpg' },
+        { name: 'Zermezeele', src: VITRAUX + 'arneke_eglise28.jpg' }
+    ];
 
-    const eglises = { arneke: arnekePhotos };
+    const eglises = { vitrauxLivre: vitrauxLivre };
 
     // ===== ARTICLES (HTML stocke comme template) =====
     const articleHertel = `
@@ -571,8 +593,11 @@
     //       ...
     //     ] }
     //
-    // - n     : numéro du point sur le plan (visible sur la pastille)
+    // - n     : numéro du point sur le plan (visible sur la pastille) — reprendre la
+    //           numérotation du « Plan de découverte » du dépliant paroissial
     // - x, y  : position en % sur l'image (0,0 = top-left, 100,100 = bottom-right)
+    // - spots : optionnel, positions supplémentaires [{x, y}, ...] quand le même
+    //           numéro figure à plusieurs endroits du plan (ex. portails, confessionnaux)
     // - title : courte étiquette
     // - body  : description (peut contenir du HTML)
     //
@@ -582,16 +607,18 @@
     const eglisesPlans = {
         wormhout: {
             plan: 'images/eglises-plans/wormhout.jpg',
+            // Numérotation et emplacements alignés sur le « Plan de découverte »
+            // du dépliant paroissial de Wormhout.
             points: [
                 {
-                    n: 1, x: 50, y: 14,
-                    title: "Retable du maître-autel",
-                    body: "Retable lambris de la deuxième partie du XVIIIᵉ siècle, épouse les murs de l'abside jusqu'au berceau lambrissé. Thème : « Gloire à la Trinité et au Christ présent dans l'eucharistie ». Bois peint faux marbre brun et or veiné de blanc et rouge. Voûte en cul-de-four séparée en cinq compartiments représentant saint Placide, saint Vincent de Paul, saint François-Xavier et saint Maurus. Au centre, ostensoir rayonnant, anges et Jésus."
-                },
-                {
-                    n: 2, x: 26, y: 13,
+                    n: 1, x: 26, y: 13,
                     title: "Retable nord — Vierge Marie",
                     body: "Installé en 1785. Plan demi-circulaire concave, 3 travées séparées par des colonnes corinthiennes. Style baroque, bois peint faux marbre brun veiné de vert. Transformé au XIXᵉ. Niche centrale : Notre-Dame des Larmes (1876)."
+                },
+                {
+                    n: 2, x: 50, y: 9,
+                    title: "Retable du maître-autel",
+                    body: "Retable lambris de la deuxième partie du XVIIIᵉ siècle, épouse les murs de l'abside jusqu'au berceau lambrissé. Thème : « Gloire à la Trinité et au Christ présent dans l'eucharistie ». Bois peint faux marbre brun et or veiné de blanc et rouge. Voûte en cul-de-four séparée en cinq compartiments représentant saint Placide, saint Vincent de Paul, saint François-Xavier et saint Maurus. Au centre, ostensoir rayonnant, anges et Jésus."
                 },
                 {
                     n: 3, x: 74, y: 13,
@@ -599,39 +626,39 @@
                     body: "Restauré en 2013, caractéristique du XVIIᵉ siècle. Une seule travée + ailerons. Structure en chêne, faux marbre veiné ocre et vert, rehauts d'or. Chapiteaux corinthiens. Tableau d'autel : Sainte Famille. Niche supérieure : saint Nicolas (XIXᵉ)."
                 },
                 {
-                    n: 4, x: 50, y: 26,
+                    n: 4, x: 50, y: 22,
                     title: "Table de communion (M.H.)",
                     body: "Style Louis XV en chêne sculpté, offerte en 1731 par Alexandre Van De Walle, curé. L'abbé Blanckaert la fait exécuter en 1763. Dix panneaux figuratifs représentent le mystère de l'Eucharistie (Ancien et Nouveau Testament). En 1881, agrandissement du chœur avec recul de la partie centrale."
                 },
                 {
-                    n: 5, x: 32, y: 50,
-                    title: "Chaire à prêcher",
-                    body: "Style Empire, chêne coloré acajou. Donnée en 1841 par Ignace Coudeville, marguillier. Démontée en 1966 : la cuve est conservée dans l'abside sud, avec la statue de saint Pierre qui lui servait de support."
-                },
-                {
-                    n: 6, x: 26, y: 65,
-                    title: "Les six confessionnaux (M.H.)",
-                    body: "Trois confessionnaux rectangulaires de 1731, décor rocaille, donnés par le curé Alexandre Van De Walle. Trois autres galbés, style baroque, plutôt de la fin du XVIIIᵉ siècle."
-                },
-                {
-                    n: 7, x: 50, y: 78,
-                    title: "Les portails",
-                    body: "Vers 1723, Alexandre Van De Walle élève deux nouveaux portails en chêne se faisant face à l'entrée de l'église, de style Renaissance."
-                },
-                {
-                    n: 8, x: 50, y: 92,
-                    title: "Tribune, buffet d'orgue et orgue",
-                    body: "Seul subsiste le positif d'un instrument antérieur, mis en place en 1823. Le grand orgue actuel a été racheté à l'église Saint-Éloi de Dunkerque et installé en 1856. Restauration complète en 1912 par Frédéric Loncke, facteur d'orgues."
-                },
-                {
-                    n: 9, x: 50, y: 38,
+                    n: 5, x: 42, y: 15,
                     title: "Les stalles",
                     body: "Style néogothique, réalisées par les ateliers Collesson à Wormhout (nombreuses œuvres dans les églises de Flandre). Mises en place en 1863 après agrandissement du chœur."
                 },
                 {
-                    n: 10, x: 74, y: 65,
-                    title: "Fonts baptismaux",
-                    body: "Cuve à droite quand on entre dans l'église. La cérémonie de baptême se déroule maintenant près de la table de communion. La chapelle dédiée originellement aux fonts est maintenant consacrée au monument aux morts."
+                    n: 6, x: 88, y: 43, spots: [{ x: 12, y: 56 }, { x: 88, y: 56 }],
+                    title: "Les six confessionnaux (M.H.)",
+                    body: "Trois confessionnaux rectangulaires de 1731, décor rocaille, donnés par le curé Alexandre Van De Walle. Trois autres galbés, style baroque, plutôt de la fin du XVIIIᵉ siècle."
+                },
+                {
+                    n: 7, x: 12, y: 31, spots: [{ x: 88, y: 31 }, { x: 12, y: 43 }],
+                    title: "Les six confessionnaux (M.H.) — suite",
+                    body: "Trois confessionnaux rectangulaires de 1731, décor rocaille, donnés par le curé Alexandre Van De Walle. Trois autres galbés, style baroque, plutôt de la fin du XVIIIᵉ siècle."
+                },
+                {
+                    n: 8, x: 62, y: 24,
+                    title: "Chaire à prêcher",
+                    body: "Style Empire, chêne coloré acajou. Donnée en 1841 par Ignace Coudeville, marguillier. Démontée en 1966 : la cuve est conservée dans l'abside sud, avec la statue de saint Pierre qui lui servait de support."
+                },
+                {
+                    n: 9, x: 12, y: 72, spots: [{ x: 88, y: 72 }],
+                    title: "Les portails",
+                    body: "Vers 1723, Alexandre Van De Walle élève deux nouveaux portails en chêne se faisant face à l'entrée de l'église, de style Renaissance."
+                },
+                {
+                    n: 10, x: 50, y: 80,
+                    title: "Tribune, buffet d'orgue et orgue",
+                    body: "Seul subsiste le positif d'un instrument antérieur, mis en place en 1823. Le grand orgue actuel a été racheté à l'église Saint-Éloi de Dunkerque et installé en 1856. Restauration complète en 1912 par Frédéric Loncke, facteur d'orgues."
                 }
             ]
         }

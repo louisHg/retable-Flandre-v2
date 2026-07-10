@@ -17,7 +17,7 @@
 //   Galeries / feeds
 //     rf-gallery-carousel     carrousel retables d'accueil      (data: RFContent.galleries.retables)
 //     rf-eglises-grid         grille des 37 fiches églises      (data: RFContent.eglisesVisite)
-//     rf-gallery-arneke       carrousel vitraux d'Arnèke         (data: RFContent.galleries.eglises.arneke)
+//     rf-gallery-arneke       carrousel vitraux du livre         (data: RFContent.galleries.eglises.vitrauxLivre)
 //     rf-actu-feed            feed actualités filtrable          (data: RFContent.actualites)
 //
 //   Articles
@@ -716,6 +716,18 @@
             activePoint() {
                 return this.activeIdx !== null ? this.points[this.activeIdx] : null;
             },
+            // Une pastille par position : le point principal (x, y) + ses éventuels
+            // `spots` supplémentaires (même numéro affiché à plusieurs endroits)
+            markers() {
+                const out = [];
+                this.points.forEach((p, idx) => {
+                    out.push({ key: p.n + '-0', n: p.n, x: p.x, y: p.y, title: p.title, idx: idx });
+                    (p.spots || []).forEach((s, j) => {
+                        out.push({ key: p.n + '-' + (j + 1), n: p.n, x: s.x, y: s.y, title: p.title, idx: idx });
+                    });
+                });
+                return out;
+            },
             // Calque des pastilles calé sur la zone réellement occupée par l'image
             // (l'image est "contain" dans son conteneur : les % des points sont
             // relatifs à l'image, pas au conteneur)
@@ -797,15 +809,15 @@
                             <img :src="plan.plan" :alt="'Plan de ' + churchName" class="rf-plan-modal-map"
                                  ref="mapimg" @load="measureMap">
                             <div class="rf-plan-modal-maparea" :style="mapAreaStyle">
-                                <button v-for="(p, idx) in points" :key="p.n"
+                                <button v-for="m in markers" :key="m.key"
                                         type="button"
                                         class="rf-plan-modal-marker"
-                                        :class="{ active: idx === activeIdx }"
-                                        :style="'left:' + p.x + '%; top:' + p.y + '%;'"
-                                        :title="p.title"
-                                        :aria-label="p.n + '. ' + p.title"
-                                        @click="selectPoint(idx)">
-                                    {{ p.n }}
+                                        :class="{ active: m.idx === activeIdx }"
+                                        :style="'left:' + m.x + '%; top:' + m.y + '%;'"
+                                        :title="m.title"
+                                        :aria-label="m.n + '. ' + m.title"
+                                        @click="selectPoint(m.idx)">
+                                    {{ m.n }}
                                 </button>
                             </div>
                         </div>
@@ -841,13 +853,13 @@
     };
 
     // ==========================================
-    // 🪟 rf-gallery-arneke — Carrousel des vitraux d'Arnèke
+    // 🪟 rf-gallery-arneke — Carrousel des vitraux des églises (photos du livre)
     // ==========================================
     const RFGalleryArneke = {
         data() {
             const e = (window.RFContent && window.RFContent.galleries && window.RFContent.galleries.eglises) || {};
             return {
-                arneke: e.arneke || []
+                arneke: e.vitrauxLivre || []
             };
         },
         mounted() {
@@ -864,10 +876,12 @@
                 <div class="container">
                     <div class="rf-section-heading">
                         <div class="rf-section-heading-icon"><i class="bi bi-image"></i></div>
-                        <h3>Vitraux de l'église d'Arnèke</h3>
+                        <h3>Vitraux des églises de Flandre</h3>
                     </div>
                     <p class="text-muted mb-4" style="max-width:780px;">
-                        Ensemble remarquable de vitraux de l'église Saint-Martin d'Arnèke.
+                        Sélection de vitraux photographiés pour le livre
+                        « Lumière, couleur et dévotion — Vitraux en Flandre »,
+                        avec le nom de l'église d'origine.
                         Faites défiler avec les flèches, cliquez pour agrandir.
                     </p>
 
@@ -881,7 +895,7 @@
                                  :class="['carousel-item', { active: idx === 0 }]">
                                 <img :src="img.src" :alt="img.name" class="d-block w-100 rounded-4"
                                      style="height:480px;object-fit:contain;background:#fff;">
-                                <div class="carousel-caption d-none d-md-block"
+                                <div class="carousel-caption d-block"
                                      style="background:rgba(0,0,0,.55);border-radius:.5rem;padding:.4rem .9rem;bottom:1rem;left:auto;right:auto;display:inline-block;width:auto;">
                                     <span style="font-size:.85rem;">{{ img.name }}</span>
                                 </div>
