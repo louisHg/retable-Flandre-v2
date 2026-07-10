@@ -1,0 +1,43 @@
+name: Deploy v2 to Remote Server via SSH
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Setup SSH key
+        run: |
+          mkdir -p ~/.ssh
+          echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
+          chmod 600 ~/.ssh/id_rsa
+          ssh-keyscan -H ${{ secrets.DEPLOY_HOST }} >> ~/.ssh/known_hosts
+
+      # La v2 vit dans un SOUS-DOSSIER du site v1 :
+      # https://www.retablesdeflandre.fr/retableFlandreV2/
+      # Le --delete ne s'applique qu'à ce sous-dossier ; la v1 (racine) n'est pas touchée.
+      - name: Deploy via rsync over SSH
+        run: |
+          rsync -avz --delete \
+            --exclude '.git/' \
+            --exclude '.github/' \
+            --exclude '.DS_Store' \
+            --exclude 'README.md' \
+            --exclude 'LICENSE' \
+            --exclude 'server.js' \
+            --exclude 'start-server.sh' \
+            --exclude 'deploy.sh' \
+            -e "ssh -i ~/.ssh/id_rsa" \
+            ./ ${{ secrets.DEPLOY_USER }}@${{ secrets.DEPLOY_HOST }}:~/html5up-editorial/retableFlandreV2/
+
+      - name: Fix permissions
+        run: |
+          ssh -i ~/.ssh/id_rsa ${{ secrets.DEPLOY_USER }}@${{ secrets.DEPLOY_HOST }} \
+            "chmod -R 755 ~/html5up-editorial/retableFlandreV2"
