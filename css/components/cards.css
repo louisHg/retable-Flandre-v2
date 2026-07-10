@@ -754,6 +754,16 @@
   object-fit: contain;
 }
 
+/* Calque positionné en JS pour épouser exactement l'image (letterbox du contain) */
+.rf-plan-modal-maparea {
+  position: absolute;
+  pointer-events: none;
+}
+
+.rf-plan-modal-maparea .rf-plan-modal-marker {
+  pointer-events: auto;
+}
+
 .rf-plan-modal-marker {
   position: absolute;
   transform: translate(-50%, -50%);

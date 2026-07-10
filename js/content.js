@@ -168,8 +168,23 @@
         <h4 class="mb-3">Les retables de Flandre française des XVIIe, XVIIIe et XIXe siècles</h4>
         <h6 class="mb-3" style="color: #717275;">Philippe HERTEL, Anita OGER-LEURENT</h6>
         <p style="line-height: 1.8; color: #555;">
-            « Les retables de Flandre française des XVIIe, XVIIIe et XIXe siècles » :
-            contexte spirituel et historique, Réforme et Contre-Réforme ; essai de typologie.
+            Pourquoi la Flandre compte-t-elle une telle concentration de retables ? La première partie
+            de l'article, due à Philippe Hertel, replace ces grands meubles dans leur contexte spirituel
+            et historique&nbsp;: né comme simple « cadre » derrière la table d'autel (du latin
+            <em>retro tabula</em>), le retable devient après le concile de Trente le point de focalisation
+            de l'église. Face à la Réforme protestante — et après la fureur iconoclaste des « Gueux »
+            partie de Steenvoorde en 1566 —, la Contre-Réforme catholique en fait le support triomphal
+            de ses dogmes réaffirmés&nbsp;: Eucharistie, culte de la Vierge et des saints, hiérarchie de l'Église.
+        </p>
+        <p style="line-height: 1.8; color: #555;">
+            La seconde partie, signée Anita Oger-Leurent, propose un essai de typologie des retables
+            du Westhoek&nbsp;: polyptyques peints de la reconstitution (fin XVIᵉ), retables architecturés
+            de la « Renaissance flamande » (Bollezeele 1619, Steenbecque), formule du
+            <strong>portique</strong> inspirée des arcs de triomphe, puis retables-lambris épousant
+            l'abside entière. On y découvre le bois sous le faux marbre — chêne des forêts de Nieppe
+            et de Clairmarais, résineux nordiques importés par Dunkerque —, les dynasties d'artisans
+            (Vosselle, Elshoecht, Piette…) et le devenir de ces meubles « vivants » jusqu'aux
+            interrogations patrimoniales d'aujourd'hui.
         </p>
         <p class="mb-3" style="font-size: 0.95rem; color: #717275;">
             In 11ES JOURNÉES D'ÉTUDES DE LA SECTION FRANÇAISE DE L'INSTITUT INTERNATIONAL DE CONSERVATION (S.F.I.I.C.).
@@ -188,8 +203,21 @@
         <h4 class="mb-3">Retables de Flandre : un patrimoine partagé</h4>
         <h6 class="mb-3" style="color: #717275;">Anita OGER-LEURENT</h6>
         <p style="line-height: 1.8; color: #555;">
-            « Retables de Flandre : un patrimoine partagé » explore les liens culturels et
-            artistiques qui unissent les retables flamands des deux côtés de la frontière.
+            En 1713, le traité d'Utrecht trancha « dans la chair de l'ancienne Flandre »&nbsp;: la nouvelle
+            frontière sépara le Westhoek français des châtellenies restées aux Pays-Bas autrichiens,
+            la future Belgique. Mais hommes, idées et œuvres continuèrent de circuler&nbsp;: sculpteurs
+            et ébénistes — les Roose, Vosselle, Elshoecht — travaillèrent des deux côtés, léguant
+            aux Flandres belge et française un <strong>patrimoine partagé</strong> dont les retables
+            des églises rurales sont l'exemple emblématique.
+        </p>
+        <p style="line-height: 1.8; color: #555;">
+            L'article retrace l'évolution de ces meubles après l'iconoclasme calviniste de 1566-1568&nbsp;:
+            polyptyques peints, retables architecturés maniéristes (Bollezeele, 1619), parti vertical
+            inspiré des arcs de triomphe, jusqu'à l'apogée du XVIIIᵉ siècle et au retable-lambris fusionnant
+            avec l'architecture. Derrière l'austérité de leurs murs de briques, les églises rurales de
+            Flandre abritent ainsi un mobilier d'une qualité exceptionnelle — statuaire en bois locaux,
+            structure en sapin nordique importé par Dunkerque, toiles de peintres régionaux renommés
+            comme Jean De Reyn ou Matthieu Elias — pleinement inscrit dans l'ordre baroque européen.
         </p>
         <p class="mb-4" style="font-size: 0.95rem; color: #717275;">
             In Situ, n°3, printemps 2003, Territoires d'inventaire
@@ -239,7 +267,7 @@
         { name: 'Socx',              image: null,                                                     description: "Église Saint-Maxime, retables du maître-autel, de la Vierge et de Saint-Léger.", tags: ['Saint-Maxime', 'Saint-Léger'], pdf: DEPLIANT_BASE + 'Socx.pdf' },
         { name: 'Steenbecque',       image: null,                                                     description: "Église Saint-Léger, retable du maître-autel.", tags: ['Saint-Léger'], pdf: DEPLIANT_BASE + 'Steenbecque.pdf' },
         { name: 'Steene',            image: null,                                                     description: "", tags: [], pdf: DEPLIANT_BASE + 'Steene.pdf' },
-        { name: 'Steenvoorde',       image: 'images/2025/STEENVOORDE.jpeg',                           description: "Église Saint-Pierre, haute flèche de 92 mètres.", tags: ['Saint-Pierre', 'flèche'], pdf: DEPLIANT_BASE + 'Steenvoorde.pdf' },
+        { name: 'Steenvoorde',       image: 'images/2025/STEENVOORDE.jpeg',                           description: "Église Saint-Pierre, haute flèche de 92 mètres.", tags: ['Saint-Pierre', 'flèche'], pdf: null },
         { name: 'Volckerinckhove',   image: 'images/2025/Volckerinckove.JPG',                         description: "Église romane, poutres sculptées et fonts baptismaux remarquables.", tags: ['romane'], pdf: DEPLIANT_BASE + 'Volckerinckhove.pdf' },
         { name: 'Warhem',            image: 'images/2026/Warhem-Gravelines/Warhem.jpg',               description: "Église Saint-Martin, retable du Rosaire.", tags: ['Saint-Martin', 'Rosaire'], pdf: DEPLIANT_BASE + 'Warhem.pdf' },
         { name: 'Wemaers-Cappel',    image: 'images/previous-image/WEMAERS-Cappel.jpg',               description: "Église Saint-Sylvestre, retable du maître-autel.", tags: ['Saint-Sylvestre'], pdf: DEPLIANT_BASE + 'Wemaers-Cappel.pdf' },

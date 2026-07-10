@@ -655,7 +655,7 @@
                     </div>
 
                     <div class="row g-3">
-                        <div v-for="eglise in filtered" :key="eglise.pdf"
+                        <div v-for="eglise in filtered" :key="eglise.name"
                              class="col-lg-3 col-md-4 col-sm-6 col-12">
                             <div class="rf-eglise-card">
                                 <div class="rf-eglise-card-media">
@@ -675,10 +675,14 @@
                                                 @click="openPlan(eglise)">
                                             <i class="bi bi-geo-alt"></i>Plan interactif
                                         </button>
-                                        <a :href="eglise.pdf" target="_blank"
+                                        <a v-if="eglise.pdf" :href="eglise.pdf" target="_blank"
                                            class="rf-eglise-btn rf-eglise-btn-outline">
                                             <i class="bi bi-file-pdf"></i>Dépliant
                                         </a>
+                                        <span v-else class="rf-eglise-btn rf-eglise-btn-outline"
+                                              style="opacity:.55;cursor:default;">
+                                            <i class="bi bi-hourglass-split"></i>Dépliant à venir
+                                        </span>
                                     </div>
                                 </div>
                             </div>
@@ -699,7 +703,8 @@
                 open: false,
                 slug: null,
                 churchName: '',
-                activeIdx: null
+                activeIdx: null,
+                mapBox: null
             };
         },
         computed: {
@@ -710,6 +715,18 @@
             points() { return this.plan ? this.plan.points : []; },
             activePoint() {
                 return this.activeIdx !== null ? this.points[this.activeIdx] : null;
+            },
+            // Calque des pastilles calé sur la zone réellement occupée par l'image
+            // (l'image est "contain" dans son conteneur : les % des points sont
+            // relatifs à l'image, pas au conteneur)
+            mapAreaStyle() {
+                if (!this.mapBox) return { display: 'none' };
+                return {
+                    left: this.mapBox.left + 'px',
+                    top: this.mapBox.top + 'px',
+                    width: this.mapBox.width + 'px',
+                    height: this.mapBox.height + 'px'
+                };
             }
         },
         mounted() {
@@ -721,19 +738,24 @@
                 this.slug = slug;
                 this.churchName = e.detail.name || slug;
                 this.activeIdx = null;
+                this.mapBox = null;
                 this.open = true;
                 document.body.style.overflow = 'hidden';
+                this.$nextTick(() => this.measureMap());
             };
             this._onKey = (e) => {
                 if (!this.open) return;
                 if (e.key === 'Escape') this.close();
             };
+            this._onResize = () => { if (this.open) this.measureMap(); };
             document.addEventListener('rf-open-plan', this._onOpen);
             document.addEventListener('keydown', this._onKey);
+            window.addEventListener('resize', this._onResize);
         },
         beforeUnmount() {
             if (this._onOpen) document.removeEventListener('rf-open-plan', this._onOpen);
             if (this._onKey) document.removeEventListener('keydown', this._onKey);
+            if (this._onResize) window.removeEventListener('resize', this._onResize);
         },
         methods: {
             close() {
@@ -742,6 +764,19 @@
             },
             selectPoint(idx) {
                 this.activeIdx = this.activeIdx === idx ? null : idx;
+            },
+            measureMap() {
+                const wrap = this.$refs.mapwrap;
+                const img = this.$refs.mapimg;
+                if (!wrap || !img || !img.complete || !img.naturalWidth) return;
+                const w = wrap.getBoundingClientRect();
+                const i = img.getBoundingClientRect();
+                this.mapBox = {
+                    left: i.left - w.left,
+                    top: i.top - w.top,
+                    width: i.width,
+                    height: i.height
+                };
             }
         },
         template: `
@@ -758,18 +793,21 @@
                     </header>
 
                     <div class="rf-plan-modal-body">
-                        <div class="rf-plan-modal-mapwrap">
-                            <img :src="plan.plan" :alt="'Plan de ' + churchName" class="rf-plan-modal-map">
-                            <button v-for="(p, idx) in points" :key="p.n"
-                                    type="button"
-                                    class="rf-plan-modal-marker"
-                                    :class="{ active: idx === activeIdx }"
-                                    :style="'left:' + p.x + '%; top:' + p.y + '%;'"
-                                    :title="p.title"
-                                    :aria-label="p.n + '. ' + p.title"
-                                    @click="selectPoint(idx)">
-                                {{ p.n }}
-                            </button>
+                        <div class="rf-plan-modal-mapwrap" ref="mapwrap">
+                            <img :src="plan.plan" :alt="'Plan de ' + churchName" class="rf-plan-modal-map"
+                                 ref="mapimg" @load="measureMap">
+                            <div class="rf-plan-modal-maparea" :style="mapAreaStyle">
+                                <button v-for="(p, idx) in points" :key="p.n"
+                                        type="button"
+                                        class="rf-plan-modal-marker"
+                                        :class="{ active: idx === activeIdx }"
+                                        :style="'left:' + p.x + '%; top:' + p.y + '%;'"
+                                        :title="p.title"
+                                        :aria-label="p.n + '. ' + p.title"
+                                        @click="selectPoint(idx)">
+                                    {{ p.n }}
+                                </button>
+                            </div>
                         </div>
 
                         <aside class="rf-plan-modal-side" :class="{ 'is-active': activePoint }">
