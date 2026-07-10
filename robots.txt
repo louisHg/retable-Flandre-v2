@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://www.retablesdeflandre.fr/sitemap.xml
