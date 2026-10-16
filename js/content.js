@@ -307,6 +307,29 @@
     //
     const actualites = [
         {
+            id: 'anniversaire-35-ans-2026',
+            date: '2026-10-03',
+            category: 'Anniversaire',
+            title: "Les 35 ans de l'association",
+            summary: "Samedi 3 octobre 2026, l'association a fêté ses 35 ans en l'église Saint-Eloi d'Hazebrouck : remise des 12 nouveaux dépliants, hommage à Mme Aïda Tellier, concert d'orgues, verre de l'amitié et repas.",
+            body: "<p>L'association <strong>Retables de Flandre</strong> a fêté ses <strong>35 ans</strong> le <strong>samedi 3 octobre 2026</strong> en l'<strong>église Saint-Eloi d'Hazebrouck</strong>, avec le Centre International Albert-Roussel (CIAR). Au programme :</p>"
+                + "<ul>"
+                + "<li><strong>17h</strong> — remise des 12 nouveaux dépliants de l'association, suivie de la mise à l'honneur de Mme <strong>Aïda Tellier</strong></li>"
+                + "<li><strong>18h</strong> — concert d'orgues avec <strong>Emmanuel Hocde</strong> (participation libre)</li>"
+                + "<li><strong>19h</strong> — verre de l'amitié</li>"
+                + "<li><strong>20h</strong> — repas à frais partagés à « La Taverne »</li>"
+                + "</ul>"
+                + "<p>Les 12 nouveaux dépliants ont été remis aux communes de Boeschèpe, Craywick, Eringhem, Ochtezeele, Oost-Cappel, Quaëdypre, Renescure, Saint-Pierrebrouck, Steenvoorde, Terdeghem, Wylder et Zermezeele.</p>",
+            tags: ['anniversaire', '35 ans', 'Hazebrouck', 'Saint-Eloi', 'dépliants', 'concert', 'orgue', 'CIAR', '2026'],
+            photos: [
+                { src: 'images/2026/35-ans/affiche-35-ans.jpg', alt: "Affiche des 35 ans de l'association — samedi 3 octobre 2026, église Saint-Eloi d'Hazebrouck", caption: "L'affiche des 35 ans" }
+            ],
+            docs: [
+                { label: "Voir l'affiche en grand", href: 'images/2026/35-ans/affiche-35-ans.jpg' }
+            ],
+            featured: true
+        },
+        {
             id: 'visite-warhem-gravelines-2026',
             date: '2026-07-05',
             category: 'Visite',
@@ -683,8 +706,8 @@
     //
     const bannerItems = [
         {
-            label: "Visite du dimanche 5 juillet 2026 — les églises de Warhem et de Gravelines",
-            actuId: 'visite-warhem-gravelines-2026'
+            label: "Samedi 3 octobre 2026 — les 35 ans de l'association à l'église Saint-Eloi d'Hazebrouck",
+            actuId: 'anniversaire-35-ans-2026'
         }
     ];
 
