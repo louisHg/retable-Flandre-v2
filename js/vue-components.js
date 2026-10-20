@@ -108,12 +108,9 @@
                                 </div>
                             </div>
                             <p class="mt-4">
-                                Les membres de l'association vous adressent leurs <strong>meilleurs vœux pour 2026</strong>
+                                En parcourant le site rénové, vous ferez, nous l'espérons, de <strong>belles découvertes de notre patrimoine</strong>.
                                 <br/>
-                                Que cette nouvelle année vous apporte santé, sérénité et joie,
-                                au fil de belles découvertes de notre patrimoine.
-                                <br/><br/>
-                                <em>Merci pour votre soutien et votre fidélité.</em>
+                                Les membres de l'association vous remercient pour votre soutien et votre fidélité.
                             </p>
                             <a target="_blank" href="images/2025/retablesdeflandre/Redecouvrir-n-51.pdf"
                                class="btn custom-btn smoothscroll" style="font-size: 1.1rem; padding: 12px 22px;">
@@ -151,7 +148,7 @@
                             <p class="mt-4" style="line-height: 1.8;">
                                 L'ensemble des retables de Flandre française constitue un corpus homogène, formant à
                                 l'intérieur de l'arrondissement de Dunkerque, <strong>de la mer du Nord à la Lys</strong>,
-                                un ensemble de près de <strong>150 œuvres réparties dans une cinquantaine d'églises</strong>.
+                                un ensemble de près de <strong>150 œuvres réparties dans une soixantaine d'églises</strong>.
                                 <br><br>
                                 Leur cohérence vient de l'unité de leur époque de construction, les <strong>XVII° et XVIII° siècles</strong>,
                                 de leur structure architecturale et de leur matériau de construction, le bois.
@@ -193,7 +190,7 @@
                             <p style="line-height: 1.8; color: #555;">
                                 L'ensemble des retables de Flandre française constitue un corpus homogène, formant à
                                 l'intérieur de l'arrondissement de Dunkerque, de la mer du Nord à la Lys, un ensemble de près de
-                                <strong>150 œuvres réparties dans une cinquantaine d'églises</strong>.
+                                <strong>150 œuvres réparties dans une soixantaine d'églises</strong>.
                             </p>
                             <p style="line-height: 1.8; color: #555;" class="mb-4">
                                 Leur cohérence vient de l'unité de leur époque de construction, les <strong>XVII° et XVIII° siècles</strong>,
@@ -506,8 +503,7 @@
                     <div class="container">
                         <div class="row align-items-end mb-4">
                             <div class="col-lg-8">
-                                <h2 class="videos-title mb-2">Galerie des Retables</h2>
-                                <p class="videos-subtitle mb-0">Découvrez les retables des églises de Flandre rénové par l'association</p>
+                                <h2 class="videos-title mb-2">Galerie des Retables restaurés</h2>
                             </div>
                         </div>
                         <div id="photoCarousel" ref="carouselEl" class="carousel slide" data-bs-ride="carousel">
