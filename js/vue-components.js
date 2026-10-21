@@ -318,6 +318,7 @@
                                                     <label for="phone">Téléphone</label>
                                                 </div>
                                             </div>
+                                            
                                             <div class="col-lg-12 col-md-6 col-12">
                                                 <div class="form-floating">
                                                     <input type="email" id="email" v-model="form.email"
