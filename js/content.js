@@ -333,7 +333,7 @@
                 + "<ul>"
                 + "<li>Boeschèpe — église Saint-Martin, par Réginald Pasquier</li>"
                 + "<li>Craywick — église Saint-Gilles, par Nicole Lalleman</li>"
-                + "<li>Eringhem — église Saint-Matthias, par Jean-Pierre</li>"
+                + "<li>Eringhem — église Saint-Matthias, par Jean-Pierre Vanryssel</li>"
                 + "<li>Ochtezeele — église Saint-Omer, par René Charlet</li>"
                 + "<li>Oost-Cappel — église Saint-Nicolas, par Françoise Faes</li>"
                 + "<li>Quaëdypre — église Saint-Omer, par Françoise Faes</li>"
