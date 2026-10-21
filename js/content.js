@@ -311,20 +311,54 @@
             date: '2026-10-03',
             category: 'Anniversaire',
             title: "Les 35 ans de l'association",
-            summary: "Samedi 3 octobre 2026, l'association a fêté ses 35 ans en l'église Saint-Eloi d'Hazebrouck : remise des 12 nouveaux dépliants, hommage à Mme Aïda Tellier, concert d'orgues, verre de l'amitié et repas.",
-            body: "<p>L'association <strong>Retables de Flandre</strong> a fêté ses <strong>35 ans</strong> le <strong>samedi 3 octobre 2026</strong> en l'<strong>église Saint-Eloi d'Hazebrouck</strong>, avec le Centre International Albert-Roussel (CIAR). Au programme :</p>"
+            summary: "Samedi 3 octobre 2026, l'association a fêté ses 35 ans en l'église Saint-Eloi d'Hazebrouck : retour sur 35 ans d'action (42 retables restaurés), remise des 12 nouveaux dépliants aux communes, hommage à Mme Aïda Tellier et récital d'orgue d'Emmanuel Hocde.",
+            body: "<p>L'association <strong>Retables de Flandre</strong> a fêté ses <strong>35 ans</strong> le <strong>samedi 3 octobre 2026</strong> en l'<strong>église Saint-Eloi d'Hazebrouck</strong>, devant les élus, les guides et de nombreux adhérents.</p>"
+                + "<h4>35 ans au service des retables</h4>"
+                + "<p>Redécouvrir les retables des églises de Flandre, éléments importants du patrimoine culturel de notre région : c'est le but que s'est fixé l'association. Le coup d'envoi a été donné le <strong>24 mai 1991</strong> à l'église Saint-Eloi de Dunkerque, avec le lancement de l'opération « Mon patrimoine » initiée par le ministère de la Culture, avec le concours de Bernard Prévost, sous-préfet de Dunkerque, et de la ville de Dunkerque.</p>"
+                + "<p>L'association s'est assigné quatre buts : poursuivre la recherche sur l'histoire et l'environnement des retables, diffuser l'information concernant ce patrimoine, mobiliser les moyens financiers complémentaires aux opérations de sauvegarde, de restauration et de mise en valeur, et participer au développement touristique.</p>"
+                + "<p>Quelques grandes étapes rappelées par la présidente, <strong>Régine Beaucamp</strong> :</p>"
                 + "<ul>"
-                + "<li><strong>17h</strong> — remise des 12 nouveaux dépliants de l'association, suivie de la mise à l'honneur de Mme <strong>Aïda Tellier</strong></li>"
-                + "<li><strong>18h</strong> — concert d'orgues avec <strong>Emmanuel Hocde</strong> (participation libre)</li>"
-                + "<li><strong>19h</strong> — verre de l'amitié</li>"
-                + "<li><strong>20h</strong> — repas à frais partagés à « La Taverne »</li>"
+                + "<li><strong>1993</strong> — José De Broucker devient président, accompagné de Francis Thulie, secrétaire général. Création d'un fonds de ressources pour la restauration, circuits « Chemins et Mémoires », « Retables en musique », signalétique des Chemins des Retables.</li>"
+                + "<li><strong>1996</strong> — 18 guides certifiés ; le livre « Architecture et Trésors des églises de Flandre » est offert par Mme Geneviève Duprez au profit du fonds de ressources. Échanges culturels en Haute-Saône, Haute-Savoie et en Bucovine (Roumanie).</li>"
+                + "<li><strong>2002</strong> — 18 nouveaux guides certifiés ; rallye des retables.</li>"
+                + "<li><strong>2008</strong> — Régine Beaucamp succède à José De Broucker ; album « VIVAT » et son DVD consacrés aux 24 retables restaurés.</li>"
+                + "<li><strong>2010</strong> — livre d'art « Lumière, couleur et dévotion — Vitraux en Flandre », offert au pape François par l'abbé Lescroart en 2015.</li>"
+                + "<li><strong>2016</strong> — nouvelle formation de guides ; Francis Thulie décoré par le préfet de région ; exposition « Forme et Sens » (40 panneaux).</li>"
+                + "<li><strong>2021-2022</strong> — Crochte restaure 3 retables de l'église Saint-Georges et en découvre un 4ᵉ.</li>"
+                + "<li><strong>2025-2026</strong> — formation de 9 nouveaux guides.</li>"
                 + "</ul>"
-                + "<p>Les 12 nouveaux dépliants ont été remis aux communes de Boeschèpe, Craywick, Eringhem, Ochtezeele, Oost-Cappel, Quaëdypre, Renescure, Saint-Pierrebrouck, Steenvoorde, Terdeghem, Wylder et Zermezeele.</p>",
-            tags: ['anniversaire', '35 ans', 'Hazebrouck', 'Saint-Eloi', 'dépliants', 'concert', 'orgue', 'CIAR', '2026'],
+                + "<p>À ce jour, <strong>42 retables ont été restaurés</strong> — et l'association attend de nouvelles demandes !</p>"
+                + "<h4>Remise des 12 nouveaux dépliants</h4>"
+                + "<p>Rédigés par nos guides, relus et corrigés par Aïda Tellier, Nicole Lalleman et Hélène Bossart, les dépliants ont été remis aux élus des 12 communes concernées :</p>"
+                + "<ul>"
+                + "<li>Boeschèpe — église Saint-Martin, par Réginald Pasquier</li>"
+                + "<li>Craywick — église Saint-Gilles, par Nicole Lalleman</li>"
+                + "<li>Eringhem — église Saint-Matthias, par Jean-Pierre</li>"
+                + "<li>Ochtezeele — église Saint-Omer, par René Charlet</li>"
+                + "<li>Oost-Cappel — église Saint-Nicolas, par Françoise Faes</li>"
+                + "<li>Quaëdypre — église Saint-Omer, par Françoise Faes</li>"
+                + "<li>Renescure — église Notre-Dame de l'Assomption, par Aïda Tellier</li>"
+                + "<li>Saint-Pierre-Brouck — église Saint-Pierre, par Françoise Faes</li>"
+                + "<li>Steenvoorde — église Saint-Pierre, par Daniel Francke</li>"
+                + "<li>Terdeghem — église Saint-Martin, par Marie-Claude Wiel</li>"
+                + "<li>Wylder — église Saint-Martin, par Françoise Faes</li>"
+                + "<li>Zermezeele — église Saint-Omer, par René Charlet</li>"
+                + "</ul>"
+                + "<h4>Hommage à Aïda Tellier</h4>"
+                + "<p>« Quelle chance, quel bonheur de vous avoir connue parmi les membres efficaces de notre association ! » Pendant de longues années, <strong>Aïda Tellier</strong> a inlassablement parcouru nos villages, de la côte maritime à la Flandre intérieure, pour étudier, photographier et faire connaître ce patrimoine. Elle a accompagné et orienté les nombreuses personnes devenues guides, construit les programmes des visites d'été en veillant à ce que les 62 églises du territoire soient étudiées, coordonné la rédaction de l'ouvrage sur les vitraux et aidé de façon extraordinaire à la rédaction des dépliants. L'association lui a offert un souvenir en remerciement de tout ce qu'elle lui a donné.</p>"
+                + "<p>La journée s'est poursuivie avec le <strong>récital d'Emmanuel Hocde</strong> aux orgues de l'église Saint-Eloi, organisé par Damien Top du Centre International Albert-Roussel (CIAR).</p>",
+            tags: ['anniversaire', '35 ans', 'Hazebrouck', 'Saint-Eloi', 'dépliants', 'Aïda Tellier', 'hommage', 'concert', 'orgue', 'CIAR', '2026'],
             photos: [
+                { src: 'images/2026/35-ans/assemblee.jpg', alt: "L'assemblée réunie dans l'église Saint-Eloi d'Hazebrouck pour les 35 ans", caption: "L'assemblée à Saint-Eloi" },
+                { src: 'images/2026/35-ans/discours.jpg', alt: "Discours des 35 ans de l'association dans l'église Saint-Eloi d'Hazebrouck", caption: 'Le discours des 35 ans' },
+                { src: 'images/2026/35-ans/hommage-aida-tellier.jpg', alt: 'Remise du souvenir à Mme Aïda Tellier', caption: 'Hommage à Aïda Tellier' },
+                { src: 'images/2026/35-ans/aida-tellier.jpg', alt: 'Mme Aïda Tellier', caption: 'Aïda Tellier' },
+                { src: 'images/2026/35-ans/depliants.jpg', alt: 'Les 12 nouveaux dépliants des églises de Flandre', caption: 'Les 12 nouveaux dépliants' },
+                { src: 'images/2026/35-ans/article-de-presse.jpg', alt: "Article de presse — Quarante-deux retables restaurés grâce à l'association des Retables de Flandre", caption: "L'article de presse" },
                 { src: 'images/2026/35-ans/affiche-35-ans.jpg', alt: "Affiche des 35 ans de l'association — samedi 3 octobre 2026, église Saint-Eloi d'Hazebrouck", caption: "L'affiche des 35 ans" }
             ],
             docs: [
+                { label: "Lire l'article de presse", href: 'images/2026/35-ans/article-de-presse.jpg' },
                 { label: "Voir l'affiche en grand", href: 'images/2026/35-ans/affiche-35-ans.jpg' }
             ],
             featured: true
@@ -706,7 +740,7 @@
     //
     const bannerItems = [
         {
-            label: "Samedi 3 octobre 2026 — les 35 ans de l'association à l'église Saint-Eloi d'Hazebrouck",
+            label: "Retour en photos sur les 35 ans de l'association — 42 retables restaurés, 12 nouveaux dépliants, hommage à Aïda Tellier",
             actuId: 'anniversaire-35-ans-2026'
         }
     ];
