@@ -18,7 +18,13 @@ jobs:
           mkdir -p ~/.ssh
           echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
           chmod 600 ~/.ssh/id_rsa
-          ssh-keyscan -H ${{ secrets.DEPLOY_HOST }} >> ~/.ssh/known_hosts
+          # Ionos ne répond pas toujours du premier coup : jusqu'à 5 essais
+          for i in 1 2 3 4 5; do
+            ssh-keyscan -T 15 -H ${{ secrets.DEPLOY_HOST }} >> ~/.ssh/known_hosts && break
+            echo "ssh-keyscan échoué (essai $i), nouvel essai dans 10 s"
+            sleep 10
+          done
+          grep -q . ~/.ssh/known_hosts
 
       # La v2 vit dans un SOUS-DOSSIER du site v1 :
       # https://www.retablesdeflandre.fr/retableFlandreV2/
