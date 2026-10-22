@@ -57,14 +57,14 @@
                 if (target) {
                     target.scrollIntoView({behavior: 'smooth'});
                 } else {
-                    window.location.href = 'index.html#section_contact';
+                    window.location.href = './#section_contact';
                 }
                 this.handleNavClick();
             }
         },
         template: `
             <aside id="rfSidebar" class="rf-sidebar" :class="{ 'is-collapsed': !isOpen }">
-                <a class="rf-brand d-flex align-items-center" href="index.html">
+                <a class="rf-brand d-flex align-items-center" href="./">
                     <img src="images/previous-image/logo.jpg" class="rf-brand-image img-fluid" alt="Retables de Flandre">
                     <span class="rf-brand-text">
                         Retables
@@ -73,7 +73,7 @@
                 </a>
 
                 <nav class="rf-sidebar-nav">
-                    <a class="nav-link" :class="{ active: currentPage === 'index' }" href="index.html" @click="handleNavClick">Accueil</a>
+                    <a class="nav-link" :class="{ active: currentPage === 'index' }" href="./" @click="handleNavClick">Accueil</a>
                     <a class="nav-link" :class="{ active: currentPage === 'generic' }" href="generic.html" @click="handleNavClick">Qui sommes-nous ?</a>
                     <a class="nav-link" :class="{ active: currentPage === 'retable' }" href="qu-est-ce-qu-un-retable.html" @click="handleNavClick">Qu'est-ce qu'un retable ?</a>
                     <a class="nav-link" :class="{ active: currentPage === 'visite' }" href="depliants-eglises.html" @click="handleNavClick">Que peut-on visiter ?</a>
