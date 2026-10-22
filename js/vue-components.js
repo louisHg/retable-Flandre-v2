@@ -504,7 +504,8 @@
                     <div class="container">
                         <div class="row align-items-end mb-4">
                             <div class="col-lg-8">
-                                <h2 class="videos-title mb-2">Galerie des Retables restaurés</h2>
+                                <h2 class="videos-title mb-2">Galerie des Retables</h2>
+                                <p class="videos-subtitle mb-0">Découvrez les retables des églises de Flandre rénovés</p>
                             </div>
                         </div>
                         <div id="photoCarousel" ref="carouselEl" class="carousel slide" data-bs-ride="carousel">
