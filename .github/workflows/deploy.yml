@@ -13,6 +13,15 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
+      # Cache-busting : ajoute ?v=<commit> aux JS/CSS locaux de chaque page, pour
+      # que les navigateurs rechargent ces fichiers à chaque déploiement au lieu
+      # de garder une ancienne copie en cache (fichiers du dépôt inchangés).
+      - name: Version des JS/CSS
+        run: |
+          V="${GITHUB_SHA::8}"
+          perl -pi -e 's#((?:src|href)="(?:js|css)/[^"?]+\.(?:js|css))"#$1?v='"$V"'"#g' *.html
+          grep -c "?v=$V" *.html
+
       - name: Setup SSH key
         run: |
           mkdir -p ~/.ssh
