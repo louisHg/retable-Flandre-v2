@@ -26,7 +26,7 @@
 //
 //   Transversal
 //     rf-newsletter-cta       CTA newsletter
-//     rf-contact              formulaire contact (EmailJS)
+//     rf-contact              bloc coordonnées de contact
 //     rf-lightbox             modale d'agrandissement automatique (toutes images)
 //     rf-news-banner          strip "Nouveautés" en haut de chaque page (data: window.RFNewsAPI)
 //
@@ -237,116 +237,29 @@
     // 📧 rf-contact
     // ==========================================
     const RFContact = {
-        data() {
-            return {
-                form: {fullName: '', phone: '', email: '', message: ''},
-                sending: false,
-                sent: false,
-                error: null
-            };
-        },
-        mounted() {
-            if (window.emailjs) {
-                emailjs.init('aDQZj6KUMz6fZ2Qs3');
-            }
-        },
-        methods: {
-            async submitForm() {
-                this.sending = true;
-                this.sent = false;
-                this.error = null;
-                try {
-                    await emailjs.send('service_outp9kh', 'template_dkbwnu2', {
-                        fullName: this.form.fullName,
-                        phone: this.form.phone,
-                        email: this.form.email,
-                        message: this.form.message
-                    });
-                    this.sent = true;
-                    this.form = {fullName: '', phone: '', email: '', message: ''};
-                } catch (err) {
-                    this.error = "Erreur lors de l'envoi. Veuillez réessayer.";
-                    console.error('Erreur EmailJS :', err);
-                } finally {
-                    this.sending = false;
-                }
-            }
-        },
         template: `
             <section class="contact-section section-padding" id="section_contact">
                 <div class="container">
                     <div class="row justify-content-center">
-                        <div class="col-lg-10 col-12">
-                            <div class="row contact-split">
-                                <div class="col-lg-5 col-12">
-                                    <div class="p-4 rounded-4 shadow-sm" style="background:#fff;">
-                                        <h2 class="mb-3">Contact</h2>
-                                        <p class="mb-2">
-                                            <i class="bi bi-envelope"></i>
-                                            <a href="mailto:retables@orange.fr" class="ms-2">retables@orange.fr</a>
-                                        </p>
-                                        <p class="mb-2">
-                                            <i class="bi bi-telephone"></i>
-                                            <a href="tel:0627712538" class="ms-2">06 27 71 25 38</a>
-                                        </p>
-                                        <p class="mb-0">
-                                            <i class="bi bi-geo-alt"></i>
-                                            <span class="ms-2">
-                                                Association RETABLES de FLANDRE<br>
-                                                B.P. 70002<br>
-                                                59470 Wormhout
-                                            </span>
-                                        </p>
-                                    </div>
-                                </div>
-                                <div class="col-lg-6 col-12">
-                                    <form class="custom-form contact-form" role="form" @submit.prevent="submitForm">
-                                        <h2 class="mb-4 pb-2">Écrivez-nous</h2>
-                                        <div class="row">
-                                            <div class="col-lg-6 col-md-6 col-12">
-                                                <div class="form-floating">
-                                                    <input type="text" id="full-name" v-model="form.fullName"
-                                                           class="form-control" placeholder="Nom et prénom" required>
-                                                    <label for="full-name">Nom et prénom</label>
-                                                </div>
-                                            </div>
-                                            <div class="col-lg-6 col-md-6 col-12">
-                                                <div class="form-floating">
-                                                    <input type="tel" id="phone" v-model="form.phone"
-                                                           pattern="^\\+?[0-9\\s\\-]{7,15}$"
-                                                           class="form-control" placeholder="Numéro de téléphone" required>
-                                                    <label for="phone">Téléphone</label>
-                                                </div>
-                                            </div>
-                                            
-                                            <div class="col-lg-12 col-md-6 col-12">
-                                                <div class="form-floating">
-                                                    <input type="email" id="email" v-model="form.email"
-                                                           pattern="[^ @]*@[^ @]*"
-                                                           class="form-control" placeholder="Adresse e-mail" required>
-                                                    <label for="email">Adresse e-mail</label>
-                                                </div>
-                                            </div>
-                                            <div class="col-lg-12 col-12">
-                                                <div class="form-floating">
-                                                    <textarea id="message" v-model="form.message"
-                                                              class="form-control"
-                                                              placeholder="Votre message ici" required></textarea>
-                                                    <label for="message">Message</label>
-                                                </div>
-                                                <button type="submit" class="form-control mt-3" :disabled="sending">
-                                                    {{ sending ? 'Envoi en cours...' : 'Envoyer' }}
-                                                </button>
-                                                <div v-if="sent" class="alert alert-success mt-3" role="alert">
-                                                    ✅ Message envoyé avec succès !
-                                                </div>
-                                                <div v-if="error" class="alert alert-danger mt-3" role="alert">
-                                                    {{ error }}
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </form>
-                                </div>
+                        <div class="col-lg-5 col-md-8 col-12">
+                            <div class="p-4 rounded-4 shadow-sm" style="background:#fff;">
+                                <h2 class="mb-3">Contact</h2>
+                                <p class="mb-2">
+                                    <i class="bi bi-envelope"></i>
+                                    <a href="mailto:retables@orange.fr" class="ms-2">retables@orange.fr</a>
+                                </p>
+                                <p class="mb-2">
+                                    <i class="bi bi-telephone"></i>
+                                    <a href="tel:0627712538" class="ms-2">06 27 71 25 38</a>
+                                </p>
+                                <p class="mb-0">
+                                    <i class="bi bi-geo-alt"></i>
+                                    <span class="ms-2">
+                                        Association RETABLES de FLANDRE<br>
+                                        B.P. 70002<br>
+                                        59470 Wormhout
+                                    </span>
+                                </p>
                             </div>
                         </div>
                     </div>

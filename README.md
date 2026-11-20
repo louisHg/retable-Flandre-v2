@@ -23,7 +23,6 @@ Le script lance simplement `python3 -m http.server 8080`. Aucune dépendance, au
 | Vue 3 | Chargé en CDN local (`js/vue.global.prod.js`) | Composants réactifs sans build step. Édite → recharge. |
 | Bootstrap 5 | CSS + JS bundle | Grilles, carrousels, modales. |
 | Bootstrap Icons | CSS local | Icônes via `<i class="bi bi-…"></i>`. |
-| EmailJS | CDN | Envoi du formulaire contact côté client. |
 | HTML statique | 1 fichier par page | Servable depuis n'importe quel hébergeur statique (Ionos, Netlify, etc.). |
 
 **Pas de** Node, pas de bundler, pas de framework côté serveur. Le site fonctionne avec un simple serveur de fichiers.
@@ -142,7 +141,7 @@ Tous définis dans `js/vue-components.js`, enregistrés via `window.RFComponents
 | `rf-gallery-arneke` | Carrousel des 28 vitraux d'Arnèke | `RFContent.galleries.eglises.arneke` |
 | `rf-actu-feed` | Feed actualités (recherche + filtres + pagination) | `RFContent.actualites` |
 | `rf-newsletter-cta` | CTA "Lettre d'infos" | inline |
-| `rf-contact` | Formulaire contact (EmailJS) | inline |
+| `rf-contact` | Bloc coordonnées de contact | inline |
 | `rf-footer` | Pied de page | inline |
 | `rf-lightbox` | Modale plein écran auto-bindée à toutes les images | scan DOM |
 
