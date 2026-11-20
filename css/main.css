@@ -303,6 +303,17 @@ strong {
   pointer-events: none;
 }
 
+.rf-footer-copy {
+  position: absolute;
+  left: 20px;
+  bottom: 12px;
+  z-index: 2;
+  margin: 0;
+  font-size: 13px;
+  font-weight: var(--font-weight-medium);
+  color: var(--white-color);
+}
+
 .rf-footer-signature {
   position: absolute;
   right: 20px;

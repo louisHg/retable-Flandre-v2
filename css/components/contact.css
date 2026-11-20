@@ -1,0 +1,38 @@
+/* =========================================================
+   rf-contact — bloc Contact au-dessus du footer
+   Les cartes réutilisent .rf-panorama-card / .rf-panorama-icon (cards.css)
+   ========================================================= */
+
+.rf-contact-subtitle {
+    color: var(--p-color);
+}
+
+.rf-contact-card {
+    color: var(--dark-color);
+    text-decoration: none;
+}
+
+a.rf-contact-card:hover,
+a.rf-contact-card:focus-visible {
+    color: var(--dark-color);
+    border-top-color: var(--primary-dark);
+}
+
+a.rf-contact-card:hover .rf-panorama-icon {
+    background: var(--primary-color);
+    color: #fff;
+}
+
+.rf-panorama-card > p.rf-contact-value {
+    margin-bottom: 0;
+    color: var(--secondary-color);
+    font-size: 1.05rem;
+    font-weight: var(--font-weight-medium);
+    word-break: break-word;
+}
+
+/* La carte « courrier » n'est pas cliquable : pas d'effet de survol */
+div.rf-contact-card:hover {
+    transform: none;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+}

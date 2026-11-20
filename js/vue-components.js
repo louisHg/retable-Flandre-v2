@@ -238,27 +238,41 @@
     // ==========================================
     const RFContact = {
         template: `
-            <section class="contact-section section-padding" id="section_contact">
+            <section class="rf-contact section-padding" id="section_contact">
                 <div class="container">
-                    <div class="row justify-content-center">
-                        <div class="col-lg-5 col-md-8 col-12">
-                            <div class="p-4 rounded-4 shadow-sm" style="background:#fff;">
-                                <h2 class="mb-3">Contact</h2>
-                                <p class="mb-2">
-                                    <i class="bi bi-envelope"></i>
-                                    <a href="mailto:retables@orange.fr" class="ms-2">retables@orange.fr</a>
-                                </p>
-                                <p class="mb-2">
-                                    <i class="bi bi-telephone"></i>
-                                    <a href="tel:0627712538" class="ms-2">06 27 71 25 38</a>
-                                </p>
-                                <p class="mb-0">
-                                    <i class="bi bi-geo-alt"></i>
-                                    <span class="ms-2">
-                                        Association RETABLES de FLANDRE<br>
-                                        B.P. 70002<br>
-                                        59470 Wormhout
-                                    </span>
+                    <div class="d-flex align-items-end justify-content-between flex-wrap gap-3 mb-4">
+                        <div>
+                            <h2 class="mb-2">Contact</h2>
+                            <p class="rf-contact-subtitle mb-0">Une question, une visite de groupe, une adhésion ? L'association vous répond volontiers.</p>
+                        </div>
+                        <a class="btn custom-btn" target="_blank" rel="noopener" href="https://www.facebook.com/lesretablesdeflandres">
+                            <i class="bi bi-facebook me-2"></i>Suivez-nous sur Facebook
+                        </a>
+                    </div>
+
+                    <div class="row g-4">
+                        <div class="col-lg-4 col-md-6 col-12">
+                            <a class="rf-panorama-card rf-contact-card" href="mailto:retables@orange.fr">
+                                <div class="rf-panorama-icon"><i class="bi bi-envelope"></i></div>
+                                <h3>Par e-mail</h3>
+                                <p class="rf-contact-value">retables@orange.fr</p>
+                            </a>
+                        </div>
+                        <div class="col-lg-4 col-md-6 col-12">
+                            <a class="rf-panorama-card rf-contact-card" href="tel:0627712538">
+                                <div class="rf-panorama-icon"><i class="bi bi-telephone"></i></div>
+                                <h3>Par téléphone</h3>
+                                <p class="rf-contact-value">06 27 71 25 38</p>
+                            </a>
+                        </div>
+                        <div class="col-lg-4 col-md-12 col-12">
+                            <div class="rf-panorama-card rf-contact-card">
+                                <div class="rf-panorama-icon"><i class="bi bi-geo-alt"></i></div>
+                                <h3>Par courrier</h3>
+                                <p class="rf-contact-value">
+                                    Association RETABLES de FLANDRE<br>
+                                    B.P. 70002<br>
+                                    59470 Wormhout
                                 </p>
                             </div>
                         </div>
@@ -272,20 +286,17 @@
     // 🦶 rf-footer
     // ==========================================
     const RFFooter = {
+        data() {
+            return { year: new Date().getFullYear() };
+        },
         template: `
             <footer class="site-footer">
-                <div class="container">
-                    <div class="row mb-5 pb-5">
-                        <div class="col-lg-12 col-12 text-center">
-                            <p class="mb-0" style="color:#fff;">&copy; RETABLES de FLANDRE</p>
-                        </div>
-                    </div>
-                </div>
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">
                     <path fill="var(--primary-color)" fill-opacity="1"
                           d="M0,224L34.3,192C68.6,160,137,96,206,90.7C274.3,85,343,139,411,144C480,149,549,107,617,122.7C685.7,139,754,213,823,240C891.4,267,960,245,1029,224C1097.1,203,1166,181,1234,160C1302.9,139,1371,117,1406,106.7L1440,96L1440,320L1405.7,320C1371.4,320,1303,320,1234,320C1165.7,320,1097,320,1029,320C960,320,891,320,823,320C754.3,320,686,320,617,320C548.6,320,480,320,411,320C342.9,320,274,320,206,320C137.1,320,69,320,34,320L0,320Z">
                     </path>
                 </svg>
+                <p class="rf-footer-copy">&copy; {{ year }} RETABLES de FLANDRE</p>
                 <p class="rf-footer-signature">Site réalisé par Louis Huyghe</p>
             </footer>
         `

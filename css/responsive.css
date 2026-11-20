@@ -263,6 +263,34 @@ iframe {
     }
 }
 
+/* © et signature empilés sur petit écran (sinon ils se chevauchent) */
+@media (max-width: 575px) {
+    .rf-footer-copy,
+    .rf-footer-signature {
+        left: 0;
+        right: 0;
+        text-align: center;
+    }
+
+    .rf-footer-copy {
+        bottom: 32px;
+    }
+}
+
+/* © et signature empilés sur petit écran (sinon ils se chevauchent) */
+@media (max-width: 575px) {
+    .rf-footer-copy,
+    .rf-footer-signature {
+        left: 0;
+        right: 0;
+        text-align: center;
+    }
+
+    .rf-footer-copy {
+        bottom: 32px;
+    }
+}
+
 /* ─────────────────────────────────────────────────────
    14. VISITES — images photo grid responsive
 ───────────────────────────────────────────────────── */
