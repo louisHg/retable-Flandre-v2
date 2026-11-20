@@ -644,6 +644,9 @@
     // - n     : numéro du point sur le plan (visible sur la pastille) — reprendre la
     //           numérotation du « Plan de découverte » du dépliant paroissial
     // - x, y  : position en % sur l'image (0,0 = top-left, 100,100 = bottom-right)
+    // - label : optionnel, libellé affiché à la place de n pour les sous-éléments
+    //           numérotés du dépliant (ex. '10-1', '11a') — plusieurs points peuvent
+    //           alors partager le même n
     // - spots : optionnel, positions supplémentaires [{x, y}, ...] quand le même
     //           numéro figure à plusieurs endroits du plan (ex. portails, confessionnaux)
     // - title : courte étiquette
@@ -659,52 +662,52 @@
             // du dépliant paroissial de Wormhout.
             points: [
                 {
-                    n: 1, x: 26, y: 13,
+                    n: 1, x: 27, y: 16.2,
                     title: "Retable nord — Vierge Marie",
                     body: "Installé en 1785. Plan demi-circulaire concave, 3 travées séparées par des colonnes corinthiennes. Style baroque, bois peint faux marbre brun veiné de vert. Transformé au XIXᵉ. Niche centrale : Notre-Dame des Larmes (1876)."
                 },
                 {
-                    n: 2, x: 50, y: 9,
+                    n: 2, x: 50.3, y: 8.7,
                     title: "Retable du maître-autel",
                     body: "Retable lambris de la deuxième partie du XVIIIᵉ siècle, épouse les murs de l'abside jusqu'au berceau lambrissé. Thème : « Gloire à la Trinité et au Christ présent dans l'eucharistie ». Bois peint faux marbre brun et or veiné de blanc et rouge. Voûte en cul-de-four séparée en cinq compartiments représentant saint Placide, saint Vincent de Paul, saint François-Xavier et saint Maurus. Au centre, ostensoir rayonnant, anges et Jésus."
                 },
                 {
-                    n: 3, x: 74, y: 13,
+                    n: 3, x: 71.3, y: 15.9,
                     title: "Retable sud — Sainte-Famille (M.H.)",
                     body: "Restauré en 2013, caractéristique du XVIIᵉ siècle. Une seule travée + ailerons. Structure en chêne, faux marbre veiné ocre et vert, rehauts d'or. Chapiteaux corinthiens. Tableau d'autel : Sainte Famille. Niche supérieure : saint Nicolas (XIXᵉ)."
                 },
                 {
-                    n: 4, x: 50, y: 22,
+                    n: 4, x: 49.4, y: 21.6,
                     title: "Table de communion (M.H.)",
                     body: "Style Louis XV en chêne sculpté, offerte en 1731 par Alexandre Van De Walle, curé. L'abbé Blanckaert la fait exécuter en 1763. Dix panneaux figuratifs représentent le mystère de l'Eucharistie (Ancien et Nouveau Testament). En 1881, agrandissement du chœur avec recul de la partie centrale."
                 },
                 {
-                    n: 5, x: 42, y: 15,
+                    n: 5, x: 43.7, y: 16.8,
                     title: "Les stalles",
                     body: "Style néogothique, réalisées par les ateliers Collesson à Wormhout (nombreuses œuvres dans les églises de Flandre). Mises en place en 1863 après agrandissement du chœur."
                 },
                 {
-                    n: 6, x: 88, y: 43, spots: [{ x: 12, y: 56 }, { x: 88, y: 56 }],
+                    n: 6, x: 75.3, y: 40.7, spots: [{ x: 22.7, y: 56.3 }, { x: 75.3, y: 56.3 }],
                     title: "Les six confessionnaux (M.H.)",
                     body: "Trois confessionnaux rectangulaires de 1731, décor rocaille, donnés par le curé Alexandre Van De Walle. Trois autres galbés, style baroque, plutôt de la fin du XVIIIᵉ siècle."
                 },
                 {
-                    n: 7, x: 12, y: 31, spots: [{ x: 88, y: 31 }, { x: 12, y: 43 }],
+                    n: 7, x: 22.4, y: 27.6, spots: [{ x: 77.9, y: 27.6 }, { x: 21.8, y: 40.7 }],
                     title: "Les six confessionnaux (M.H.) — suite",
                     body: "Trois confessionnaux rectangulaires de 1731, décor rocaille, donnés par le curé Alexandre Van De Walle. Trois autres galbés, style baroque, plutôt de la fin du XVIIIᵉ siècle."
                 },
                 {
-                    n: 8, x: 62, y: 24,
+                    n: 8, x: 67.8, y: 23.1,
                     title: "Chaire à prêcher",
                     body: "Style Empire, chêne coloré acajou. Donnée en 1841 par Ignace Coudeville, marguillier. Démontée en 1966 : la cuve est conservée dans l'abside sud, avec la statue de saint Pierre qui lui servait de support."
                 },
                 {
-                    n: 9, x: 12, y: 72, spots: [{ x: 88, y: 72 }],
+                    n: 9, x: 22.1, y: 69.1, spots: [{ x: 74.4, y: 69.1 }],
                     title: "Les portails",
                     body: "Vers 1723, Alexandre Van De Walle élève deux nouveaux portails en chêne se faisant face à l'entrée de l'église, de style Renaissance."
                 },
                 {
-                    n: 10, x: 50, y: 80,
+                    n: 10, x: 52, y: 74.2,
                     title: "Tribune, buffet d'orgue et orgue",
                     body: "Seul subsiste le positif d'un instrument antérieur, mis en place en 1823. Le grand orgue actuel a été racheté à l'église Saint-Éloi de Dunkerque et installé en 1856. Restauration complète en 1912 par Frédéric Loncke, facteur d'orgues."
                 }
@@ -934,9 +937,39 @@
                     body: "Sur l'autel, la statue dite « vision de saint François » représente le saint étreignant la croix et communiant à la Passion du Christ, dont il reçut les stigmates. En 1901, il est enrichi d'une peinture murale qui représente les trois vœux d'un religieux : chasteté, pauvreté et obéissance."
                 },
                 {
-                    n: 10, x: 14.2, y: 28.6, spots: [{ x: 13.7, y: 41.3 }, { x: 13.5, y: 63.2 }, { x: 59.9, y: 74.5 }, { x: 85.5, y: 63.5 }, { x: 85.9, y: 42.2 }, { x: 85.6, y: 28.7 }],
-                    title: "Les tableaux",
-                    body: "<em>10-1 Le martyre des sept frères Maccabées</em> (M.H.). Une mère voit six de ses fils suppliciés et encourage le septième à subir le même sort que ses frères.<br><br><em>10-2 L'adoration des bergers</em>, peinture sur toile attribuée au Barsan mais qui proviendrait de l'abbaye de Woestine. Les armoiries qui couronnent le cadre sont celles de la dernière abbesse Marie-Barbe Briois.<br><br><em>10-3 La Vierge remettant le rosaire à saint Dominique</em>. Peinture sur toile qui aurait fait partie d'un retable.<br><br><em>10-4 La mise au tombeau</em>, peinture sur bois, datée du XVIIᵉ siècle, elle représente la 14ᵉ station du chemin de croix (M.H.).<br><br><em>10-5 Saint Nicolas apparaît en rêve à Constantin pour sauver les trois soldats</em>, signé TJ Boulogne, daté de 1823 (S.M.H.).<br><br><em>10-6 La mort du bienheureux Joscio</em>, peinture sur toile de J. F. Lemaire du XVIIIᵉ siècle, dernier abbé de l'abbaye Saint-Bertin (M.H.).<br><br><em>10-7 L'adoration des bergers</em>, sur le cadre est marqué « Donné par le roi en 1821 ». Il s'agit d'une copie d'un tableau du XVIIIᵉ."
+                    n: 10, label: '10-1', x: 15.8, y: 28.3,
+                    title: "Les tableaux — Le martyre des sept frères Maccabées (M.H.)",
+                    body: "Une mère voit six de ses fils suppliciés et encourage le septième à subir le même sort que ses frères."
+                },
+                {
+                    n: 10, label: '10-2', x: 15.5, y: 41.0,
+                    title: "Les tableaux — L'adoration des bergers",
+                    body: "Peinture sur toile attribuée au Barsan mais qui proviendrait de l'abbaye de Woestine. Les armoiries qui couronnent le cadre sont celles de la dernière abbesse Marie-Barbe Briois."
+                },
+                {
+                    n: 10, label: '10-3', x: 15.3, y: 63.0,
+                    title: "Les tableaux — La Vierge remettant le rosaire à saint Dominique",
+                    body: "Peinture sur toile qui aurait fait partie d'un retable."
+                },
+                {
+                    n: 10, label: '10-4', x: 61.8, y: 74.2,
+                    title: "Les tableaux — La mise au tombeau (M.H.)",
+                    body: "Peinture sur bois, datée du XVIIᵉ siècle, elle représente la 14ᵉ station du chemin de croix."
+                },
+                {
+                    n: 10, label: '10-5', x: 87.6, y: 63.2,
+                    title: "Les tableaux — Saint Nicolas apparaît en rêve à Constantin",
+                    body: "Saint Nicolas apparaît en rêve à Constantin pour sauver les trois soldats. Signé TJ Boulogne, daté de 1823 (S.M.H.)."
+                },
+                {
+                    n: 10, label: '10-6', x: 88.0, y: 41.8,
+                    title: "Les tableaux — La mort du bienheureux Joscio (M.H.)",
+                    body: "Peinture sur toile de J. F. Lemaire du XVIIIᵉ siècle, dernier abbé de l'abbaye Saint-Bertin."
+                },
+                {
+                    n: 10, label: '10-7', x: 87.7, y: 28.4,
+                    title: "Les tableaux — L'adoration des bergers",
+                    body: "Sur le cadre est marqué « Donné par le roi en 1821 ». Il s'agit d'une copie d'un tableau du XVIIIᵉ."
                 }
             ]
         },
@@ -1889,14 +1922,54 @@
                     body: "La cuve de pierre est surmontée de la figuration du baptême du Christ. La grille est en fer forgé."
                 },
                 {
-                    n: 11, x: 13.2, y: 48.0, spots: [{ x: 20.3, y: 25.6 }, { x: 78.6, y: 27.7 }, { x: 83.0, y: 41.6 }, { x: 83.2, y: 48.5 }],
-                    title: "Les tableaux (M.H.)",
-                    body: "a - le Triomphe de la Vierge ;<br>b - l’Annonciation ;<br>c - la Cène ;<br>d - le Calvaire (ex-voto, 1682) ;<br>e - l’Adoration des bergers (ex-voto, 1704)."
+                    n: 11, label: '11a', x: 13.6, y: 47.7,
+                    title: "Tableau — Le Triomphe de la Vierge (M.H.)",
+                    body: "Le Triomphe de la Vierge, l’un des tableaux de l’église protégés au titre des monuments historiques."
                 },
                 {
-                    n: 12, x: 33.9, y: 40.9, spots: [{ x: 68.2, y: 40.5 }, { x: 69.1, y: 53.4 }, { x: 19.2, y: 29.9 }, { x: 20.0, y: 53.3 }],
-                    title: "Des statues",
-                    body: "a - saint Antoine ermite ;<br>b - buste reliquaire de saint Omer ;<br>c - Vierge à l’Enfant ;<br>d - l’Éducation de la Vierge (statue de procession, ou « Kranz ») ;<br>e - sainte Catherine d’Alexandrie ;<br>f - l’Éducation de la Vierge.<br><br><em>Les cinq dernières de ces statues sont protégées (M.H.).</em>"
+                    n: 11, label: '11b', x: 20.8, y: 25.4,
+                    title: "Tableau — L’Annonciation (M.H.)",
+                    body: "L’Annonciation, l’un des tableaux de l’église protégés au titre des monuments historiques."
+                },
+                {
+                    n: 11, label: '11c', x: 79.5, y: 27.3,
+                    title: "Tableau — La Cène (M.H.)",
+                    body: "La Cène, l’un des tableaux de l’église protégés au titre des monuments historiques."
+                },
+                {
+                    n: 11, label: '11d', x: 84.2, y: 41.3,
+                    title: "Tableau — Le Calvaire (M.H.)",
+                    body: "Le Calvaire, ex-voto de 1682."
+                },
+                {
+                    n: 11, label: '11e', x: 84.2, y: 48.1,
+                    title: "Tableau — L’Adoration des bergers (M.H.)",
+                    body: "L’Adoration des bergers, ex-voto de 1704."
+                },
+                {
+                    n: 12, label: '12a', x: 34.8, y: 40.5,
+                    title: "Statue — Saint Antoine ermite",
+                    body: "Statue de saint Antoine ermite."
+                },
+                {
+                    n: 12, label: '12b', x: 69.1, y: 40.1,
+                    title: "Statue — Buste reliquaire de saint Omer (M.H.)",
+                    body: "Buste reliquaire de saint Omer."
+                },
+                {
+                    n: 12, label: '12c', x: 70.0, y: 53.0,
+                    title: "Statue — Vierge à l’Enfant (M.H.)",
+                    body: "Vierge à l’Enfant."
+                },
+                {
+                    n: 12, label: '12d', x: 20.2, y: 29.5,
+                    title: "Statue — L’Éducation de la Vierge (M.H.)",
+                    body: "L’Éducation de la Vierge, statue de procession (ou « Kranz »).<br><br>Le dépliant mentionne aussi une seconde Éducation de la Vierge (12f), protégée elle aussi."
+                },
+                {
+                    n: 12, label: '12e', x: 20.8, y: 52.9,
+                    title: "Statue — Sainte Catherine d’Alexandrie (M.H.)",
+                    body: "Sainte Catherine d’Alexandrie."
                 }
             ]
         },
@@ -2619,9 +2692,19 @@
                     body: "Deux bannières sont suspendues dans l’abside : l’une représente saint Martin en soldat romain partageant son manteau, l’autre porte les armes de la commune, don en 1909, du chanoine Leuridan dernier descendant de Louis-Auguste de la Viefville, marquis de Steenvoorde, seigneur de Watten et Wulverdinghe."
                 },
                 {
-                    n: 10, x: 36.6, y: 40.1, spots: [{ x: 68.0, y: 40.4 }, { x: 37.6, y: 67.6 }],
-                    title: "Les tableaux",
-                    body: "Les tableaux, autres que celui du maître-autel, sont tous du XVIIᵉ siècle : <em>La Résurrection de Lazare</em> (10/1), <em>Le Retour d’Égypte de la Sainte Famille</em> (10/2), <em>Un Christ aux outrages</em> (10/3) (au-dessus du confessionnal du mur nord de la nef). Ce dernier a été restauré en 2018 ainsi que le tableau d’autel."
+                    n: 10, label: '10-1', x: 40.5, y: 39.5,
+                    title: "Les tableaux — La Résurrection de Lazare",
+                    body: "Les tableaux, autres que celui du maître-autel, sont tous du XVIIᵉ siècle."
+                },
+                {
+                    n: 10, label: '10-2', x: 72.0, y: 39.8,
+                    title: "Les tableaux — Le Retour d’Égypte de la Sainte Famille",
+                    body: "Les tableaux, autres que celui du maître-autel, sont tous du XVIIᵉ siècle."
+                },
+                {
+                    n: 10, label: '10-3', x: 40.8, y: 67.1,
+                    title: "Les tableaux — Un Christ aux outrages",
+                    body: "Les tableaux, autres que celui du maître-autel, sont tous du XVIIᵉ siècle.<br><br>Situé au-dessus du confessionnal du mur nord de la nef, il a été restauré en 2018 ainsi que le tableau d’autel."
                 }
             ]
         },

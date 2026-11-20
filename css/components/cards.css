@@ -795,6 +795,14 @@
   z-index: 2;
 }
 
+.rf-plan-modal-marker.is-long {
+  width: auto;
+  min-width: 40px;
+  padding: 0 7px;
+  border-radius: 999px;
+  font-size: 0.8rem;
+}
+
 .rf-plan-modal-marker:hover {
   background: var(--primary-dark);
   transform: translate(-50%, -50%) scale(1.15);
@@ -967,9 +975,10 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 28px;
+  min-width: 28px;
   height: 28px;
-  border-radius: 50%;
+  padding: 0 6px;
+  border-radius: 999px;
   background: var(--custom-btn-bg-hover-color);
   color: #fff;
   font-weight: 700;
@@ -1045,9 +1054,10 @@
 
 .rf-plan-modal-list-num {
   flex-shrink: 0;
-  width: 24px;
+  min-width: 24px;
   height: 24px;
-  border-radius: 50%;
+  padding: 0 5px;
+  border-radius: 999px;
   background: var(--primary-color);
   color: #fff;
   font-weight: 700;

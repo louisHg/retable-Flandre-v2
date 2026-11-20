@@ -644,9 +644,10 @@
             markers() {
                 const out = [];
                 this.points.forEach((p, idx) => {
-                    out.push({ key: p.n + '-0', n: p.n, x: p.x, y: p.y, title: p.title, idx: idx });
+                    const label = this.labelOf(p);
+                    out.push({ key: idx + '-0', n: label, x: p.x, y: p.y, title: p.title, idx: idx });
                     (p.spots || []).forEach((s, j) => {
-                        out.push({ key: p.n + '-' + (j + 1), n: p.n, x: s.x, y: s.y, title: p.title, idx: idx });
+                        out.push({ key: idx + '-' + (j + 1), n: label, x: s.x, y: s.y, title: p.title, idx: idx });
                     });
                 });
                 return out;
@@ -697,6 +698,10 @@
                 this.open = false;
                 document.body.style.overflow = '';
             },
+            // Libellé affiché : sous-numéro du dépliant (ex. '10-1', '11a') ou numéro
+            labelOf(p) {
+                return p.label || String(p.n);
+            },
             selectPoint(idx) {
                 this.activeIdx = this.activeIdx === idx ? null : idx;
             },
@@ -735,7 +740,7 @@
                                 <button v-for="m in markers" :key="m.key"
                                         type="button"
                                         class="rf-plan-modal-marker"
-                                        :class="{ active: m.idx === activeIdx }"
+                                        :class="{ active: m.idx === activeIdx, 'is-long': m.n.length > 2 }"
                                         :style="'left:' + m.x + '%; top:' + m.y + '%;'"
                                         :title="m.title"
                                         :aria-label="m.n + '. ' + m.title"
@@ -750,7 +755,7 @@
                                     @click="selectPoint(activeIdx)" aria-label="Fermer la description">✕</button>
 
                             <div v-if="activePoint" class="rf-plan-modal-detail">
-                                <div class="rf-plan-modal-detail-num">{{ activePoint.n }}</div>
+                                <div class="rf-plan-modal-detail-num">{{ labelOf(activePoint) }}</div>
                                 <h4>{{ activePoint.title }}</h4>
                                 <p v-html="activePoint.body"></p>
                             </div>
@@ -761,10 +766,10 @@
 
                             <h5 class="rf-plan-modal-list-title">Tous les éléments</h5>
                             <ol class="rf-plan-modal-list">
-                                <li v-for="(p, idx) in points" :key="p.n"
+                                <li v-for="(p, idx) in points" :key="idx"
                                     :class="{ active: idx === activeIdx }"
                                     @click="selectPoint(idx)">
-                                    <span class="rf-plan-modal-list-num">{{ p.n }}</span>
+                                    <span class="rf-plan-modal-list-num">{{ labelOf(p) }}</span>
                                     {{ p.title }}
                                 </li>
                             </ol>
