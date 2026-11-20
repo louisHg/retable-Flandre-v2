@@ -303,6 +303,17 @@ strong {
   pointer-events: none;
 }
 
+.rf-footer-signature {
+  position: absolute;
+  right: 20px;
+  bottom: 12px;
+  z-index: 2;
+  margin: 0;
+  font-size: 13px;
+  color: var(--white-color);
+  opacity: 0.85;
+}
+
 .site-footer-title {
   color: var(--secondary-color);
 }
