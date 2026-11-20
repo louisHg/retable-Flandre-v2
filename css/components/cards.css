@@ -571,6 +571,16 @@
   transform: scale(1.05);
 }
 
+/* Cover = plan extrait du dépliant (portrait) : affiché en entier, sans recadrage */
+.rf-eglise-card-media.is-plan {
+  background: #fff;
+}
+
+.rf-eglise-card-media.is-plan img {
+  object-fit: contain;
+  padding: 0.5rem;
+}
+
 /* Placeholder coloré quand pas d'image */
 .rf-eglise-card-placeholder {
   width: 100%;

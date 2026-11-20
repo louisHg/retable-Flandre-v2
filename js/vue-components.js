@@ -581,7 +581,7 @@
                         <div v-for="eglise in filtered" :key="eglise.name"
                              class="col-lg-3 col-md-4 col-sm-6 col-12">
                             <div class="rf-eglise-card">
-                                <div class="rf-eglise-card-media">
+                                <div :class="['rf-eglise-card-media', { 'is-plan': eglise.image && eglise.image.includes('/Plans_des_eglises/') }]">
                                     <img v-if="eglise.image" :src="eglise.image" :alt="eglise.name" loading="lazy">
                                     <div v-else class="rf-eglise-card-placeholder"
                                          :style="placeholderStyle(eglise.name)">
