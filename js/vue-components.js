@@ -581,8 +581,18 @@
                         <div v-for="eglise in filtered" :key="eglise.name"
                              class="col-lg-3 col-md-4 col-sm-6 col-12">
                             <div class="rf-eglise-card">
-                                <div :class="['rf-eglise-card-media', { 'is-plan': eglise.image && eglise.image.includes('/Plans_des_eglises/') }]">
-                                    <img v-if="eglise.image" :src="eglise.image" :alt="eglise.name" loading="lazy">
+                                <div :class="['rf-eglise-card-media', { 'is-plan': eglise.image && eglise.image.includes('/Plans_des_eglises/'), 'is-clickable': hasPlan(eglise) }]"
+                                     :role="hasPlan(eglise) ? 'button' : null"
+                                     :tabindex="hasPlan(eglise) ? 0 : null"
+                                     :aria-label="hasPlan(eglise) ? 'Ouvrir le plan interactif de ' + eglise.name : null"
+                                     @click="hasPlan(eglise) && openPlan(eglise)"
+                                     @keydown.enter.prevent="hasPlan(eglise) && openPlan(eglise)"
+                                     @keydown.space.prevent="hasPlan(eglise) && openPlan(eglise)">
+                                    <img v-if="eglise.image" :src="eglise.image" :alt="eglise.name" loading="lazy"
+                                         :data-no-lightbox="hasPlan(eglise) ? '' : null">
+                                    <span v-if="hasPlan(eglise)" class="rf-eglise-card-media-hint">
+                                        <i class="bi bi-geo-alt"></i>Voir le plan
+                                    </span>
                                     <div v-else class="rf-eglise-card-placeholder"
                                          :style="placeholderStyle(eglise.name)">
                                         <i class="bi bi-bank"></i>
@@ -900,6 +910,8 @@
                 imgs.forEach((img) => {
                     // Ignorer les petites images (logos, icônes)
                     if (img.closest('.rf-brand') || img.closest('.rf-sidebar')) return;
+                    // Images qui ont leur propre action au clic (ex. photo d'église → plan interactif)
+                    if (img.hasAttribute('data-no-lightbox')) return;
                     if (img.naturalWidth > 0 && img.naturalWidth < 60) return;
                     if (img.width > 0 && img.width < 60) return;
 

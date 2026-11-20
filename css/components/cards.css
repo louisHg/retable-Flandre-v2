@@ -581,6 +581,50 @@
   padding: 0.5rem;
 }
 
+/* Photo cliquable → ouvre le plan interactif */
+.rf-eglise-card-media.is-clickable {
+  cursor: pointer;
+}
+
+.rf-eglise-card-media.is-clickable:focus-visible {
+  outline: 3px solid var(--primary-color);
+  outline-offset: -3px;
+}
+
+.rf-eglise-card-media-hint {
+  position: absolute;
+  right: 0.6rem;
+  bottom: 0.6rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.3rem 0.7rem;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.92);
+  color: #222;
+  font-size: 0.8rem;
+  font-weight: 600;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.18);
+  opacity: 0;
+  transform: translateY(4px);
+  transition: opacity 0.2s ease, transform 0.2s ease;
+  pointer-events: none;
+}
+
+.rf-eglise-card-media.is-clickable:hover .rf-eglise-card-media-hint,
+.rf-eglise-card-media.is-clickable:focus-visible .rf-eglise-card-media-hint {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Écrans tactiles : pas de survol → indication toujours visible */
+@media (hover: none) {
+  .rf-eglise-card-media-hint {
+    opacity: 1;
+    transform: none;
+  }
+}
+
 /* Placeholder coloré quand pas d'image */
 .rf-eglise-card-placeholder {
   width: 100%;
