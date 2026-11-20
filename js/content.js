@@ -275,7 +275,7 @@
         { name: 'Oudezeele',         image: 'images/2025/Hondschoote-Oudezeele/Oudezeele1.png',       description: "Église Saint-Jean-Baptiste, retables de la Vierge et Sainte-Anne-Trinitaire.", tags: ['Saint-Jean-Baptiste'], pdf: DEPLIANT_BASE + 'Oudezeele.pdf' },
         { name: 'Pitgam',            image: null,                                                     description: "Église Saint-Folquin, retable nord du Rosaire.", tags: ['Saint-Folquin', 'Rosaire'], pdf: DEPLIANT_BASE + 'Pitgam.pdf' },
         { name: 'Rexpoëde',          image: null,                                                     description: "", tags: [], pdf: DEPLIANT_BASE + 'Rexpoede.pdf' },
-        { name: "Saint Georges de l'Aa", image: null,                                                  description: "", tags: [], pdf: DEPLIANT_BASE + "Saint Georges de l'Aa.pdf" },
+        { name: "Saint-Georges-sur-l'Aa", image: null,                                                  description: "", tags: [], pdf: DEPLIANT_BASE + "Saint Georges de l'Aa.pdf" },
         { name: 'Sercus',            image: 'images/2026/Sercus-Wylder/Sercus.jpg',                   description: "", tags: [], pdf: DEPLIANT_BASE + 'Sercus.pdf' },
         { name: 'Socx',              image: null,                                                     description: "Église Saint-Léger, retables du maître-autel, de la Vierge et Saint-Léger.", tags: ['Saint-Léger'], pdf: DEPLIANT_BASE + 'Socx.pdf' },
         { name: 'Steenbecque',       image: null,                                                     description: "Église Saint-Pierre, retable du maître-autel.", tags: ['Saint-Pierre'], pdf: DEPLIANT_BASE + 'Steenbecque.pdf' },
@@ -328,7 +328,7 @@
                 + "<li>Ochtezeele — église Saint-Omer, par René Charlet</li>"
                 + "<li>Oost-Cappel — église Saint-Nicolas, par Françoise Faes</li>"
                 + "<li>Quaëdypre — église Saint-Omer, par Françoise Faes</li>"
-                + "<li>Renescure — église Notre-Dame de l'Assomption, par Aïda Tellier</li>"
+                + "<li>Renescure — église Notre-Dame-de-l'Assomption, par Aïda Tellier</li>"
                 + "<li>Saint-Pierre-Brouck — église Saint-Pierre, par Françoise Faes</li>"
                 + "<li>Steenvoorde — église Saint-Pierre, par Daniel Francke</li>"
                 + "<li>Terdeghem — église Saint-Martin, par Marie-Claude Wiel</li>"
@@ -533,7 +533,7 @@
             date: '2025-08-17',
             category: 'Visite',
             title: 'Visite — Herzeele et Wulverdinghe',
-            summary: "Notre-Dame de l'Assomption d'Herzeele (église-halle en briques XVIᵉ) et Saint-Martin de Wulverdinghe (façade romane).",
+            summary: "Notre-Dame-de-l'Assomption d'Herzeele (église-halle en briques XVIᵉ) et Saint-Martin de Wulverdinghe (façade romane).",
             tags: ['visite', 'Herzeele', 'Wulverdinghe', 'estivale', '2025'],
             photos: [
                 { src: 'images/2025/Herzeele.jpeg', alt: 'Herzeele' },
@@ -670,7 +670,7 @@
                 },
                 {
                     n: 3, x: 74, y: 13,
-                    title: "Retable sud — Sainte Famille (M.H.)",
+                    title: "Retable sud — Sainte-Famille (M.H.)",
                     body: "Restauré en 2013, caractéristique du XVIIᵉ siècle. Une seule travée + ailerons. Structure en chêne, faux marbre veiné ocre et vert, rehauts d'or. Chapiteaux corinthiens. Tableau d'autel : Sainte Famille. Niche supérieure : saint Nicolas (XIXᵉ)."
                 },
                 {
